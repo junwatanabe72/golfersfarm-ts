@@ -1,0 +1,8 @@
+{
+  "name": "golfersfarm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/junwatanabe72/golfersfarm-ts.git",
+  "author": "jun_mac <junwatanabe72@gmail.com>",
+  "license": "MIT"
+}

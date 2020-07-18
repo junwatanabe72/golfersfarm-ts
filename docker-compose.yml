@@ -1,0 +1,35 @@
+version: "3"
+services:
+  client:
+    container_name: "client"
+    build:
+      context: ./client
+    ports:
+      - 3002:3002
+    volumes:
+      - ./client:/opt
+    tty: true
+  server:
+    container_name: "server"
+    build:
+      context: ./server
+    ports:
+      - 3000:3000
+    volumes:
+      - ./server:/opt
+    links:
+      - mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    tty: true
+
+  mysql:
+    container_name: "mysql"
+    build:
+      context: ./mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    tty: true
