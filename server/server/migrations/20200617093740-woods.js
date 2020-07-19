@@ -1,18 +1,34 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("categories", {
+    return queryInterface.createTable("woods", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      key: {
-        type: Sequelize.STRING,
-      },
       name: {
         type: Sequelize.STRING,
+      },
+      shaftId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "shafts",
+          key: "id",
+        },
+      },
+      makerId: {
+        type: Sequelize.INTEGER,
+        onDelete: "CASCADE",
+        references: {
+          model: "makers",
+          key: "id",
+        },
+      },
+      count: {
+        type: Sequelize.ENUM,
       },
       createdAt: {
         allowNull: false,
@@ -25,6 +41,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("categories");
+    return queryInterface.dropTable("woods");
   },
 };

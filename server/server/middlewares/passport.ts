@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import passportJWT from "passport-jwt";
 import { compare } from "bcrypt";
 import dotenv from 'dotenv';
-import users from "../models/user"
+import users from "../models/users"
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -20,7 +20,7 @@ async function (loginId: string, password:string, done: Function) {
       if (!user) {
         return done(null, false, { message: 'No user by that email' });
       }
-      let match = await compare(password, user.authorize_token!)
+      let match = await compare(password, user.password)
   await console.log(typeof match)
     if (!match) {
       return done(null, false, { message: 'Not a matching password' });

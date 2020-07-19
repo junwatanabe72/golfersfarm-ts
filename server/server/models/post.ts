@@ -1,6 +1,6 @@
 import { Model,DataTypes } from "sequelize";
 import  sequelize  from '../middlewares/sequelize';
-import PostCategory from './postCategory';
+import PostCategory from './balls';
 
 const POST_STATUSES = {
   draft: 0,

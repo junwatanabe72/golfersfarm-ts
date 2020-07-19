@@ -1,28 +1,24 @@
 "use strict";
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("post_categories", {
+    return queryInterface.createTable("balls", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      postId: {
+      userId: {
         type: Sequelize.INTEGER,
         onDelete: "CASCADE",
         references: {
-          model: "posts",
+          model: "users",
           key: "id",
         },
       },
-      categoryId: {
-        type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
-        references: {
-          model: "categories",
-          key: "id",
-        },
+      maker: {
+        type: Sequelize.STRING,
+        defaultValue: "Titleist pro-v1x",
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +31,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("post_categories");
+    return queryInterface.dropTable("balls");
   },
 };

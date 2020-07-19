@@ -4,20 +4,38 @@ module.exports = {
     return queryInterface.createTable("users", {
       id: {
         allowNull: false,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
+      },
+      sex: {
         type: Sequelize.INTEGER,
       },
-      loginId: {
+      residence: {
+        type: Sequelize.INTEGER,
+      },
+      birthPlace: {
+        type: Sequelize.INTEGER,
+      },
+      averageDistance: {
+        type: Sequelize.INTEGER,
+      },
+      bestScore: {
+        type: Sequelize.INTEGER,
+      },
+      email: {
         type: Sequelize.STRING,
       },
-      authorize_token: {
+      password: {
         type: Sequelize.STRING,
       },
-      name: {
+      job: {
         type: Sequelize.STRING,
       },
-      iconUrl: {
+      profileImage: {
+        type: Sequelize.STRING,
+      },
+      clubImage: {
         type: Sequelize.STRING,
       },
       createdAt: {

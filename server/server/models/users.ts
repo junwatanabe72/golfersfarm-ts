@@ -1,7 +1,6 @@
-import { Model, DataTypes } from "sequelize";
-import  sequelize  from '../middlewares/sequelize';
-// import Post from './post';
-
+import { Model, DataTypes, Sequelize } from "sequelize";
+// import sequelize from "../middlewares/sequelize";
+import Ball from './balls';
 
 const SEX = {
   0: "man",
@@ -9,10 +8,13 @@ const SEX = {
 };
 export const sexValues = Object.values(SEX);
 
- class User extends Model {
-   public id!: number;
- }
-User.init(
+class User extends Model {
+  
+  public id!: number;
+  public password!: string;
+  
+  public static initialize(sequelize: Sequelize){
+    this.init(
   {
     id: {
       allowNull: false,
@@ -23,7 +25,7 @@ User.init(
     sex: {
       type: DataTypes.INTEGER,
     },
-    resience: {
+    residence: {
       type: DataTypes.INTEGER,
     },
     birthPlace: {
@@ -49,15 +51,23 @@ User.init(
     },
     clubImage: {
       type: DataTypes.STRING(250),
-    }
+    },
   },
   {
-    tableName: 'users',
+    tableName: "users",
     sequelize: sequelize,
-  },
+  }
 );
+  return this;
+}
 
-// User.hasMany(Post);
-// Post.belongsTo(User);
+public static associate() {
+    this.hasOne(Ball, {
+      sourceKey: 'id',
+      foreignKey: 'userId',
+      constraints: false
+    });
+  }
+}
 
 export default User;

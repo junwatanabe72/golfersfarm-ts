@@ -8,8 +8,8 @@ import logger from "morgan";
 import passport from "passport";
 import "./middlewares/passport";
 import { usersRouter } from "./routes/users";
-import { authRouter } from "./routes/auth";
-import { postsRouter } from "./routes/posts";
+// import { authRouter } from "./routes/auth";
+// import { postsRouter } from "./routes/posts";
 
 const rfs = require("rotating-file-stream");
 const app = express();
@@ -34,7 +34,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // app.use("/auth", authRouter);
-app.use("/user", passport.authenticate("jwt", { session: false }), usersRouter);
+app.use("/users",usersRouter);
 // app.use("/posts", passport.authenticate("jwt", { session: false }), postsRouter);
 
 const server = http.createServer(app);
