@@ -8,14 +8,18 @@ module.exports = {
         autoIncrement: true,
         primaryKey: true,
       },
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       sex: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       residence: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       birthPlace: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
       },
       averageDistance: {
         type: Sequelize.INTEGER,
@@ -25,9 +29,11 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       password: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       job: {
         type: Sequelize.STRING,

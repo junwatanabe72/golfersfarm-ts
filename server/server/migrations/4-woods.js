@@ -11,9 +11,17 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onDelete: "CASCADE",
+        references: {
+          model: "users",
+          key: "id",
+        },
+      },
       shaftId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
         references: {
           model: "shafts",
           key: "id",
@@ -21,14 +29,13 @@ module.exports = {
       },
       makerId: {
         type: Sequelize.INTEGER,
-        onDelete: "CASCADE",
         references: {
           model: "makers",
           key: "id",
         },
       },
       count: {
-        type: Sequelize.ENUM,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,

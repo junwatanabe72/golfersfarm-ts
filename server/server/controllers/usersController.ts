@@ -1,65 +1,54 @@
 import { Request, Response } from "express";
-import { Op } from "sequelize";
 import db,{sequelize} from "../models"
 
 const users = db.User;
 const balls = db.Ball;
-
+const woods = db.Wood;
+const shafts = db.Shaft;
+const makers = db.Maker;
+const num = 1;
 export default {
   async show(req: Request, res: Response) {
     const user = await users.findOne({
       where: { id: req.params.id },
       raw: false,
-      // include: [
-      //   {
-      //     model: userCategories,
-      //     as: "user_categories",
-      //     required: false,
-      //     include: [
-      //       {
-      //         model: categories,
-      //         as: "categories",
-      //         required: false,
-      //       },
-      //     ],
-      //   },
-      // ],
     });
-    if (!user) {
+    const userData = await woods.findAll({
+      where: { userId: user.id },
+      raw: false,
+      include: [
+            {
+              model: shafts,
+              as: "shafts",
+              required: false,
+            },
+            {
+              model: makers,
+              as: "makers",
+              required: false,
+            },
+          ],
+    })
+    if (!userData) {
       return res.status(404).json({ message: 'not exist' });
     }
-    res.json({ user });
+    res.json({ userData });
   },
   async index(req: Request, res: Response) {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-    const user = await users.findAll({
+    const allUser = await users.findAll({
       // where: { status: queryStatus },
-      raw: false,
-      // include: [
-      //   {
-      //     model: userCategories,
-      //     as: "user_categories",
-      //     required: false,
-      //     include: [
-      //       {
-      //         model: categories,
-      //         as: "categories",
-      //         required: false,
-      //       },
-      //     ],
-      //   },
-      // ],
     });
-    if (!user) {
+    if (!allUser) {
       return res.status(404).json({ message: "not exist" });
     }
-    res.json({ user });
+    res.json({ allUser });
   },
 
 //transactionを貼る。
   async create(req: any, res: Response) {
     const {
-      user: { password },
+      user: { password,name,email },
     } = req.body;
     // const params = { ...rest, userId: req.user.id };
     try {
@@ -67,11 +56,29 @@ export default {
         const newuser = await users.create(
           {
             password: password,
+            name: name,
+            email: email,
           },
           { transaction: t }
         );
           await balls.create(
             {
+              userId: newuser.id,
+            },
+            { transaction: t }
+          );
+
+        const newShaft = await shafts.findOne({
+          where: { id: num }});
+        const newMaker = await makers.findOne({
+          where: { id: num }
+        })
+
+          await woods.create(
+            {
+              shaftId: newShaft.id,
+              makerId: newMaker.id,
+              count: "4 P",
               userId: newuser.id,
             },
             { transaction: t }

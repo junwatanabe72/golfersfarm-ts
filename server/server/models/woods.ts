@@ -1,10 +1,15 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import User from "./users";
+import Shaft from "./shafts";
+import Maker from "./makers";
 
-class Ball extends Model {
+class Wood extends Model {
   public id!: number;
-  public userId!: number;
-  public maker!: string;
+  public name: string | undefined;
+  public userId!: number | undefined;
+  public shaftId: number | undefined;
+  public makerId: number | undefined;
+  public count: string | undefined;
 
   public static initialize(sequelize: Sequelize){
     this.init(
@@ -15,17 +20,25 @@ class Ball extends Model {
           autoIncrement: true,
           primaryKey: true,
         },
+        name: {
+          type: DataTypes.STRING(250),
+        },
         userId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        maker: {
+        shaftId: {
+          type: DataTypes.INTEGER,
+        },
+        makerId: {
+          type: DataTypes.INTEGER,
+        },
+        count: {
           type: DataTypes.STRING(250),
-          defaultValue: "Titleist pro-v1x",
         },
       },
       {
-        tableName: "balls",
+        tableName: "woods",
         sequelize: sequelize,
       }
     );
@@ -37,7 +50,15 @@ class Ball extends Model {
       onDelete: "CASCADE",
       constraints: false,
     });
+    this.belongsTo(Shaft, {
+      foreignKey: "shaftId",
+      constraints: false,
+    });
+    this.belongsTo(Maker, {
+      foreignKey: "makerId",
+      constraints: false,
+    });
   }
 }
 
-export default Ball;
+export default Wood;

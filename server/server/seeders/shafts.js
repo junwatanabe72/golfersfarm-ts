@@ -3,23 +3,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "categories",
+      "shafts",
       [
         {
-          key: "programming",
-          name: "プログラミング",
+          name: "TOUR AD DI-7",
+          flex: "s",
+          manufacturer: "GRAPHITE DESIGN",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          key: "career",
-          name: "キャリア",
+          name: "SPD474 EVOⅢ",
+          flex: "s",
+          manufacturer: "Fujikura",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          key: "hobby",
-          name: "趣味",
+          name: "Diamana™ D-LIMITED 50",
+          flex: "s",
+          manufacturer: "三菱ケミカル",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

@@ -1,13 +1,11 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import User from "./users";
-import Maker from "./makers";
+import Wood from "./woods";
 
-
-class Ball extends Model {
+class Shaft extends Model {
   public id!: number;
-  public name: string | undefined;
-  public userId!: number;
-  public makerId: number | undefined;
+  public name!: string;
+  public flex!: string;
+  public manufacturer!: string;
 
   public static initialize(sequelize: Sequelize){
     this.init(
@@ -20,33 +18,31 @@ class Ball extends Model {
         },
         name: {
           type: DataTypes.STRING(250),
-        },
-        userId: {
-          type: DataTypes.INTEGER,
           allowNull: false,
         },
-        makerId: {
-          type: DataTypes.INTEGER,
+        flex: {
+          type: DataTypes.STRING(250),
+          allowNull: false,
+        },
+        manufacturer: {
+          type: DataTypes.STRING(250),
+          allowNull: false,
         },
       },
       {
-        tableName: "balls",
+        tableName: "shafts",
         sequelize: sequelize,
       }
     );
   return this;
   }
   public static associate() {
-    this.belongsTo(User, {
-      foreignKey: "userId",
-      onDelete: "CASCADE",
-      constraints: false,
-    });
-    this.belongsTo(Maker, {
-      foreignKey: "makerId",
-      constraints: false,
+    this.hasMany(Wood, {
+      sourceKey: 'id',
+      foreignKey: 'shaftId',
+      constraints: false
     });
   }
 }
 
-export default Ball;
+export default Shaft;

@@ -3,6 +3,10 @@ import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
 import User from "./users";
 import Ball from "./balls";
+import Wood from "./woods";
+import Shaft from "./shafts";
+import Maker from "./makers";
+
 dotenv.config();
 
 const env = process.env.NODE_ENV || "development";
@@ -14,6 +18,9 @@ export const sequelize = new Sequelize(config);
 const db: dbType = {
   User: User.initialize(sequelize),
   Ball: Ball.initialize(sequelize),
+  Wood: Wood.initialize(sequelize),
+  Shaft: Shaft.initialize(sequelize),
+  Maker: Maker.initialize(sequelize),
 };
 
 interface dbType {
