@@ -6,6 +6,13 @@ module.exports = {
       "shafts",
       [
         {
+          name: "original",
+          flex: "s",
+          manufacturer: "original",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           name: "TOUR AD DI-7",
           flex: "s",
           manufacturer: "GRAPHITE DESIGN",

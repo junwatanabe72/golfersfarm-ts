@@ -6,6 +6,11 @@ module.exports = {
       "makers",
       [
         {
+          name: "original",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           name: "Mizuno",
           createdAt: new Date(),
           updatedAt: new Date(),

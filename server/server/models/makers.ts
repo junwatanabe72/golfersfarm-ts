@@ -48,11 +48,6 @@ class Maker extends Model {
       foreignKey: 'makerId',
       constraints: false
     });
-    // this.hasMany(Shaft, {
-    //   sourceKey: 'id',
-    //   foreignKey: 'makerId',
-    //   constraints: false
-    // });
   }
 }
 

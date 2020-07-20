@@ -7,7 +7,7 @@ const usersRouter = express.Router();
 usersRouter.get("/:id",usersController.show);
 usersRouter.get("/", usersController.index);
 usersRouter.post("/", usersController.create);
-// usersRouter.patch("/:id", usersController.update);
+usersRouter.patch("/:id", usersController.update);
 usersRouter.delete("/:id", usersController.delete);
 
 //usersGearsAPI(ClubsTable,BallsTable,PuttersTable)
