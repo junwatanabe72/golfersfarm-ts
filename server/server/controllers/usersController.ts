@@ -1,123 +1,70 @@
-import { Request, Response } from "express";
 import db,{sequelize} from "../models"
-
 const users = db.User;
-const balls = db.Ball;
-const woods = db.Wood;
-const shafts = db.Shaft;
-const makers = db.Maker;
-const num = 1;
-const resData = (arg:{})=>{return {"data": arg}}
 
 export default {
 
-  async show(req: Request, res: Response) {
+  async show(id: string) {
     const user = await users.findOne({
-      where: { id: req.params.id },
+      where: { id: id },
       raw: false,
     });
-    const newWood = await woods.findAll({
-      where: { userId: user.id },
-      raw: false,
-      include: [
-            {
-              model: shafts,
-              required: false,
-            },
-            {
-              model: makers,
-              required: false,
-            },
-          ],
-    })
-    if (!newWood) {
-      return res.status(404).json({ message: 'not exist' });
+    if (!user) {
+      return { message: 'no user exist' };
     }
-    res.json({"data":{ user, newWood}});
+    return user;
   },
 
-  async index(req: Request, res: Response) {
+  async index() {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
     const allUser = await users.findAll({
       // where: { status: queryStatus },
     });
     if (!allUser) {
-      return res.status(404).json({ message: "not exist" });
+      return { message: "not exist" };
     }
-    res.json(resData({allUser}));
+    return allUser;
   },
-  async create(req: any, res: Response) {
-    const {
-      user: { password,name,email },
-    } = req.body;
-    // const params = { ...rest, userId: req.user.id };
-    try {
-      await sequelize.transaction(async (t) => {
+  async create(req: any,res: any | null) {
         const newuser = await users.create(
           {
-            password: password,
-            name: name,
-            email: email,
-          },
-          { transaction: t }
-        );
-          const newBall = await balls.create(
-            {
-              userId: newuser.id,
-            },
-            { transaction: t }
-          );
-
-        const newShaft = await shafts.findOne({
-          where: { id: num }});
-        const newMaker = await makers.findOne({
-          where: { id: num }
-        })
-          const newWoods = await woods.create(
-            {
-              shaftId: newShaft.id,
-              makerId: newMaker.id,
-              count: "3 5",
-              userId: newuser.id,
-            },
-            { transaction: t }
-          );
-        res.json([{ newuser }, { newBall }, { newWoods}]);
-          })
-    } catch (error) {
-      res.status(400)
+            password: req.password,
+            name: req.name,
+            email: req.email,
+          },res
+        )
+    if (!newuser) {
+      return { message: "error" };
     }
+        return newuser 
   },
 
-  async update(req: any, res: Response) {
+  async update(id: string,user: any) {
     const targetuser: any = await users.findOne({
-      where: { id: req.params.id }
+      where: { id: id }
     });
-    const params = req.body.user;
-    
-    if (!targetuser) { res.json({ message: "check this userId" }); }
+    if (!targetuser) { return { message: "check this userId" }; }
 
     //userを更新する。
     const updateUser = await targetuser.update({
-      sex: params.sex,
-      residence: params.residence,
-      averageDistance: params.averageDistance,
-      bestScore: params.bestScore,
-      email: params.email,
-      job: params.job,
-      profileImage: params.profileImage,
-      clubImage: params.clubImage,
+      sex: user.sex,
+      residence: user.residence,
+      averageDistance: user.averageDistance,
+      bestScore: user.bestScore,
+      email: user.email,
+      job: user.job,
+      profileImage: user.profileImage,
+      clubImage: user.clubImage,
     });
-    res.json({ updateUser });
+    return updateUser;
   },
-  async delete(req: any, res: Response) {
+  async delete(id: string) {
     const targetuser: any = await users.findOne({
-      where: { id: req.params.id },
+      where: { id: id },
     })
     if (!targetuser) { 
-      res.json({ message: "check this userId" });
+      return { message: "check this userId" };
     }
     await targetuser.destroy();
-    res.json({});
+    return {message: "ok"}
   }
 };

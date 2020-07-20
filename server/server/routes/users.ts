@@ -1,18 +1,20 @@
 import express from "express";
-import usersController from "../controllers/usersController";
+import applicationController from "../controllers/applicationController";
+// import usersController from "../controllers/usersController";
 
 const usersRouter = express.Router();
 
 //usersprofileAPI(UsersTable)
-usersRouter.get("/:id",usersController.show);
-usersRouter.get("/", usersController.index);
-usersRouter.post("/", usersController.create);
-usersRouter.patch("/:id", usersController.update);
-usersRouter.delete("/:id", usersController.delete);
+usersRouter.get("/:id", applicationController.show);
+usersRouter.get("/", applicationController.index);
+usersRouter.post("/", applicationController.create);
+usersRouter.patch("/:id", applicationController.update);
+usersRouter.delete("/:id", applicationController.delete);
 
-//usersGearsAPI(ClubsTable,BallsTable,PuttersTable)
+//usersGearsAPI(WoodsTable,BallsTable)
 // usersRouter.post("/:id/gears");
-// usersRouter.patch("/:id/gears/:id");
+// usersRouter.patch("/:id/woods/:id");
+// usersRouter.patch("/:id/balls/:id");
 // usersRouter.delete("/:id/gears/:id");
 
 //usersVideosAPI(VideosTable)
