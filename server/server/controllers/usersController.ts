@@ -1,4 +1,5 @@
-import db,{sequelize} from "../models"
+import db, { sequelize } from "../models"
+import {userType} from "../models/users";
 const users = db.User;
 
 export default {
@@ -8,9 +9,6 @@ export default {
       where: { id: id },
       raw: false,
     });
-    if (!user) {
-      return { message: 'no user exist' };
-    }
     return user;
   },
 
@@ -19,26 +17,21 @@ export default {
     const allUser = await users.findAll({
       // where: { status: queryStatus },
     });
-    if (!allUser) {
-      return { message: "not exist" };
-    }
     return allUser;
   },
-  async create(req: any,res: any | null) {
+  
+  async create(user: userType, transaction: any | null) {
         const newuser = await users.create(
           {
-            password: req.password,
-            name: req.name,
-            email: req.email,
-          },res
+            password: user.password,
+            name: user.name,
+            email: user.email,
+          }, transaction
         )
-    if (!newuser) {
-      return { message: "error" };
-    }
-        return newuser 
+      return newuser 
   },
 
-  async update(id: string,user: any) {
+  async update(id: string, user: userType) {
     const targetuser: any = await users.findOne({
       where: { id: id }
     });
@@ -55,15 +48,13 @@ export default {
       profileImage: user.profileImage,
       clubImage: user.clubImage,
     });
+    
     return updateUser;
   },
   async delete(id: string) {
     const targetuser: any = await users.findOne({
       where: { id: id },
     })
-    if (!targetuser) { 
-      return { message: "check this userId" };
-    }
     await targetuser.destroy();
     return {message: "ok"}
   }

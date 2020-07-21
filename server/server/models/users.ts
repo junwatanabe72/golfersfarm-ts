@@ -4,11 +4,6 @@ import Ball from './balls';
 import Wood from './woods';
 
 
-const SEX = {
-  0: "man",
-  1: "woman",
-};
-export const sexValues = Object.values(SEX);
 
 class User extends Model {
   public id!: number;
@@ -91,6 +86,21 @@ public static associate() {
       constraints: false
     });
   }
+}
+
+export interface userType {
+  id: number;
+  name: string;
+  sex: string | undefined;
+  residence: string | undefined;
+  birthPlace: string | undefined;
+  averageDistance: number | undefined;
+  bestScore: number | undefined;
+  email: string;
+  password: string;
+  job: string | undefined;
+  profileImage: string | undefined;
+  clubImage: string | undefined;
 }
 
 export default User;

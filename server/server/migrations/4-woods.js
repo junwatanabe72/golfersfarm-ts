@@ -1,4 +1,12 @@
 "use strict";
+
+const defaultStatus = {
+  name: "original",
+  shaftId: 1,
+  makerId: 1,
+  count: "3 5",
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("woods", {
@@ -10,6 +18,8 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: defaultStatus.name,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -22,6 +32,8 @@ module.exports = {
       },
       shaftId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: defaultStatus.shaftId,
         references: {
           model: "shafts",
           key: "id",
@@ -29,6 +41,8 @@ module.exports = {
       },
       makerId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: defaultStatus.makerId,
         references: {
           model: "makers",
           key: "id",
@@ -36,6 +50,8 @@ module.exports = {
       },
       count: {
         type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: defaultStatus.count,
       },
       createdAt: {
         allowNull: false,

@@ -1,7 +1,7 @@
 import path from "path";
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
-import User from "./users";
+import User, {userType} from "./users";
 import Ball from "./balls";
 import Wood from "./woods";
 import Shaft from "./shafts";
@@ -22,6 +22,7 @@ const db: dbType = {
   Shaft: Shaft.initialize(sequelize),
   Maker: Maker.initialize(sequelize),
 };
+
 
 interface dbType {
   [key: string]: any;// ←シグネチャー

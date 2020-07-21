@@ -3,13 +3,20 @@ import User from "./users";
 import Shaft from "./shafts";
 import Maker from "./makers";
 
+const defaultStatus={
+  name: "original",
+  shaftId: 1,
+  makerId: 1,
+  count: "3 5",
+}
+
 class Wood extends Model {
   public id!: number;
-  public name: string | undefined;
-  public userId!: number | undefined;
-  public shaftId: number | undefined;
-  public makerId: number | undefined;
-  public count: string | undefined;
+  public name!: string;
+  public userId!: number;
+  public shaftId!: number;
+  public makerId!: number;
+  public count!: string;
 
   public static initialize(sequelize: Sequelize){
     this.init(
@@ -22,6 +29,8 @@ class Wood extends Model {
         },
         name: {
           type: DataTypes.STRING(250),
+          defaultValue: defaultStatus.name,
+          allowNull: false,
         },
         userId: {
           type: DataTypes.INTEGER,
@@ -29,12 +38,18 @@ class Wood extends Model {
         },
         shaftId: {
           type: DataTypes.INTEGER,
+          allowNull: false,
+          defaultValue: defaultStatus.shaftId,
         },
         makerId: {
           type: DataTypes.INTEGER,
+          allowNull: false,
+          defaultValue: defaultStatus.makerId,
         },
         count: {
           type: DataTypes.STRING(250),
+          allowNull: false,
+          defaultValue: defaultStatus.count,
         },
       },
       {
@@ -59,6 +74,15 @@ class Wood extends Model {
       constraints: false,
     });
   }
+}
+
+export interface woodType {
+  id: number;
+  name: string;
+  userId: number;
+  shaftId: number;
+  makerId: number;
+  count: string;
 }
 
 export default Wood;
