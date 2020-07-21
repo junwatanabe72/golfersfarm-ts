@@ -4,11 +4,11 @@ const users = db.User;
 
 export default {
 
-  async show(id: string) {
+  async show(id: string, transaction: any | null) {
     const user = await users.findOne({
       where: { id: id },
       raw: false,
-    });
+    }, transaction);
     return user;
   },
 

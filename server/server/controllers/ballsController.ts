@@ -1,63 +1,56 @@
 import db from "../models"
-import { woodType } from "../models/woods";
+import { ballType } from "../models/balls";
 
-const woods = db.Wood;
-const shafts = db.Shaft;
+const balls = db.Ball;
 const makers = db.Maker;
 
 export default {
   async show(id: number, transaction: any | null) {
-    const targetWood = await woods.findOne({
+    const targetBall = await balls.findOne({
       where: { userId: id },
       raw: false,
       include: [
-            {
-              model: shafts,
-              required: false,
-            },
             {
               model: makers,
               required: false,
             },
           ],
     },transaction)
-    return targetWood;
+    return targetBall;
   },
   async create(id: number,transaction: any | null) {
-    const newWood = await woods.create({
+    const newBall = await balls.create({
           userId: id
         },transaction
       );
-    return newWood;
+    return newBall;
   },
-  async update(id: string, wood: woodType) {
-    const targetWood: any = await woods.findOne({
+  async update(id: string, ball: ballType) {
+    const targetBall: any = await balls.findOne({
       where: { id: id }
     });
-    if (!targetWood) { return { message: "check this userId" } }
+    if (!targetBall) { return { message: "check this userId" } }
     //woodを更新する。
-    const updateWood = await targetWood.update({
-      name: wood.name,
-      shaftId: wood.shaftId,
-      makerId: wood.makerId,
-      count: wood.count,
+    const updateBall = await targetBall.update({
+      name: ball.name,
+      makerId: ball.makerId,
     });
-    return  updateWood;
+    return  updateBall;
   },
 
   //今のところ使わない。
   // async index() {
   //   // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-  //   const allWood = await woods.findAll({
+  //   const allBall = await balls.findAll({
   //     // where: { status: queryStatus },
   //   });
-  //   return allWood;
+  //   return allBall;
   // },
   // async delete(id: string) {
-  //   const targetWood: any = await woods.findOne({
+  //   const targetBall: any = await balls.findOne({
   //     where: { id: id },
   //   })
-  //   await targetWood.destroy();
+  //   await targetBall.destroy();
   //   return { message: "ok" }
   // }
 };

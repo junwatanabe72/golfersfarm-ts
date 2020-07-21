@@ -1,15 +1,11 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import defaultValues from "../value/model/value"
 import User from "./users";
-import Maker from "./makers";
 
-
-
-class Ball extends Model {
+class Video extends Model {
   public id!: number;
-  public name: string | undefined;
+  public name!: string;
   public userId!: number;
-  public makerId!: number;
+  public url!: string;
 
   public static initialize(sequelize: Sequelize){
     this.init(
@@ -22,22 +18,19 @@ class Ball extends Model {
         },
         name: {
           type: DataTypes.STRING(250),
-          defaultValue: defaultValues.ball.name,
           allowNull: false,
-
         },
         userId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
-        makerId: {
-          type: DataTypes.INTEGER, 
+        url: {
+          type: DataTypes.STRING(250),
           allowNull: false,
-          defaultValue: defaultValues.ball.makerId,
         },
       },
       {
-        tableName: "balls",
+        tableName: "videos",
         sequelize: sequelize,
       }
     );
@@ -49,18 +42,14 @@ class Ball extends Model {
       onDelete: "CASCADE",
       constraints: false,
     });
-    this.belongsTo(Maker, {
-      foreignKey: "makerId",
-      constraints: false,
-    });
   }
 }
 
-export interface ballType {
+export interface videoType {
   id: number;
   name: string;
   userId: number;
-  makerId: number;
+  url: string;
 }
 
-export default Ball;
+export default Video;

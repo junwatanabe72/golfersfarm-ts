@@ -1,4 +1,6 @@
+const defaultValues = require('../value/model/value');
 "use strict";
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("balls", {
@@ -10,9 +12,12 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
+        allowNull: false,
+        defaultValue: defaultValues.ball.name,
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         onDelete: "CASCADE",
         references: {
           model: "users",
@@ -21,6 +26,8 @@ module.exports = {
       },
       makerId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: defaultValues.ball.makerId,
         references: {
           model: "makers",
           key: "id",

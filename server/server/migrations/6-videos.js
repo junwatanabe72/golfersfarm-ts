@@ -1,9 +1,8 @@
-const defaultValues = require('../value/model/value');
 "use strict";
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("woods", {
+    return queryInterface.createTable("videos", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -13,7 +12,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: defaultValues.wood.name,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -24,28 +22,9 @@ module.exports = {
           key: "id",
         },
       },
-      shaftId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: defaultValues.wood.shaftId,
-        references: {
-          model: "shafts",
-          key: "id",
-        },
-      },
-      makerId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: defaultValues.wood.makerId,
-        references: {
-          model: "makers",
-          key: "id",
-        },
-      },
-      count: {
+      url: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: defaultValues.wood.count,
       },
       createdAt: {
         allowNull: false,
@@ -58,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("woods");
+    return queryInterface.dropTable("videos");
   },
 };

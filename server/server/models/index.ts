@@ -2,8 +2,9 @@ import path from "path";
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
 import User, {userType} from "./users";
-import Ball from "./balls";
-import Wood from "./woods";
+import Ball, { ballType } from "./balls";
+import Wood, { woodType } from "./woods";
+import Video, { videoType } from "./videos";
 import Shaft from "./shafts";
 import Maker from "./makers";
 
@@ -19,6 +20,7 @@ const db: dbType = {
   User: User.initialize(sequelize),
   Ball: Ball.initialize(sequelize),
   Wood: Wood.initialize(sequelize),
+  Video: Video.initialize(sequelize),
   Shaft: Shaft.initialize(sequelize),
   Maker: Maker.initialize(sequelize),
 };
