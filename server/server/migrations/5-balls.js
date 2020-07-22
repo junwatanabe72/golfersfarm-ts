@@ -1,5 +1,10 @@
-const defaultValues = require('../value/model/value');
+// const defaultValues = require('../values/modelValues.js');
 "use strict";
+
+const ball = {
+  name: "anything",
+  makerId: 1,
+}
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -13,7 +18,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: defaultValues.ball.name,
+        defaultValue: ball.name,
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -27,7 +32,7 @@ module.exports = {
       makerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: defaultValues.ball.makerId,
+        defaultValue: ball.makerId,
         references: {
           model: "makers",
           key: "id",

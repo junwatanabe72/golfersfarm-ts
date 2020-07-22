@@ -1,9 +1,12 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import defaultValues from "../value/model/value"
+// const woodss = require("../values/modelValues");
 import User from "./users";
 import Maker from "./makers";
 
-
+const ball =  {
+  name: "anything",
+  makerId: 1,
+}
 
 class Ball extends Model {
   public id!: number;
@@ -22,7 +25,7 @@ class Ball extends Model {
         },
         name: {
           type: DataTypes.STRING(250),
-          defaultValue: defaultValues.ball.name,
+          defaultValue: ball.name,
           allowNull: false,
 
         },
@@ -33,7 +36,7 @@ class Ball extends Model {
         makerId: {
           type: DataTypes.INTEGER, 
           allowNull: false,
-          defaultValue: defaultValues.ball.makerId,
+          defaultValue: ball.makerId,
         },
       },
       {

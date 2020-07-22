@@ -11,13 +11,13 @@ export default {
   //   }, transaction)
   //   return targetVideo;
   // },
-  async index(id: number, transaction: any | null) {
+  async index(id: string, transaction: any | null) {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-    const allVideo = await videos.findAll({
+    const allVideos = await videos.findAll({
       where: { userId: id },
       raw: false,
     }, transaction)
-    return allVideo;
+    return allVideos;
   },
   async create(id: string, video: videoType,transaction: any | null) {
     const newVideo = await videos.create({
@@ -32,7 +32,7 @@ export default {
     const targetVideo: any = await videos.findOne({
       where: { id: videoId, userId: id }
     });
-    if (!targetVideo) { return { message: "check this videoId" } }
+    
     //woodを更新する。
     const updateVideo = await targetVideo.update({
       name: video.name,

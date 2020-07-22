@@ -11,13 +11,12 @@ export default {
     }, transaction);
     return user;
   },
-
   async index() {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-    const allUser = await users.findAll({
+    const allUsers = await users.findAll({
       // where: { status: queryStatus },
     });
-    return allUser;
+    return allUsers;
   },
   
   async create(user: userType, transaction: any | null) {
@@ -35,9 +34,6 @@ export default {
     const targetuser: any = await users.findOne({
       where: { id: id }
     });
-    if (!targetuser) { return { message: "check this userId" }; }
-
-    //userを更新する。
     const updateUser = await targetuser.update({
       sex: user.sex,
       residence: user.residence,

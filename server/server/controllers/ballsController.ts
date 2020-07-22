@@ -29,7 +29,7 @@ export default {
     const targetBall: any = await balls.findOne({
       where: { id: id }
     });
-    if (!targetBall) { return { message: "check this userId" } }
+    
     //woodを更新する。
     const updateBall = await targetBall.update({
       name: ball.name,

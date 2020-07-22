@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   wood: {
     name: "original",
     shaftId: 1,

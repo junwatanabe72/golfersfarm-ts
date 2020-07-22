@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import {sequelize} from "../models"
 import usersController from "./usersController";
 import woodsController from "./woodsController";
@@ -9,7 +9,7 @@ const resData = (arg:{})=>{return {"data": arg}}
 
 export default {
 
-  async userShow(req: Request, res: Response) {
+  async userShow(req: Request, res: Response, next: NextFunction) {
     try {
       await sequelize.transaction(async (t) => {
         const targetUser = await usersController.show(req.params.id, { transaction: t });
@@ -20,68 +20,110 @@ export default {
         })
     } catch (error) {
       res.status(400)
+      return next(error)
     }
   },
   async userIndex(req: Request, res: Response) {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-    const allUser = await usersController.index();
-      if (!allUser) {
-        return res.status(404).json({ message: 'not exist' });
+    const allUsers = await usersController.index();
+      if (!allUsers) {
+        res.status(204).json({ message: 'not exist' });
+      }else{
+        res.json(resData({allUsers}));
       }
-    res.json(resData({allUser}));
   },
-  async userCreate(req: any, res: Response) {
+  async userCreate(req: any, res: Response, next: NextFunction) {
     const {user} = req.body; 
       try {
         await sequelize.transaction(async (t) => {
             const newUser = await usersController.create(user,{ transaction: t });
             const newBall = await ballsController.create(newUser.id, { transaction: t });
             const newWood = await woodsController.create(newUser.id, { transaction: t });
-          
-          res.json([{ newUser }, { newBall }, { newWood}]);
+          res.status(201).json([{ newUser }, { newBall }, { newWood}]);
             })
       } catch (error) {
           res.status(400)
+        return next(error)
       }
   },
-  async userUpdate(req: any, res: Response) {
+  async userUpdate(req: any, res: Response, next: NextFunction) {
     const { user } = req.body;
-    const updateUser = await usersController.update(req.params.id,user)
-      if (!updateUser) {
-        return res.status(404).json({ message: 'not exist' });
+      try{
+        const updateUser = await usersController.update(req.params.id,user)
+          if (!updateUser) { 
+            return res.status(404) 
+          }else{
+            res.status(201).json({ updateUser });
+          }
+      } catch (error){
+          res.status(404)
+        return next(error)
       }
-    res.json({ updateUser });
   },
-  async userDelete(req: any, res: Response) {
-    usersController.delete(req.params.id);
-    res.json({});
+  async userDelete(req: any, res: Response, next: NextFunction) {
+      try {
+        usersController.delete(req.params.id);
+        res.status(204).json({});
+      } catch (error) {
+          res.status(404)
+        return next(error)
+      }
   },
 
-  async videoCreate(req: any, res: Response) {
-    const { video } = req.body;
-    const newVideo = await videosController.create(req.params.id, video,null);
-    if (!newVideo) {
-      return res.status(404).json({ message: 'not exist' });
+  async videoIndex(req: any, res: Response, next: NextFunction) {
+    // const queryStatus: any = req.query.status ? req.query.status : statusValues;
+    try {
+      const allVideos = await videosController.index(req.params.id,null);
+        if (!allVideos) {
+            res.status(204).json({ message: 'not exist' });
+        }else{
+          res.json(resData({ allVideos }));
+        }
+    } catch (error) {
+        res.status(404)
+      return next(error)
     }
-    res.json({ newVideo });
   },
-  async videoUpdate(req: any, res: Response) {
+  async videoCreate(req: any, res: Response, next: NextFunction) {
     const { video } = req.body;
-    const updateVideo = await videosController.update(req.params.id,req.params.videoid,video)
-    if (!updateVideo) {
-      return res.status(404).json({ message: 'not exist' });
+      try {
+        const newVideo = await videosController.create(req.params.id, video,null);
+          res.status(201).json({ newVideo });
+      } catch (error) {
+          res.status(404)
+        return next(error)
+      }
+  },
+  async videoUpdate(req: any, res: Response, next: NextFunction) {
+    const { video } = req.body;
+      try{
+        const updateVideo = await videosController.update(req.params.id,req.params.videoid,video)
+        if (!updateVideo) {
+          return res.status(404)
+        } else {
+          res.status(201).json({ updateVideo });
+        }
+      } catch (error) {
+          res.status(404)
+        return next(error)
+      }
+  },
+  async videoDelete(req: any, res: Response, next: NextFunction) {
+    try{
+      videosController.delete(req.params.id,req.params.videoid);
+      res.status(204).json({});
+    } catch (error) {
+      res.status(404)
+      return next(error)
     }
-    res.json({ updateVideo });
   },
-  async videoDelete(req: any, res: Response) {
-    videosController.delete(req.params.id,req.params.videoid);
-    res.json({});
+  async userShowtest(req: Request, res: Response, next: NextFunction) {
+    try{
+      const targetUser = await usersController.show(req.params.id,null);
+      res.json({ "data": { targetUser } });
+    } catch (error) {
+      res.status(404)
+      return next(error)
+    }
   },
-
-
-
-  async userShowtest(req: Request, res: Response) {
-        const targetUser = await usersController.show(req.params.id,null);
-        res.json({ "data": { targetUser } });
-  },
-};
+}

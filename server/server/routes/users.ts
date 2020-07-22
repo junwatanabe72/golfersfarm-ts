@@ -20,6 +20,7 @@ usersRouter.delete("/:id", applicationController.userDelete);
 
 //usersVideosAPI(VideosTable)
 usersRouter.post("/:id/videos/",applicationController.videoCreate);
+usersRouter.get("/:id/videos/", applicationController.videoIndex);
 usersRouter.patch("/:id/videos/:videoid", applicationController.videoUpdate );
 usersRouter.delete("/:id/videos/:videoid", applicationController.videoDelete);
 

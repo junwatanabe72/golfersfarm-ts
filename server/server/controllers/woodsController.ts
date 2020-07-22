@@ -34,7 +34,7 @@ export default {
     const targetWood: any = await woods.findOne({
       where: { id: id }
     });
-    if (!targetWood) { return { message: "check this userId" } }
+    
     //woodを更新する。
     const updateWood = await targetWood.update({
       name: wood.name,

@@ -1,8 +1,16 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import defaultValues from "../value/model/value"
+// import defaultValues from "../values/modelValues"
+// const woodss = require("../values/modelValues");
 import User from "./users";
 import Shaft from "./shafts";
 import Maker from "./makers";
+
+const wood = {
+    name: "original",
+    shaftId: 1,
+    makerId: 1,
+    count: "3 5",
+  }
 
 class Wood extends Model {
   public id!: number;
@@ -23,7 +31,7 @@ class Wood extends Model {
         },
         name: {
           type: DataTypes.STRING(250),
-          defaultValue: defaultValues.wood.name,
+          defaultValue: wood.name,
           allowNull: false,
         },
         userId: {
@@ -33,17 +41,17 @@ class Wood extends Model {
         shaftId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: defaultValues.wood.shaftId,
+          defaultValue: wood.shaftId,
         },
         makerId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: defaultValues.wood.makerId,
+          defaultValue: wood.makerId,
         },
         count: {
           type: DataTypes.STRING(250),
           allowNull: false,
-          defaultValue: defaultValues.wood.count,
+          defaultValue: wood.count,
         },
       },
       {
