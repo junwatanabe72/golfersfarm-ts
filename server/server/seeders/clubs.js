@@ -3,30 +3,32 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "makers",
+      "clubs",
       [
         {
-          name: "original",
+          name: "JBEAM 435",
+          userId: 1,
+          typeId: 2,
+          shaftId: 3,
+          makerId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Mizuno",
+          name: "Ibrade",
+          userId: 1,
+          typeId: 2,
+          shaftId: 2,
+          makerId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Titleist",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: "Callaway",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          name: "その他",
+          name: "X-Drive",
+          userId: 1,
+          typeId: 1,
+          shaftId: 2,
+          makerId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -36,6 +38,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("makers", null, {});
+    return queryInterface.bulkDelete("clubs", null, {});
   },
 };

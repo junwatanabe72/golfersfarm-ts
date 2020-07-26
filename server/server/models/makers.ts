@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import Ball from "./balls";
-import Wood from "./woods";
+import Club from "./clubs";
 
 // const models:any =[Ball,Wood]
 
@@ -43,7 +43,7 @@ class Maker extends Model {
       foreignKey: 'makerId',
       constraints: false
     });
-    this.hasMany(Wood, {
+    this.hasMany(Club, {
       sourceKey: 'id',
       foreignKey: 'makerId',
       constraints: false

@@ -1,9 +1,6 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-// import sequelize from "../middlewares/sequelize";
 import Ball from './balls';
-import Wood from './woods';
-
-
+import Club from './clubs';
 
 class User extends Model {
   public id!: number;
@@ -19,7 +16,48 @@ class User extends Model {
   public profileImage: string | undefined;
   public clubImage: string | undefined;
   
-  
+  static async add(user: User, db: Sequelize ) {
+    await db.transaction(async (t) => {
+      const newUser = await this.create(
+        {
+          password: user.password,
+          name: user.name,
+          email: user.email,
+        }, { transaction: t }
+      );
+      const newBall = await Ball.create({
+        userId: newUser.id
+      }, { transaction: t }
+      );
+      const newClub = await Club.create({
+        name: "original",
+        userId: newUser.id,
+        shaftId: 1,
+        makerId: 1,
+        typeId: 1,
+      }, { transaction: t }
+      );
+      return [{ newUser }, { newClub} ,{ newBall }]
+    })
+  }
+
+  static async updateProfile(user:User) {
+    const targetUser: any = await this.findOne({
+        where: { id: user.id }
+      });
+      const updateUser = await targetUser.update({
+        sex: user.sex,
+        residence: user.residence,
+        averageDistance: user.averageDistance,
+        bestScore: user.bestScore,
+        email: user.email,
+        job: user.job,
+        profileImage: user.profileImage,
+        clubImage: user.clubImage,
+      });
+      return {updateUser}
+    }
+
   public static initialize(sequelize: Sequelize){
     this.init(
   {
@@ -80,7 +118,7 @@ public static associate() {
       foreignKey: 'userId',
       constraints: false
     });
-    this.hasMany(Wood, {
+    this.hasMany(Club, {
       sourceKey: 'id',
       foreignKey: 'userId',
       constraints: false
@@ -101,6 +139,8 @@ export interface userType {
   job: string | undefined;
   profileImage: string | undefined;
   clubImage: string | undefined;
+  add: ()=> void;
+  updateProfile: ()=> void;
 }
 
 export default User;

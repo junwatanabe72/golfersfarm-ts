@@ -1,15 +1,15 @@
 "use strict";
 
 // const defaultValues = require('../values/modelValues');
-const wood = {
+const club = {
   name: "original",
   shaftId: 1,
   makerId: 1,
-  count: "3 5",
+  typeId: 1,
 }
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("woods", {
+    return queryInterface.createTable("clubs", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -19,7 +19,16 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: wood.name,
+        defaultValue: club.name,
+      },
+      typeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: club.makerId,
+        references: {
+          model: "clubTypes",
+          key: "id",
+        },
       },
       userId: {
         type: Sequelize.INTEGER,
@@ -33,7 +42,7 @@ module.exports = {
       shaftId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: wood.shaftId,
+        defaultValue: club.shaftId,
         references: {
           model: "shafts",
           key: "id",
@@ -42,16 +51,11 @@ module.exports = {
       makerId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        defaultValue: wood.makerId,
+        defaultValue: club.makerId,
         references: {
           model: "makers",
           key: "id",
         },
-      },
-      count: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        defaultValue: wood.count,
       },
       createdAt: {
         allowNull: false,
@@ -64,6 +68,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("woods");
+    return queryInterface.dropTable("clubs");
   },
 };

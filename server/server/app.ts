@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response,NextFunction } from "express";
 import bodyParser from "body-parser";
 import path from "path";
 import http from "http";
@@ -28,8 +28,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser());
 app.use(passport.initialize());
 
+app.use(function (req: Request, res: Response, next: NextFunction) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 //router
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response,next: NextFunction) => {
   res.json({ message: "ok" });
 });
 

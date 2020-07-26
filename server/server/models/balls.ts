@@ -14,6 +14,16 @@ class Ball extends Model {
   public userId!: number;
   public makerId!: number;
 
+  static async updateBall(id: string, ball: ballType) {
+    const targetBall: any = await this.findOne({
+      where: { id: id }
+    });
+    const updateBall = await targetBall.update({
+      name: ball.name,
+      makerId: ball.makerId,
+    });
+    return updateBall;
+  }
   public static initialize(sequelize: Sequelize){
     this.init(
       {
@@ -64,6 +74,7 @@ export interface ballType {
   name: string;
   userId: number;
   makerId: number;
+  updateBall: ()=> void;
 }
 
 export default Ball;

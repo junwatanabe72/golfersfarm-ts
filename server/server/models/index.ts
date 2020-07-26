@@ -1,12 +1,13 @@
 import path from "path";
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
-import User, {userType} from "./users";
-import Ball, { ballType } from "./balls";
-import Wood, { woodType } from "./woods";
-import Video, { videoType } from "./videos";
+import User from "./users";
+import Ball from "./balls";
+import Club from "./clubs";
+import Video from "./videos";
 import Shaft from "./shafts";
 import Maker from "./makers";
+import ClubType from "./clubTypes";
 
 dotenv.config();
 
@@ -19,10 +20,11 @@ export const sequelize = new Sequelize(config);
 const db: dbType = {
   User: User.initialize(sequelize),
   Ball: Ball.initialize(sequelize),
-  Wood: Wood.initialize(sequelize),
+  Club: Club.initialize(sequelize),
   Video: Video.initialize(sequelize),
   Shaft: Shaft.initialize(sequelize),
   Maker: Maker.initialize(sequelize),
+  ClubType: ClubType.initialize(sequelize),
 };
 
 

@@ -1,11 +1,9 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import Club from "./clubs";
 
-class Shaft extends Model {
+class ClubType extends Model {
   public id!: number;
-  public name!: string;
-  public flex!: string;
-  public manufacturer!: string;
+  public type!: string;
 
   public static initialize(sequelize: Sequelize){
     this.init(
@@ -16,33 +14,27 @@ class Shaft extends Model {
           autoIncrement: true,
           primaryKey: true,
         },
-        name: {
-          type: DataTypes.STRING(250),
-          allowNull: false,
-        },
-        flex: {
-          type: DataTypes.STRING(250),
-          allowNull: false,
-        },
-        manufacturer: {
+        type: {
           type: DataTypes.STRING(250),
           allowNull: false,
         },
       },
       {
-        tableName: "shafts",
+        tableName: "clubTypes",
         sequelize: sequelize,
       }
     );
   return this;
   }
   public static associate() {
+
+    
     this.hasMany(Club, {
       sourceKey: 'id',
-      foreignKey: 'shaftId',
+      foreignKey: 'typeId',
       constraints: false
     });
   }
 }
 
-export default Shaft;
+export default ClubType;

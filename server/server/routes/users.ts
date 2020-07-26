@@ -1,28 +1,30 @@
 import express from "express";
-import applicationController from "../controllers/applicationController";
-// import usersController from "../controllers/usersController";
+import usersController from "../controllers/usersController";
+import clubsController from "../controllers/clubsController";
+import ballsController from "../controllers/ballsController";
+import videosController from "../controllers/videosController";
 
 const usersRouter = express.Router();
 
 
 //usersprofileAPI(UsersTable)
-usersRouter.get("/:id", applicationController.userShow);
-usersRouter.get("/", applicationController.userIndex);
-usersRouter.post("/", applicationController.userCreate);
-usersRouter.patch("/:id", applicationController.userUpdate);
-usersRouter.delete("/:id", applicationController.userDelete);
+usersRouter.get("/:id", usersController.show);
+usersRouter.get("/", usersController.index);
+usersRouter.post("/", usersController.create);
+usersRouter.patch("/:id", usersController.update);
+usersRouter.delete("/:id", usersController.delete);
 
-//usersGearsAPI(WoodsTable,BallsTable)
-// usersRouter.post("/:id/gears");
-// usersRouter.patch("/:id/woods/:id");
-// usersRouter.patch("/:id/balls/:id");
+//usersGearsAPI(clubsTable,BallsTable)
+usersRouter.get("/:id/gears",clubsController.index);
+usersRouter.patch("/:id/gears", clubsController.update);
+usersRouter.patch("/:id/gears/ball", ballsController.update);
 // usersRouter.delete("/:id/gears/:id");
 
 //usersVideosAPI(VideosTable)
-usersRouter.post("/:id/videos/",applicationController.videoCreate);
-usersRouter.get("/:id/videos/", applicationController.videoIndex);
-usersRouter.patch("/:id/videos/:videoid", applicationController.videoUpdate );
-usersRouter.delete("/:id/videos/:videoid", applicationController.videoDelete);
+usersRouter.post("/:id/videos/",videosController.create);
+usersRouter.get("/:id/videos/", videosController.index);
+usersRouter.patch("/:id/videos/:videoid", videosController.update );
+usersRouter.delete("/:id/videos/:videoid", videosController.delete);
 
 //usersTournamentsAPI(TournamentsTable)
 // usersRouter.post("/:id/tournaments");

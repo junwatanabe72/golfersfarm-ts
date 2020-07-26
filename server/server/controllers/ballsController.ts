@@ -1,13 +1,14 @@
+import { Request, Response, NextFunction } from "express";
 import db from "../models"
-import { ballType } from "../models/balls";
 
 const balls = db.Ball;
 const makers = db.Maker;
 
 export default {
-  async show(id: number, transaction: any | null) {
+  async show(req: Request, res: Response, next: NextFunction) {
+    try{
     const targetBall = await balls.findOne({
-      where: { userId: id },
+      where: { userId: req.params.id},
       raw: false,
       include: [
             {
@@ -15,27 +16,22 @@ export default {
               required: false,
             },
           ],
-    },transaction)
-    return targetBall;
+    })
+      res.json({ targetBall});
+    } catch (error) {
+      res.status(400)
+      return next(error)
+    }
   },
-  async create(id: number,transaction: any | null) {
-    const newBall = await balls.create({
-          userId: id
-        },transaction
-      );
-    return newBall;
-  },
-  async update(id: string, ball: ballType) {
-    const targetBall: any = await balls.findOne({
-      where: { id: id }
-    });
-    
-    //woodを更新する。
-    const updateBall = await targetBall.update({
-      name: ball.name,
-      makerId: ball.makerId,
-    });
-    return  updateBall;
+  async update(req: Request, res: Response, next: NextFunction) {
+    const { ball } = req.body;
+    try {
+      const updateBall = await balls.updateBall(req.params.id,ball);
+      res.status(201).json({ updateBall });
+    } catch (error) {
+      res.status(404)
+      return next(error)
+    }
   },
 
   //今のところ使わない。

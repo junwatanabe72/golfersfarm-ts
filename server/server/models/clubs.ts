@@ -2,24 +2,41 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 // import defaultValues from "../values/modelValues"
 // const woodss = require("../values/modelValues");
 import User from "./users";
+import ClubType from "./clubTypes";
 import Shaft from "./shafts";
 import Maker from "./makers";
 
-const wood = {
-    name: "original",
-    shaftId: 1,
-    makerId: 1,
-    count: "3 5",
-  }
+const club = {
+  name: "original",
+  shaftId: 1,
+  makerId: 1,
+  typeId: 1,
+}
 
-class Wood extends Model {
+class Club extends Model {
   public id!: number;
   public name!: string;
+  public typeId!: number;
   public userId!: number;
   public shaftId!: number;
   public makerId!: number;
-  public count!: string;
+  
 
+  static async clubUpdate(id: string, club: clubType) {
+    const targetClub: any = await this.findOne({
+      where: { 
+        id: club.id,
+        userId: id 
+      }
+    });
+    const updateClub = await targetClub.update({
+      name: club.name,
+      typeId: club.typeId,
+      shaftId: club.shaftId,
+      makerId: club.makerId,
+    });
+    return updateClub;
+  }
   public static initialize(sequelize: Sequelize){
     this.init(
       {
@@ -31,31 +48,31 @@ class Wood extends Model {
         },
         name: {
           type: DataTypes.STRING(250),
-          defaultValue: wood.name,
+          defaultValue: club.name,
           allowNull: false,
         },
         userId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
+        typeId: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+          defaultValue: club.typeId,
+        },
         shaftId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: wood.shaftId,
+          defaultValue: club.shaftId,
         },
         makerId: {
           type: DataTypes.INTEGER,
           allowNull: false,
-          defaultValue: wood.makerId,
-        },
-        count: {
-          type: DataTypes.STRING(250),
-          allowNull: false,
-          defaultValue: wood.count,
+          defaultValue: club.makerId,
         },
       },
       {
-        tableName: "woods",
+        tableName: "clubs",
         sequelize: sequelize,
       }
     );
@@ -75,16 +92,20 @@ class Wood extends Model {
       foreignKey: "makerId",
       constraints: false,
     });
+    this.belongsTo(ClubType, {
+      foreignKey: "typeId",
+      constraints: false,
+    });
   }
 }
 
-export interface woodType {
+export interface clubType {
   id: number;
   name: string;
+  typeId: number;
   userId: number;
   shaftId: number;
   makerId: number;
-  count: string;
 }
 
-export default Wood;
+export default Club;

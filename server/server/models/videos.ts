@@ -7,6 +7,26 @@ class Video extends Model {
   public userId!: number;
   public url!: string;
 
+  static async add(id: string,video: Video) {
+    const newVideo = await this.create({
+      userId: id,
+      name: video.name,
+      url: video.url,
+    });
+    return {newVideo}
+  }
+
+  static async updateDatas(video: Video) {
+    const targetVideo: any = await this.findOne({
+      where: { id: video.id }
+    });
+    const updateVideo = await targetVideo.update({
+      name: video.name,
+      url: video.url,
+    });
+    return { updateVideo }
+  }
+
   public static initialize(sequelize: Sequelize){
     this.init(
       {
@@ -44,12 +64,13 @@ class Video extends Model {
     });
   }
 }
-
 export interface videoType {
   id: number;
   name: string;
   userId: number;
   url: string;
+  add: () => void;
+  updateDatas: () => void;
 }
 
 export default Video;
