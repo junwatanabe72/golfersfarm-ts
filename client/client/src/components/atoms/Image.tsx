@@ -1,10 +1,10 @@
 import React from 'react';
-import { defaultSize, widthType } from "../../utils/styled/styledText"
+import { defaultSize, widthType } from "../../utils/constant/number"
 import styled from 'styled-components';
 
 interface ImageProps {
   width?: widthType,
-  image?: string,
+  image: string,
 } 
 
 const Container = styled.img< { width?: widthType}>`

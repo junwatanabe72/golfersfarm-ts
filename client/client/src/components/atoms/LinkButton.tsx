@@ -1,62 +1,57 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { defaultSize } from "../../utils/styled/styledText"
+import { defaultSize,fontType } from "../../utils/constant/number";
+import { defaultColors, colorType } from "../../utils/constant/color";
+import { ROUTE, routeType } from "../../utils/constant/route"
 import styled from 'styled-components';
 
 interface LinkProps {
-  fontsize?: number,
-  color?: string,
-  to: string,
+  fontsize?: fontType,
+  color: colorType,
+  to: any,
 };
 
 const StyledLink = styled(Link) <LinkProps>`
   display: inline-block;
-  
   font-size: ${(props) => props.fontsize}px;
   ${(props) => getButtonBcolor(props.color)};
 `;
 
-const getButtonBcolor = (props: string | undefined) => {
-  if (props === 'primary') {
+const getButtonBcolor = (props: colorType) => {
+  if (props === defaultColors.BASICCOLORS.primary) {
     return `
-      color: #00bcd4;
+      color: ${defaultColors.BASICCOLORS.primary};
       &:hover {
-        color: #008ba2;
+        color: ${defaultColors.BASICCOLORS.primaryDark};
       }
   `;
-  } else if (props === 'secondary') {
+  } else if (props === defaultColors.BASICCOLORS.secondary) {
     return `
-      color: #ff5722;
+      color: ${defaultColors.BASICCOLORS.secondary};
       &:hover {
-        color: #c41c00;
+        color: ${defaultColors.BASICCOLORS.secondaryDark};
       }
   `;
-  } else if (props === 'basic') {
+  } else if (props === defaultColors.BASICCOLORS.basic) {
     return `
-      color: #546e7a;
+      color: ${defaultColors.BASICCOLORS.basic};
       &:hover {
-        color: #29434e;
+        color: ${defaultColors.BASICCOLORS.basicDark};
       }
   `;
-  } else if (props === 'white') {
+  } else if (props === defaultColors.BASICCOLORS.white) {
     return `
-      color: #eeeeee;
+      color: ${defaultColors.BASICCOLORS.white};
       &:hover {
-        color: #bcbcbc;
+        color: ${defaultColors.BASICCOLORS.whiteDark};
       }
   `;
   }
 };
 
-StyledLink.defaultProps = {
-  fontsize: defaultSize.FONT.BASE,
-  color: "primary",
-}
-
-
 const LinkButton: React.FC<LinkProps> = ({
   to,
-  fontsize,
+  fontsize = defaultSize.FONT.BASE,
   color,
   children
 }) => {

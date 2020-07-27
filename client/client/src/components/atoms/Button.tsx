@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { defaultColors, colorType } from "../../utils/constant/color"
 
-type selectColor = "primary" | "secondary";
 
 interface ButtonProps {
-  color: selectColor,
+  color: colorType,
   onClick: () => void,
 } 
-const DefaultButton = styled.a < { color: selectColor }>`
+const DefaultButton = styled.a < { color: colorType }>`
   cursor: pointer;
   display: inline-block;
   text-align: center;
@@ -20,23 +20,23 @@ const DefaultButton = styled.a < { color: selectColor }>`
   }
 `;
 
-const getButtonBcolor = (props: selectColor) => {
-  if (props === 'primary') {
+const getButtonBcolor = (props: colorType) => {
+  if (props === defaultColors.BASICCOLORS.primary) {
     return `
-      color: black;
-      background-color: #00bcd4;
-      border-bottom: 2px solid #008ba2;
+      color: ${defaultColors.BASICCOLORS.basic};
+      background-color: ${defaultColors.BASICCOLORS.primary};
+      border-bottom: 2px solid ${defaultColors.BASICCOLORS.primaryDark};
       &:hover {
-        background-color: #008ba2;
+        background-color: ${defaultColors.BASICCOLORS.primaryDark};
       }
   `;
-  } else if (props === 'secondary') {
+  } else if (props === defaultColors.BASICCOLORS.secondary) {
     return `
-      color: white;
-      background-color: #ff5722;
-      border-bottom: 2px solid #c41c00;
+      color: ${defaultColors.BASICCOLORS.white};
+      background-color: ${defaultColors.BASICCOLORS.secondary};
+      border-bottom: 2px solid ${defaultColors.BASICCOLORS.secondaryDark};
       &:hover {
-        background-color: #c41c00;
+        background-color: ${defaultColors.BASICCOLORS.secondaryDark};
       }
   `;
 }

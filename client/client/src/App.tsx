@@ -10,7 +10,9 @@ import TextArea from './components/atoms/TextArea';
 import Image from './components/atoms/Image';
 import ComponentFontAwesomeIcon from './components/atoms/FontAwesomeIcon';
 import LinkButton from './components/atoms/LinkButton';
-import { defaultSize } from "./utils/styled/styledText"
+import { defaultSize } from "./utils/constant/number"
+import { defaultColors, colorType } from "./utils/constant/color"
+import { ROUTE, routeType } from "./utils/constant/route"
 import { PdComponent } from "./utils/styled/styledSpace"
 // import Body from './components/templates/Body';
 // import Modal from './container/ModalContainer';
@@ -42,34 +44,26 @@ const App: React.FC =():JSX.Element =>{
           window.alert('Hello world!');
         }}
       />
-      <Image image={URL} width={50} />
       <Image image={URL} width={100} />
-      <Image image={URL} />
-      <Image image={URL} width={300} />
-      <Image image={URL} width={400} />
-      <Image image={URL} width={500} />
-      <Image image={URL} width={600} />
-      <Image image={URL} width={700} />
-      <Image image={URL} width={800} />
       <ComponentFontAwesomeIcon head="fab" tail="accessible-icon" />
       <Router>
-        <Route exact path="/">
+        <Route exact path={ROUTE.INDEX}>
           <Logo fontsize={defaultSize.FONT.XXXLARGE}>GolfersfarmINDEX</Logo>
-          <LinkButton to="/issue" color="primary">
+          <LinkButton to={ROUTE.USER(1)} color={defaultColors.BASICCOLORS.primary}>
             issueへ
           </LinkButton>
-          <LinkButton to="/">/へ</LinkButton>
+          <LinkButton to={ROUTE.USERS} color={defaultColors.BASICCOLORS.primary}>/へ</LinkButton>
         </Route>
-        <Route path="/issue">
+        <Route path={ROUTE.USER(1)}>
           <Styledh2>
-            <LinkButton to="/profile" color="secondary">
+            <LinkButton to={ROUTE.USERS} color={defaultColors.BASICCOLORS.secondary}>
               profileへ
             </LinkButton>
-            <LinkButton to="/">/へ</LinkButton>
+            <LinkButton to={ROUTE.INDEX} color={defaultColors.BASICCOLORS.primary}>/へ</LinkButton>
           </Styledh2>
           <PdComponent top={10} right={40}>
             <Button
-              color={'primary'}
+              color={defaultColors.BASICCOLORS.primary}
               onClick={() => {
                 console.log('test');
               }}
@@ -78,14 +72,14 @@ const App: React.FC =():JSX.Element =>{
             </Button>
           </PdComponent>
         </Route>
-        <Route path="/profile">
-          <LinkButton to="/issue" color="primary">
+        <Route path={ROUTE.USERS}>
+          <LinkButton to={ROUTE.USER(1)} color={defaultColors.BASICCOLORS.primary}>
             issueへ
           </LinkButton>
-          <LinkButton to="/">/へ</LinkButton>
+          <LinkButton to={ROUTE.INDEX} color={defaultColors.BASICCOLORS.primary}>/へ</LinkButton>
           <PdComponent top={10} right={40}>
             <Button
-              color={'secondary'}
+              color={defaultColors.BASICCOLORS.secondary}
               onClick={() => {
                 console.log('test');
               }}
