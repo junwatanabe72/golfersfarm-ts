@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface TextAreaProps {
+  placeHolder?: string,
+  value: string,
+  onChange?: () => void,
+} 
+
 const Container = styled.div`
   width: 100%;
   padding: 12px 8px;
@@ -18,7 +24,7 @@ const InputTextarea = styled.textarea`
   background: none;
 `;
 
-function TextArea({ placeHolder, value = '', onChange }) {
+const TextArea: React.FC<TextAreaProps> = ({ placeHolder, value = '', onChange }) => {
   return (
     <Container>
       <Frame>

@@ -1,6 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
+interface InputProps {
+  placeHolder?: string,
+  value?: string,
+  onChange?: ()=> void,
+} 
+
 const Container = styled.div`
   width: 100%;
   padding: 12px 8px;
@@ -20,7 +26,7 @@ const InputBar = styled.input`
   background: none;
 `;
 
-function Input({ placeHolder, value, onChange }) {
+const Input: React.FC<InputProps> = ({ placeHolder, value, onChange })=> {
   return (
     <Container>
       <Frame>

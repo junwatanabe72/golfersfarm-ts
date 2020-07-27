@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 // import { restfulApiConfig } from './config';
 
 // export const userName = 'junwatanabe72';

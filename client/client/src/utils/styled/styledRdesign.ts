@@ -1,4 +1,8 @@
-// import { css } from 'styled-components';
+import styled, { css } from 'styled-components';
+
+// type MediaProps = {
+//   width: string[],
+// };
 
 // export const media = {
 //   handheld1279: (...args) => css`

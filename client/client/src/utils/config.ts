@@ -1,3 +1,4 @@
+import React from 'react';
 // const Config = () => {
 //   if (process.env.NODE_ENV === 'test') {
 //     // test

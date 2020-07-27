@@ -1,13 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import { fontType} from "../../utils/styled/styledText"
 
-const Styledh2 = styled.h2`
-  font-size: ${(props) => props.fontsize}rem;
-  margin: 4px;
+
+
+interface LogoProps {
+  fontsize: fontType,
+  fontweight?: number,
+} 
+
+const Styledh2 = styled.h2< { fontsize: number, fontweight?: number}>`
+  font-size: ${(props) => props.fontsize}px;
+  font-weight: ${(props) => props.fontweight}px;
 `;
 
-function Logo({ name, fontsize }) {
-  return <Styledh2 fontsize={fontsize}>{name}</Styledh2>;
+const Logo: React.FC<LogoProps> = ({ fontsize, fontweight,children })=>{
+  return <Styledh2 fontweight={fontweight} fontsize={fontsize}>{children}</Styledh2>;
 }
 
 export default Logo;
+

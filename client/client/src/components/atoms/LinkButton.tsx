@@ -1,44 +1,68 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { defaultSize } from "../../utils/styled/styledText"
 import styled from 'styled-components';
 
-interface Props {
-  height: number;
+interface LinkProps {
+  fontsize?: number,
+  color?: string,
+  to: string,
+};
 
-}
-
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link) <LinkProps>`
   display: inline-block;
-  width: 100%;
-  line-height: 30px;
-  // height: ${(props) => props.height}px;
-  // font-size: ${(props) => props.size}px;
-  // color: ${(props) => props.color};
-  // &:hover {
-  //   color: ${(props) => props.hovercolor};
-  //   background-color: ${(props) => props.hoverbackgroundcolor};
-  // }
+  
+  font-size: ${(props) => props.fontsize}px;
+  ${(props) => getButtonBcolor(props.color)};
 `;
 
-function LinkButton({
-  height,
+const getButtonBcolor = (props: string | undefined) => {
+  if (props === 'primary') {
+    return `
+      color: #00bcd4;
+      &:hover {
+        color: #008ba2;
+      }
+  `;
+  } else if (props === 'secondary') {
+    return `
+      color: #ff5722;
+      &:hover {
+        color: #c41c00;
+      }
+  `;
+  } else if (props === 'basic') {
+    return `
+      color: #546e7a;
+      &:hover {
+        color: #29434e;
+      }
+  `;
+  } else if (props === 'white') {
+    return `
+      color: #eeeeee;
+      &:hover {
+        color: #bcbcbc;
+      }
+  `;
+  }
+};
+
+StyledLink.defaultProps = {
+  fontsize: defaultSize.FONT.BASE,
+  color: "primary",
+}
+
+
+const LinkButton: React.FC<LinkProps> = ({
   to,
-  size,
-  color = 'black',
-  hoverbackgroundcolor,
-  hovercolor,
-  value,
-}) {
+  fontsize,
+  color,
+  children
+}) => {
   return (
-    <StyledLink
-      // size={size}
-      // to={to}
-      // color={color}
-      // hoverbackgroundcolor={hoverbackgroundcolor}
-      // hovercolor={hovercolor}
-      // height={height}
-    >
-      {/* {value} */}
+    <StyledLink to={to} fontsize={fontsize} color={color}>
+      {children}
     </StyledLink>
   );
 }

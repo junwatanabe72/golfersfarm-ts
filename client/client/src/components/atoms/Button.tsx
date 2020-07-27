@@ -1,45 +1,51 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const DefaultButton = styled.a`
+type selectColor = "primary" | "secondary";
+
+interface ButtonProps {
+  color: selectColor,
+  onClick: () => void,
+} 
+const DefaultButton = styled.a < { color: selectColor }>`
   cursor: pointer;
   display: inline-block;
   text-align: center;
   padding: 4px 32px;
   margin: 4px;
   border-radius: 6px;
-  ${(props) => getButtonBcolor(props)}
+  ${(props) => getButtonBcolor(props.color)};
   &:active {
     border-bottom: none;
   }
 `;
 
-const getButtonBcolor = (props) => {
-  if (props.type === 'primary') {
+const getButtonBcolor = (props: selectColor) => {
+  if (props === 'primary') {
+    return `
+      color: black;
+      background-color: #00bcd4;
+      border-bottom: 2px solid #008ba2;
+      &:hover {
+        background-color: #008ba2;
+      }
+  `;
+  } else if (props === 'secondary') {
     return `
       color: white;
-      background-color: rgb(66, 195, 96);
-      border-bottom: 2px solid rgb(40, 167, 69);
+      background-color: #ff5722;
+      border-bottom: 2px solid #c41c00;
       &:hover {
-        background-color: rgb(40, 180, 69);
+        background-color: #c41c00;
       }
   `;
-  } else if (props.type === 'danger') {
-    return `
-    color: white;
-      background-color: rgb(215, 58, 73);
-      border-bottom: 2px solid rgb(175, 28, 42);
-      &:hover {
-        background-color: rgb(195, 28, 42);
-      }
-  `;
-  }
+}
 };
 
-function Button({ type, onChange, ButtonName }) {
+const Button: React.FC<ButtonProps>=({color,onClick,children}) => {
   return (
-    <DefaultButton type={type} onClick={onChange}>
-      {ButtonName}
+    <DefaultButton color={color} onClick={onClick}>
+      {children}
     </DefaultButton>
   );
 }
