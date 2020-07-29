@@ -30,6 +30,7 @@ type MarginProps = {
   right?: number,
   bottom?: number,
   left?: number,
+  all?: number,
 };
 
 export const Margin = styled.div<MarginProps>`
@@ -37,14 +38,15 @@ export const Margin = styled.div<MarginProps>`
   margin-right: ${(props) => props.right}px;
   margin-bottom: ${(props) => props.bottom}px;
   margin-left: ${(props) => props.left}px;
+  margin: ${(props) => props.all}px;
 `
 Margin.defaultProps = {
   top: 0,
   right: 0,
   bottom: 0,
-  left: 0
+  left: 0,
 }
 
-export const MgComponent: React.FC<MarginProps> = ({ top, right, bottom, left, children }) => {
-  return <Margin top={top} right={right} bottom={bottom} left={left}>{children}</Margin>;
+export const MgComponent: React.FC<MarginProps> = ({ top, right, bottom, left,all, children }) => {
+  return <Margin top={top} right={right} bottom={bottom} left={left} all={all}>{children}</Margin>;
 }

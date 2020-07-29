@@ -6,18 +6,18 @@ import { ROUTE, routeType } from "../../utils/constant/route"
 import styled from 'styled-components';
 
 interface LinkProps {
-  fontsize?: fontType,
-  color: colorType,
-  to: any,
+  fontSize?: fontType,
+  color?: colorType,
+  to: string,
 };
 
 const StyledLink = styled(Link) <LinkProps>`
   display: inline-block;
-  font-size: ${(props) => props.fontsize}px;
+  font-size: ${(props) => props.fontSize}px;
   ${(props) => getButtonBcolor(props.color)};
 `;
 
-const getButtonBcolor = (props: colorType) => {
+const getButtonBcolor = (props?: colorType) => {
   if (props === defaultColors.BASICCOLORS.primary) {
     return `
       color: ${defaultColors.BASICCOLORS.primary};
@@ -46,17 +46,23 @@ const getButtonBcolor = (props: colorType) => {
         color: ${defaultColors.BASICCOLORS.whiteDark};
       }
   `;
-  }
+  } else {
+    return `
+      color: ${defaultColors.BASICCOLORS.basic};
+      &:hover {
+        color: ${defaultColors.BASICCOLORS.basicDark};
+      }
+  `;}
 };
 
 const LinkButton: React.FC<LinkProps> = ({
   to,
-  fontsize = defaultSize.FONT.BASE,
+  fontSize = defaultSize.FONT.MEDIUM,
   color,
   children
 }) => {
   return (
-    <StyledLink to={to} fontsize={fontsize} color={color}>
+    <StyledLink to={to} fontSize={fontSize} color={color}>
       {children}
     </StyledLink>
   );

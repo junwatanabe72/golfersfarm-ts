@@ -8,10 +8,11 @@ const BASICCOLORS = {
   basic: "#546e7a",
   basicDark: "#29434e",
   basicLight: "#819ca9",
-  white: "#eeeeee",
+  white: "#f9f9f9",
   whiteDark: "#bcbcbc",
   whiteLight: "#ffffff",
   caution: "#4527a0",
+
 } as const
 
 

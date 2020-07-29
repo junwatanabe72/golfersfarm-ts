@@ -8,7 +8,7 @@ interface InputProps {
 } 
 
 const Container = styled.div`
-  width: 100%;
+  // width: 100%;
   padding: 12px 8px;
 `;
 const Frame = styled.div`
@@ -18,7 +18,7 @@ const Frame = styled.div`
 `;
 const InputBar = styled.input`
   display: table-cell;
-  width: 98%;
+  // width: 98%;
   padding: 8px;
   border-width: inital;
   border-style: none;

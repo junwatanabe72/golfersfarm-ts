@@ -1,14 +1,15 @@
 export const ROUTE = {
-  INDEX: "/",
+  TOP: "/",
   USERS: "/users",
-  USER: (id: number)=>{ return `/users/${id}`},
-  EDITUSER: (id: number) => { return `/users/${id}/edit` },
-  EDITGEAR: (id: number) => { return `/users/${id}/edit` }
+  USER: "/users/:id",
+  LOGIN: "/auth/login",
+  SIGNUP: "/auth/signup"
 } as const
 
 
-export type routeType = typeof ROUTE.INDEX | 
+export type routeType = typeof ROUTE.TOP | 
                   typeof ROUTE.USERS | 
-                  typeof ROUTE.USER | 
-                  typeof ROUTE.EDITUSER |
-                  typeof ROUTE.EDITGEAR;
+                  typeof ROUTE.USER |
+                  typeof ROUTE.LOGIN |
+                  typeof ROUTE.SIGNUP;
+                  
