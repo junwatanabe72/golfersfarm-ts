@@ -1,4 +1,4 @@
-const FONT = {
+export const FONTSIZE = {
   ICONXLARGE: 60,
   ICONLARGE: 50,
   XXXLARGE: 32,
@@ -12,7 +12,7 @@ const FONT = {
   TINY: 8,
 } as const
 
-const IWIDTH = {
+export const IMAGEWIDTH = {
   XXXLARGE: 800,
   XXLARGE: 700,
   XLARGE: 600,
@@ -24,42 +24,36 @@ const IWIDTH = {
   TINY: 50,
 } as const
 
-const FONT_WEIGHT = {
+export const FONTWEIGHT = {
   NORMAL: 400,
   BOLD: 600,
 } as const
 
-const BORDER_RADIUS = 4 as 4
+export const BORDERRADIUS = 4 as 4
 
-export const defaultSize = {
-  FONT,
-  IWIDTH,
-  FONT_WEIGHT,
-  BORDER_RADIUS
-};
 
-export type fontWeightType = typeof FONT_WEIGHT.NORMAL | typeof FONT_WEIGHT.BOLD
+export type FONTSIZEWEIGHTTYPE = typeof FONTWEIGHT.NORMAL | typeof FONTWEIGHT.BOLD
 
-export type fontType = typeof FONT.ICONXLARGE |
-  typeof FONT.ICONLARGE |
-  typeof FONT.XXXLARGE |
-  typeof FONT.XXLARGE |
-  typeof FONT.XLARGE |
-  typeof FONT.LARGE |
-  typeof FONT.MEDIUM |
-  typeof FONT.LARGE |
-  typeof FONT.BASE |
-  typeof FONT.SMALL |
-  typeof FONT.XSMALL |
-  typeof FONT.TINY;
+export type FONTSIZETYPE = typeof FONTSIZE.ICONXLARGE |
+  typeof FONTSIZE.ICONLARGE |
+  typeof FONTSIZE.XXXLARGE |
+  typeof FONTSIZE.XXLARGE |
+  typeof FONTSIZE.XLARGE |
+  typeof FONTSIZE.LARGE |
+  typeof FONTSIZE.MEDIUM |
+  typeof FONTSIZE.LARGE |
+  typeof FONTSIZE.BASE |
+  typeof FONTSIZE.SMALL |
+  typeof FONTSIZE.XSMALL |
+  typeof FONTSIZE.TINY;
 
-export type widthType = typeof IWIDTH.XXXLARGE |
-  typeof IWIDTH.XXLARGE |
-  typeof IWIDTH.XLARGE |
-  typeof IWIDTH.LARGE |
-  typeof IWIDTH.MEDIUM |
-  typeof IWIDTH.LARGE |
-  typeof IWIDTH.BASE |
-  typeof IWIDTH.SMALL |
-  typeof IWIDTH.XSMALL |
-  typeof IWIDTH.TINY;
+export type WIDTHTYPE = typeof IMAGEWIDTH.XXXLARGE |
+  typeof IMAGEWIDTH.XXLARGE |
+  typeof IMAGEWIDTH.XLARGE |
+  typeof IMAGEWIDTH.LARGE |
+  typeof IMAGEWIDTH.MEDIUM |
+  typeof IMAGEWIDTH.LARGE |
+  typeof IMAGEWIDTH.BASE |
+  typeof IMAGEWIDTH.SMALL |
+  typeof IMAGEWIDTH.XSMALL |
+  typeof IMAGEWIDTH.TINY;

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { defaultSize,fontType } from "../../utils/constant/number";
-import { defaultColors, colorType } from "../../utils/constant/color";
-import { ROUTE, routeType } from "../../utils/constant/route"
+import { FONTSIZE,FONTSIZETYPE } from "../../utils/constant/number";
+import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color";
+import { ROUTE } from "../../utils/constant/route"
 import styled from 'styled-components';
 
 interface LinkProps {
-  fontSize?: fontType,
-  color?: colorType,
+  fontSize?: FONTSIZETYPE,
+  color?: COLORTYPES,
   to: string,
 };
 
@@ -17,47 +17,47 @@ const StyledLink = styled(Link) <LinkProps>`
   ${(props) => getButtonBcolor(props.color)};
 `;
 
-const getButtonBcolor = (props?: colorType) => {
-  if (props === defaultColors.BASICCOLORS.primary) {
+const getButtonBcolor = (props?: COLORTYPES) => {
+  if (props === BASICCOLORS.PRIMARY) {
     return `
-      color: ${defaultColors.BASICCOLORS.primary};
+      color: ${BASICCOLORS.PRIMARY};
       &:hover {
-        color: ${defaultColors.BASICCOLORS.primaryDark};
+        color: ${BASICCOLORS.PRIMARYDARK};
       }
   `;
-  } else if (props === defaultColors.BASICCOLORS.secondary) {
+  } else if (props === BASICCOLORS.SECONDARY) {
     return `
-      color: ${defaultColors.BASICCOLORS.secondary};
+      color: ${BASICCOLORS.SECONDARY};
       &:hover {
-        color: ${defaultColors.BASICCOLORS.secondaryDark};
+        color: ${BASICCOLORS.SECONDARYDARK};
       }
   `;
-  } else if (props === defaultColors.BASICCOLORS.basic) {
+  } else if (props === BASICCOLORS.BASIC) {
     return `
-      color: ${defaultColors.BASICCOLORS.basic};
+      color: ${BASICCOLORS.BASIC};
       &:hover {
-        color: ${defaultColors.BASICCOLORS.basicDark};
+        color: ${BASICCOLORS.BASICDARK};
       }
   `;
-  } else if (props === defaultColors.BASICCOLORS.white) {
+  } else if (props === BASICCOLORS.WHITE) {
     return `
-      color: ${defaultColors.BASICCOLORS.white};
+      color: ${BASICCOLORS.WHITE};
       &:hover {
-        color: ${defaultColors.BASICCOLORS.whiteDark};
+        color: ${BASICCOLORS.WHITEDARK};
       }
   `;
   } else {
     return `
-      color: ${defaultColors.BASICCOLORS.basic};
+      color: ${BASICCOLORS.BASIC};
       &:hover {
-        color: ${defaultColors.BASICCOLORS.basicDark};
+        color: ${BASICCOLORS.BASICDARK};
       }
   `;}
 };
 
 const LinkButton: React.FC<LinkProps> = ({
   to,
-  fontSize = defaultSize.FONT.MEDIUM,
+  fontSize = FONTSIZE.MEDIUM,
   color,
   children
 }) => {

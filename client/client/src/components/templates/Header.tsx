@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import HeaderTitle from '../molecules/header/HeaderTitle';
 import HeaderLink from '../molecules/header/HeaderLink';
 import HeaderMenu from '../molecules/header/HeaderMenu';
-import { defaultColors,colorType } from "../../utils/constant/color"
+import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color"
 import { media } from '../../utils/styled/styledRdesign';
 
 interface Props {
-  headerColor: colorType,
+  headerColor: COLORTYPES,
 };
 
 //style
@@ -49,7 +49,7 @@ const Header: React.FC<Props> = ({ headerColor}) => {
   const workModal = () => {
     setModal(!modalIsOpen);
   };
-  const fontColor = (headerColor === defaultColors.BASICCOLORS.white) ? defaultColors.BASICCOLORS.primary : defaultColors.BASICCOLORS.secondary;
+  const fontColor = (headerColor === BASICCOLORS.WHITE) ? BASICCOLORS.PRIMARY : BASICCOLORS.SECONDARY;
   return (
     <BackgroundColor headerColor={headerColor}>
       <Container>

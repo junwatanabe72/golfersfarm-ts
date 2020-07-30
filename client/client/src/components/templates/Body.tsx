@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route, Switch,Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ROUTE, routeType } from "../../utils/constant/route"
-import { defaultColors, colorType } from "../../utils/constant/color"
+import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
+import { BASICCOLORS, COLORTYPES } from "../../utils/constant/color"
 import LinkButton from '../atoms/LinkButton';
 
 import Top from "./Top";
@@ -10,7 +10,7 @@ import Users from "./Users";
 import User from "./User";
 
 interface Props {
-  bodyColor: colorType,
+  bodyColor: COLORTYPES,
 };
 
 const BackgroundColor = styled.div<Props>`
@@ -32,7 +32,6 @@ const Body: React.FC<Props> = ({ bodyColor }) => {
         <Switch>
           <Route exact path={ROUTE.TOP} component={Top}/ >
           <Route exact path={ROUTE.USERS} component={Users}/ >
-          <Route path={ROUTE.USER} component={User}/ >
         </Switch>
       </Container>
     </BackgroundColor>

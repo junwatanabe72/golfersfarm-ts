@@ -1,15 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { fontType, fontWeightType } from "../../utils/constant/number"
+import { FONTSIZETYPE,FONTSIZEWEIGHTTYPE } from "../../utils/constant/number"
 
 
 
 interface LogoProps {
-  fontsize: fontType,
-  fontweight?: fontWeightType,
+  fontsize: FONTSIZETYPE,
+  fontweight?: FONTSIZEWEIGHTTYPE,
 } 
 
-const Styledh2 = styled.h2< { fontsize: fontType, fontweight?: fontWeightType}>`
+const Styledh2 = styled.h2< { fontsize: FONTSIZETYPE, fontweight?: FONTSIZEWEIGHTTYPE}>`
   font-size: ${(props) => props.fontsize}px;
   font-weight: ${(props) => props.fontweight}px;
 `;

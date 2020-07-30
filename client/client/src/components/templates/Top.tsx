@@ -6,15 +6,15 @@ import Input from '../atoms/Input';
 import TextArea from '../atoms/TextArea';
 import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
-import { ROUTE, routeType } from "../../utils/constant/route"
-import { defaultColors, colorType } from "../../utils/constant/color"
-import { defaultSize } from "../../utils/constant/number"
+import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
+import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color"
+import { FONTSIZE } from "../../utils/constant/number"
 
 
 const Top: React.FC = () => {
   return (
     <div className="App">
-      <Logo fontsize={defaultSize.FONT.XXXLARGE}>TOPsPage</Logo>
+      <Logo fontsize={FONTSIZE.XXXLARGE}>TOPsPage</Logo>
       <Input />
       <TextArea
         placeHolder="sample"
@@ -23,7 +23,7 @@ const Top: React.FC = () => {
           window.alert('Hello world!');
         }}
       />
-      <LinkButton to={ROUTE.USERS} color={defaultColors.BASICCOLORS.primary}>
+      <LinkButton to={ROUTE.USERS} color={BASICCOLORS.PRIMARY}>
         indexへ
       </LinkButton>
     </div>

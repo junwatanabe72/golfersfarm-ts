@@ -1,35 +1,30 @@
-const BASICCOLORS = {
-  primary: "#00bcd4",
-  primaryDark: "#008ba3",
-  primaryLight: "#62efff",
-  secondary: "#ff5722",
-  secondaryDark: "#c41c00",
-  secondaryLight: "#ff8a50",
-  basic: "#546e7a",
-  basicDark: "#29434e",
-  basicLight: "#819ca9",
-  white: "#f9f9f9",
-  whiteDark: "#bcbcbc",
-  whiteLight: "#ffffff",
-  caution: "#4527a0",
-
+export const BASICCOLORS = {
+  PRIMARY: "#00bcd4",
+  PRIMARYDARK: "#008ba3",
+  PRIMARYLIGHT: "#62efff",
+  SECONDARY: "#ff5722",
+  SECONDARYDARK: "#c41c00",
+  SECONDARYLIGHT: "#ff8a50",
+  BASIC: "#546e7a",
+  BASICDARK: "#29434e",
+  BASICLIGHT: "#819ca9",
+  WHITE: "#f9f9f9",
+  WHITEDARK: "#bcbcbc",
+  WHITELIGHT: "#ffffff",
+  CAUTION: "#4527a0",
 } as const
 
 
-export const defaultColors = {
-  BASICCOLORS,
-};
-
-export type colorType = typeof BASICCOLORS.primary | 
-                        typeof BASICCOLORS.primaryDark |
-                        typeof BASICCOLORS.primaryLight |
-                        typeof BASICCOLORS.secondary |
-                        typeof BASICCOLORS.secondaryDark |
-                        typeof BASICCOLORS.secondaryLight |
-                        typeof BASICCOLORS.basic |
-                        typeof BASICCOLORS.basicDark |
-                        typeof BASICCOLORS.basicLight |
-                        typeof BASICCOLORS.white |
-                        typeof BASICCOLORS.whiteDark |
-                        typeof BASICCOLORS.whiteLight;
-  
+export type COLORTYPES = typeof BASICCOLORS.PRIMARY | 
+  typeof BASICCOLORS.PRIMARYDARK |
+  typeof BASICCOLORS.PRIMARYLIGHT |
+  typeof BASICCOLORS.SECONDARY |
+  typeof BASICCOLORS.SECONDARYDARK |
+  typeof BASICCOLORS.SECONDARYLIGHT |
+  typeof BASICCOLORS.BASIC |
+  typeof BASICCOLORS.BASICDARK |
+  typeof BASICCOLORS.BASICLIGHT |
+  typeof BASICCOLORS.WHITE |
+  typeof BASICCOLORS.WHITEDARK |
+  typeof BASICCOLORS.WHITELIGHT |
+  typeof BASICCOLORS.CAUTION;

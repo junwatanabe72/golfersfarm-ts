@@ -1,17 +1,17 @@
 import React from 'react';
-import { defaultSize, widthType } from "../../utils/constant/number"
+import { IMAGEWIDTH, WIDTHTYPE} from "../../utils/constant/number"
 import styled from 'styled-components';
 
 interface ImageProps {
-  width?: widthType,
+  width?: WIDTHTYPE,
   image: string,
 } 
 
-const Container = styled.img< { width?: widthType}>`
+const Container = styled.img< { width?: WIDTHTYPE}>`
   width: ${(props) => props.width};
 `;
 
-const Image: React.FC<ImageProps> = ({ width = defaultSize.IWIDTH.SMALL, image }) => {
+const Image: React.FC<ImageProps> = ({ width = IMAGEWIDTH.SMALL, image }) => {
   return <Container width={width} src={image} />;
 };
 

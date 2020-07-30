@@ -7,16 +7,16 @@ import Input from '../atoms/Input';
 import TextArea from '../atoms/TextArea';
 import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
-import { ROUTE, routeType } from "../../utils/constant/route"
-import { defaultColors, colorType } from "../../utils/constant/color"
-import { defaultSize } from "../../utils/constant/number"
+import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
+import { BASICCOLORS, COLORTYPES } from "../../utils/constant/color"
+import { FONTSIZE } from "../../utils/constant/number"
 
 interface Props extends RouteComponentProps < {id: string} >{};
 
 const User: React.FC<Props> = ({match}) => {
   return (
     <div className="App">
-      <Logo fontsize={defaultSize.FONT.XXXLARGE}>UPage</Logo>
+      <Logo fontsize={FONTSIZE.XXXLARGE}>UPage</Logo>
       <Input />
       <TextArea
         placeHolder="sample"
@@ -25,7 +25,7 @@ const User: React.FC<Props> = ({match}) => {
           window.alert('Hello world!');
         }}
       />
-      <LinkButton to={ROUTE.TOP} color={defaultColors.BASICCOLORS.primary}>
+      <LinkButton to={ROUTE.TOP} color={BASICCOLORS.PRIMARY}>
         {match.params.id}
       </LinkButton>
     </div>

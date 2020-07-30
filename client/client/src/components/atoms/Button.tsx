@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { defaultColors, colorType } from "../../utils/constant/color"
+import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color"
 
 
 interface ButtonProps {
-  color: colorType,
+  color: COLORTYPES,
   onClick: () => void,
 } 
-const DefaultButton = styled.a < { color: colorType }>`
+const DefaultButton = styled.a < { color: COLORTYPES }>`
   cursor: pointer;
   display: inline-block;
   text-align: center;
@@ -20,23 +20,23 @@ const DefaultButton = styled.a < { color: colorType }>`
   }
 `;
 
-const getButtonBcolor = (props: colorType) => {
-  if (props === defaultColors.BASICCOLORS.primary) {
+const getButtonBcolor = (props: COLORTYPES) => {
+  if (props === BASICCOLORS.PRIMARY) {
     return `
-      color: ${defaultColors.BASICCOLORS.basic};
-      background-color: ${defaultColors.BASICCOLORS.primary};
-      border-bottom: 2px solid ${defaultColors.BASICCOLORS.primaryDark};
+      color: ${BASICCOLORS.BASIC};
+      background-color: ${BASICCOLORS.PRIMARY};
+      border-bottom: 2px solid ${BASICCOLORS.PRIMARYDARK};
       &:hover {
-        background-color: ${defaultColors.BASICCOLORS.primaryDark};
+        background-color: ${BASICCOLORS.PRIMARYDARK};
       }
   `;
-  } else if (props === defaultColors.BASICCOLORS.secondary) {
+  } else if (props === BASICCOLORS.SECONDARY) {
     return `
-      color: ${defaultColors.BASICCOLORS.white};
-      background-color: ${defaultColors.BASICCOLORS.secondary};
-      border-bottom: 2px solid ${defaultColors.BASICCOLORS.secondaryDark};
+      color: ${BASICCOLORS.WHITE};
+      background-color: ${BASICCOLORS.SECONDARY};
+      border-bottom: 2px solid ${BASICCOLORS.SECONDARYDARK};
       &:hover {
-        background-color: ${defaultColors.BASICCOLORS.secondaryDark};
+        background-color: ${BASICCOLORS.SECONDARYDARK};
       }
   `;
 }

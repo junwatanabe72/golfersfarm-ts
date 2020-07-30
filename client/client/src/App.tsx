@@ -5,7 +5,7 @@ import axios from 'axios';
 import Header from './components/templates/Header';
 import Body from './components/templates/Body';
 // import Modal from './container/ModalContainer';
-import { defaultColors } from "./utils/constant/color"
+import { BASICCOLORS } from "./utils/constant/color"
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
@@ -21,8 +21,8 @@ const App: React.FC =()=>{
   return (
     <Container>
         <Router>
-        <Header headerColor={defaultColors.BASICCOLORS.white}/>
-        <Body bodyColor={defaultColors.BASICCOLORS.whiteLight} />
+        <Header headerColor={BASICCOLORS.WHITE}/>
+        <Body bodyColor={BASICCOLORS.WHITELIGHT} />
         </Router>
     </Container>
   );
