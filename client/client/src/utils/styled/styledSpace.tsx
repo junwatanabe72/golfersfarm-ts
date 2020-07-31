@@ -1,36 +1,33 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-
+import { CLEAR, CLEARTYPE}from "../constant/number";
 type PaddingProps = {
-  top?: number,
-  right?: number,
-  bottom?: number,
-  left?: number,
+  top?: CLEARTYPE,
+  right?: CLEARTYPE,
+  bottom?: CLEARTYPE,
+  left?: CLEARTYPE,
+  all?: CLEARTYPE,
 };
 
- const Padding = styled.div<PaddingProps>`
+ export const Padding = styled.div<PaddingProps>`
   padding-top: ${(props) => props.top}px;
   padding-right: ${(props) => props.right}px;
   padding-bottom: ${(props) => props.bottom}px;
   padding-left: ${(props) => props.left}px;
+  padding: ${(props) => props.all}px;
 `
-Padding.defaultProps = {
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0
-}
 
-export const PdComponent: React.FC<PaddingProps> = ({top,right,bottom,left,children}) => {
-return <Padding top={top} right={right} bottom={bottom} left={left}>{children}</Padding>;
+
+export const PdComponent: React.FC<PaddingProps> = ({top,right,bottom,left,all,children}) => {
+  return <Padding top={top} right={right} bottom={bottom} left={left} all={all}>{children}</Padding>;
 }
 
 type MarginProps = {
-  top?: number,
-  right?: number,
-  bottom?: number,
-  left?: number,
-  all?: number,
+  top?: CLEARTYPE,
+  right?: CLEARTYPE,
+  bottom?: CLEARTYPE,
+  left?: CLEARTYPE,
+  all?: CLEARTYPE,
 };
 
 export const Margin = styled.div<MarginProps>`
@@ -40,12 +37,6 @@ export const Margin = styled.div<MarginProps>`
   margin-left: ${(props) => props.left}px;
   margin: ${(props) => props.all}px;
 `
-Margin.defaultProps = {
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-}
 
 export const MgComponent: React.FC<MarginProps> = ({ top, right, bottom, left,all, children }) => {
   return <Margin top={top} right={right} bottom={bottom} left={left} all={all}>{children}</Margin>;

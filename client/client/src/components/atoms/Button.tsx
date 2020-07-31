@@ -5,7 +5,7 @@ import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color"
 
 interface ButtonProps {
   color: COLORTYPES,
-  onClick: () => void,
+  onClick?: () => void,
 } 
 const DefaultButton = styled.a < { color: COLORTYPES }>`
   cursor: pointer;
@@ -23,10 +23,11 @@ const DefaultButton = styled.a < { color: COLORTYPES }>`
 const getButtonBcolor = (props: COLORTYPES) => {
   if (props === BASICCOLORS.PRIMARY) {
     return `
-      color: ${BASICCOLORS.BASIC};
+      color: ${BASICCOLORS.WHITE};
       background-color: ${BASICCOLORS.PRIMARY};
       border-bottom: 2px solid ${BASICCOLORS.PRIMARYDARK};
       &:hover {
+        color: ${BASICCOLORS.WHITE};
         background-color: ${BASICCOLORS.PRIMARYDARK};
       }
   `;
@@ -37,6 +38,16 @@ const getButtonBcolor = (props: COLORTYPES) => {
       border-bottom: 2px solid ${BASICCOLORS.SECONDARYDARK};
       &:hover {
         background-color: ${BASICCOLORS.SECONDARYDARK};
+      }
+  `;
+  } else if (props === BASICCOLORS.WHITELIGHT) {
+    return `
+      color: ${BASICCOLORS.PRIMARY};
+      background-color: ${BASICCOLORS.WHITELIGHT};
+      border: 2px solid ${BASICCOLORS.PRIMARY};
+      &:hover {
+        color: ${BASICCOLORS.WHITE};
+        background-color: ${BASICCOLORS.PRIMARY};
       }
   `;
 }

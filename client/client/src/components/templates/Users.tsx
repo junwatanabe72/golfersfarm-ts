@@ -1,32 +1,46 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled from 'styled-components';
-import Button from '../atoms/Button';
-import Logo from '../atoms/Logo';
-import Input from '../atoms/Input';
-import TextArea from '../atoms/TextArea';
 import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
-import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
-import { BASICCOLORS, COLORTYPES } from "../../utils/constant/color"
-import { FONTSIZE } from "../../utils/constant/number"
+import {  IMAGEWIDTH,CLEAR } from "../../utils/constant/number"
+import { MgComponent} from "../../utils/styled/styledSpace";
+
+const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
+const userName ="jun"
+const players = [{ id: 1, name: userName, image: URL }, { id: 2, name: userName, image: URL }, { id: 3, name: userName, image: URL }, { id: 4, name: userName, image: URL }]
+
+const Container = styled.div`
+  display: flex;
+  max-width: 1000px;
+  flex-wrap: wrap;
+`;
+const Styled = styled.div`
+  text-align: center;
+`;
+
 
 const Users: React.FC = () => {
+  const [modalIsOpen, setModal] = useState<any>(players);
+  
+  const player = modalIsOpen.map((data: any, i: number) => {
+      return (
+        <MgComponent all={CLEAR.SMALL}>
+          <Image image={data.image} width={IMAGEWIDTH.SMALL} />
+          <Styled>
+            <LinkButton to={`/users/${data.id}`}>
+              {data.name}
+            </LinkButton>
+          </Styled>
+        </MgComponent>
+      );
+    })
+  
   return (
-    <div className="App">
-      <Logo fontsize={FONTSIZE.XXXLARGE}>UsersPage</Logo>
-      {/* <Input />
-      <TextArea
-        placeHolder="sample"
-        value="value"
-        onChange={() => {
-          window.alert('Hello world!');
-        }}
-      /> */}
-      <LinkButton to={ROUTE.TOP} color={BASICCOLORS.PRIMARY}>
-        index?
-      </LinkButton>
-      </div>
+      <Container>
+        {player}
+      </Container>
   )
+  
 }
-
 export default Users;
+  

@@ -24,6 +24,18 @@ export const IMAGEWIDTH = {
   TINY: 50,
 } as const
 
+export const CLEAR = {
+  XXXLARGE: 96,
+  XXLARGE: 80,
+  XLARGE: 64,
+  LARGE: 56,
+  MEDIUM: 32,
+  BASE: 24,
+  SMALL: 16,
+  XSMALL: 8,
+  TINY: 4,
+} as const
+
 export const FONTWEIGHT = {
   NORMAL: 400,
   BOLD: 600,
@@ -57,3 +69,14 @@ export type WIDTHTYPE = typeof IMAGEWIDTH.XXXLARGE |
   typeof IMAGEWIDTH.SMALL |
   typeof IMAGEWIDTH.XSMALL |
   typeof IMAGEWIDTH.TINY;
+
+export type CLEARTYPE = typeof CLEAR.XXXLARGE |
+  typeof CLEAR.XXLARGE |
+  typeof CLEAR.XLARGE |
+  typeof CLEAR.LARGE |
+  typeof CLEAR.MEDIUM |
+  typeof CLEAR.LARGE |
+  typeof CLEAR.BASE |
+  typeof CLEAR.SMALL |
+  typeof CLEAR.XSMALL |
+  typeof CLEAR.TINY;

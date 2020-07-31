@@ -21,8 +21,8 @@ const App: React.FC =()=>{
   return (
     <Container>
         <Router>
-        <Header headerColor={BASICCOLORS.WHITE}/>
-        <Body bodyColor={BASICCOLORS.WHITELIGHT} />
+        <Header headerColor={BASICCOLORS.WHITELIGHT}/>
+        <Body bodyColor={BASICCOLORS.WHITE} />
         </Router>
     </Container>
   );

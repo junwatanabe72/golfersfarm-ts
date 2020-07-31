@@ -1,21 +1,28 @@
 import React from 'react';
-  
-// export const Text = styled.span`
-//   display: ${props => props.disp};
-//   text-align: ${props => props.ta};
-//   font-size: ${props => props.fs};
-//   color: ${props => props.color};
-//   font-weight: ${props => props.fw};
-//   line-height: ${props => props.lh};
-// // `
-// Text.defaultProps = {
-//   "display": "inline",
-//   "text-align": "left",
-//   "font-size": "12px",
-//   "color": "#4B5467",
-//   "font-weight": "normal",
-//   "line-height": "1px"
-// }
+import styled, { css } from 'styled-components';
+import { COLORTYPES} from "../constant/color";
+
+type SpanProps = {
+  display?: string,
+  textAlign?: string,
+  fontSize?: number,
+  color?: COLORTYPES,
+  fontWeight?: string,
+  lineHeight?: number,
+};
+
+export const StyledSpan = styled.span<SpanProps>`
+  display: ${props => props.display};
+  text-align: ${props => props.textAlign};
+  font-size: ${props => props.fontSize}px;
+  color: ${props => props.color};
+  font-weight: ${props => props.fontWeight};
+  line-height: ${props => props.lineHeight}px;
+ `
+
+
+
+
 
 // export const Border = styled.div`
 //   border-top: ${(props) => props.top} solid ${(props) => props.color};

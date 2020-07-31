@@ -46,13 +46,7 @@ const getButtonBcolor = (props?: COLORTYPES) => {
         color: ${BASICCOLORS.WHITEDARK};
       }
   `;
-  } else {
-    return `
-      color: ${BASICCOLORS.BASIC};
-      &:hover {
-        color: ${BASICCOLORS.BASICDARK};
-      }
-  `;}
+  }
 };
 
 const LinkButton: React.FC<LinkProps> = ({

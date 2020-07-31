@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import createSagaMiddleware from 'redux-saga';
 import App from './App';
+import { BASICCOLORS } from "./utils/constant/color"
 import { createGlobalStyle } from 'styled-components';
 // import reducer from './reducers/Combine';
 // import mySaga from './sagas/index';
@@ -16,6 +17,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
     line-height: 1.5;
     font-size: 15px;
+    color: ${BASICCOLORS.BASIC};
     font-weight: 400; 
   }
   body {
@@ -35,7 +37,7 @@ const GlobalStyle = createGlobalStyle`
   }
   a {
     text-decoration: none;
-    color: blue;
+    color: ${BASICCOLORS.WHITELIGHT};
   }
   textarea{
     min-height: 150px;
