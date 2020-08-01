@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import LinkButton from '../../atoms/LinkButton';
 import { ROUTE } from "../../../utils/constant/route";
-import { COLORTYPES } from "../../../utils/constant/color"
+import { ICOLOR } from "../../../utils/constant/color"
 
-interface HeaderMenuProps {
+
+interface Props extends ICOLOR {
   modalIsOpen: boolean,
-  fontColor: COLORTYPES,
 };
 
 const num = 1;
@@ -33,11 +33,11 @@ const StyledList = styled.li`
 // `;
 
 
-const DropDownMenu: React.FC<HeaderMenuProps>=({modalIsOpen,fontColor})=>{
+const DropDownMenu: React.FC<Props>=({modalIsOpen,color})=>{
   const baseMenu = Object.entries(ROUTE).map((route) => {
     return (
       <StyledList>
-        <LinkButton to={route[1]} color={fontColor} >
+        <LinkButton to={route[1]} color={color} >
           {route[0]}
         </LinkButton>
       </StyledList>
@@ -47,7 +47,7 @@ const DropDownMenu: React.FC<HeaderMenuProps>=({modalIsOpen,fontColor})=>{
   const loginMenu = Object.entries(loginRoute).map((route) => {
     return (
       <StyledList>
-        <LinkButton to={route[1]} color={fontColor} >
+        <LinkButton to={route[1]} color={color} >
           {route[0]}
         </LinkButton>
       </StyledList>

@@ -14,6 +14,9 @@ export const BASICCOLORS = {
   CAUTION: "#4527a0",
 } as const
 
+export interface ICOLOR {
+  color: COLORTYPES
+}
 
 export type COLORTYPES = typeof BASICCOLORS.PRIMARY | 
   typeof BASICCOLORS.PRIMARYDARK |

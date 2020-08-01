@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import Image from '../../atoms/Image';
 import Logo from '../../atoms/Logo';
 import SwingImage from "../../../utils/image/swing.jpg"
-import { BASICCOLORS, COLORTYPES } from "../../../utils/constant/color";
+import { BASICCOLORS } from "../../../utils/constant/color";
 import { FONTSIZE, IMAGEWIDTH, CLEAR } from "../../../utils/constant/number";
+import { TopUsageText } from "../../../utils/constant/text/body/top/text";
 import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
 import { media } from '../../../utils/styled/styledRdesign';
@@ -30,14 +31,8 @@ const FixedColumn = styled.div`
   border-radius: 4px;
 `;
 
-const text: string[] = ["PROFILE",
-                        "GEARS",
-                        "RESULTS",
-                        "SWING",
-                        "SCORES",
-]
 
-const mainText = text.map((t: string, i: number) => {    
+const mainText = TopUsageText.UsageItem.map((t: string, i: number) => {    
     return (
       <Padding left={CLEAR.XSMALL} right={CLEAR.XSMALL} bottom={CLEAR.BASE}>
         <FixedColumn>
@@ -50,14 +45,13 @@ const mainText = text.map((t: string, i: number) => {
 }
 )
 
-
 const TopUsage: React.FC = () => {
   return (
       <>
         <Padding  bottom={CLEAR.MEDIUM}>
-          <StyledSpan color={BASICCOLORS.PRIMARY} textAlign={"center"}>
-          <Logo fontsize={FONTSIZE.XXLARGE}>
-              Golfersfarmに登録すると、何が出来るの？
+          <StyledSpan color={BASICCOLORS.PRIMARY}>
+          <Logo fontSize={FONTSIZE.XXLARGE}>
+              {TopUsageText.UsageTitle}
               </Logo>
             </StyledSpan>
         </Padding>

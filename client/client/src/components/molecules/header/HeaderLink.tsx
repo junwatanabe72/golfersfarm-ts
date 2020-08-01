@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LinkButton from '../../atoms/LinkButton';
-import { COLORTYPES } from "../../../utils/constant/color";
+import { ICOLOR } from "../../../utils/constant/color";
 import { ROUTE } from "../../../utils/constant/route";
 const num = 1;
 // logout,edit,show
@@ -9,24 +9,24 @@ const addRoute = {USER: `/users/${num}`, EDIT: `/users/${num}/edit`, LOGOUT: "au
 
 const {TOP,USERS} = ROUTE
 const loginRoute = { TOP, USERS, ...addRoute}
-interface Props {
-  fontColor: COLORTYPES,
+
+interface Props extends ICOLOR {
 };
 
 const StyledList = styled.li`
   margin: 0 16px 0 auto;
 `;
 
-const HeaderLink: React.FC<Props> = ({fontColor}) => {
-  const [modalIsOpen, setModal] = useState<boolean>(false);
+const HeaderLink: React.FC<Props> = ({color}) => {
+  const [routeTest, setTest] = useState<boolean>(false);
   const workModal = () => {
-    setModal(!modalIsOpen);
+    setTest(!routeTest);
   };
 
   const baseMenu = Object.entries(ROUTE).map((route) => { 
     return (
     <StyledList>
-      <LinkButton to={route[1]} color={fontColor} >
+      <LinkButton to={route[1]} color={color} >
         {route[0]}
       </LinkButton>
     </StyledList>
@@ -36,13 +36,13 @@ const HeaderLink: React.FC<Props> = ({fontColor}) => {
   const loginMenu = Object.entries(loginRoute).map((route) => {
     return (
       <StyledList>
-        <LinkButton to={route[1]} color={fontColor} >
+        <LinkButton to={route[1]} color={color} >
           {route[0]}
         </LinkButton>
       </StyledList>
     );
   }); 
-  const menu = modalIsOpen ? loginMenu : baseMenu;
+  const menu = routeTest ? loginMenu : baseMenu;
   return (
       <>
       <div onClick={() => {workModal()}}>click</div>

@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import TopTitle from "../molecules/top/TopTitle";
 import TopConcept from "../molecules/top/TopConcept";
 import TopUsage from "../molecules/top/TopUsage";
-import { BASICCOLORS, COLORTYPES } from "../../utils/constant/color";
-import { FONTSIZE, FONTWEIGHT, IMAGEWIDTH, CLEAR } from "../../utils/constant/number";
+import { BASICCOLORS, ICOLOR} from "../../utils/constant/color";
+import { CLEAR } from "../../utils/constant/number";
 import { Padding } from "../../utils/styled/styledSpace";
 
+type PartialICOLOR = Partial<ICOLOR>
+
 const Container = styled.div`
-  
 `;
 
 const Layout = styled.div`
@@ -19,11 +20,11 @@ const Layout = styled.div`
   text-align: center;
 `;
 
-const BackColor = styled.div<{ backColor?: COLORTYPES}>`
-  background-color: ${(props)=> props.backColor};
+const BackColor = styled.div<PartialICOLOR>`
+  background-color: ${(props)=> props.color};
 `;
 BackColor.defaultProps = {
-  backColor: BASICCOLORS.WHITE
+  color: BASICCOLORS.WHITE
 }
 
 const Components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />] 
@@ -31,7 +32,7 @@ const Components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />]
 const data = Components.map((d: JSX.Element,i: number) => {
     if (i % 2 !== 0){
       return (
-        <BackColor backColor={BASICCOLORS.WHITELIGHT}>
+        <BackColor color={BASICCOLORS.WHITELIGHT}>
           <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
               <Layout>
                 {d}

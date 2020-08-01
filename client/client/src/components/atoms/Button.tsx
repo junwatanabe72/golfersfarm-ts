@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color"
+import { BASICCOLORS,ICOLOR } from "../../utils/constant/color"
 
+type PartialICOLOR = Partial<ICOLOR>
 
-interface ButtonProps {
-  color: COLORTYPES,
+interface Props extends PartialICOLOR {
   onClick?: () => void,
 } 
-const DefaultButton = styled.a < { color: COLORTYPES }>`
+const DefaultButton = styled.a<Props>`
   cursor: pointer;
   display: inline-block;
   text-align: center;
@@ -20,7 +20,7 @@ const DefaultButton = styled.a < { color: COLORTYPES }>`
   }
 `;
 
-const getButtonBcolor = (props: COLORTYPES) => {
+const getButtonBcolor = (props: Props["color"]) => {
   if (props === BASICCOLORS.PRIMARY) {
     return `
       color: ${BASICCOLORS.WHITE};
@@ -53,7 +53,7 @@ const getButtonBcolor = (props: COLORTYPES) => {
 }
 };
 
-const Button: React.FC<ButtonProps>=({color,onClick,children}) => {
+const Button: React.FC<Props>=({color,onClick,children}) => {
   return (
     <DefaultButton color={color} onClick={onClick}>
       {children}

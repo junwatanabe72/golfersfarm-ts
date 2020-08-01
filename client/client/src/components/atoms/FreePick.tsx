@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Image from './Image';
-import { WIDTHTYPE } from "../../utils/constant/number";
+import { IWIDTH } from "../../utils/constant/number";
 
-interface Props{
+interface Props extends IWIDTH{
   image: string,
-  width: WIDTHTYPE,
 }
 
 const FixedColumn = styled.div`

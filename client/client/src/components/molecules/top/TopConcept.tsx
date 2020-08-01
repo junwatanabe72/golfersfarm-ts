@@ -6,8 +6,9 @@ import LinkButton from '../../atoms/LinkButton';
 import Logo from '../../atoms/Logo';
 import LastImage from "../../../utils/image/16782.jpg"
 import { ROUTE } from "../../../utils/constant/route"
-import { BASICCOLORS, COLORTYPES } from "../../../utils/constant/color";
+import { BASICCOLORS } from "../../../utils/constant/color";
 import { FONTSIZE, IMAGEWIDTH, CLEAR } from "../../../utils/constant/number";
+import { TopConceptText } from "../../../utils/constant/text/body/top/text";
 import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
 import { media } from '../../../utils/styled/styledRdesign';
@@ -32,17 +33,10 @@ const ResponseText = styled.div`
       `}
 `;
 
-const text: string[] = ["Golfersfarmはこれまでになかったゴルファーのためのアプリケーションです。",
-                        "ゴルフの醍醐味は、スコアだけではありません。",
-                        "Golfersfarmでは、ツアープロのようにあなたのクラブセッティングやスウィング動画などを登録できます。",
-                        "あなたのこだわりや努力を全世界に向けて、公開しましょう！",
-                        "Golfersfarmを始める",
-]
-
-const mainText = text.map((t: string, i: number) => {
-  if (i === text.length-1) {
+const mainText = TopConceptText.ConceptText.map((t: string, i: number) => {
+  if (i === TopConceptText.ConceptText.length-1) {
     return (
-      <Padding bottom={CLEAR.MEDIUM}>
+      <Padding bottom={CLEAR.XSMALL}>
         <LinkButton to={ROUTE.LOGIN}>
           <Button color={BASICCOLORS.WHITELIGHT}>
             {t}
@@ -63,8 +57,8 @@ const TopConcept: React.FC = () => {
     <>
         <Padding bottom={CLEAR.MEDIUM}>
           <StyledSpan color={BASICCOLORS.PRIMARY}>
-            <Logo fontsize={FONTSIZE.XXLARGE}>
-              ゴルフを、もっと楽しく
+            <Logo fontSize={FONTSIZE.XXLARGE}>
+            {TopConceptText.ConceptTitle}
             </Logo>
           </StyledSpan>
         </Padding>

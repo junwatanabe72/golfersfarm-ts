@@ -7,6 +7,7 @@ import Logo from '../../atoms/Logo';
 import TopImage from "../../../utils/image/6114.jpg"
 import { ROUTE } from "../../../utils/constant/route"
 import { BASICCOLORS } from "../../../utils/constant/color";
+import { TopTitleText } from "../../../utils/constant/text/body/top/text";
 import { FONTSIZE,IMAGEWIDTH,CLEAR } from "../../../utils/constant/number";
 import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
@@ -26,25 +27,18 @@ const FixedWidth = styled.div`
   width: 70%;
 `;
 
-const text: string[] = ["あなたのゴルフライフを公開しよう！",
-                        "Golfersfarmはゴルファーのためのプロフィール公開ツールです。",
-                        "「無料」で使えて、操作も簡単です。",
-                        "さあ、今すぐ登録をしよう！Enjoy your Golf life!!",
-                        "今すぐ無料登録する",
-                        ]
-
-const mainText = text.map((t: string,i: number) =>{
+const mainText = TopTitleText.map((t: string,i: number) =>{
   if(i===0){
     return (
       <Padding bottom={CLEAR.MEDIUM}>
-        <Logo fontsize={FONTSIZE.XXXLARGE} >
+        <Logo fontSize={FONTSIZE.XXXLARGE} >
         <StyledSpan color={BASICCOLORS.PRIMARY}>
             {t}
         </StyledSpan>
         </Logo>
       </Padding>
     )
-  }else if(i===text.length-1){
+  } else if (i === TopTitleText.length-1){
     return (
       <Padding bottom={CLEAR.MEDIUM}>
         <LinkButton to={ROUTE.LOGIN}>
@@ -61,7 +55,6 @@ const mainText = text.map((t: string,i: number) =>{
   }
   }
 )
-
 
 const TopTitle: React.FC = () => {
   return (

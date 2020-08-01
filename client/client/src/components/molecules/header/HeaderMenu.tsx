@@ -2,12 +2,12 @@ import React, { useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import DropDownMenu from './DropDownMenu';
 import ComponentFontAwesomeIcon from '../../atoms/FontAwesomeIcon';
-import { COLORTYPES } from "../../../utils/constant/color"
+import { ICOLOR } from "../../../utils/constant/color"
+import { HEADERMENUZTYPE } from "../../../utils/constant/text/header/text";
 
-interface HeaderMenuProps {
+interface Props extends ICOLOR,HEADERMENUZTYPE{
   workModal: ()=> void,
   modalIsOpen: boolean,
-  fontColor: COLORTYPES,
 };
 
 const Container = styled.div`
@@ -27,7 +27,7 @@ const PositionAbsolute = styled.div<{ modalIsOpen: boolean }>`
   display: ${(props) => (props.modalIsOpen ? '' : 'none')};
 `;
 
-const HeaderMenu: React.FC<HeaderMenuProps> =({ modalIsOpen, workModal,fontColor }) => {
+const HeaderMenu: React.FC<Props> =({ modalIsOpen, workModal,color,head,tail }) => {
   const modalRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -49,9 +49,9 @@ const HeaderMenu: React.FC<HeaderMenuProps> =({ modalIsOpen, workModal,fontColor
 
   return (
    <Container ref={modalRef} onClick={workModal}>
-      <ComponentFontAwesomeIcon head={'fas'} tail={'bars'} fontColor={fontColor} />
+      <ComponentFontAwesomeIcon head={head} tail={tail} color={color} />
       <PositionAbsolute modalIsOpen={modalIsOpen}>
-        <DropDownMenu modalIsOpen={modalIsOpen} fontColor={fontColor}/>
+        <DropDownMenu modalIsOpen={modalIsOpen} color={color}/>
       </PositionAbsolute> 
     </Container >
   );

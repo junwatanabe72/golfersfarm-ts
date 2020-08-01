@@ -11,12 +11,12 @@ import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
 import { BASICCOLORS, COLORTYPES } from "../../utils/constant/color"
 import { FONTSIZE } from "../../utils/constant/number"
 
-interface Props extends RouteComponentProps < {id: string} >{};
+interface Props extends RouteComponentProps<{ id: string }> { };
 
-const User: React.FC<Props> = ({match}) => {
+const Tos: React.FC<Props> = ({ match }) => {
   return (
     <div className="App">
-      <Logo fontsize={FONTSIZE.XXXLARGE}>UPage</Logo>
+      <Logo fontSize={FONTSIZE.XXXLARGE}>Tos</Logo>
       <Input />
       <TextArea
         placeHolder="sample"
@@ -32,4 +32,4 @@ const User: React.FC<Props> = ({match}) => {
   )
 }
 
-export default User;
+export default Tos;

@@ -5,47 +5,48 @@ import ReactDOM from 'react-dom';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import createSagaMiddleware from 'redux-saga';
 import App from './App';
+import {GlobalStyle} from "./utils/styled/globalStyle"
 import { BASICCOLORS } from "./utils/constant/color"
-import { createGlobalStyle } from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
 // import reducer from './reducers/Combine';
 // import mySaga from './sagas/index';
 // import Toastify from './utils/Toastify';
 import * as serviceWorker from './serviceWorker';
 
-const GlobalStyle = createGlobalStyle`
-  html {
-    font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
-    line-height: 1.5;
-    font-size: 15px;
-    color: ${BASICCOLORS.BASIC};
-    font-weight: 400; 
-  }
-  body {
-    padding: 0;
-    margin: 0; 
-  }
-  h2{
-    padding: 0;
-    margin: 0; 
-  }
-  ul {
-    padding: 0;
-    margin: 0; 
-  }
-  li {
-    list-style-type: none;
-  }
-  a {
-    text-decoration: none;
-    color: ${BASICCOLORS.WHITELIGHT};
-  }
-  textarea{
-    min-height: 150px;
-  }
-  a:visited {
-    color: none;
-  }
-`;
+// const GlobalStyle = createGlobalStyle`
+//   html {
+//     font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
+//     line-height: 1.5;
+//     font-size: 15px;
+//     color: ${BASICCOLORS.BASIC};
+//     font-weight: 400; 
+//   }
+//   body {
+//     padding: 0;
+//     margin: 0; 
+//   }
+//   h2{
+//     padding: 0;
+//     margin: 0; 
+//   }
+//   ul {
+//     padding: 0;
+//     margin: 0; 
+//   }
+//   li {
+//     list-style-type: none;
+//   }
+//   a {
+//     text-decoration: none;
+//     color: ${BASICCOLORS.WHITELIGHT};
+//   }
+//   textarea{
+//     min-height: 150px;
+//   }
+//   a:visited {
+//     color: none;
+//   }
+// `;
 
 // const sagaMiddleware = createSagaMiddleware();
 // const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));

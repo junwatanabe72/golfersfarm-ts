@@ -3,16 +3,17 @@ import styled from 'styled-components';
 import HeaderTitle from '../molecules/header/HeaderTitle';
 import HeaderLink from '../molecules/header/HeaderLink';
 import HeaderMenu from '../molecules/header/HeaderMenu';
-import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color"
+import { BASICCOLORS,ICOLOR } from "../../utils/constant/color"
+import { HeaderText } from "../../utils/constant/text/header/text"
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props {
-  headerColor: COLORTYPES,
+interface Props extends ICOLOR{
+  
 };
 
 //style
-const BackgroundColor = styled.div<Props>`
-  background-color: ${(props) => props.headerColor}; 
+const BackgroundColor = styled.div<ICOLOR>`
+  background-color: ${(props) => props.color}; 
 `;
 
 const Container = styled.div`
@@ -43,22 +44,26 @@ const DisplayHeaderMenu = styled.div`
       `}
 `;
 
-const Header: React.FC<Props> = ({ headerColor}) => {
+const Header: React.FC<ICOLOR> = ({ color}) => {
   const [modalIsOpen, setModal] = useState<boolean>(false);
 
   const workModal = () => {
     setModal(!modalIsOpen);
   };
-  const fontColor = (headerColor === BASICCOLORS.WHITE) ? BASICCOLORS.PRIMARY : BASICCOLORS.SECONDARY;
+  const fontColor = (color === BASICCOLORS.WHITE) ? BASICCOLORS.PRIMARY : BASICCOLORS.SECONDARY;
   return (
-    <BackgroundColor headerColor={headerColor}>
+    <BackgroundColor color={color}>
       <Container>
-        <HeaderTitle fontColor={fontColor}/>
+        <HeaderTitle color={fontColor} appTitle={HeaderText.HeaderTitleText.appTitle}/>
         <DisplayHeaderLink>
-          <HeaderLink fontColor={fontColor} />
+          <HeaderLink color={fontColor} />
         </DisplayHeaderLink>
         <DisplayHeaderMenu>
-          <HeaderMenu workModal={workModal} modalIsOpen={modalIsOpen} fontColor={fontColor}/>
+          <HeaderMenu workModal={workModal} 
+                      modalIsOpen={modalIsOpen} 
+                      color={fontColor} 
+                      head={HeaderText.HeaderMenuText.head}
+                      tail={HeaderText.HeaderMenuText.tail}/>
         </DisplayHeaderMenu>
       </Container>
     </BackgroundColor>

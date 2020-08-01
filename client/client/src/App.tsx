@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Route,BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
 import Header from './components/templates/Header';
+import Footer from './components/templates/Footer';
 import Body from './components/templates/Body';
 // import Modal from './container/ModalContainer';
 import { BASICCOLORS } from "./utils/constant/color"
@@ -21,8 +22,9 @@ const App: React.FC =()=>{
   return (
     <Container>
         <Router>
-        <Header headerColor={BASICCOLORS.WHITELIGHT}/>
-        <Body bodyColor={BASICCOLORS.WHITE} />
+          <Header color={BASICCOLORS.WHITELIGHT}/>
+          <Body color={BASICCOLORS.WHITE} />
+          <Footer color={BASICCOLORS.WHITELIGHT}/>
         </Router>
     </Container>
   );

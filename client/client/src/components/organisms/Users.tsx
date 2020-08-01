@@ -12,6 +12,7 @@ const players = [{ id: 1, name: userName, image: URL }, { id: 2, name: userName,
 const Container = styled.div`
   display: flex;
   max-width: 1000px;
+  min-height: 1000px;
   flex-wrap: wrap;
 `;
 const Styled = styled.div`

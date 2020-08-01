@@ -1,23 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FONTSIZE,FONTSIZETYPE } from "../../utils/constant/number";
-import { BASICCOLORS,COLORTYPES } from "../../utils/constant/color";
+import { FONTSIZE,IFONTSIZE } from "../../utils/constant/number";
+import { BASICCOLORS,ICOLOR } from "../../utils/constant/color";
 import { ROUTE } from "../../utils/constant/route"
 import styled from 'styled-components';
 
-interface LinkProps {
-  fontSize?: FONTSIZETYPE,
-  color?: COLORTYPES,
+type PartialICOLOR = Partial<ICOLOR>
+type PartialIFONTSIZE = Partial<IFONTSIZE>
+interface Props extends PartialICOLOR, PartialIFONTSIZE{
   to: string,
 };
 
-const StyledLink = styled(Link) <LinkProps>`
+const StyledLink = styled(Link) <{ fontSize?: IFONTSIZE["fontSize"],color?: ICOLOR["color"]}>`
   display: inline-block;
   font-size: ${(props) => props.fontSize}px;
   ${(props) => getButtonBcolor(props.color)};
 `;
 
-const getButtonBcolor = (props?: COLORTYPES) => {
+const getButtonBcolor = (props?: ICOLOR["color"]) => {
   if (props === BASICCOLORS.PRIMARY) {
     return `
       color: ${BASICCOLORS.PRIMARY};
@@ -49,7 +49,7 @@ const getButtonBcolor = (props?: COLORTYPES) => {
   }
 };
 
-const LinkButton: React.FC<LinkProps> = ({
+const LinkButton: React.FC<Props> = ({
   to,
   fontSize = FONTSIZE.MEDIUM,
   color,

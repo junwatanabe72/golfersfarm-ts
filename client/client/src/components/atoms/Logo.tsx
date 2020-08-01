@@ -1,21 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FONTSIZETYPE,FONTSIZEWEIGHTTYPE } from "../../utils/constant/number"
+import { FONTSIZETYPE, FONTSIZEWEIGHTTYPE, IFONTSIZE, IFONTSIZEWEIGHT} from "../../utils/constant/number"
 
+type PartialIFONTSIZE = Partial<IFONTSIZE>
+type PartialIFONTSIZEWEIGHT = Partial<IFONTSIZEWEIGHT>
 
-
-interface LogoProps {
-  fontsize: FONTSIZETYPE,
-  fontweight?: FONTSIZEWEIGHTTYPE,
+interface Props extends PartialIFONTSIZE, PartialIFONTSIZEWEIGHT {
 } 
 
-const Styledh2 = styled.h2< { fontsize: FONTSIZETYPE, fontweight?: FONTSIZEWEIGHTTYPE}>`
-  font-size: ${(props) => props.fontsize}px;
-  font-weight: ${(props) => props.fontweight}px;
+const Styledh2 = styled.h2<Props>`
+  font-size: ${(props) => props.fontSize}px;
+  font-weight: ${(props) => props.fontWeight}px;
 `;
 
-const Logo: React.FC<LogoProps> = ({ fontsize, fontweight=400,children })=>{
-  return <Styledh2 fontweight={fontweight} fontsize={fontsize}>{children}</Styledh2>;
+const Logo: React.FC<Props> = ({ fontSize, fontWeight=400,children })=>{
+  return <Styledh2 fontWeight={fontWeight} fontSize={fontSize}>{children}</Styledh2>;
 }
 
 export default Logo;
