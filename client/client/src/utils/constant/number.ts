@@ -13,23 +13,42 @@
       TINY: 8,
     } as const
 
-    export const IMAGEWIDTH = {
-      XXXLARGE: 800,
-      XXLARGE: 700,
-      XLARGE: 600,
-      LARGE: 500,
-      MEDIUM: 400,
-      BASE: 300,
-      SMALL: 200,
-      XSMALL: 100,
-      TINY: 50,
+    export const WIDTH = {
+      MAX: 100,
+      XXXLARGE: 90,
+      XXLARGE: 80,
+      XLARGE: 70,
+      LARGE: 60,
+      MEDIUMLARGE: 55,
+      MEDIUM: 50,
+      BASE: 40,
+      BASESMALL: 35,
+      SMALL: 30,
+      XSMALL: 20,
+      TINY: 10,
     } as const
+
+
+// export const WIDTH = {
+//   XXXLARGE: 800,
+//   XXLARGE: 700,
+//   XLARGE: 600,
+//   LARGE: 500,
+//   MEDIUM: 400,
+//   BASE: 300,
+//   SMALL: 200,
+//   XSMALL: 100,
+//   TINY: 50,
+// } as const
+
 
     export const CLEAR = {
       XXXLARGE: 96,
       XXLARGE: 80,
+      GXLARGE: 72,
       XLARGE: 64,
       LARGE: 56,
+      MEDIUMLARGE: 48,
       MEDIUM: 32,
       BASE: 24,
       SMALL: 16,
@@ -52,6 +71,10 @@ export interface IFONTSIZE {
 
 export interface IWIDTH {
   width: WIDTHTYPE
+}
+
+export interface VWWIDTH {
+  vwWidth: CLEARTYPE
 }
 
 export interface IFONTSIZEWEIGHT {
@@ -77,21 +100,27 @@ export type FONTSIZETYPE = typeof FONTSIZE.ICONXLARGE |
   typeof FONTSIZE.XSMALL |
   typeof FONTSIZE.TINY;
 
-export type WIDTHTYPE = typeof IMAGEWIDTH.XXXLARGE |
-  typeof IMAGEWIDTH.XXLARGE |
-  typeof IMAGEWIDTH.XLARGE |
-  typeof IMAGEWIDTH.LARGE |
-  typeof IMAGEWIDTH.MEDIUM |
-  typeof IMAGEWIDTH.LARGE |
-  typeof IMAGEWIDTH.BASE |
-  typeof IMAGEWIDTH.SMALL |
-  typeof IMAGEWIDTH.XSMALL |
-  typeof IMAGEWIDTH.TINY;
+
+export type WIDTHTYPE = typeof WIDTH.MAX |
+typeof WIDTH.XXXLARGE |
+  typeof WIDTH.XXLARGE |
+  typeof WIDTH.XLARGE |
+  typeof WIDTH.LARGE |
+  typeof WIDTH.MEDIUMLARGE |
+  typeof WIDTH.MEDIUM |
+  typeof WIDTH.LARGE |
+  typeof WIDTH.BASE |
+  typeof WIDTH.BASESMALL | 
+  typeof WIDTH.SMALL |
+  typeof WIDTH.XSMALL |
+  typeof WIDTH.TINY;
 
 export type CLEARTYPE = typeof CLEAR.XXXLARGE |
   typeof CLEAR.XXLARGE |
+  typeof CLEAR.GXLARGE | 
   typeof CLEAR.XLARGE |
   typeof CLEAR.LARGE |
+  typeof CLEAR.MEDIUMLARGE |
   typeof CLEAR.MEDIUM |
   typeof CLEAR.LARGE |
   typeof CLEAR.BASE |

@@ -8,7 +8,7 @@ import TopImage from "../../../utils/image/6114.jpg"
 import { ROUTE } from "../../../utils/constant/route"
 import { BASICCOLORS } from "../../../utils/constant/color";
 import { TopTitleText } from "../../../utils/constant/text/body/top/text";
-import { FONTSIZE,IMAGEWIDTH,CLEAR } from "../../../utils/constant/number";
+import { FONTSIZE,WIDTH,CLEAR } from "../../../utils/constant/number";
 import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
 import { media } from '../../../utils/styled/styledRdesign';
@@ -40,7 +40,7 @@ const mainText = TopTitleText.map((t: string,i: number) =>{
     )
   } else if (i === TopTitleText.length-1){
     return (
-      <Padding bottom={CLEAR.MEDIUM}>
+      <Padding bottom={CLEAR.SMALL}>
         <LinkButton to={ROUTE.LOGIN}>
           <Button color={BASICCOLORS.WHITELIGHT}>
             {t}
@@ -62,7 +62,7 @@ const TopTitle: React.FC = () => {
         <FixedWidth>
           {mainText}
         </FixedWidth>
-        <FreePick image={TopImage} width={IMAGEWIDTH.MEDIUM}/>
+        <FreePick image={TopImage} width={WIDTH.SMALL}/>
       </Container>
   )
 }

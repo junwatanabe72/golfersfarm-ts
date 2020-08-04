@@ -22,22 +22,22 @@ export const PdComponent: React.FC<PaddingProps> = ({top,right,bottom,left,all,c
   return <Padding top={top} right={right} bottom={bottom} left={left} all={all}>{children}</Padding>;
 }
 
-type MarginProps = {
-  top?: CLEARTYPE,
-  right?: CLEARTYPE,
-  bottom?: CLEARTYPE,
-  left?: CLEARTYPE,
-  all?: CLEARTYPE,
-};
+// type MarginProps = {
+//   top?: CLEARTYPE,
+//   right?: CLEARTYPE,
+//   bottom?: CLEARTYPE,
+//   left?: CLEARTYPE,
+//   all?: CLEARTYPE,
+// };
 
-export const Margin = styled.div<MarginProps>`
-  margin-top: ${(props) => props.top}px;
-  margin-right: ${(props) => props.right}px;
-  margin-bottom: ${(props) => props.bottom}px;
-  margin-left: ${(props) => props.left}px;
-  margin: ${(props) => props.all}px;
-`
+// export const Margin = styled.div<MarginProps>`
+//   margin-top: ${(props) => props.top}px;
+//   margin-right: ${(props) => props.right}px;
+//   margin-bottom: ${(props) => props.bottom}px;
+//   margin-left: ${(props) => props.left}px;
+//   margin: ${(props) => props.all}px;
+// `
 
-export const MgComponent: React.FC<MarginProps> = ({ top, right, bottom, left,all, children }) => {
-  return <Margin top={top} right={right} bottom={bottom} left={left} all={all}>{children}</Margin>;
-}
+// export const MgComponent: React.FC<MarginProps> = ({ top, right, bottom, left,all, children }) => {
+//   return <Margin top={top} right={right} bottom={bottom} left={left} all={all}>{children}</Margin>;
+// }

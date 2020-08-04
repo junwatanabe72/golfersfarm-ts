@@ -4,7 +4,7 @@ import Image from '../../atoms/Image';
 import Logo from '../../atoms/Logo';
 import SwingImage from "../../../utils/image/swing.jpg"
 import { BASICCOLORS } from "../../../utils/constant/color";
-import { FONTSIZE, IMAGEWIDTH, CLEAR } from "../../../utils/constant/number";
+import { FONTSIZE, WIDTH, CLEAR } from "../../../utils/constant/number";
 import { TopUsageText } from "../../../utils/constant/text/body/top/text";
 import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
@@ -37,7 +37,7 @@ const mainText = TopUsageText.UsageItem.map((t: string, i: number) => {
       <Padding left={CLEAR.XSMALL} right={CLEAR.XSMALL} bottom={CLEAR.BASE}>
         <FixedColumn>
           <Padding bottom={CLEAR.XSMALL}>{t}</Padding>
-          <Image width={IMAGEWIDTH.MEDIUM} image={SwingImage}/>
+          <Image width={WIDTH.SMALL} image={SwingImage}/>
         </FixedColumn>
       </Padding>
     )

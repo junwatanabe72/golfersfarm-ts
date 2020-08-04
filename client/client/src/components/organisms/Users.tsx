@@ -2,8 +2,8 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
-import {  IMAGEWIDTH,CLEAR } from "../../utils/constant/number"
-import { MgComponent} from "../../utils/styled/styledSpace";
+import { WIDTH,CLEAR } from "../../utils/constant/number"
+import { Padding} from "../../utils/styled/styledSpace";
 
 const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
 const userName ="jun"
@@ -11,7 +11,6 @@ const players = [{ id: 1, name: userName, image: URL }, { id: 2, name: userName,
 
 const Container = styled.div`
   display: flex;
-  max-width: 1000px;
   min-height: 1000px;
   flex-wrap: wrap;
 `;
@@ -24,21 +23,23 @@ const Users: React.FC = () => {
   const [modalIsOpen, setModal] = useState<any>(players);
   
   const player = modalIsOpen.map((data: any, i: number) => {
-      return (
-        <MgComponent all={CLEAR.SMALL}>
-          <Image image={data.image} width={IMAGEWIDTH.SMALL} />
+      return (        
+        <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
+          <Image image={data.image} width={WIDTH.TINY} />
           <Styled>
             <LinkButton to={`/users/${data.id}`}>
               {data.name}
             </LinkButton>
           </Styled>
-        </MgComponent>
+        </Padding>
       );
     })
   
   return (
       <Container>
         {player}
+      {player}
+      {player}
       </Container>
   )
   

@@ -9,20 +9,14 @@ import { Padding } from "../../utils/styled/styledSpace";
 
 type PartialICOLOR = Partial<ICOLOR>
 
+
+const BackColor = styled.div<PartialICOLOR>`
+  background-color: ${(props) => props.color};
+`;
+
 const Container = styled.div`
 `;
 
-const Layout = styled.div`
-  width: 90%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-`;
-
-const BackColor = styled.div<PartialICOLOR>`
-  background-color: ${(props)=> props.color};
-`;
 BackColor.defaultProps = {
   color: BASICCOLORS.WHITE
 }
@@ -34,19 +28,19 @@ const data = Components.map((d: JSX.Element,i: number) => {
       return (
         <BackColor color={BASICCOLORS.WHITELIGHT}>
           <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
-              <Layout>
+              <Container>
                 {d}
-              </Layout>
+              </Container>
           </Padding >
         </BackColor>
       )
     }else{
       return ( 
-        <BackColor>
+        <BackColor >
           <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
-            <Layout>
+            <Container>
               {d}
-            </Layout>
+            </Container>
           </Padding>
         </BackColor>
       )

@@ -5,7 +5,7 @@ const sizes: { [index: string]: number } = {
   tablet: 768,
   phone: 576,
 };
-
+// 768
 export const media = Object.keys(sizes).reduce(
   (acc, label) => {
     acc[label] = (

@@ -18,6 +18,7 @@ const Container = styled.div`
 
 const PositionAbsolute = styled.div<{ modalIsOpen: boolean }>`
   position: absolute;
+  z-index: 2;
   margin-top: 16px;
   top: 40px;
   right: 16px;

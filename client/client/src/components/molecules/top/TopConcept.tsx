@@ -7,14 +7,14 @@ import Logo from '../../atoms/Logo';
 import LastImage from "../../../utils/image/16782.jpg"
 import { ROUTE } from "../../../utils/constant/route"
 import { BASICCOLORS } from "../../../utils/constant/color";
-import { FONTSIZE, IMAGEWIDTH, CLEAR } from "../../../utils/constant/number";
+import { FONTSIZE, WIDTH, CLEAR } from "../../../utils/constant/number";
 import { TopConceptText } from "../../../utils/constant/text/body/top/text";
 import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
 import { media } from '../../../utils/styled/styledRdesign';
 
 const Container = styled.div`
-  
+  font-size: 2vw;
 `;
 
 const Layout = styled.div`
@@ -29,7 +29,7 @@ const Layout = styled.div`
 
 const ResponseText = styled.div`
   ${media.tablet`
-       margin-top: ${CLEAR.LARGE}px;
+       padding-top: ${CLEAR.LARGE}px;
       `}
 `;
 
@@ -57,13 +57,15 @@ const TopConcept: React.FC = () => {
     <>
         <Padding bottom={CLEAR.MEDIUM}>
           <StyledSpan color={BASICCOLORS.PRIMARY}>
-            <Logo fontSize={FONTSIZE.XXLARGE}>
+            {/* <Logo fontSize={FONTSIZE.XXLARGE}> */}
+              <Container>
             {TopConceptText.ConceptTitle}
-            </Logo>
+            </Container>
+            {/* </Logo> */}
           </StyledSpan>
         </Padding>
         <Layout>
-          <FreePick image={LastImage} width={IMAGEWIDTH.MEDIUM} />
+          <FreePick image={LastImage} width={WIDTH.SMALL} />
           <ResponseText>
             {mainText}
           </ResponseText>
