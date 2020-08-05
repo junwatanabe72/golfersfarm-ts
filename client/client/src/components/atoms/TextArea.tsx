@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Padding } from "../../utils/styled/styledSpace";
+import { CLEAR } from "../../utils/constant/number";
 
 interface TextAreaProps {
   placeHolder?: string,
@@ -9,7 +11,6 @@ interface TextAreaProps {
 
 const Container = styled.div`
   width: 100%;
-  padding: 12px 8px;
 `;
 const Frame = styled.div`
   border-radius: 6px;
@@ -27,9 +28,11 @@ const InputTextarea = styled.textarea`
 const TextArea: React.FC<TextAreaProps> = ({ placeHolder, value = '', onChange }) => {
   return (
     <Container>
-      <Frame>
-        <InputTextarea placeholder={placeHolder} value={value} onChange={onChange} />
-      </Frame>
+      <Padding top={CLEAR.SMALL} bottom={CLEAR.SMALL} right={CLEAR.XSMALL} left={CLEAR.XSMALL}>
+        <Frame>
+          <InputTextarea placeholder={placeHolder} value={value} onChange={onChange} />
+        </Frame>
+      </Padding>
     </Container>
   );
 }

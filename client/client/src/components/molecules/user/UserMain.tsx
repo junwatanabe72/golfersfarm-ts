@@ -31,7 +31,7 @@ const Container = styled.div`
   height: 100%;
   flex-direction: column;
   justify-content: space-around;
-  background-color: ${BASICCOLORS.PRIMARY};
+  background-color: ${BASICCOLORS.WHITELIGHT};
   align-items: center;
   ${media.tablet`
         width: 70vw;

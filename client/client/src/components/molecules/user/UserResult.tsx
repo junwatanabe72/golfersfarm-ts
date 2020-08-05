@@ -12,29 +12,31 @@ interface Props extends PartialIWIDTH {
 
 const datas = [
   {
-    arg: "性別",
-    value: "男性",
+    year: "年",
+    com: "競技",
+    rank: "順位",
   },
   {
-    arg: "出生地",
-    value: "栃木県",
+    year: "2013年11月",
+    com: "ゴルフネットワーク選手権RomaroCUP",
+    rank: "21位", 
   },
   {
-    arg: "現住所",
-    value: "神戸市",
+    year: "2007年4月",
+    com: "関東大学春季Dブロック対抗戦",
+    rank: "団体４位",
   },
   {
-    arg: "職業",
-    value: "不動産",
+    year: "2007年８月",
+    com: "関東大学春季Dブロック対抗戦",
+    rank: "団体1位", 
   },
   {
-    arg: "出身校",
-    value: "学習院大学",
+    year: "2006年8月",
+    com: "関東大学春季Cブロック対抗戦",
+    rank: "団体8位",
   },
-  {
-    arg: "趣味",
-    value: "プログラミング",
-  },
+  
 ]
 
 
@@ -44,21 +46,18 @@ const BackColor = styled.div`
 
 
 const Container = styled.div`
-  display: flex;
-  max-width: 896px;
-  // background-color: ${BASICCOLORS.SECONDARY};
-  overflow-x: auto;
-  ${media.tablet`
-        flex-direction: column;
-        align-items: center;
-      `}
+  // display: flex;
+  // width: 55vw;
+  // background-color: ${BASICCOLORS.BASICLIGHT};
+  // ${media.tablet`
+  //       flex-direction: column;
+  //       align-items: center;
+  //     `}
 `;
 
-const UserResult: React.FC<Props> = ({ width }) => {
+const UserResult: React.FC<Props> = ({width}) => {
   // console.log(vwWidth)
   return (
-
-
     <Container>
       <Table datas={datas} width={width} />
     </Container>

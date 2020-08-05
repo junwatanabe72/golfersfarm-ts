@@ -45,8 +45,7 @@ const datas = [
   },
   {
     name: "JBEAM",
-    type: `3~P 
-    IRON`,
+    type: `3~P IRON`,
     shaft: "Tour-AD DI7",
     flex: "S",
     smaker: "GrafightDesign",
@@ -113,7 +112,7 @@ const datas = [
 
 const Container = styled.div`
 //  width: 30vw;
-  background-color: ${BASICCOLORS.SECONDARY};
+  background-color: ${BASICCOLORS.WHITELIGHT};
   ${media.tablet`
         width: 60vw;
       `}

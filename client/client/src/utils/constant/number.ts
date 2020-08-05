@@ -24,6 +24,7 @@
       BASE: 40,
       BASESMALL: 35,
       SMALL: 30,
+      SXMALL: 25,
       XSMALL: 20,
       TINY: 10,
     } as const
@@ -112,6 +113,7 @@ typeof WIDTH.XXXLARGE |
   typeof WIDTH.BASE |
   typeof WIDTH.BASESMALL | 
   typeof WIDTH.SMALL |
+  typeof WIDTH.SXMALL |
   typeof WIDTH.XSMALL |
   typeof WIDTH.TINY;
 

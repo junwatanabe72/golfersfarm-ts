@@ -15,7 +15,7 @@ interface Props {
 const Container = styled.div`
   display: flex;
   width: 55vw;
-  background-color: ${BASICCOLORS.PRIMARY};
+  background-color: ${BASICCOLORS.WHITELIGHT};
   justify-content: space-between;
   align-items: center;
   ${media.tablet`

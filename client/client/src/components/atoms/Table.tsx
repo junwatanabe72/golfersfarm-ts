@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import TableData from "./TableData";
 import { WIDTH, IWIDTH } from "../../utils/constant/number";
 import { media } from '../../utils/styled/styledRdesign';
 import { BASICCOLORS, ICOLOR } from "../../utils/constant/color"
@@ -18,7 +17,12 @@ interface DataType {
     flex: string,
     smaker: string,
     maker: string,
-  }[] 
+  }[] |
+  {
+    year: string,
+    com: string,
+    rank: string,
+  }[],
 }
 
 interface Props extends DataType, PartialIWIDTH  {
@@ -58,37 +62,81 @@ const StyledTd = styled.td`
 
 const Table: React.FC<Props> = ({ datas, width }) => {
   const Data = Object.values(datas)
-  const targetDatas =
-  (Data[0]["arg"])
-  ? 
-    Object.values(datas).map(data => 
-      {
-        return (
-        <StyledTrd>
-          <StyledTd>{data.arg}</StyledTd>
-          <StyledTd>{data.value}</StyledTd>
-        </StyledTrd>
-        )
-      })
-  :
-      Object.values(datas).map(data => 
-      {
-        return (
-          <StyledTrd>
-            <StyledTd>{data.type}</StyledTd>
-            <StyledTd>{data.name}</StyledTd>
-            <StyledTd>{data.maker}</StyledTd>
-            <StyledTd>{data.shaft}</StyledTd>
-            <StyledTd>{data.flex}</StyledTd>
-            <StyledTd>{data.smaker}</StyledTd>
-          </StyledTrd>
-        )
-      })
-
+  // const targetDatas =
+  // (Data[0]["arg"]) ?
+  //     (Data[0]["arg"]) ?
+  //   Object.values(datas).map(data => 
+  //     {
+  //       return (
+  //       <StyledTrd>
+  //         <StyledTd>{data.arg}</StyledTd>
+  //         <StyledTd>{data.value}</StyledTd>
+  //       </StyledTrd>
+  //       )
+  //     })
+  // : 
+  //   Object.values(datas).map(data => {
+  //     return (
+  //       <StyledTrd>
+  //         <StyledTd>{data.year}</StyledTd>
+  //         <StyledTd>{data.com}</StyledTd>
+  //         <StyledTd>{data.rank}</StyledTd>
+  //       </StyledTrd>
+  //     )
+  //   })
+  // :
+  //   Object.values(datas).map(data => {
+  //     return (
+  //       <StyledTrd>
+  //         <StyledTd>{data.type}</StyledTd>
+  //         <StyledTd>{data.name}</StyledTd>
+  //         <StyledTd>{data.maker}</StyledTd>
+  //         <StyledTd>{data.shaft}</StyledTd>
+  //         <StyledTd>{data.flex}</StyledTd>
+  //         <StyledTd>{data.smaker}</StyledTd>
+  //       </StyledTrd>
+  //     )
+  //   });
+    
+  console.log(Data)
   return (
       <StyledTable width={width}>
         <tbody>
-        {targetDatas}
+        { Data[0]["arg"] &&
+          Object.values(datas).map(data => {
+            return (
+              <StyledTrd>
+                <StyledTd>{data.arg}</StyledTd>
+                <StyledTd>{data.value}</StyledTd>
+              </StyledTrd>
+            )
+          })
+        }
+        {Data[0]["year"] &&
+          Object.values(datas).map(data => {
+            return (
+              <StyledTrd>
+                <StyledTd>{data.year}</StyledTd>
+                <StyledTd>{data.com}</StyledTd>
+                <StyledTd>{data.rank}</StyledTd>
+              </StyledTrd>
+            )
+          })
+        }
+        {Data[0]["type"] &&
+          Object.values(datas).map(data => {
+            return (
+              <StyledTrd>
+                <StyledTd>{data.type}</StyledTd>
+                <StyledTd>{data.name}</StyledTd>
+                <StyledTd>{data.maker}</StyledTd>
+                <StyledTd>{data.shaft}</StyledTd>
+                <StyledTd>{data.flex}</StyledTd>
+                <StyledTd>{data.smaker}</StyledTd>
+              </StyledTrd>
+            )
+          })
+        }
         </tbody>
       </StyledTable>
   );

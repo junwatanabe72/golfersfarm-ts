@@ -20,6 +20,10 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0; 
   }
+  iframe {
+    padding: 0;
+    margin: 0; 
+  }
   li {
     list-style-type: none;
   }

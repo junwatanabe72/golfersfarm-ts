@@ -38,7 +38,7 @@ const Container = styled.div`
       `}
 `;
 const Color = styled.div<PartialICOLOR>`
-  background-color: ${BASICCOLORS.SECONDARYDARK};
+  background-color: ${BASICCOLORS.WHITELIGHT};
 `;
 
 const UserSub: React.FC<Props> = ({ }) => {
@@ -55,19 +55,22 @@ const UserSub: React.FC<Props> = ({ }) => {
           <UserProfile width={WIDTH.MEDIUMLARGE} />
         </Padding>
       </Color>
+      <Padding all={16} />
       <Color>
         <Padding all={24}>
           <UserGear />
         </Padding>
       </Color>
+      <Padding all={16} />
       <Color>
         <Padding all={24}>
           <UserVideo />
         </Padding>
       </Color>
+      <Padding all={16} />
       <Color>
         <Padding all={24}>
-          <UserResult />
+          <UserResult width={WIDTH.MEDIUMLARGE} />
         </Padding>
       </Color>
     </Container>
