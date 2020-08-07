@@ -29,32 +29,18 @@
       TINY: 10,
     } as const
 
-
-// export const WIDTH = {
-//   XXXLARGE: 800,
-//   XXLARGE: 700,
-//   XLARGE: 600,
-//   LARGE: 500,
-//   MEDIUM: 400,
-//   BASE: 300,
-//   SMALL: 200,
-//   XSMALL: 100,
-//   TINY: 50,
-// } as const
-
-
     export const CLEAR = {
-      XXXLARGE: 96,
-      XXLARGE: 80,
-      GXLARGE: 72,
-      XLARGE: 64,
-      LARGE: 56,
-      MEDIUMLARGE: 48,
-      MEDIUM: 32,
-      BASE: 24,
-      SMALL: 16,
-      XSMALL: 8,
-      TINY: 4,
+      XXXLARGE: 20,
+      XXLARGE: 15,
+      GXLARGE: 13,
+      XLARGE: 11,
+      LARGE: 9,
+      MEDIUMLARGE: 7,
+      MEDIUM: 5,
+      BASE: 4,
+      SMALL: 3,
+      XSMALL: 2,
+      TINY: 1,
     } as const
 
     export const FONTWEIGHT = {

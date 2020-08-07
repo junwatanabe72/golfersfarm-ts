@@ -4,6 +4,7 @@ import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
 import { WIDTH,CLEAR } from "../../utils/constant/number"
 import { Padding} from "../../utils/styled/styledSpace";
+import { BASICCOLORS } from '../../utils/constant/color';
 
 const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
 const userName ="jun"
@@ -11,8 +12,12 @@ const players = [{ id: 1, name: userName, image: URL }, { id: 2, name: userName,
 
 const Container = styled.div`
   display: flex;
-  min-height: 1000px;
+  // min-height: 1000px;
   flex-wrap: wrap;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 `;
 const Styled = styled.div`
   text-align: center;
@@ -24,10 +29,10 @@ const Users: React.FC = () => {
   
   const player = modalIsOpen.map((data: any, i: number) => {
       return (        
-        <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
+        <Padding all={CLEAR.TINY}>
           <Image image={data.image} width={WIDTH.TINY} />
           <Styled>
-            <LinkButton to={`/users/${data.id}`}>
+            <LinkButton to={`/users/${i}`} color={BASICCOLORS.PRIMARY}>
               {data.name}
             </LinkButton>
           </Styled>
@@ -37,8 +42,6 @@ const Users: React.FC = () => {
   
   return (
       <Container>
-        {player}
-      {player}
       {player}
       </Container>
   )

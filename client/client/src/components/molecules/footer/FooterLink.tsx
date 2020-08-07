@@ -4,6 +4,7 @@ import LinkButton from '../../atoms/LinkButton';
 import { ICOLOR } from "../../../utils/constant/color";
 import { ROUTE,INFOROUTE } from "../../../utils/constant/route";
 import { Padding } from '../../../utils/styled/styledSpace';
+import { CLEAR } from "../../../utils/constant/number";
 
 interface Props extends ICOLOR {
 };
@@ -27,7 +28,7 @@ const FooterLink: React.FC<Props> = ({ color }) => {
 
   const infoMenu = Object.entries(INFOROUTE).map((route) => {
     return (
-      <LiPadding all={8}>
+      <LiPadding all={CLEAR.TINY}>
         <LinkButton to={route[1]} color={color} >
           {route[0]}
         </LinkButton>
@@ -37,7 +38,7 @@ const FooterLink: React.FC<Props> = ({ color }) => {
 
   const baseMenu = Object.entries(ROUTE).map((route) => {
     return (
-      <LiPadding all={8}>
+      <LiPadding all={CLEAR.TINY}>
         <LinkButton to={route[1]} color={color} >
           {route[0]}
         </LinkButton>
@@ -47,7 +48,7 @@ const FooterLink: React.FC<Props> = ({ color }) => {
 
   const loginMenu = Object.entries(loginRoute).map((route) => {
     return (
-      <LiPadding all={8}>
+      <LiPadding all={CLEAR.TINY}>
         <LinkButton to={route[1]} color={color} >
           {route[0]}
         </LinkButton>

@@ -31,7 +31,6 @@ const Container = styled.div`
   height: 100%;
   flex-direction: column;
   justify-content: space-around;
-  background-color: ${BASICCOLORS.WHITELIGHT};
   align-items: center;
   ${media.tablet`
         width: 70vw;
@@ -40,18 +39,54 @@ const Container = styled.div`
         top: 0;
       `}
 `;
+
+const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: ${BASICCOLORS.WHITELIGHT};
+  align-items: center;
+`;
+
 const userName = "JUNWATANABE72"
 const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
 const UserMain: React.FC<Props> = () => {
   return (
     <Container>
-      <Padding all={24}>
-        <Image image={URL} width={WIDTH.XSMALL} />
-        <div>{userName}</div>
+      <Layout>
+        <Padding all={CLEAR.BASE}>
+          <Image image={URL} width={WIDTH.XSMALL} />
+          <div>{userName}</div>
+          <UserMainTable width={WIDTH.XSMALL} />
+        </Padding>
+      </Layout>
+      <Padding all={CLEAR.TINY}/>
+      <Layout>
+        <Padding all={CLEAR.BASE}>
         <UserMainTable width={WIDTH.XSMALL} />
-      </Padding>
+        </Padding>
+      </Layout>
     </Container>
   )
 }
 
 export default UserMain;
+
+
+// const Container = styled.div`
+//   display: flex;
+//   width: 30%;
+//   position: sticky;
+//   top: 50px;
+//   height: 100%;
+//   flex-direction: column;
+//   justify-content: space-around;
+//   background-color: ${BASICCOLORS.WHITELIGHT};
+//   align-items: center;
+//   ${media.tablet`
+//         width: 70vw;
+//         position: relative;
+//         height: 100%;
+//         top: 0;
+//       `}
+// `;

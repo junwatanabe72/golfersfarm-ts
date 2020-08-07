@@ -16,7 +16,7 @@ const Container = styled.img<{width: Props["width"]}>`
       `}
 `;
 
-const Image: React.FC<Props> = ({ width=WIDTH.MEDIUM, image }) => {
+const Image: React.FC<Props> = ({ width=WIDTH.SMALL, image }) => {
   return <Container width={width} src={image} />;
 };
 

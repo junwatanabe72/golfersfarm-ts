@@ -14,7 +14,7 @@ import { Padding } from "../../../utils/styled/styledSpace";
 import { media } from '../../../utils/styled/styledRdesign';
 
 const Container = styled.div`
-  font-size: 2vw;
+  font-size: 2rem;
 `;
 
 const Layout = styled.div`
@@ -29,7 +29,7 @@ const Layout = styled.div`
 
 const ResponseText = styled.div`
   ${media.tablet`
-       padding-top: ${CLEAR.LARGE}px;
+       padding-top: ${CLEAR.BASE}px;
       `}
 `;
 
@@ -55,7 +55,7 @@ const mainText = TopConceptText.ConceptText.map((t: string, i: number) => {
 const TopConcept: React.FC = () => {
   return (
     <>
-        <Padding bottom={CLEAR.MEDIUM}>
+        <Padding bottom={CLEAR.SMALL}>
           <StyledSpan color={BASICCOLORS.PRIMARY}>
             {/* <Logo fontSize={FONTSIZE.XXLARGE}> */}
               <Container>

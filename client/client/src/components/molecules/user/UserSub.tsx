@@ -44,32 +44,27 @@ const Color = styled.div<PartialICOLOR>`
 const UserSub: React.FC<Props> = ({ }) => {
   return (
     <Container> 
+      {/* <Padding all={CLEAR.TINY}/> */}
       <Color>
-        <Padding all={24}>
+        <Padding all={CLEAR.XSMALL}>
           <UserProfile width={WIDTH.MEDIUMLARGE} />
         </Padding>
       </Color>
-      <Padding all={16}/>
+      <Padding all={CLEAR.TINY} />
       <Color>
-        <Padding all={24}>
-          <UserProfile width={WIDTH.MEDIUMLARGE} />
-        </Padding>
-      </Color>
-      <Padding all={16} />
-      <Color>
-        <Padding all={24}>
+        <Padding all={CLEAR.XSMALL}>
           <UserGear />
         </Padding>
       </Color>
-      <Padding all={16} />
+      <Padding all={CLEAR.TINY} />
       <Color>
-        <Padding all={24}>
+        <Padding all={CLEAR.XSMALL}>
           <UserVideo />
         </Padding>
       </Color>
-      <Padding all={16} />
+      <Padding all={CLEAR.TINY} />
       <Color>
-        <Padding all={24}>
+        <Padding all={CLEAR.XSMALL}>
           <UserResult width={WIDTH.MEDIUMLARGE} />
         </Padding>
       </Color>

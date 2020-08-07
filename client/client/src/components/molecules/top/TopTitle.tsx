@@ -30,17 +30,17 @@ const FixedWidth = styled.div`
 const mainText = TopTitleText.map((t: string,i: number) =>{
   if(i===0){
     return (
-      <Padding bottom={CLEAR.MEDIUM}>
+      <Padding bottom={CLEAR.BASE}>
         <Logo fontSize={FONTSIZE.XXXLARGE} >
-        <StyledSpan color={BASICCOLORS.PRIMARY}>
-            {t}
-        </StyledSpan>
+          <StyledSpan color={BASICCOLORS.PRIMARY}>
+              {t}
+          </StyledSpan>
         </Logo>
       </Padding>
     )
   } else if (i === TopTitleText.length-1){
     return (
-      <Padding bottom={CLEAR.SMALL}>
+      <Padding bottom={CLEAR.XSMALL}>
         <LinkButton to={ROUTE.LOGIN}>
           <Button color={BASICCOLORS.WHITELIGHT}>
             {t}
@@ -50,7 +50,7 @@ const mainText = TopTitleText.map((t: string,i: number) =>{
     )
   }else{
     return (
-      <Padding bottom={CLEAR.SMALL}>{t}</Padding>
+      <Padding bottom={CLEAR.XSMALL}>{t}</Padding>
     )
   }
   }

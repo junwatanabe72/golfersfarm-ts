@@ -51,8 +51,6 @@ const StyledTrd = styled.tr`
 `;
 
 const StyledTd = styled.td`
-  // min-width: 20px;
-  // max-width: 120px;
   font-size: 14px;
   cursor: pointer;
   border-bottom: solid 1px #ccc;

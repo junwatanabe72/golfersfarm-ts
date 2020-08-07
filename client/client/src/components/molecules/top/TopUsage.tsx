@@ -37,7 +37,7 @@ const mainText = TopUsageText.UsageItem.map((t: string, i: number) => {
       <Padding left={CLEAR.XSMALL} right={CLEAR.XSMALL} bottom={CLEAR.BASE}>
         <FixedColumn>
           <Padding bottom={CLEAR.XSMALL}>{t}</Padding>
-          <Image width={WIDTH.SMALL} image={SwingImage}/>
+          <Image width={WIDTH.SXMALL} image={SwingImage}/>
         </FixedColumn>
       </Padding>
     )

@@ -16,6 +16,10 @@ const userName = "jun"
 
 const Container = styled.div`
   display:flex;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;  
   ${media.tablet`
         flex-direction: column;
         align-items: center;
@@ -27,7 +31,7 @@ const User: React.FC<Props> = ({match}) => {
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
         <Container>
           <UserMain />
-          <Padding all={16}  />
+        <Padding all={CLEAR.XSMALL}  />
           <UserSub />
         </Container>
       </Padding>
