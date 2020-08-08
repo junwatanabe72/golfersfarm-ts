@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { FONTSIZE,IFONTSIZE } from "../../utils/constant/number";
 import { BASICCOLORS,ICOLOR } from "../../utils/constant/color";
-import { ROUTE } from "../../utils/constant/route"
 import styled from 'styled-components';
 
 type PartialICOLOR = Partial<ICOLOR>

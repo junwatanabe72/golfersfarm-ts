@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { WIDTH, IWIDTH } from "../../utils/constant/number";
 import { media } from '../../utils/styled/styledRdesign';
-import { BASICCOLORS, ICOLOR } from "../../utils/constant/color"
 
 type PartialIWIDTH = Partial<IWIDTH>
 interface DataType {

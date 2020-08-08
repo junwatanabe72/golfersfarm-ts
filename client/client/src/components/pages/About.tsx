@@ -7,29 +7,21 @@ import Input from '../atoms/Input';
 import TextArea from '../atoms/TextArea';
 import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
+import Layout from "../templates/Layout";
 import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
 import { BASICCOLORS, COLORTYPES } from "../../utils/constant/color"
 import { FONTSIZE } from "../../utils/constant/number"
 
-interface Props extends RouteComponentProps<{ id: string }> { };
+interface Props{ 
+  login: boolean,
+};
 
-const Privacy: React.FC<Props> = ({ match }) => {
+const About: React.FC<Props> = ({ login }) => {
   return (
-    <div className="App">
-      <Logo fontSize={FONTSIZE.XXXLARGE}>Privacy</Logo>
-      <Input />
-      <TextArea
-        placeHolder="sample"
-        value={match.params.id}
-        onChange={() => {
-          window.alert('Hello world!');
-        }}
-      />
-      <LinkButton to={ROUTE.TOP} color={BASICCOLORS.PRIMARY}>
-        {match.params.id}
-      </LinkButton>
-    </div>
+    <Layout login={login}>
+      About
+    </Layout>
   )
 }
 
-export default Privacy;
+export default About;

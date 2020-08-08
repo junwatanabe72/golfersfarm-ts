@@ -7,7 +7,7 @@ import { FONTSIZE, WIDTH, CLEAR } from "../../../utils/constant/number";
 import { media } from '../../../utils/styled/styledRdesign';
 import UserGearTable from "../../molecules/user/userTable/UserGearTable";
 import { Padding } from "../../../utils/styled/styledSpace";
-import Contact from '../../organisms/Contact';
+import Contact from '../../pages/Contact';
 
 interface Props {
 }

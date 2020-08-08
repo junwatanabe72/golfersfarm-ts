@@ -3,14 +3,17 @@ import styled from 'styled-components';
 import { RouteComponentProps } from 'react-router-dom'
 import UserMain from "../molecules/user/UserMain";
 import UserSub from "../molecules/user/UserSub";
-import { ROUTE, ROUTETYPE } from "../../utils/constant/route"
-import { BASICCOLORS,ICOLOR, COLORTYPES } from "../../utils/constant/color"
-import { FONTSIZE, WIDTH, CLEAR } from "../../utils/constant/number";
-import { TopUsageText } from '../../utils/constant/text/body/top/text';
+import Layout from "../templates/Layout";
+import { CLEAR } from "../../utils/constant/number";
 import { media } from '../../utils/styled/styledRdesign';
-import UserProfile from "../molecules/user/UserProfile";
 import { Padding } from "../../utils/styled/styledSpace";
-interface Props extends RouteComponentProps < {id: string} >{};
+
+interface Props {
+  login: boolean,
+}
+// interface Props extends RouteComponentProps<{id: string}>{
+//   login: boolean,
+// };
 
 const userName = "jun"
 
@@ -26,8 +29,9 @@ const Container = styled.div`
       `}
 `;
 
-const User: React.FC<Props> = ({match}) => {
+const User: React.FC<Props> = ({login}) => {
   return (
+    <Layout login={login}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
         <Container>
           <UserMain />
@@ -35,6 +39,7 @@ const User: React.FC<Props> = ({match}) => {
           <UserSub />
         </Container>
       </Padding>
+    </Layout>
   )
 }
 
