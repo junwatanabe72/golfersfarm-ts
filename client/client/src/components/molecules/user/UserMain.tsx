@@ -9,7 +9,7 @@ import { TopUsageText } from '../../../utils/constant/text/body/top/text';
 import { media } from '../../../utils/styled/styledRdesign';
 import UserMainTable from "../../molecules/user/userTable/UserMainTable";
 import { Padding } from "../../../utils/styled/styledSpace";
-import Contact from '../../organisms/Contact';
+import Contact from '../../pages/Contact';
 
 interface Props {
 

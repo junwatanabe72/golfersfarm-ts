@@ -22,4 +22,25 @@ export type INFOROUTETYPE = typeof INFOROUTE.CONTACT |
                             typeof INFOROUTE.ABOUT |
                             typeof INFOROUTE.PRIVACY |
                             typeof INFOROUTE.TOS;
+
+// export const ROUTE = {
+//   BASE: {
+//     TOP: "/",
+//     USERS: "/users",
+//     LOGIN: "/auth/login",
+//     SIGNUP: "/auth/signup"
+//   },
+//   LOGIN: {
+//     TOP: "/",
+//     USERS: "/users",
+//     LOGIN: "/auth/login",
+//     SIGNUP: "/auth/signup"
+//   },
+//   INFOROUTE: {
+//     CONTACT: "/contact",
+//     ABOUT: "/about",
+//     PRIVACY: "/privacy",
+//     TOS: "/tos"
+//   }
+// } as const
                   

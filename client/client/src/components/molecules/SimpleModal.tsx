@@ -1,13 +1,13 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
-import DropDownMenu from './DropDownMenu';
-import ComponentFontAwesomeIcon from '../../atoms/FontAwesomeIcon';
-import { ICOLOR } from "../../../utils/constant/color"
-import { HEADERMENUZTYPE } from "../../../utils/constant/text/header/text";
+import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
+import { ICOLOR } from "../../utils/constant/color"
+import { HEADERMENUZTYPE } from "../../utils/constant/text/header/text";
 
 interface Props extends ICOLOR,HEADERMENUZTYPE{
   workModal: ()=> void,
   modalIsOpen: boolean,
+  list: ReactElement,
 };
 
 const Container = styled.div`
@@ -16,19 +16,24 @@ const Container = styled.div`
   cursor: pointer;
 `;
 
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 const PositionAbsolute = styled.div<{ modalIsOpen: boolean }>`
   position: absolute;
   z-index: 2;
   margin-top: 16px;
   top: 40px;
-  right: 16px;
+  right: 50px;
   border-radius: 2px;
   background-color: white;
   box-shadow: rgba(51, 51, 51, 0.15) 1px 1px 4px 1px;
   display: ${(props) => (props.modalIsOpen ? '' : 'none')};
 `;
 
-const HeaderMenu: React.FC<Props> =({ modalIsOpen, workModal,color,head,tail }) => {
+const SimpleModal: React.FC<Props> =({ modalIsOpen,workModal,color,head,tail,list }) => {
   const modalRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -52,11 +57,13 @@ const HeaderMenu: React.FC<Props> =({ modalIsOpen, workModal,color,head,tail }) 
    <Container ref={modalRef} onClick={workModal}>
       <ComponentFontAwesomeIcon head={head} tail={tail} color={color} />
       <PositionAbsolute modalIsOpen={modalIsOpen}>
-        <DropDownMenu modalIsOpen={modalIsOpen} color={color}/>
+        <FlexColumn>
+          {list}
+        </FlexColumn>
       </PositionAbsolute> 
     </Container >
   );
 }
 
-export default HeaderMenu;
+export default SimpleModal;
 

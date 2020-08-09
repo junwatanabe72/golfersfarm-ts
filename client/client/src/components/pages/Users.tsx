@@ -2,9 +2,14 @@ import React,{useState} from 'react';
 import styled from 'styled-components';
 import LinkButton from '../atoms/LinkButton';
 import Image from '../atoms/Image';
+import Layout from "../templates/Layout";
 import { WIDTH,CLEAR } from "../../utils/constant/number"
 import { Padding} from "../../utils/styled/styledSpace";
 import { BASICCOLORS } from '../../utils/constant/color';
+
+interface Props {
+  login: boolean,
+};
 
 const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
 const userName ="jun"
@@ -24,7 +29,7 @@ const Styled = styled.div`
 `;
 
 
-const Users: React.FC = () => {
+const Users: React.FC<Props>= ({login}) => {
   const [modalIsOpen, setModal] = useState<any>(players);
   
   const player = modalIsOpen.map((data: any, i: number) => {
@@ -41,9 +46,11 @@ const Users: React.FC = () => {
     })
   
   return (
+    <Layout login={login}>
       <Container>
       {player}
       </Container>
+    </Layout>
   )
   
 }

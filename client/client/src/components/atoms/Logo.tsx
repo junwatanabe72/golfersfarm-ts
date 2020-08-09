@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FONTSIZETYPE, FONTSIZEWEIGHTTYPE, IFONTSIZE, IFONTSIZEWEIGHT} from "../../utils/constant/number"
+import { IFONTSIZE, IFONTSIZEWEIGHT} from "../../utils/constant/number"
 
 type PartialIFONTSIZE = Partial<IFONTSIZE>
 type PartialIFONTSIZEWEIGHT = Partial<IFONTSIZEWEIGHT>

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TopTitle from "../molecules/top/TopTitle";
 import TopConcept from "../molecules/top/TopConcept";
+import Layout from "../templates/Layout";
 import TopUsage from "../molecules/top/TopUsage";
 import { BASICCOLORS, ICOLOR} from "../../utils/constant/color";
 import { CLEAR } from "../../utils/constant/number";
@@ -9,6 +10,9 @@ import { Padding } from "../../utils/styled/styledSpace";
 
 type PartialICOLOR = Partial<ICOLOR>
 
+interface Props  {
+  login: boolean,
+};
 
 const BackColor = styled.div<PartialICOLOR>`
   background-color: ${(props) => props.color};
@@ -52,11 +56,11 @@ const data = Components.map((d: JSX.Element,i: number) => {
     }
 });
 
-const Top: React.FC = () => {
+const Top: React.FC<Props>= ({login}) => {
   return (
-      <>
+    <Layout login={login}>
         {data}
-      </>
+    </Layout>
   )
 }
 
