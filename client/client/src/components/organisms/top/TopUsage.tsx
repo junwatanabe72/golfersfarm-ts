@@ -6,14 +6,9 @@ import SwingImage from "../../../utils/image/swing.jpg"
 import { BASICCOLORS } from "../../../utils/constant/color";
 import { FONTSIZE, WIDTH, CLEAR } from "../../../utils/constant/number";
 import { TopUsageText } from "../../../utils/constant/text/body/top/text";
-import { StyledSpan } from "../../../utils/styled/styledText";
 import { Padding } from "../../../utils/styled/styledSpace";
 import { media } from '../../../utils/styled/styledRdesign';
 
-// const Container = styled.div`
-//   text-align: center;
-// `;
-// 
 const Layout= styled.div<{ layout: string }>`
   display: flex;
   justify-content: ${(props) => props.layout};
@@ -31,7 +26,6 @@ const FixedColumn = styled.div`
   border-radius: 4px;
 `;
 
-
 const mainText = TopUsageText.UsageItem.map((t: string, i: number) => {    
     return (
       <Padding left={CLEAR.XSMALL} right={CLEAR.XSMALL} bottom={CLEAR.BASE}>
@@ -41,19 +35,15 @@ const mainText = TopUsageText.UsageItem.map((t: string, i: number) => {
         </FixedColumn>
       </Padding>
     )
-
-}
-)
+})
 
 const TopUsage: React.FC = () => {
   return (
       <>
-        <Padding  bottom={CLEAR.MEDIUM}>
-          <StyledSpan color={BASICCOLORS.PRIMARY}>
-          <Logo fontSize={FONTSIZE.XXLARGE}>
-              {TopUsageText.UsageTitle}
-              </Logo>
-            </StyledSpan>
+        <Padding bottom={CLEAR.XSMALL}>
+          <Logo fontSize={FONTSIZE.XXLARGE} color={BASICCOLORS.PRIMARY}>
+            {TopUsageText.UsageTitle}
+          </Logo>
         </Padding>
         <Layout layout={"space-around"}>
             {mainText[0]}

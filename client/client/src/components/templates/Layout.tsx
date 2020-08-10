@@ -12,6 +12,10 @@ interface Props  {
 //style
 const Container = styled.div`
   background-color: ${BASICCOLORS.WHITE};
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 `;
 //仮の数値
 const num = 1;

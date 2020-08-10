@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import TopTitle from "../molecules/top/TopTitle";
-import TopConcept from "../molecules/top/TopConcept";
+import TopTitle from "../organisms/top/TopTitle";
+import TopConcept from "../organisms/top/TopConcept";
 import Layout from "../templates/Layout";
-import TopUsage from "../molecules/top/TopUsage";
+import TopUsage from "../organisms/top/TopUsage";
 import { BASICCOLORS, ICOLOR} from "../../utils/constant/color";
 import { CLEAR } from "../../utils/constant/number";
 import { Padding } from "../../utils/styled/styledSpace";
@@ -30,9 +30,9 @@ BackColor.defaultProps = {
   color: BASICCOLORS.WHITE
 }
 
-const Components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />] 
+const components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />] 
 
-const data = Components.map((d: JSX.Element,i: number) => {
+const contents = components.map((d: JSX.Element,i: number) => {
     if (i % 2 !== 0){
       return (
         <BackColor color={BASICCOLORS.WHITELIGHT}>
@@ -59,7 +59,7 @@ const data = Components.map((d: JSX.Element,i: number) => {
 const Top: React.FC<Props>= ({login}) => {
   return (
     <Layout login={login}>
-        {data}
+      {contents}
     </Layout>
   )
 }
