@@ -4,6 +4,7 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import { BASICCOLORS } from "../../utils/constant/color"
 import { ROUTE,INFOROUTE } from '../../utils/constant/route';
+import { media } from '../../utils/styled/styledRdesign';
 
 interface Props  {
   login: boolean,
@@ -12,11 +13,8 @@ interface Props  {
 //style
 const Container = styled.div`
   background-color: ${BASICCOLORS.WHITE};
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
 `;
+
 //仮の数値
 const num = 1;
 const addRoute = { USER: `/users/${num}`, EDIT: `/users/${num}/edit`, LOGOUT: "auth/logout" }
@@ -29,7 +27,7 @@ const Layout: React.FC<Props> = ({login,children}) => {
   return (
     <Container>
       <Header  color={BASICCOLORS.WHITELIGHT} route={route}/>
-        {children}
+          {children}
       <Footer  color={BASICCOLORS.WHITELIGHT} route={route} infoRoute={INFOROUTE}/>
     </Container>
   );

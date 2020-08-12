@@ -11,16 +11,27 @@ import { ROUTE } from "../../../utils/constant/route"
 import { BASICCOLORS } from "../../../utils/constant/color";
 import { TopTitleText } from "../../../utils/constant/text/body/top/text";
 import { FONTSIZE,WIDTH,CLEAR } from "../../../utils/constant/number";
-import { Padding } from "../../../utils/styled/styledSpace";
+import { Padding,ALIGNITEMS } from "../../../utils/styled/styledSpace";
+
+const StyledFlex = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`;
+
+const StyledFlexColumn = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`;
 
 const rightContent = (
-  <div>
     <FreePick image={TopImage} width={WIDTH.SMALL} />
-  </div>
   );
 
 const leftContent = (
-  <div>
+  <>
     <Padding bottom={CLEAR.XSMALL}>
       <Logo fontSize={FONTSIZE.XXXLARGE} color={BASICCOLORS.PRIMARY}>
         {TopTitleText.TitleTitle}
@@ -34,12 +45,12 @@ const leftContent = (
         </Button>
       </LinkButton>
     </Padding>
-  </div>
+    </>
 )
 
 const TopTitle: React.FC = () => {
   return (
-    <FlexLayout right={rightContent} left={leftContent} width={WIDTH.XXLARGE}/>
+    <FlexLayout right={rightContent} left={leftContent} width={WIDTH.XXLARGE} alignItems={ALIGNITEMS.CENTER}/>
   )
 }
 

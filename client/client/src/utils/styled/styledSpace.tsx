@@ -24,6 +24,15 @@ export const Padding = styled.div<PaddingProps>`
   padding: ${(props) => props.all}vw;
 `
 
+export const ALIGNITEMS={
+  CENTER: "center",
+  START: "start",
+  END: "end"
+} as const;
+
+export type ALIGNITEMSTYPE = typeof ALIGNITEMS.CENTER |
+  typeof ALIGNITEMS.START |
+  typeof ALIGNITEMS.END;
 
 
 // type MarginProps = {

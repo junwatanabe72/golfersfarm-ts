@@ -2,9 +2,9 @@ import React, { useRef, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
 import { ICOLOR } from "../../utils/constant/color"
-import { HEADERMENUZTYPE } from "../../utils/constant/text/header/text";
+import { MENUZTYPE } from "../../utils/constant/text/text";
 
-interface Props extends ICOLOR,HEADERMENUZTYPE{
+interface Props extends ICOLOR,MENUZTYPE{
   workModal: ()=> void,
   modalIsOpen: boolean,
   list: ReactElement,

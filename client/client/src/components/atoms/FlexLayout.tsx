@@ -1,17 +1,22 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { IWIDTH,WIDTH } from "../../utils/constant/number";
+import { IWIDTH,WIDTH, CLEAR } from "../../utils/constant/number";
 import { media } from '../../utils/styled/styledRdesign';
+import { Padding,ALIGNITEMSTYPE } from "../../utils/styled/styledSpace";
+import { BASICCOLORS, ICOLOR, COLORTYPES } from "../../utils/constant/color"
 
-interface Props extends IWIDTH {
+
+type PartialIWIDTH = Partial<IWIDTH>
+interface Props extends PartialIWIDTH {
   right: ReactElement,
   left: ReactElement,
+  alignItems?: ALIGNITEMSTYPE, 
 }
 
-const Container = styled.div`
+const Container = styled.div<{ alignItems?: ALIGNITEMSTYPE} >`
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items:${(props) => props.alignItems};
   ${media.tablet`
         flex-direction: column;
         align-items: center;
@@ -20,11 +25,15 @@ const Container = styled.div`
 
 const FixedWidth = styled.div<{ width: Props["width"]}>`
   width: ${(props) => props.width}vw;
+  ${media.tablet`
+      width: 60vw;
+      padding-bottom: 10px;
+      `}
 `;
 
-const TopTitle: React.FC<Props>= ({right,left,width=WIDTH.MEDIUM}) => {
+const FlexLayout: React.FC<Props> = ({ right, left, width, alignItems}) => {
   return (
-    <Container>
+    <Container alignItems={alignItems}>
       <FixedWidth width={width}>
         {left}
       </FixedWidth>
@@ -33,4 +42,4 @@ const TopTitle: React.FC<Props>= ({right,left,width=WIDTH.MEDIUM}) => {
   )
 }
 
-export default TopTitle;
+export default FlexLayout;

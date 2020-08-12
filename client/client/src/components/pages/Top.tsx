@@ -5,7 +5,7 @@ import TopConcept from "../organisms/top/TopConcept";
 import Layout from "../templates/Layout";
 import TopUsage from "../organisms/top/TopUsage";
 import { BASICCOLORS, ICOLOR} from "../../utils/constant/color";
-import { CLEAR } from "../../utils/constant/number";
+import { CLEAR,WIDTH } from "../../utils/constant/number";
 import { Padding } from "../../utils/styled/styledSpace";
 
 type PartialICOLOR = Partial<ICOLOR>
@@ -19,7 +19,7 @@ const BackColor = styled.div<PartialICOLOR>`
 `;
 
 const Container = styled.div`
-  width: 90%;
+  width: 90vw;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
@@ -36,7 +36,7 @@ const contents = components.map((d: JSX.Element,i: number) => {
     if (i % 2 !== 0){
       return (
         <BackColor color={BASICCOLORS.WHITELIGHT}>
-          <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
+          <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
               <Container>
                 {d}
               </Container>
@@ -46,7 +46,7 @@ const contents = components.map((d: JSX.Element,i: number) => {
     }else{
       return ( 
         <BackColor >
-          <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
+          <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
             <Container>
               {d}
             </Container>

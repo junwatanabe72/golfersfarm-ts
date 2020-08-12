@@ -11,9 +11,14 @@ import { ROUTE } from "../../../utils/constant/route"
 import { BASICCOLORS } from "../../../utils/constant/color";
 import { FONTSIZE, WIDTH, CLEAR } from "../../../utils/constant/number";
 import { TopConceptText } from "../../../utils/constant/text/body/top/text";
-import { Padding } from "../../../utils/styled/styledSpace";
+import { Padding, ALIGNITEMS } from "../../../utils/styled/styledSpace";
 
-
+const StyledFlexColumn = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+`;
 
 const headContent = (
   <>
@@ -26,7 +31,7 @@ const headContent = (
 )
 
 const rightContent = (
-  <div>
+  <StyledFlexColumn>
     <Text text={TopConceptText.ConceptText} />
     <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
       <LinkButton to={ROUTE.LOGIN}>
@@ -35,8 +40,7 @@ const rightContent = (
         </Button>
       </LinkButton>
     </Padding>
-    
-  </div>
+  </StyledFlexColumn>
 );
 
 const leftContent = (
@@ -49,7 +53,7 @@ const TopConcept: React.FC = () => {
   return (
     <div>
       {headContent}
-      <FlexLayout right={rightContent} left={leftContent} width={WIDTH.SMALL} />
+      <FlexLayout right={rightContent} left={leftContent} width={WIDTH.SMALL} alignItems={ALIGNITEMS.CENTER}/>
     </div>
   )
 }

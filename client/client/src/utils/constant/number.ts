@@ -26,7 +26,9 @@
       SMALL: 30,
       SXMALL: 25,
       XSMALL: 20,
-      TINY: 10,
+      XXSMALL: 15,
+      XXXSMALL: 10,
+      TINY: 5,
     } as const
 
     export const CLEAR = {
@@ -101,6 +103,8 @@ typeof WIDTH.XXXLARGE |
   typeof WIDTH.SMALL |
   typeof WIDTH.SXMALL |
   typeof WIDTH.XSMALL |
+  typeof WIDTH.XXSMALL |
+  typeof WIDTH.XXXSMALL |
   typeof WIDTH.TINY;
 
 export type CLEARTYPE = typeof CLEAR.XXXLARGE |

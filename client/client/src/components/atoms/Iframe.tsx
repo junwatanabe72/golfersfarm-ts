@@ -16,11 +16,10 @@ interface Props extends PartialIWIDTH, IHEIGHTWIDTH {
 const Container = styled.iframe<{ width: Props["width"], height: Props["height"]}>`
   width: ${(props) => props.width}vw;
   height: ${(props) => props.height}vw;
-  padding: 1.2vw;
   allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
   ${media.tablet`
-        width: ${WIDTH.MEDIUMLARGE}vw;
-        height: ${WIDTH.LARGE}vw;
+        width: ${WIDTH.MEDIUM}vw;
+        height: ${WIDTH.MEDIUM}vw;
       `}
 `;
 

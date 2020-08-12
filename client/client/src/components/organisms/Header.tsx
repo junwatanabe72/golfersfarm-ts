@@ -7,7 +7,7 @@ import LinkButton from '../atoms/LinkButton';
 import { FONTSIZE,CLEAR } from "../../utils/constant/number";
 import { BASICCOLORS,ICOLOR } from "../../utils/constant/color"
 import { HeaderText } from "../../utils/constant/text/header/text"
-
+import { FONTAWEICON }from "../../utils/constant/text/text"
 interface Props extends ICOLOR{
   route: any,
 };
@@ -39,8 +39,8 @@ const Header: React.FC<Props> = ({ color,route }) => {
     modalIsOpen={modalIsOpen}
     color={fontColor}
     list={linkList}
-    head={HeaderText.HeaderMenuText.head}
-    tail={HeaderText.HeaderMenuText.tail} />;
+    head={FONTAWEICON.bar.head}
+    tail={FONTAWEICON.bar.tail} />;
 
   return (
     <BackgroundColor color={color}>
