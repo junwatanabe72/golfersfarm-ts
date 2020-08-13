@@ -62,8 +62,8 @@ export interface IWIDTH {
   width: WIDTHTYPE
 }
 
-export interface VWWIDTH {
-  vwWidth: CLEARTYPE
+export interface IWIDTHTAB {
+  widthTab: WIDTHTYPE
 }
 
 export interface IFONTSIZEWEIGHT {

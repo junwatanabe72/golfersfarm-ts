@@ -1,3 +1,20 @@
+const facebook = "https://www.facebook.com/junwatanabe72";
+const twitter = "https://twitter.com/junwata72"
+const instagram = "https://www.instagram.com/ruby.on/"
+const youtube = "https://www.youtube.com/channel/UC-hTmh_CtqIUphbwd8Eu6EQ"
+
+const urls = {
+  facebook: facebook,
+  twitter: twitter,
+  instagram: instagram,
+  youtube: youtube,
+}
+
+const userName = "JUNWATANABE72";
+const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
+export const chars = [{ id: 1, name: userName, image: URL, url: urls }, { id: 2, name: userName, image: URL, url: urls }, { id: 3, name: userName, image: URL, url: urls }, { id: 4, name: userName, image: URL, url: urls }]
+
+
 export const sampleUserMainDatas = [
   {
     arg: "ベストスコア",

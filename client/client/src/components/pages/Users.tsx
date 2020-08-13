@@ -1,58 +1,40 @@
-import React,{useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import LinkButton from '../atoms/LinkButton';
-import Image from '../atoms/Image';
 import Layout from "../templates/Layout";
-import { WIDTH,CLEAR } from "../../utils/constant/number"
-import { Padding} from "../../utils/styled/styledSpace";
-import { BASICCOLORS } from '../../utils/constant/color';
+import ThumbNail from "../molecules/ThumbNail";
+import { chars } from "../../utils/constant/text/body/user/text";
+import { media } from '../../utils/styled/styledRdesign';
+import { CLEAR,WIDTH,FONTSIZE } from "../../utils/constant/number";
+import { Padding } from "../../utils/styled/styledSpace";
 
 interface Props {
   login: boolean,
 };
 
-const URL = "https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4"
-const userName ="jun"
-const players = [{ id: 1, name: userName, image: URL }, { id: 2, name: userName, image: URL }, { id: 3, name: userName, image: URL }, { id: 4, name: userName, image: URL }]
-
 const Container = styled.div`
   display: flex;
-  // min-height: 1000px;
+  width: 90vw;
   flex-wrap: wrap;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  max-width: 1200px;
+  margin: 0 auto;
   text-align: center;
-`;
-const Styled = styled.div`
-  text-align: center;
+  ${media.tablet`
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      `}
 `;
 
-
-const Users: React.FC<Props>= ({login}) => {
-  const [modalIsOpen, setModal] = useState<any>(players);
-  
-  const player = modalIsOpen.map((data: any, i: number) => {
-      return (        
-        <Padding all={CLEAR.TINY}>
-          <Image image={data.image} width={WIDTH.TINY} />
-          <Styled>
-            <LinkButton to={`/users/${i}`} color={BASICCOLORS.PRIMARY}>
-              {data.name}
-            </LinkButton>
-          </Styled>
-        </Padding>
-      );
-    })
-  
+const Users: React.FC<Props>= ({login}) => {  
   return (
     <Layout login={login}>
-      <Container>
-      {player}
-      </Container>
+      <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
+        <Container>
+          <ThumbNail datas={chars} clear={CLEAR.TINY} width={WIDTH.XXXSMALL} widthTab={WIDTH.MEDIUM} fontSize={FONTSIZE.MEDIUM}/>
+        </Container>
+      </Padding>
     </Layout>
   )
-  
 }
 export default Users;
   

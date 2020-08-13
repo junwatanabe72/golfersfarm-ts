@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ICOLOR } from "../../utils/constant/color";
-import { IFONTSIZE } from "../../utils/constant/number";
+import { IFONTSIZE,FONTSIZE } from "../../utils/constant/number";
 import { IconName,IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 
 
@@ -21,7 +21,7 @@ const Container = styled.div<{ color: ICOLOR["color"], fontSize: PartialIFONTSIZ
   cursor: pointer;
 `;
 
-const ComponentFontAwesomeIcon: React.FC<Props> = ({ color,fontSize=24,head, tail }) => {
+const ComponentFontAwesomeIcon: React.FC<Props> = ({ color,fontSize=FONTSIZE.LARGE,head, tail }) => {
   const Lookup: IconLookup = { prefix: head, iconName: tail };
   const IconDefinition: IconDefinition = findIconDefinition(Lookup);
   return (

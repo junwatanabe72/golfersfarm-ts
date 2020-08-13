@@ -47,9 +47,11 @@ align-items: center;
 const URL = "https://www.youtube.com/embed/wet97FIk2iY";
 const videos = [URL, URL, URL, URL]
 const ImageURL = "https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg"
+
 const rightContent = (
   <Table datas={sampleGearDatas} width={WIDTH.SMALL} />
 );
+
 const leftContent = (
     <StyledFlexColumn>
       <PaddingExtend>
@@ -62,19 +64,19 @@ const UserSub: React.FC<Props> = ({}) => {
   return (
       <Container>
         <Card color={BASICCOLORS.WHITELIGHT} title={"PROFILE"} clear={CLEAR.XSMALL} textAlign={ALIGNITEMS.START}>
-            <Table datas={sampleProfileDatas} />
+          <Table datas={sampleProfileDatas} />
         </Card>
         <Padding all={CLEAR.TINY} />
         <Card color={BASICCOLORS.WHITELIGHT} title={"GEAR"} clear={CLEAR.TINY} textAlign={ALIGNITEMS.START}>
-            <FlexLayout left={leftContent} right={rightContent} alignItems={ALIGNITEMS.CENTER} />
+          <FlexLayout left={leftContent} right={rightContent} alignItems={ALIGNITEMS.CENTER} />
         </Card>
         <Padding all={CLEAR.TINY} />
         <Card color={BASICCOLORS.WHITELIGHT} title={"SWING"} clear={CLEAR.XSMALL} textAlign={ALIGNITEMS.START}>
-            <VideoPosition maxWidth={WIDTH.MEDIUM} videos={videos} />
+          <VideoPosition maxWidth={WIDTH.MEDIUM} videos={videos} />
         </Card>
         <Padding all={CLEAR.TINY} />
         <Card color={BASICCOLORS.WHITELIGHT} title={"RESULT"} clear={CLEAR.XSMALL} textAlign={ALIGNITEMS.START}>
-            <Table datas={sampleResultDatas} />
+          <Table datas={sampleResultDatas} />
         </Card>
       </Container>
   )
