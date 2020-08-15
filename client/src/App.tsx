@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ConnectedProps } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import axios from 'axios';
@@ -10,8 +10,9 @@ import Contact from './components/pages/Contact';
 import About from './components/pages/About';
 import Privacy from './components/pages/Privacy';
 import Tos from './components/pages/Tos';
-import { addUser } from './actions';
-import connector from './containers/userContainer';
+import { State } from './store';
+import { addUser, deleteUser } from './actions';
+// import connector from './containers/userContainer';
 import { initialUser } from './utils/constant/text/body/user/text';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 // import Modal from './container/ModalContainer';
@@ -23,9 +24,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolid�
 import { far } from '@fortawesome/free-regular-svg-icons'; //fontawesomeのregularアイコンのインポート
 library.add(fas, far, fab);
 
-type PropsFromRedux = ConnectedProps<typeof connector>;
+// type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface Props extends PropsFromRedux {}
+interface Props {}
 const Container = styled.div`
   width: 100%;
 `;
@@ -33,21 +34,17 @@ const num = 1;
 const URL =
   'https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4';
 
-const App: React.FC<Props> = ({ userData }) => {
-  const [currentUser, setUser] = useState<any>(userData);
-
-  // const changedStatus = () => {
-  //   setLogin(!login);
-  // };
+const App: React.FC<Props> = () => {
+  const currentUser = useSelector((state: State) => state.User);
+  const dispatch = useDispatch();
   useEffect(() => {
-    addUser(initialUser);
-    return function cleanup() {
-      addUser(initialUser);
-    };
+    dispatch(addUser(initialUser));
   }, []);
 
   return (
     <Container>
+      <div onClick={() => dispatch(addUser(initialUser))}>add</div>
+      <div onClick={() => dispatch(deleteUser())}>delete</div>
       <Router>
         <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
         <Route exact path={ROUTE.USERS} render={() => <Users currentUser={currentUser} />} />
