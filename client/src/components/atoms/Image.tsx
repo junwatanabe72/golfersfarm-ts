@@ -1,19 +1,19 @@
 import React from 'react';
-import { WIDTH, IWIDTH, WIDTHTYPE} from "../../utils/constant/number"
+import { WIDTH, IWIDTH, WIDTHTYPE } from '../../utils/constant/number';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
 
-type PartialIWIDTH = Partial<IWIDTH>
+type PartialIWIDTH = Partial<IWIDTH>;
 
-interface Props extends PartialIWIDTH{
-  image: string,
-  widthTab?: WIDTHTYPE,
-} 
+interface Props extends PartialIWIDTH {
+  image: string | undefined;
+  widthTab?: WIDTHTYPE;
+}
 
-const Container = styled.img<{ width: Props["width"], widthTab: Props["widthTab"]}>`
+const Container = styled.img<{ width: Props['width']; widthTab: Props['widthTab'] }>`
   width: ${(props) => props.width}vw;
   ${media.tablet`
-        width: ${(props: { widthTab: WIDTHTYPE; }) => props.widthTab}vw
+        width: ${(props: { widthTab: WIDTHTYPE }) => props.widthTab}vw
       `}
 `;
 

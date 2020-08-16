@@ -1,3 +1,36 @@
+import { Action } from 'redux';
+import { initialUser } from '../utils/constant/text/body/user/text';
+
+//ACTIONTYPES
+export const ACTIONTYPES = {
+  ADD_USER: 'ADD_USER',
+  ADD_USERS: 'ADD_USERS',
+  DELETE_USER: 'DELETE_USER',
+} as const;
+
+// userAction
+export type UserData = typeof initialUser;
+export type PartialIUserData = Partial<UserData>;
+
+export interface AddUserAction extends Action {
+  type: typeof ACTIONTYPES.ADD_USER;
+  payload: PartialIUserData;
+}
+export interface DeleteUserAction extends Action {
+  type: typeof ACTIONTYPES.DELETE_USER;
+}
+export type UserActionTypes = AddUserAction | DeleteUserAction;
+
+//usersAction
+export type UsersData = UserData[];
+export interface AddUsersAction extends Action {
+  type: typeof ACTIONTYPES.ADD_USERS;
+  payload: UsersData;
+}
+
+export type stateDatas = { User: UserData } | { Users: UsersData };
+export type UsersActionTypes = AddUsersAction;
+
 //REDUX_SAGA
 // export const ISSUE_REQUESTED = 'ISSUE_REQUESTED';
 // export function getIssue(issue) {
@@ -20,12 +53,18 @@
 // }
 //REDUX_SAGA
 
-import { initialUser } from "../utils/constant/text/body/user/text";
-type a = typeof initialUser;
+//user
+export function addUser(data: PartialIUserData): UserActionTypes {
+  return { type: ACTIONTYPES.ADD_USER, payload: data };
+}
 
-export const ADD_USER = 'ADD_USER';
-export function addUser(data: a) {
-  return { type: ADD_USER, payload:  data  };
+export function deleteUser(): UserActionTypes {
+  return { type: ACTIONTYPES.DELETE_USER };
+}
+
+//users
+export function addUsers(data: UsersData): UsersActionTypes {
+  return { type: ACTIONTYPES.ADD_USERS, payload: data };
 }
 
 // Issue Action Creators & Action Type:
