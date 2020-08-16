@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Top from './components/pages/Top';
 import Users from './components/pages/Users';
@@ -10,6 +10,8 @@ import Contact from './components/pages/Contact';
 import About from './components/pages/About';
 import Privacy from './components/pages/Privacy';
 import Tos from './components/pages/Tos';
+import Login from './components/pages/Login';
+import SignUp from './components/pages/SignUp';
 import { State } from './store';
 import { addUser, deleteUser } from './actions';
 // import connector from './containers/userContainer';
@@ -30,16 +32,24 @@ interface Props {}
 const Container = styled.div`
   width: 100%;
 `;
-const num = 1;
-const URL =
-  'https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4';
 
 const App: React.FC<Props> = () => {
   const currentUser = useSelector((state: State) => state.User);
+  const allUsers = useSelector((state: State) => state.Users);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(addUser(initialUser));
   }, []);
+
+  const route = allUsers.map((user) => {
+    return (
+      <Route
+        exact
+        path={`/users/${user.id}`}
+        render={() => <User currentUser={currentUser} targetUser={user} />}
+      />
+    );
+  });
 
   return (
     <Container>
@@ -47,8 +57,22 @@ const App: React.FC<Props> = () => {
       <div onClick={() => dispatch(deleteUser())}>delete</div>
       <Router>
         <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
+        <Route
+          exact
+          path={ROUTE.LOGIN}
+          render={() =>
+            currentUser ? <Redirect to={ROUTE.TOP} /> : <Login currentUser={currentUser} />
+          }
+        />
+        <Route
+          exact
+          path={ROUTE.SIGNUP}
+          render={() =>
+            currentUser ? <Redirect to={ROUTE.TOP} /> : <SignUp currentUser={currentUser} />
+          }
+        />
         <Route exact path={ROUTE.USERS} render={() => <Users currentUser={currentUser} />} />
-        <Route exact path={`/users/${num}`} render={() => <User currentUser={currentUser} />} />
+        {route}
         <Route
           exact
           path={INFOROUTE.CONTACT}

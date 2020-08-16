@@ -5,9 +5,9 @@ import Footer from '../organisms/Footer';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
 import { media } from '../../utils/styled/styledRdesign';
-
+import { PartialIUserData, UserData } from '../../actions';
 interface Props {
-  currentUser: any;
+  currentUser: PartialIUserData;
 }
 
 //style

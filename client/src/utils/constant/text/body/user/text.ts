@@ -35,7 +35,13 @@ export const initialUser = {
   clubImage: ImageURL,
 };
 
-export const chars = [initialUser, initialUser, initialUser, initialUser];
+export const chars = [
+  initialUser,
+  { ...initialUser, id: 2 },
+  { ...initialUser, id: 3 },
+  { ...initialUser, id: 4 },
+  { ...initialUser, id: 5 },
+];
 
 export const sampleUserMainDatas = [
   {

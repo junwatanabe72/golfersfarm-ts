@@ -4,11 +4,11 @@ import LinkButton from '../../atoms/LinkButton';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import SNS from '../../molecules/SNSIcons';
-import { ICLEAR, IWIDTH, IWIDTHTAB, IFONTSIZE } from '../../../utils/constant/number';
+import { ICLEAR, IWIDTHSIZE, IWIDTHTAB, IFONTSIZE } from '../../../utils/constant/number';
 import { UserData } from '../../../actions';
 import { BASICCOLORS } from '../../../utils/constant/color';
 
-type PartialIWIDTH = Partial<IWIDTH>;
+type PartialIWIDTH = Partial<IWIDTHSIZE>;
 type PartialICLEAR = Partial<ICLEAR>;
 type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
 type PartialIFONTSIZE = Partial<IFONTSIZE>;
