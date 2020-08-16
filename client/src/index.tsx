@@ -5,27 +5,26 @@ import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
-import {GlobalStyle} from "./utils/styled/globalStyle"
-// import reducer from './reducers/Combine';
+import { GlobalStyle } from './utils/styled/globalStyle';
+import { store } from './store';
 // import mySaga from './sagas';
 // import Toastify from './utils/Toastify';
 import * as serviceWorker from './serviceWorker';
 
 // const sagaMiddleware = createSagaMiddleware();
-// const store = createStore(reducer);
+
 // const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 // //saga
 // sagaMiddleware.run(mySaga);
 //saga
 
-
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
       {/* <Toastify /> */}
       <App />
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

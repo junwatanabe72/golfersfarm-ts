@@ -1,16 +1,21 @@
-import { ADD_USER } from '../actions';
-import { initialUser } from '../utils/constant/text/body/user/text';
-type a = typeof initialUser;
-type b = {
-  type: 'ADD_USER';
-  payload: a;
-};
+import { ACTIONTYPES, PartialIUserData, UserActionTypes } from '../actions';
 
-export default function UserReducer(state = initialUser, action: b): a {
-  const data = action.payload || {};
+const initialState: PartialIUserData = {};
+
+export default function UserReducer(
+  state = initialState,
+  action: UserActionTypes
+): PartialIUserData {
+  let newState = state;
   switch (action.type) {
-    case ADD_USER: {
-      return data;
+    case ACTIONTYPES.ADD_USER: {
+      const User = action.payload || {};
+      newState = { ...User };
+      return newState;
+    }
+    case ACTIONTYPES.DELETE_USER: {
+      newState = {};
+      return newState;
     }
     default: {
       return state;

@@ -1,33 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RouteComponentProps } from 'react-router-dom'
-import UserMain from "../organisms/user/UserMain";
-import UserSub from "../organisms/user/UserSub";
-import Layout from "../templates/Layout";
-import { CLEAR } from "../../utils/constant/number";
-import { Padding } from "../../utils/styled/styledSpace";
-import FlexLayout from "../atoms/FlexLayout";
+import { RouteComponentProps } from 'react-router-dom';
+import UserMain from '../organisms/user/UserMain';
+import UserSub from '../organisms/user/UserSub';
+import Layout from '../templates/Layout';
+import { CLEAR } from '../../utils/constant/number';
+import { Padding } from '../../utils/styled/styledSpace';
+import FlexLayout from '../atoms/FlexLayout';
+import { PartialIUserData } from '../../actions';
 
 interface Props {
-  currentUser: any,
+  currentUser: PartialIUserData;
 }
 
 const Container = styled.div`
   width: 90vw;
   max-width: 1200px;
   margin: 0 auto;
-  text-align: center;  
+  text-align: center;
 `;
 
-
-
-const User: React.FC<Props> = ({currentUser}) => {
-  const rightContent = (
-    <UserSub currentUser={currentUser}/>
-  );
-  const leftContent = (
-    <UserMain currentUser={currentUser} />
-  );
+const User: React.FC<Props> = ({ currentUser }) => {
+  const rightContent = <UserSub currentUser={currentUser} />;
+  const leftContent = <UserMain currentUser={currentUser} />;
 
   return (
     <Layout currentUser={currentUser}>
@@ -37,7 +32,7 @@ const User: React.FC<Props> = ({currentUser}) => {
         </Container>
       </Padding>
     </Layout>
-  )
-}
+  );
+};
 
 export default User;
