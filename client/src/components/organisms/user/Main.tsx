@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BASICCOLORS, ICOLOR } from '../../../utils/constant/color';
-import { WIDTH, CLEAR, FONTSIZE } from '../../../utils/constant/number';
+import { SIZE, CLEAR, FONTSIZE } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
 import Table from '../../atoms/Table';
 import Card from '../../molecules/Card';
-import UserCard from './UserCard';
+import UserCard from './Card';
 import { sampleUserMainDatas, chars } from '../../../utils/constant/text/body/user/text';
+import { PartialIUserData, UserData } from '../../../actions';
 
 interface Props {
-  currentUser: any;
+  targetUser: UserData;
 }
 
 type PartialICOLOR = Partial<ICOLOR>;
@@ -29,19 +30,19 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const UserMain: React.FC<Props> = ({ currentUser }) => {
+const UserMain: React.FC<Props> = ({ targetUser }) => {
   return (
     <Container>
       <UserCard
-        data={currentUser}
+        data={targetUser}
         clear={CLEAR.XSMALL}
-        width={WIDTH.XXSMALL}
-        widthTab={WIDTH.LARGE}
+        width={SIZE.XXSMALL}
+        widthTab={SIZE.LARGE}
         fontSize={FONTSIZE.XLARGE}
       />
       <Padding all={CLEAR.XSMALL} />
       <Card color={BASICCOLORS.WHITELIGHT} clear={CLEAR.XSMALL}>
-        <Table datas={sampleUserMainDatas} width={WIDTH.XXSMALL} />
+        <Table datas={sampleUserMainDatas} width={SIZE.XXSMALL} />
       </Card>
     </Container>
   );
