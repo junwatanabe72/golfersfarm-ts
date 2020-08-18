@@ -1,10 +1,10 @@
 import React from 'react';
-import UserCard from '../organisms/user/UserCard';
-import { CLEAR, IFONTSIZE, ICLEAR, IWIDTH, IWIDTHTAB } from '../../utils/constant/number';
+import UserCard from '../organisms/user/Card';
+import { CLEAR, IFONTSIZE, ICLEAR, IWIDTHSIZE, IWIDTHTAB } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { UsersData, UserData } from '../../actions';
 
-type PartialIWIDTH = Partial<IWIDTH>;
+type PartialIWIDTH = Partial<IWIDTHSIZE>;
 type PartialICLEAR = Partial<ICLEAR>;
 type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
 type PartialIFONTSIZE = Partial<IFONTSIZE>;

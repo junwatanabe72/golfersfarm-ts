@@ -1,29 +1,28 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { IWIDTH,WIDTH, CLEAR } from "../../utils/constant/number";
+import { IWIDTHSIZE, SIZE, CLEAR } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { Padding,ALIGNITEMSTYPE } from "../../utils/styled/styledSpace";
-import { BASICCOLORS, ICOLOR, COLORTYPES } from "../../utils/constant/color"
+import { Padding, ALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
+import { BASICCOLORS, ICOLOR, COLORTYPES } from '../../utils/constant/color';
 
-
-type PartialIWIDTH = Partial<IWIDTH>
+type PartialIWIDTH = Partial<IWIDTHSIZE>;
 interface Props extends PartialIWIDTH {
-  right: ReactElement,
-  left: ReactElement,
-  alignItems?: ALIGNITEMSTYPE, 
+  right: ReactElement;
+  left: ReactElement;
+  alignItems?: ALIGNITEMSTYPE;
 }
 
-const Container = styled.div<{ alignItems?: ALIGNITEMSTYPE} >`
+const Container = styled.div<{ alignItems?: ALIGNITEMSTYPE }>`
   display: flex;
   justify-content: space-around;
-  align-items:${(props) => props.alignItems};
+  align-items: ${(props) => props.alignItems};
   ${media.tablet`
         flex-direction: column;
         align-items: center;
       `}
 `;
 
-const FixedWidth = styled.div<{ width: Props["width"]}>`
+const FixedWidth = styled.div<{ width: Props['width'] }>`
   width: ${(props) => props.width}vw;
   ${media.tablet`
       width: 60vw;
@@ -31,15 +30,13 @@ const FixedWidth = styled.div<{ width: Props["width"]}>`
       `}
 `;
 
-const FlexLayout: React.FC<Props> = ({ right, left, width, alignItems}) => {
+const FlexLayout: React.FC<Props> = ({ right, left, width, alignItems }) => {
   return (
     <Container alignItems={alignItems}>
-      <FixedWidth width={width}>
-        {left}
-      </FixedWidth>
-        {right}
+      <FixedWidth width={width}>{left}</FixedWidth>
+      {right}
     </Container>
-  )
-}
+  );
+};
 
 export default FlexLayout;

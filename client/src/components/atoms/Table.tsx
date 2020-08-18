@@ -1,44 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
-import { WIDTH, IWIDTH } from "../../utils/constant/number";
+import { SIZE, IWIDTHSIZE } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
 
-type PartialIWIDTH = Partial<IWIDTH>
+type PartialIWIDTH = Partial<IWIDTHSIZE>;
 interface DataType {
-  datas: {
-    arg: string,
-    value: string,
-  }[] |
-  {
-    name: string,
-    type: string,
-    shaft: string,
-    flex: string,
-    maker: string,
-  }[] |
-  {
-    year: string,
-    com: string,
-    rank: string,
-  }[],
+  datas:
+    | {
+        arg: string;
+        value: string;
+      }[]
+    | {
+        name: string;
+        type: string;
+        shaft: string;
+        flex: string;
+        maker: string;
+      }[]
+    | {
+        year: string;
+        com: string;
+        rank: string;
+      }[];
 }
 
-interface Props extends DataType, PartialIWIDTH  {
-}
+interface Props extends DataType, PartialIWIDTH {}
 
-const StyledTable = styled.table<{ width: Props["width"]}>`
+const StyledTable = styled.table<{ width: Props['width'] }>`
   width: ${(props) => props.width}vw;
   border: solid 1px #ccc;
   margin: 0vw auto;
   border-radius: 5px;
-   ${media.tablet`
+  ${media.tablet`
       width: 60vw;  
-      `} 
+      `}
 `;
 
 StyledTable.defaultProps = {
-  width: WIDTH.MEDIUM,
-}
+  width: SIZE.MEDIUM,
+};
 
 const StyledTrd = styled.tr`
   border-top: solid 1px #ccc;
@@ -56,35 +56,32 @@ const StyledTd = styled.td`
   border-right: solid 1px white;
 `;
 
-
 const Table: React.FC<Props> = ({ datas, width }) => {
-  const Data = Object.values(datas)
+  const Data = Object.values(datas);
   return (
-      <StyledTable width={width}>
-        <tbody>
-        { Data[0]["arg"] &&
-          Object.values(datas).map(data => {
+    <StyledTable width={width}>
+      <tbody>
+        {Data[0]['arg'] &&
+          Object.values(datas).map((data) => {
             return (
               <StyledTrd>
                 <StyledTd>{data.arg}</StyledTd>
                 <StyledTd>{data.value}</StyledTd>
               </StyledTrd>
-            )
-          })
-        }
-        {Data[0]["year"] &&
-          Object.values(datas).map(data => {
+            );
+          })}
+        {Data[0]['year'] &&
+          Object.values(datas).map((data) => {
             return (
               <StyledTrd>
                 <StyledTd>{data.year}</StyledTd>
                 <StyledTd>{data.com}</StyledTd>
                 <StyledTd>{data.rank}</StyledTd>
               </StyledTrd>
-            )
-          })
-        }
-        {Data[0]["type"] &&
-          Object.values(datas).map(data => {
+            );
+          })}
+        {Data[0]['type'] &&
+          Object.values(datas).map((data) => {
             return (
               <StyledTrd>
                 <StyledTd>{data.type}</StyledTd>
@@ -93,12 +90,11 @@ const Table: React.FC<Props> = ({ datas, width }) => {
                 <StyledTd>{data.shaft}</StyledTd>
                 <StyledTd>{data.flex}</StyledTd>
               </StyledTrd>
-            )
-          })
-        }
-        </tbody>
-      </StyledTable>
+            );
+          })}
+      </tbody>
+    </StyledTable>
   );
-}
+};
 
 export default Table;

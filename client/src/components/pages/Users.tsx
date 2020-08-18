@@ -7,9 +7,9 @@ import Layout from '../templates/Layout';
 import ThumbNail from '../molecules/ThumbNail';
 import { chars } from '../../utils/constant/text/body/user/text';
 import { media } from '../../utils/styled/styledRdesign';
-import { CLEAR, WIDTH, FONTSIZE } from '../../utils/constant/number';
+import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData } from '../../actions';
+import { PartialIUserData, UserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;
@@ -34,6 +34,7 @@ const Users: React.FC<Props> = ({ currentUser }) => {
   useEffect(() => {
     dispatch(addUsers(chars));
   }, []);
+
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
@@ -41,8 +42,8 @@ const Users: React.FC<Props> = ({ currentUser }) => {
           <ThumbNail
             datas={indexUsers}
             clear={CLEAR.TINY}
-            width={WIDTH.XXXSMALL}
-            widthTab={WIDTH.MEDIUM}
+            width={SIZE.XXXSMALL}
+            widthTab={SIZE.MEDIUM}
             fontSize={FONTSIZE.MEDIUM}
           />
         </Container>
