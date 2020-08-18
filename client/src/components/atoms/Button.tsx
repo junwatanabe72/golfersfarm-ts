@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS,ICOLOR } from "../../utils/constant/color"
+import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
+import { Padding } from '../../utils/styled/styledSpace';
+import { FONTSIZE, CLEARTYPE, CLEAR, IFONTSIZE } from '../../utils/constant/number';
+type PartialIFONTSIZE = Partial<IFONTSIZE>;
+type PartialICOLOR = Partial<ICOLOR>;
 
-type PartialICOLOR = Partial<ICOLOR>
-
-interface Props extends PartialICOLOR {
-  onClick?: () => void,
-} 
+interface Props extends PartialICOLOR, PartialIFONTSIZE {
+  onClick?: () => void;
+  pWidth?: CLEARTYPE;
+  pHeight?: CLEARTYPE;
+}
 const DefaultButton = styled.a<Props>`
+  font-size: ${(props) => props.fontSize}px;
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  padding: 4px 32px;
-  margin: 4px;
   border-radius: 6px;
   ${(props) => getButtonBcolor(props.color)};
   &:active {
@@ -20,7 +23,7 @@ const DefaultButton = styled.a<Props>`
   }
 `;
 
-const getButtonBcolor = (props: Props["color"]) => {
+const getButtonBcolor = (props: Props['color']) => {
   if (props === BASICCOLORS.PRIMARY) {
     return `
       color: ${BASICCOLORS.WHITE};
@@ -50,15 +53,24 @@ const getButtonBcolor = (props: Props["color"]) => {
         background-color: ${BASICCOLORS.PRIMARY};
       }
   `;
-}
+  }
 };
 
-const Button: React.FC<Props>=({color,onClick,children}) => {
+const Button: React.FC<Props> = ({
+  pHeight = CLEAR.TINY,
+  pWidth = CLEAR.MEDIUM,
+  color,
+  onClick,
+  children,
+  fontSize = FONTSIZE.LARGE,
+}) => {
   return (
-    <DefaultButton color={color} onClick={onClick}>
-      {children}
+    <DefaultButton color={color} onClick={onClick} fontSize={fontSize}>
+      <Padding top={pHeight} bottom={pHeight} right={pWidth} left={pWidth}>
+        {children}
+      </Padding>
     </DefaultButton>
   );
-}
+};
 
 export default Button;

@@ -11,7 +11,7 @@ import Layout from '../templates/Layout';
 import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { BASICCOLORS, COLORTYPES } from '../../utils/constant/color';
 import { FONTSIZE } from '../../utils/constant/number';
-import { PartialIUserData } from '../../actions';
+import { PartialIUserData, UserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;
