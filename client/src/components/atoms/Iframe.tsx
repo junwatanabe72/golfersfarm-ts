@@ -1,29 +1,27 @@
 import React from 'react';
-import { WIDTH, IWIDTH, WIDTHTYPE } from "../../utils/constant/number"
+import { SIZE, IWIDTHSIZE, IHEIGHTSIZE } from '../../utils/constant/number';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
 
-type PartialIWIDTH = Partial<IWIDTH>
+type PartialIWIDTH = Partial<IWIDTHSIZE>;
+type PartialIHEIGHTSIZE = Partial<IHEIGHTSIZE>;
+interface IHEIGHTWIDTH {}
 
-interface IHEIGHTWIDTH {
-  height?: WIDTHTYPE
+interface Props extends PartialIWIDTH, PartialIHEIGHTSIZE {
+  source: string;
 }
 
-interface Props extends PartialIWIDTH, IHEIGHTWIDTH {
-  source: string,
-}
-
-const Container = styled.iframe<{ width: Props["width"], height: Props["height"]}>`
+const Container = styled.iframe<{ width: Props['width']; height: Props['height'] }>`
   width: ${(props) => props.width}vw;
   height: ${(props) => props.height}vw;
-  allow: "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture";
+  allow: 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
   ${media.tablet`
-        width: ${WIDTH.MEDIUM}vw;
-        height: ${WIDTH.MEDIUM}vw;
+        width: ${SIZE.MEDIUM}vw;
+        height: ${SIZE.MEDIUM}vw;
       `}
 `;
 
-const Iframe: React.FC<Props> = ({ source, width = WIDTH.XSMALL, height = WIDTH.XSMALL}) => {
+const Iframe: React.FC<Props> = ({ source, width = SIZE.XSMALL, height = SIZE.XSMALL }) => {
   return <Container width={width} src={source} height={height} frameBorder="0" />;
 };
 
