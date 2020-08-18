@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Route, BrowserRouter as Router, Redirect } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Redirect, RouteComponentProps } from 'react-router-dom';
 import axios from 'axios';
 import Top from './components/pages/Top';
 import Users from './components/pages/Users';
@@ -11,6 +11,7 @@ import About from './components/pages/About';
 import Privacy from './components/pages/Privacy';
 import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
+import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
 import { State } from './store';
 import { addUser, deleteUser } from './actions';
@@ -33,14 +34,11 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const App: React.FC<Props> = () => {
-  const currentUser = useSelector((state: State) => state.User);
+const App: React.FC<Props> = ({}) => {
+  const currentUser = useSelector((state: State) => state.CurrentUser);
   const allUsers = useSelector((state: State) => state.Users);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(addUser(initialUser));
-  }, []);
-
+  const existedCurrentUser = 0 !== Object.keys(currentUser).length ? true : false;
   const route = allUsers.map((user) => {
     return (
       <Route
@@ -53,26 +51,29 @@ const App: React.FC<Props> = () => {
 
   return (
     <Container>
-      <div onClick={() => dispatch(addUser(initialUser))}>add</div>
-      <div onClick={() => dispatch(deleteUser())}>delete</div>
       <Router>
+        <Route exact path={ROUTE.USERS} render={() => <Users currentUser={currentUser} />} />
+        {route}
         <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
         <Route
           exact
           path={ROUTE.LOGIN}
-          render={() =>
-            currentUser ? <Redirect to={ROUTE.TOP} /> : <Login currentUser={currentUser} />
+          render={(props) =>
+            existedCurrentUser ? (
+              <Redirect to={ROUTE.TOP} />
+            ) : (
+              <Login {...props} currentUser={currentUser} />
+            )
           }
         />
+        <Route exact path={`/logout`} render={() => <LogOut currentUser={currentUser} />} />
         <Route
           exact
           path={ROUTE.SIGNUP}
           render={() =>
-            currentUser ? <Redirect to={ROUTE.TOP} /> : <SignUp currentUser={currentUser} />
+            existedCurrentUser ? <Redirect to={ROUTE.TOP} /> : <SignUp currentUser={currentUser} />
           }
         />
-        <Route exact path={ROUTE.USERS} render={() => <Users currentUser={currentUser} />} />
-        {route}
         <Route
           exact
           path={INFOROUTE.CONTACT}
