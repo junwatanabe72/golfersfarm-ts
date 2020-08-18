@@ -7,11 +7,12 @@ import TopUsage from '../organisms/top/Usage';
 import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
 import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData } from '../../actions';
+import { PartialIUserData, UserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;
 }
+
 type PartialICOLOR = Partial<ICOLOR>;
 
 const BackColor = styled.div<PartialICOLOR>`

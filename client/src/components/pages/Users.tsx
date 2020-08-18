@@ -9,7 +9,7 @@ import { chars } from '../../utils/constant/text/body/user/text';
 import { media } from '../../utils/styled/styledRdesign';
 import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData } from '../../actions';
+import { PartialIUserData, UserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;
@@ -34,6 +34,7 @@ const Users: React.FC<Props> = ({ currentUser }) => {
   useEffect(() => {
     dispatch(addUsers(chars));
   }, []);
+
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>

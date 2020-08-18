@@ -22,9 +22,11 @@ const Container = styled.div`
 `;
 
 const User: React.FC<Props> = ({ currentUser, targetUser }) => {
+  // useEffect(() => {
+  //   dispatch(addUser(initialUser));
+  // }, []);
   const rightContent = <UserSub targetUser={targetUser} />;
   const leftContent = <UserMain targetUser={targetUser} />;
-
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
