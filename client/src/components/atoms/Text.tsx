@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CLEAR, IFONTSIZE } from '../../utils/constant/number';
+import { CLEAR, IFONTSIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 type PartialIFONTSIZE = Partial<IFONTSIZE>;
 
@@ -13,7 +13,7 @@ const Container = styled.div<{ fontSize: Props['fontSize'] }>`
   text-align: center;
 `;
 
-const Text: React.FC<Props> = ({ text, fontSize }) => {
+const Text: React.FC<Props> = ({ text, fontSize = FONTSIZE.LARGE }) => {
   return (
     <Container fontSize={fontSize}>
       {text.map((t: string) => {

@@ -23,9 +23,7 @@ const StyledFlexColumn = styled.div`
 const headContent = (
   <>
     <Padding bottom={CLEAR.SMALL}>
-      <Logo fontSize={FONTSIZE.XXLARGE} color={BASICCOLORS.PRIMARY}>
-        {TopConceptText.ConceptTitle}
-      </Logo>
+      <Logo fontSize={FONTSIZE.XXLARGE}>{TopConceptText.ConceptTitle}</Logo>
     </Padding>
   </>
 );
@@ -43,7 +41,7 @@ const rightContent = (
 
 const leftContent = (
   <div>
-    <FreePick image={LastImage} width={SIZE.SMALL} />
+    <FreePick image={LastImage} />
   </div>
 );
 

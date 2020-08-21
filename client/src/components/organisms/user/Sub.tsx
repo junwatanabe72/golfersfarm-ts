@@ -44,7 +44,8 @@ const Container = styled.div`
       `}
 `;
 const PaddingExtend = styled(Padding)`
-  padding: ${CLEAR.TINY}vw;
+  padding-top: ${CLEAR.TINY}vw;
+  padding-right: ${CLEAR.TINY}vw;
 `;
 const StyledFlexColumn = styled.div`
   display: flex;
@@ -66,46 +67,26 @@ const UserSub: React.FC<Props> = ({ targetUser }) => {
   const leftContent = (
     <StyledFlexColumn>
       <PaddingExtend>
-        <Image image={targetUser.clubImage} width={SIZE.XSMALL} />
+        <Image image={targetUser.clubImage} width={SIZE.XSMALLMD} />
       </PaddingExtend>
     </StyledFlexColumn>
   );
 
   return (
     <Container>
-      <Card
-        color={BASICCOLORS.WHITELIGHT}
-        title={'PROFILE'}
-        clear={CLEAR.XSMALL}
-        textAlign={ALIGNITEMS.START}
-      >
+      <Card color={BASICCOLORS.WHITELIGHT} title={'PROFILE'}>
         <Table datas={tableData} keys={profileSubTableKeys} />
       </Card>
       <Padding all={CLEAR.TINY} />
-      <Card
-        color={BASICCOLORS.WHITELIGHT}
-        title={'GEAR'}
-        clear={CLEAR.TINY}
-        textAlign={ALIGNITEMS.START}
-      >
+      <Card color={BASICCOLORS.WHITELIGHT} title={'GEAR'} textAlign={ALIGNITEMS.START}>
         <FlexLayout left={leftContent} right={rightContent} alignItems={ALIGNITEMS.CENTER} />
       </Card>
       <Padding all={CLEAR.TINY} />
-      <Card
-        color={BASICCOLORS.WHITELIGHT}
-        title={'SWING'}
-        clear={CLEAR.XSMALL}
-        textAlign={ALIGNITEMS.START}
-      >
-        <VideoPosition maxWidth={SIZE.MEDIUM} videos={videos} />
+      <Card color={BASICCOLORS.WHITELIGHT} title={'SWING'}>
+        <VideoPosition videos={videos} />
       </Card>
       <Padding all={CLEAR.TINY} />
-      <Card
-        color={BASICCOLORS.WHITELIGHT}
-        title={'RESULT'}
-        clear={CLEAR.XSMALL}
-        textAlign={ALIGNITEMS.START}
-      >
+      <Card color={BASICCOLORS.WHITELIGHT} title={'RESULT'}>
         {/* <Table datas={sampleResultDatas} /> */}
       </Card>
     </Container>

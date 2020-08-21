@@ -26,6 +26,7 @@ export const SIZE = {
   SMALL: 30,
   SXMALL: 25,
   XSMALL: 20,
+  XSMALLMD: 19,
   XXSMALL: 15,
   XXXSMALL: 10,
   TINY: 5,
@@ -43,6 +44,7 @@ export const CLEAR = {
   SMALL: 3,
   XSMALL: 2,
   TINY: 1,
+  ZERO: 0,
 } as const;
 
 export const FONTWEIGHT = {
@@ -76,6 +78,8 @@ export interface ICLEAR {
   clear: CLEARTYPE;
 }
 // types
+export type PartialICLEAR = Partial<ICLEAR>;
+
 export type FONTSIZEWEIGHTTYPE = typeof FONTWEIGHT.NORMAL | typeof FONTWEIGHT.BOLD;
 
 export type FONTSIZETYPE =
@@ -106,6 +110,7 @@ export type SIZETYPE =
   | typeof SIZE.SMALL
   | typeof SIZE.SXMALL
   | typeof SIZE.XSMALL
+  | typeof SIZE.XSMALLMD
   | typeof SIZE.XXSMALL
   | typeof SIZE.XXXSMALL
   | typeof SIZE.TINY;
@@ -122,4 +127,5 @@ export type CLEARTYPE =
   | typeof CLEAR.BASE
   | typeof CLEAR.SMALL
   | typeof CLEAR.XSMALL
-  | typeof CLEAR.TINY;
+  | typeof CLEAR.TINY
+  | typeof CLEAR.ZERO;

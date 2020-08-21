@@ -35,15 +35,9 @@ const UserMain: React.FC<Props> = ({ targetUser }) => {
   const tableData = { averageDistance, bestScore, homeCource };
   return (
     <Container>
-      <UserCard
-        data={targetUser}
-        clear={CLEAR.XSMALL}
-        width={SIZE.XXSMALL}
-        widthTab={SIZE.LARGE}
-        fontSize={FONTSIZE.XLARGE}
-      />
+      <UserCard data={targetUser} width={SIZE.XXSMALL} />
       <Padding all={CLEAR.XSMALL} />
-      <Card color={BASICCOLORS.WHITELIGHT} clear={CLEAR.XSMALL}>
+      <Card color={BASICCOLORS.WHITELIGHT}>
         <Table datas={tableData} keys={profileTableKeys} width={SIZE.XXSMALL} />
       </Card>
     </Container>

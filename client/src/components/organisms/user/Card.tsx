@@ -28,13 +28,13 @@ const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize }) =
   const urls = { facebook, twitter, instagram, youtube };
 
   return (
-    <Card color={BASICCOLORS.WHITELIGHT} clear={clear}>
+    <Card clear={clear}>
       <Container>
         <Image image={data.profileImage} width={width} widthTab={widthTab} />
-        <LinkButton to={`/users/${data.id}`} fontSize={fontSize} color={BASICCOLORS.PRIMARY}>
+        <LinkButton to={`/users/${data.id}`} fontSize={fontSize}>
           {data.name}
         </LinkButton>
-        <SNS urls={urls} color={BASICCOLORS.SECONDARY} fontSize={fontSize} />
+        <SNS urls={urls} fontSize={fontSize} />
       </Container>
     </Card>
   );

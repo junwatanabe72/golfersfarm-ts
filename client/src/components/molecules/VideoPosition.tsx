@@ -24,7 +24,7 @@ const Container = styled.div<{ maxWidth: Props['maxWidth'] }>`
       `}
 `;
 
-const VideoPosition: React.FC<Props> = ({ maxWidth, videos }) => {
+const VideoPosition: React.FC<Props> = ({ maxWidth = SIZE.MEDIUM, videos }) => {
   const [width, height] = [3, 4].includes(videos.length)
     ? [SIZE.SXMALL, SIZE.XSMALL]
     : [SIZE.LARGE, SIZE.SMALL];

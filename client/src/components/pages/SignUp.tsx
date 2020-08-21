@@ -40,15 +40,13 @@ const SignUp: React.FC<Props> = ({ currentUser }) => {
     <Layout currentUser={currentUser}>
       <Container>
         <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
-          <Sign color={BASICCOLORS.WHITELIGHT} title={SignUpText.SignUpTitle} clear={CLEAR.XSMALL}>
+          <Sign title={SignUpText.SignUpTitle}>
             {SignUpInputItems}
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
               <div>{SignUpText.SignUpCheck}</div>
             </Padding>
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <Button color={BASICCOLORS.PRIMARY} pWidth={CLEAR.LARGE}>
-                {SignUpText.SignUpTitle}
-              </Button>
+              <Button pWidth={CLEAR.LARGE}>{SignUpText.SignUpTitle}</Button>
             </Padding>
             <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
               <LinkButton to={ROUTE.LOGIN}>

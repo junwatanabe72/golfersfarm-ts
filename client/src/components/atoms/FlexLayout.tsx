@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { IWIDTHSIZE, SIZE, CLEAR } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { Padding, ALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
+import { Padding, ALIGNITEMS, ALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
 import { BASICCOLORS, ICOLOR, COLORTYPES } from '../../utils/constant/color';
 
 type PartialIWIDTH = Partial<IWIDTHSIZE>;

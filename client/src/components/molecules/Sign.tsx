@@ -1,17 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../atoms/Logo';
-import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
-import { CLEAR, ICLEAR, FONTSIZE } from '../../utils/constant/number';
+import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
+import { CLEAR, PartialICLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { ALIGNITEMSTYPE, ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 
-type PartialICLEAR = Partial<ICLEAR>;
-type PartialICOLOR = Partial<ICOLOR>;
 interface Props extends PartialICOLOR, PartialICLEAR {
   title?: string;
-  textAlign?: ALIGNITEMSTYPE;
 }
 
 const Container = styled.div`
@@ -32,8 +29,7 @@ const PaddingExtend = styled(Padding)<{ clear: Props['clear'] }>`
 `;
 
 const Sign: React.FC<Props> = ({
-  textAlign = ALIGNITEMS.CENTER,
-  color,
+  color = BASICCOLORS.WHITELIGHT,
   title,
   children,
   clear = CLEAR.SMALL,
@@ -42,9 +38,7 @@ const Sign: React.FC<Props> = ({
     <Color color={color}>
       <PaddingExtend clear={clear}>
         <Container>
-          <Logo color={BASICCOLORS.PRIMARY} textAlign={textAlign} fontSize={FONTSIZE.XXXLARGE}>
-            {title}
-          </Logo>
+          <Logo fontSize={FONTSIZE.XXXLARGE}>{title}</Logo>
           {children}
         </Container>
       </PaddingExtend>

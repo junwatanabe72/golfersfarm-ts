@@ -56,11 +56,9 @@ const Login: React.FC<Props> = ({ currentUser, history }) => {
       return;
     }
 
-    const suceess = await dispatch(addUser(initialUser));
+    dispatch(addUser(initialUser));
 
-    if (suceess) {
-      history.push(`/users/${currentUser.id}`);
-    }
+    history.push(`/users/`);
 
     setMail('');
     setPass('');
@@ -85,10 +83,10 @@ const Login: React.FC<Props> = ({ currentUser, history }) => {
     <Layout currentUser={currentUser}>
       <Container>
         <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
-          <Sign color={BASICCOLORS.WHITELIGHT} title={LoginText.LoginTitle}>
+          <Sign title={LoginText.LoginTitle}>
             {LoginInputItems}
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <Button color={BASICCOLORS.PRIMARY} pWidth={CLEAR.LARGE} onClick={onSubmit}>
+              <Button pWidth={CLEAR.LARGE} onClick={onSubmit}>
                 {LoginText.LoginTitle}
               </Button>
             </Padding>

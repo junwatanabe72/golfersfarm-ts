@@ -34,13 +34,7 @@ const Users: React.FC<Props> = ({ currentUser, allUsers }) => {
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
         <Container>
-          <ThumbNail
-            datas={allUsers}
-            clear={CLEAR.TINY}
-            width={SIZE.XXXSMALL}
-            widthTab={SIZE.MEDIUM}
-            fontSize={FONTSIZE.MEDIUM}
-          />
+          <ThumbNail datas={allUsers} clear={CLEAR.TINY} width={SIZE.XXXSMALL} />
         </Container>
       </Padding>
     </Layout>

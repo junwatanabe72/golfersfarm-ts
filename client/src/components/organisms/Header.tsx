@@ -5,15 +5,15 @@ import LinkList from '../molecules/LinkList';
 import Toggle from '../molecules/Toggle';
 import LinkButton from '../atoms/LinkButton';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
-import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
+import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
 import { HeaderText } from '../../utils/constant/text/header/text';
 import { FONTAWEICON } from '../../utils/constant/text/text';
-interface Props extends ICOLOR {
+interface Props extends PartialICOLOR {
   route: any;
 }
 
 //style
-const BackgroundColor = styled.div<ICOLOR>`
+const BackgroundColor = styled.div<PartialICOLOR>`
   background-color: ${(props) => props.color};
 `;
 
@@ -27,13 +27,13 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Header: React.FC<Props> = ({ color, route }) => {
+const Header: React.FC<Props> = ({ color = BASICCOLORS.WHITELIGHT, route }) => {
   const [modalIsOpen, setModal] = useState<boolean>(false);
   const workModal = () => {
     setModal(!modalIsOpen);
   };
   const fontColor = color === BASICCOLORS.WHITE ? BASICCOLORS.PRIMARY : BASICCOLORS.SECONDARY;
-  const linkList = <LinkList color={fontColor} route={route} clear={CLEAR.TINY} />;
+  const linkList = <LinkList color={fontColor} route={route} />;
   const modalInLinks = (
     <SimpleModal
       workModal={workModal}

@@ -41,13 +41,11 @@ const LogOut: React.FC<Props> = ({ currentUser }) => {
     <Layout currentUser={currentUser}>
       <Container>
         <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
-          <Sign color={BASICCOLORS.WHITELIGHT}>
+          <Sign>
             <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
               <Logo color={BASICCOLORS.BASICLIGHT}>{LogoutText.LogoutMessage}</Logo>
               <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}></Padding>
-              <LinkButton to={ROUTE.LOGIN} color={BASICCOLORS.PRIMARY}>
-                {LogoutText.LogoutLoginUser}
-              </LinkButton>
+              <LinkButton to={ROUTE.LOGIN}>{LogoutText.LogoutLoginUser}</LinkButton>
             </Padding>
           </Sign>
         </Padding>

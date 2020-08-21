@@ -59,7 +59,7 @@ const getButtonBcolor = (props: Props['color']) => {
 const Button: React.FC<Props> = ({
   pHeight = CLEAR.TINY,
   pWidth = CLEAR.MEDIUM,
-  color,
+  color = BASICCOLORS.PRIMARY,
   onClick,
   children,
   fontSize = FONTSIZE.LARGE,

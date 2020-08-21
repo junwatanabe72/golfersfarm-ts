@@ -50,11 +50,11 @@ const Tablegear: React.FC<Props> = ({ datas, width, keys }) => {
     return <StyledTd>{value}</StyledTd>;
   });
 
-  const body = Object.keys(datas).map(function (data: any) {
-    return datas[data].items.map(function (value: any) {
-      return <StyledTd>{value}</StyledTd>;
-    });
-  });
+  // const body = Object.keys(datas).map(function (data: any) {
+  //   return datas[data].items.map(function (value: any) {
+  //     return <StyledTd>{value}</StyledTd>;
+  //   });
+  // });
 
   const num = [head];
   // // console.log(num);

@@ -27,9 +27,9 @@ const Layout: React.FC<Props> = ({ currentUser, children }) => {
 
   return (
     <Container>
-      <Header color={BASICCOLORS.WHITELIGHT} route={route} />
+      <Header route={route} />
       {children}
-      <Footer color={BASICCOLORS.WHITELIGHT} route={route} infoRoute={INFOROUTE} />
+      <Footer route={route} infoRoute={INFOROUTE} />
     </Container>
   );
 };

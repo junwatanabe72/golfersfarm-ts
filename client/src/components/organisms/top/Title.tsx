@@ -26,14 +26,12 @@ const StyledFlexColumn = styled.div`
   flex-direction: column;
 `;
 
-const rightContent = <FreePick image={TopImage} width={SIZE.SMALL} />;
+const rightContent = <FreePick image={TopImage} />;
 
 const leftContent = (
   <>
     <Padding bottom={CLEAR.XSMALL}>
-      <Logo fontSize={FONTSIZE.XXXLARGE} color={BASICCOLORS.PRIMARY}>
-        {TopTitleText.TitleTitle}
-      </Logo>
+      <Logo fontSize={FONTSIZE.XXXLARGE}>{TopTitleText.TitleTitle}</Logo>
     </Padding>
     <Text text={TopTitleText.TitleText} />
     <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>

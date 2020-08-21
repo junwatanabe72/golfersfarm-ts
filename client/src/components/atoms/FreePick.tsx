@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Image from './Image';
-import { IWIDTHSIZE } from '../../utils/constant/number';
+import { IWIDTHSIZE, SIZE } from '../../utils/constant/number';
 
-interface Props extends IWIDTHSIZE {
+type PartialIWIDTH = Partial<IWIDTHSIZE>;
+interface Props extends PartialIWIDTH {
   image: string;
 }
 
@@ -16,7 +17,7 @@ const StyledA = styled.a`
   text-align: center;
 `;
 
-const FreePick: React.FC<Props> = ({ image, width }) => {
+const FreePick: React.FC<Props> = ({ image, width = SIZE.SMALL }) => {
   return (
     <FixedColumn>
       <Image image={image} width={width} />
