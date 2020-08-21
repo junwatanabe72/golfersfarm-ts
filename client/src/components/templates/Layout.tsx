@@ -4,8 +4,7 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
-import { media } from '../../utils/styled/styledRdesign';
-import { UserData, PartialIUserData } from '../../actions';
+import { PartialIUserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;

@@ -4,14 +4,15 @@ import LinkButton from '../../atoms/LinkButton';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import SNS from '../../molecules/SNSIcons';
-import { ICLEAR, IWIDTHSIZE, IWIDTHTAB, IFONTSIZE } from '../../../utils/constant/number';
+import {
+  PartialICLEAR,
+  PartialIWIDTH,
+  PartialIWIDTHTAB,
+  PartialIFONTSIZE,
+} from '../../../utils/constant/number';
 import { UserData, PartialIUserData } from '../../../actions';
 import { BASICCOLORS } from '../../../utils/constant/color';
 
-type PartialIWIDTH = Partial<IWIDTHSIZE>;
-type PartialICLEAR = Partial<ICLEAR>;
-type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
   data: PartialIUserData;
 }

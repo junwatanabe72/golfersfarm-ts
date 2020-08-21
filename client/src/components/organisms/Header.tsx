@@ -4,10 +4,11 @@ import SimpleModal from '../molecules/SimpleModal';
 import LinkList from '../molecules/LinkList';
 import Toggle from '../molecules/Toggle';
 import LinkButton from '../atoms/LinkButton';
-import { FONTSIZE, CLEAR } from '../../utils/constant/number';
+import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
 import { HeaderText } from '../../utils/constant/text/header/text';
 import { FONTAWEICON } from '../../utils/constant/text/text';
+
 interface Props extends PartialICOLOR {
   route: any;
 }

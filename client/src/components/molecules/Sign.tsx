@@ -21,7 +21,7 @@ const Color = styled.div<PartialICOLOR>`
   background-color: ${(props) => props.color};
 `;
 
-const PaddingExtend = styled(Padding)<{ clear: Props['clear'] }>`
+const PaddingExtend = styled(Padding)<PartialICLEAR>`
   padding: ${(props) => props.clear}vw;
   ${media.tablet`
       padding: ${CLEAR.XSMALL}vw;

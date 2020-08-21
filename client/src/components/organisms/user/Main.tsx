@@ -1,25 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS, ICOLOR } from '../../../utils/constant/color';
-import { SIZE, CLEAR, FONTSIZE } from '../../../utils/constant/number';
+import { BASICCOLORS } from '../../../utils/constant/color';
+import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
 import Table from '../../atoms/Table';
 import Card from '../../molecules/Card';
 import UserCard from './Card';
 import { profileTableKeys } from '../../../utils/constant/text/body/user/text';
-import { PartialIUserData, UserData } from '../../../actions';
+import { PartialIUserData } from '../../../actions';
 
 interface Props {
   targetUser: PartialIUserData;
 }
-
-type PartialICOLOR = Partial<ICOLOR>;
-const BackColor = styled.div<PartialICOLOR>`
-  background-color: ${(props) => props.color};
-`;
-BackColor.defaultProps = {
-  color: BASICCOLORS.WHITE,
-};
 
 const Container = styled.div`
   display: flex;

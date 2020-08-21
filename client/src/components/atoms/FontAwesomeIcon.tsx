@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { PartialICOLOR, BASICCOLORS } from '../../utils/constant/color';
-import { IFONTSIZE, FONTSIZE } from '../../utils/constant/number';
+import { PartialIFONTSIZE, FONTSIZE } from '../../utils/constant/number';
 import {
   IconName,
   IconLookup,
@@ -10,14 +10,12 @@ import {
   findIconDefinition,
 } from '@fortawesome/fontawesome-svg-core';
 
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
-
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   head: 'fas' | 'fab' | 'far';
   tail: IconName;
 }
 
-const Container = styled.div<{ color: PartialICOLOR; fontSize: PartialIFONTSIZE['fontSize'] }>`
+const Container = styled.div<{ color: Props['color']; fontSize: Props['fontSize'] }>`
   font-size: ${(props) => props.fontSize}px;
   color: ${(props) => props.color};
   display: inline-block;

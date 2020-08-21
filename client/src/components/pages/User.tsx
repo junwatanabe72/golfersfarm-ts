@@ -11,7 +11,7 @@ import { addClubs, addUsers } from '../../actions';
 import { initialUser, allClubs } from '../../utils/constant/text/body/user/text';
 import { Padding } from '../../utils/styled/styledSpace';
 import FlexLayout from '../atoms/FlexLayout';
-import { PartialIUserData, UserData } from '../../actions';
+import { PartialIUserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;

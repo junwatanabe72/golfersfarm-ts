@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FONTSIZE, IFONTSIZE, IFONTSIZEWEIGHT } from '../../utils/constant/number';
-import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
-import { ALIGNITEMSTYPE, ALIGNITEMS } from '../../utils/styled/styledSpace';
+import { FONTSIZE, PartialIFONTSIZE, PartialIFONTSIZEWEIGHT } from '../../utils/constant/number';
+import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
+import { PartialITEXTALIGNTYPE, ALIGNITEMS } from '../../utils/styled/styledSpace';
 
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
-type PartialICOLOR = Partial<ICOLOR>;
-type PartialIFONTSIZEWEIGHT = Partial<IFONTSIZEWEIGHT>;
-type PartialALIGNITEMSTYPE = Partial<ALIGNITEMSTYPE>;
-interface Props extends PartialICOLOR, PartialIFONTSIZE, PartialIFONTSIZEWEIGHT {
-  textAlign?: ALIGNITEMSTYPE;
-}
+interface Props
+  extends PartialICOLOR,
+    PartialIFONTSIZE,
+    PartialIFONTSIZEWEIGHT,
+    PartialITEXTALIGNTYPE {}
 
 const Styledh2 = styled.h2<Props>`
   font-size: ${(props) => props.fontSize}px;

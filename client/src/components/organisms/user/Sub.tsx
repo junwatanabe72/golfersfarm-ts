@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS, ICOLOR } from '../../../utils/constant/color';
+import { BASICCOLORS } from '../../../utils/constant/color';
 import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
 import VideoPosition from '../../molecules/VideoPosition';
@@ -11,26 +11,16 @@ import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import FlexLayout from '../../atoms/FlexLayout';
 import {
-  sampleGearDatas,
-  sampleResultDatas,
   profileSubTableKeys,
   gearTableKeys,
   allClubs,
 } from '../../../utils/constant/text/body/user/text';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
-import { UserData, PartialIUserData } from '../../../actions';
+import { PartialIUserData } from '../../../actions';
 
 interface Props {
   targetUser: PartialIUserData;
 }
-
-type PartialICOLOR = Partial<ICOLOR>;
-const BackColor = styled.div<PartialICOLOR>`
-  background-color: ${(props) => props.color};
-`;
-BackColor.defaultProps = {
-  color: BASICCOLORS.WHITE,
-};
 
 const Container = styled.div`
   display: flex;

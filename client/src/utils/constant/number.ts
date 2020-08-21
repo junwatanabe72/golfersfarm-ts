@@ -62,6 +62,7 @@ export interface IFONTSIZE {
 export interface IWIDTHSIZE {
   width: SIZETYPE;
 }
+
 export interface IHEIGHTSIZE {
   height: SIZETYPE;
 }
@@ -78,7 +79,6 @@ export interface ICLEAR {
   clear: CLEARTYPE;
 }
 // types
-export type PartialICLEAR = Partial<ICLEAR>;
 
 export type FONTSIZEWEIGHTTYPE = typeof FONTWEIGHT.NORMAL | typeof FONTWEIGHT.BOLD;
 
@@ -129,3 +129,11 @@ export type CLEARTYPE =
   | typeof CLEAR.XSMALL
   | typeof CLEAR.TINY
   | typeof CLEAR.ZERO;
+
+// partial
+export type PartialIWIDTH = Partial<IWIDTHSIZE>;
+export type PartialIHEIGHTSIZE = Partial<IHEIGHTSIZE>;
+export type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
+export type PartialICLEAR = Partial<ICLEAR>;
+export type PartialIFONTSIZE = Partial<IFONTSIZE>;
+export type PartialIFONTSIZEWEIGHT = Partial<IFONTSIZEWEIGHT>;

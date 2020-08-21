@@ -35,6 +35,16 @@ export type ALIGNITEMSTYPE =
   | typeof ALIGNITEMS.START
   | typeof ALIGNITEMS.END;
 
+export interface IALIGNITEMSTYPE {
+  alignItems: ALIGNITEMSTYPE;
+}
+
+export interface ITEXTALIGNTYPE {
+  textAlign: ALIGNITEMSTYPE;
+}
+
+export type PartialIALIGNITEMSTYPE = Partial<IALIGNITEMSTYPE>;
+export type PartialITEXTALIGNTYPE = Partial<ITEXTALIGNTYPE>;
 // type MarginProps = {
 //   top?: CLEARTYPE,
 //   right?: CLEARTYPE,
