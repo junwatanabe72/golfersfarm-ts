@@ -2,12 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { SIZE, IWIDTHSIZE } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { TableData } from '../../utils/constant/text/body/user/text';
+import { TableData, GearData, GData } from '../../utils/constant/text/body/user/text';
 type PartialIWIDTH = Partial<IWIDTHSIZE>;
 type PartialTableData = Partial<TableData>;
+type PartialGearData = Partial<GearData>;
+type PartialGData = Partial<GData>;
 
 interface Props extends PartialIWIDTH {
-  datas: PartialTableData;
+  datas: PartialTableData | PartialGearData;
   keys: string[];
 }
 
@@ -41,28 +43,38 @@ const StyledTd = styled.td`
   border-right: solid 1px white;
 `;
 
-const Table: React.FC<Props> = ({ datas, width, keys }) => {
-  // export const gearTableItems = {
-  //   type: '種類',
-  //   name: '名前',
-  //   maker: 'メーカー',
-  //   shaft: 'シャフト',
-  //   flex: '硬さ',
-  // };
-  // const column =
-  const Data = Object.values(datas).map((value: string | undefined, i: number) => {
-    return (
-      <StyledTrd>
-        <StyledTd>{keys[i]}</StyledTd>
-        <StyledTd>{value}</StyledTd>
-      </StyledTrd>
-    );
+const Tablegear: React.FC<Props> = ({ datas, width, keys }) => {
+  const records = new Array(Object.values(datas).length);
+
+  const head = keys.map((value: string) => {
+    return <StyledTd>{value}</StyledTd>;
   });
+
+  // const body = Object.keys(datas).map(function(data: any){
+  //     return (
+  //       {
+  //       datas[data].items.map(function(value)
+  //       {
+  //         return(
+  //         <StyledTd>{value}</StyledTd>
+  //         )
+  //       })
+  //       }
+  //       );
+  //     })
+
+  const num = [head];
+  // // console.log(num);
+  // console.log(body);
   return (
     <StyledTable width={width}>
-      <tbody>{Data}</tbody>
+      <tbody>
+        {num.map((value) => {
+          return <StyledTrd>{value}</StyledTrd>;
+        })}
+      </tbody>
     </StyledTable>
   );
 };
 
-export default Table;
+export default Tablegear;

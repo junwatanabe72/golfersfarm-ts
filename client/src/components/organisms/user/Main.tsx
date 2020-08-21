@@ -6,11 +6,11 @@ import { Padding } from '../../../utils/styled/styledSpace';
 import Table from '../../atoms/Table';
 import Card from '../../molecules/Card';
 import UserCard from './Card';
-import { sampleUserMainDatas, chars } from '../../../utils/constant/text/body/user/text';
+import { profileTableKeys } from '../../../utils/constant/text/body/user/text';
 import { PartialIUserData, UserData } from '../../../actions';
 
 interface Props {
-  targetUser: UserData;
+  targetUser: PartialIUserData;
 }
 
 type PartialICOLOR = Partial<ICOLOR>;
@@ -31,6 +31,8 @@ const Container = styled.div`
 `;
 
 const UserMain: React.FC<Props> = ({ targetUser }) => {
+  const { averageDistance, bestScore, homeCource } = targetUser;
+  const tableData = { averageDistance, bestScore, homeCource };
   return (
     <Container>
       <UserCard
@@ -42,7 +44,7 @@ const UserMain: React.FC<Props> = ({ targetUser }) => {
       />
       <Padding all={CLEAR.XSMALL} />
       <Card color={BASICCOLORS.WHITELIGHT} clear={CLEAR.XSMALL}>
-        <Table datas={sampleUserMainDatas} width={SIZE.XXSMALL} />
+        <Table datas={tableData} keys={profileTableKeys} width={SIZE.XXSMALL} />
       </Card>
     </Container>
   );

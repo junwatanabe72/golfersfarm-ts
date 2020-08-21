@@ -27,15 +27,49 @@ export const initialUser = {
   sex: '男性',
   residence: '兵庫県',
   birthPlace: '栃木県',
+  school: '学習院大学',
+  hobby: 'プログラミング',
   averageDistance: '250',
-  bestScore: 69,
+  bestScore: '69',
+  homeCource: '姉ヶ崎CC',
   email: 'Email',
   password: 'Password',
   job: 'free',
   clubImage: ImageURL,
 };
+export const profileTableItems = {
+  averageDistance: '平均飛距離',
+  bestScore: 'ベストスコア',
+  homeCource: 'ホームコース',
+};
 
-export const chars = [
+export const profileTableSubItems = {
+  sex: '性別',
+  residence: '現住所',
+  birthPlace: '出生地',
+  job: '職業',
+  school: '出身校',
+  hobby: '趣味',
+};
+export const profileTableKeys = ['ベストスコア', '平均飛距離', 'ホームコース'];
+export const profileSubTableKeys = ['性別', '現住所', '出生地', '職業', '出身校', '趣味'];
+
+export const resultTableItems = {
+  year: '年',
+  competition: '競技',
+  rank: '順位',
+};
+
+export const gearTableKeys = ['種類', '名前', 'メーカー', 'シャフト', '硬さ'];
+export const gearTableItems = {
+  type: '種類',
+  name: '名前',
+  maker: 'メーカー',
+  shaft: 'シャフト',
+  flex: '硬さ',
+};
+
+export const users = [
   initialUser,
   { ...initialUser, id: 2 },
   { ...initialUser, id: 3 },
@@ -43,46 +77,69 @@ export const chars = [
   { ...initialUser, id: 5 },
 ];
 
-export const sampleUserMainDatas = [
-  {
-    arg: 'ベストスコア',
-    value: '69',
-  },
-  {
-    arg: '飛距離',
-    value: '250',
-  },
-  {
-    arg: '所属コース',
-    value: '姉ヶ崎CC',
-  },
+export const club = {
+  id: 1,
+  name: 'FT-TOUR',
+  shaftId: 1,
+  userId: 1,
+  makerId: 1,
+  typeId: 1,
+};
+
+export const allClubs = [
+  club,
+  { ...club, id: 2, name: 'V-steel', typeId: 2 },
+  { ...club, id: 3, name: 'V-steel', typeId: 3 },
+  { ...club, id: 4, name: 'I-Brade', typeId: 4 },
+  { ...club, id: 5, name: 'E-ZONE', typeId: 5 },
+  { ...club, id: 6, name: 'E-ZONE', typeId: 6 },
+  { ...club, id: 7, userId: 2 },
+  { ...club, id: 8 },
 ];
 
-export const sampleProfileDatas = [
-  {
-    arg: '性別',
-    value: '男性',
-  },
-  {
-    arg: '出生地',
-    value: '栃木県',
-  },
-  {
-    arg: '現住所',
-    value: '神戸市',
-  },
-  {
-    arg: '職業',
-    value: '不動産',
-  },
-  {
-    arg: '出身校',
-    value: '学習院大学',
-  },
-  {
-    arg: '趣味',
-    value: 'プログラミング',
-  },
+export const clubType = {
+  id: 1,
+  type: '1WOOD',
+};
+export const allTypes = [
+  clubType,
+  { ...clubType, id: 2, type: '3WOOD' },
+  { ...clubType, id: 3, type: '5WOOD' },
+  { ...clubType, id: 4, type: 'IRON(3~P)' },
+  { ...clubType, id: 5, type: 'AW' },
+  { ...clubType, id: 6, type: 'SW' },
+];
+
+export type TableData = typeof profileTableItems | typeof profileTableSubItems;
+export type GearData = typeof club[];
+export type GData = typeof club;
+export const shaft = {
+  id: 1,
+  name: 'TOUR-AD PT-7',
+  flex: 's',
+  manufacturer: 'GRAPHITE DESIGN',
+};
+export const shafts = [
+  shaft,
+  { ...shaft, id: 2, name: 'TOUR-AD DI-7' },
+  { ...shaft, id: 3, type: 'TOUR-AD DJ-7' },
+  { ...shaft, id: 4, type: 'TOUR-AD MD-7' },
+  { ...shaft, id: 5, type: 'TOUR-AD GT-7' },
+  { ...shaft, id: 6, type: 'TOUR-AD BB-7' },
+];
+
+export const maker = {
+  id: 1,
+  name: 'MIZUNO',
+};
+
+export const makers = [
+  maker,
+  { ...maker, id: 2, name: 'Titleist' },
+  { ...maker, id: 3, type: 'HONMMA' },
+  { ...maker, id: 4, type: 'TOURSTAGE' },
+  { ...maker, id: 5, type: 'SRIXON' },
+  { ...maker, id: 6, type: 'PING' },
 ];
 
 export const sampleResultDatas = [

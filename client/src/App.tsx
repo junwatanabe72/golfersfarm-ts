@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Route, BrowserRouter as Router, Redirect, RouteComponentProps } from 'react-router-dom';
@@ -14,20 +14,15 @@ import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
 import { State } from './store';
-import { addUser, deleteUser } from './actions';
-// import connector from './containers/userContainer';
-import { initialUser } from './utils/constant/text/body/user/text';
+import { addUsers, addTypes, addShafts, addMakers } from './actions';
+import { users, allTypes, shafts, makers } from './utils/constant/text/body/user/text';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
-// import Modal from './container/ModalContainer';
-import { BASICCOLORS } from './utils/constant/color';
 
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
 import { far } from '@fortawesome/free-regular-svg-icons'; //fontawesomeのregularアイコンのインポート
 library.add(fas, far, fab);
-
-// type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props {}
 const Container = styled.div`
@@ -37,6 +32,10 @@ const Container = styled.div`
 const App: React.FC<Props> = ({}) => {
   const currentUser = useSelector((state: State) => state.CurrentUser);
   const allUsers = useSelector((state: State) => state.Users);
+  const clubTypes = useSelector((state: State) => state.Types);
+  const allShafts = useSelector((state: State) => state.Shafts);
+  const Makers = useSelector((state: State) => state.Maker);
+  const allClubs = useSelector((state: State) => state.Clubs);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length ? true : false;
   const route = allUsers.map((user) => {
@@ -44,15 +43,32 @@ const App: React.FC<Props> = ({}) => {
       <Route
         exact
         path={`/users/${user.id}`}
-        render={() => <User currentUser={currentUser} targetUser={user} />}
+        render={() =>
+          user.id === currentUser.id ? (
+            <User currentUser={currentUser} targetUser={currentUser} />
+          ) : (
+            <User currentUser={currentUser} targetUser={user} />
+          )
+        }
       />
     );
   });
 
+  useEffect(() => {
+    dispatch(addUsers(users));
+    dispatch(addTypes(allTypes));
+    dispatch(addShafts(shafts));
+    dispatch(addMakers(makers));
+  }, []);
+
   return (
     <Container>
       <Router>
-        <Route exact path={ROUTE.USERS} render={() => <Users currentUser={currentUser} />} />
+        <Route
+          exact
+          path={ROUTE.USERS}
+          render={() => <Users currentUser={currentUser} allUsers={allUsers} />}
+        />
         {route}
         <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
         <Route
