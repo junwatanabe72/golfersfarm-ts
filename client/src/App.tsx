@@ -37,7 +37,7 @@ const App: React.FC<Props> = ({}) => {
   const Makers = useSelector((state: State) => state.Maker);
   const allClubs = useSelector((state: State) => state.Clubs);
   const dispatch = useDispatch();
-  const existedCurrentUser = 0 !== Object.keys(currentUser).length ? true : false;
+  const existedCurrentUser = 0 !== Object.keys(currentUser).length;
   const route = allUsers.map((user) => {
     return (
       <Route

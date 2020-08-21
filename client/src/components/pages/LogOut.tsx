@@ -41,7 +41,7 @@ const LogOut: React.FC<Props> = ({ currentUser }) => {
     <Layout currentUser={currentUser}>
       <Container>
         <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
-          <Sign textAlign={ALIGNITEMS.CENTER} color={BASICCOLORS.WHITELIGHT} clear={CLEAR.SMALL}>
+          <Sign color={BASICCOLORS.WHITELIGHT}>
             <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
               <Logo color={BASICCOLORS.BASICLIGHT}>{LogoutText.LogoutMessage}</Logo>
               <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}></Padding>

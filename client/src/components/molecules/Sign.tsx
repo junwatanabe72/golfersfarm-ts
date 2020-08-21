@@ -4,7 +4,7 @@ import Logo from '../atoms/Logo';
 import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
 import { CLEAR, ICLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { ALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
+import { ALIGNITEMSTYPE, ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 
 type PartialICLEAR = Partial<ICLEAR>;
@@ -31,7 +31,13 @@ const PaddingExtend = styled(Padding)<{ clear: Props['clear'] }>`
       `}
 `;
 
-const Sign: React.FC<Props> = ({ textAlign, color, title, children, clear }) => {
+const Sign: React.FC<Props> = ({
+  textAlign = ALIGNITEMS.CENTER,
+  color,
+  title,
+  children,
+  clear = CLEAR.SMALL,
+}) => {
   return (
     <Color color={color}>
       <PaddingExtend clear={clear}>

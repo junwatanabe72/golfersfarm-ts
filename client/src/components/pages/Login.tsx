@@ -85,12 +85,7 @@ const Login: React.FC<Props> = ({ currentUser, history }) => {
     <Layout currentUser={currentUser}>
       <Container>
         <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
-          <Sign
-            textAlign={ALIGNITEMS.CENTER}
-            color={BASICCOLORS.WHITELIGHT}
-            title={LoginText.LoginTitle}
-            clear={CLEAR.SMALL}
-          >
+          <Sign color={BASICCOLORS.WHITELIGHT} title={LoginText.LoginTitle}>
             {LoginInputItems}
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
               <Button color={BASICCOLORS.PRIMARY} pWidth={CLEAR.LARGE} onClick={onSubmit}>
