@@ -9,9 +9,7 @@ export default function UserReducer(
   let newState = state;
   switch (action.type) {
     case ACTIONTYPES.ADD_USER: {
-      const User = action.payload || {};
-      newState = { ...User };
-      return newState;
+      return action.payload || {};
     }
     case ACTIONTYPES.DELETE_USER: {
       newState = {};

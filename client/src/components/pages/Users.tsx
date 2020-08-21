@@ -5,14 +5,15 @@ import { State } from '../../store';
 import { addUsers } from '../../actions';
 import Layout from '../templates/Layout';
 import ThumbNail from '../molecules/ThumbNail';
-import { chars } from '../../utils/constant/text/body/user/text';
+import { users } from '../../utils/constant/text/body/user/text';
 import { media } from '../../utils/styled/styledRdesign';
 import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData, UserData } from '../../actions';
+import { PartialIUserData, UsersData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;
+  allUsers: UsersData;
 }
 
 const Container = styled.div`
@@ -28,19 +29,13 @@ const Container = styled.div`
       align-items: center;
       `}
 `;
-const Users: React.FC<Props> = ({ currentUser }) => {
-  const indexUsers = useSelector((state: State) => state.Users);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(addUsers(chars));
-  }, []);
-
+const Users: React.FC<Props> = ({ currentUser, allUsers }) => {
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
         <Container>
           <ThumbNail
-            datas={indexUsers}
+            datas={allUsers}
             clear={CLEAR.TINY}
             width={SIZE.XXXSMALL}
             widthTab={SIZE.MEDIUM}

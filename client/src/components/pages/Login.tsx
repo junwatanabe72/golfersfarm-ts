@@ -16,7 +16,7 @@ import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { initialUser } from '../../utils/constant/text/body/user/text';
 import { LoginText } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIUserData, UserData } from '../../actions';
+import { PartialIUserData } from '../../actions';
 
 interface Props extends RouteComponentProps<{}> {
   currentUser: PartialIUserData;
@@ -39,7 +39,7 @@ const errorMessage = {
 const Login: React.FC<Props> = ({ currentUser, history }) => {
   const [loginMail, setMail] = useState<string>('');
   const [loginPass, setPass] = useState<string>('');
-  const [vaildMessege, setMessage] = useState('');
+  const [vaildMessege, setMessage] = useState<string>('');
   const dispatch = useDispatch();
 
   const onSubmit = async () => {
@@ -59,7 +59,7 @@ const Login: React.FC<Props> = ({ currentUser, history }) => {
     const suceess = await dispatch(addUser(initialUser));
 
     if (suceess) {
-      history.push('/users');
+      history.push(`/users/${currentUser.id}`);
     }
 
     setMail('');

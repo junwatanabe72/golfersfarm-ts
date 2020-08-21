@@ -6,19 +6,22 @@ import { media } from '../../../utils/styled/styledRdesign';
 import VideoPosition from '../../molecules/VideoPosition';
 import { Padding } from '../../../utils/styled/styledSpace';
 import Table from '../../atoms/Table';
+import Tablegear from '../../atoms/Tablegear';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import FlexLayout from '../../atoms/FlexLayout';
 import {
   sampleGearDatas,
   sampleResultDatas,
-  sampleProfileDatas,
+  profileSubTableKeys,
+  gearTableKeys,
+  allClubs,
 } from '../../../utils/constant/text/body/user/text';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
-import { UserData } from '../../../actions';
+import { UserData, PartialIUserData } from '../../../actions';
 
 interface Props {
-  targetUser: UserData;
+  targetUser: PartialIUserData;
 }
 
 type PartialICOLOR = Partial<ICOLOR>;
@@ -55,7 +58,10 @@ const ImageURL =
   'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';
 
 const UserSub: React.FC<Props> = ({ targetUser }) => {
-  const rightContent = <Table datas={sampleGearDatas} width={SIZE.SMALL} />;
+  const { sex, residence, birthPlace, job, school, hobby } = targetUser;
+  const tableData = { sex, residence, birthPlace, job, school, hobby };
+
+  const rightContent = <Tablegear datas={allClubs} keys={gearTableKeys} width={SIZE.SMALL} />;
 
   const leftContent = (
     <StyledFlexColumn>
@@ -73,7 +79,7 @@ const UserSub: React.FC<Props> = ({ targetUser }) => {
         clear={CLEAR.XSMALL}
         textAlign={ALIGNITEMS.START}
       >
-        <Table datas={sampleProfileDatas} />
+        <Table datas={tableData} keys={profileSubTableKeys} />
       </Card>
       <Padding all={CLEAR.TINY} />
       <Card
@@ -100,7 +106,7 @@ const UserSub: React.FC<Props> = ({ targetUser }) => {
         clear={CLEAR.XSMALL}
         textAlign={ALIGNITEMS.START}
       >
-        <Table datas={sampleResultDatas} />
+        {/* <Table datas={sampleResultDatas} /> */}
       </Card>
     </Container>
   );
