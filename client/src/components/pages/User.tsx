@@ -7,20 +7,15 @@ import UserMain from '../organisms/user/Main';
 import UserSub from '../organisms/user/Sub';
 import Layout from '../templates/Layout';
 import { CLEAR } from '../../utils/constant/number';
-import { addClubs, addUsers } from '../../actions';
-import { initialUser, allClubs } from '../../utils/constant/text/body/user/value';
+import { addClubs } from '../../actions';
+import { allClubs } from '../../utils/constant/text/body/user/value';
 import { Padding } from '../../utils/styled/styledSpace';
 import FlexLayout from '../atoms/FlexLayout';
-import { PartialIUserData } from '../../actions';
-import {
-  clubTableTypes,
-  resultTableTypes,
-  userObjectType,
-} from '../../utils/constant/text/body/user/text';
+import { PartialUserObjectType, clubTableTypes } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
-  targetUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
+  targetUser: PartialUserObjectType;
   storeClubs: clubTableTypes;
 }
 

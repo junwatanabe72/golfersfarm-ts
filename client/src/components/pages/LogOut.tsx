@@ -13,12 +13,11 @@ import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { LogoutText } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIUserData } from '../../actions';
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
-
 const Container = styled.div`
   width: 60vw;
   max-width: 1200px;

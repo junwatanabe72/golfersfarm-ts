@@ -9,11 +9,11 @@ import { users } from '../../utils/constant/text/body/user/value';
 import { media } from '../../utils/styled/styledRdesign';
 import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData, UsersData } from '../../actions';
+import { PartialUserObjectType, userThumbNailTypes } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
-  allUsers: UsersData;
+  currentUser: PartialUserObjectType;
+  allUsers: userThumbNailTypes;
 }
 
 const Container = styled.div`

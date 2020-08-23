@@ -1,6 +1,13 @@
 import { Action } from 'redux';
 import { clubType, club, maker, shaft } from '../utils/constant/text/body/user/value';
-import { userObjectType } from '../utils/constant/text/body/user/text';
+import {
+  PartialUserObjectType,
+  userThumbNailTypes,
+  clubTableTypes,
+  TypesData,
+  ShaftsData,
+  MakersData,
+} from '../utils/constant/storeType';
 //ACTIONTYPES
 export const ACTIONTYPES = {
   ADD_USER: 'ADD_USER',
@@ -13,11 +20,11 @@ export const ACTIONTYPES = {
 } as const;
 
 // userAction
-export type PartialIUserData = Partial<userObjectType>;
+// export type PartialIUserData = Partial<userObjectType>;
 
 export interface AddUserAction extends Action {
   type: typeof ACTIONTYPES.ADD_USER;
-  payload: PartialIUserData;
+  payload: PartialUserObjectType;
 }
 export interface DeleteUserAction extends Action {
   type: typeof ACTIONTYPES.DELETE_USER;
@@ -25,25 +32,25 @@ export interface DeleteUserAction extends Action {
 export type UserActionTypes = AddUserAction | DeleteUserAction;
 
 //usersAction
-export type UsersData = userObjectType[];
+
 export interface AddUsersAction extends Action {
   type: typeof ACTIONTYPES.ADD_USERS;
-  payload: UsersData;
+  payload: userThumbNailTypes;
 }
 export type UsersActionTypes = AddUsersAction;
 
 //clubsAction
-export type ClubData = typeof club;
-export type ClubsData = ClubData[];
+// export type ClubData = typeof club;
+// export type ClubsData = ClubData[];
 export interface AddClubAction extends Action {
   type: typeof ACTIONTYPES.ADD_CLUBS;
-  payload: ClubsData;
+  payload: clubTableTypes;
 }
 export type ClubsActionTypes = AddClubAction;
 
 //typesAction
-export type TypeData = typeof clubType;
-export type TypesData = TypeData[];
+// export type TypeData = typeof clubType;
+// export type TypesData = TypeData[];
 export interface AddTypeAction extends Action {
   type: typeof ACTIONTYPES.ADD_TYPES;
   payload: TypesData;
@@ -51,8 +58,8 @@ export interface AddTypeAction extends Action {
 export type TypesActionTypes = AddTypeAction;
 
 //shaftsAction
-export type ShaftData = typeof shaft;
-export type ShaftsData = ShaftData[];
+// export type ShaftData = typeof shaft;
+// export type ShaftsData = ShaftData[];
 export interface AddShaftAction extends Action {
   type: typeof ACTIONTYPES.ADD_SHAFTS;
   payload: ShaftsData;
@@ -60,8 +67,8 @@ export interface AddShaftAction extends Action {
 export type ShaftsActionTypes = AddShaftAction;
 
 //makersAction
-export type MakerData = typeof maker;
-export type MakersData = MakerData[];
+// export type MakerData = typeof maker;
+// export type MakersData = MakerData[];
 export interface AddMakerAction extends Action {
   type: typeof ACTIONTYPES.ADD_MAKERS;
   payload: MakersData;
@@ -90,18 +97,18 @@ export type MakersActionTypes = AddMakerAction;
 //REDUX_SAGA
 
 //userActionCreater
-export function addUser(data: PartialIUserData): UserActionTypes {
+export function addUser(data: PartialUserObjectType): UserActionTypes {
   return { type: ACTIONTYPES.ADD_USER, payload: data };
 }
 export function deleteUser(): UserActionTypes {
   return { type: ACTIONTYPES.DELETE_USER };
 }
 //usersActionCreater
-export function addUsers(data: UsersData): UsersActionTypes {
+export function addUsers(data: userThumbNailTypes): UsersActionTypes {
   return { type: ACTIONTYPES.ADD_USERS, payload: data };
 }
 //clubsActionCreater
-export function addClubs(data: ClubsData): ClubsActionTypes {
+export function addClubs(data: clubTableTypes): ClubsActionTypes {
   return { type: ACTIONTYPES.ADD_CLUBS, payload: data };
 }
 //typesActionCreater

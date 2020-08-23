@@ -8,10 +8,10 @@ import Card from '../../molecules/Card';
 import UserCard from './Card';
 import { TABLETYPES } from '../../../utils/constant/text/tableType';
 import { profileTableItems } from '../../../utils/constant/text/body/user/text';
-import { PartialIUserData } from '../../../actions';
+import { PartialUserObjectType } from '../../../utils/constant/storeType';
 
 interface Props {
-  targetUser: PartialIUserData;
+  targetUser: PartialUserObjectType;
 }
 
 const Container = styled.div`

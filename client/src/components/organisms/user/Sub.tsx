@@ -17,11 +17,10 @@ import {
 import { allResults } from '../../../utils/constant/text/body/user/value';
 import { TABLETYPES } from '../../../utils/constant/text/tableType';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
-import { PartialIUserData } from '../../../actions';
-import { clubTableTypes } from '../../../utils/constant/text/body/user/text';
+import { PartialUserObjectType, clubTableTypes } from '../../../utils/constant/storeType';
 
 interface Props {
-  targetUser: PartialIUserData;
+  targetUser: PartialUserObjectType;
   storeClubs: clubTableTypes;
 }
 

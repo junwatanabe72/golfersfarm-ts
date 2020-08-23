@@ -10,11 +10,11 @@ import {
   PartialIWIDTHTAB,
   PartialIFONTSIZE,
 } from '../../../utils/constant/number';
-import { PartialIUserData } from '../../../actions';
+import { PartialUserObjectType } from '../../../utils/constant/storeType';
 import { BASICCOLORS } from '../../../utils/constant/color';
 
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
-  data: PartialIUserData;
+  data: PartialUserObjectType;
 }
 
 const Container = styled.div`

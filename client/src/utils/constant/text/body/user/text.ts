@@ -1,7 +1,5 @@
 // ↑本番では、使わない！！
 
-import { initialUser } from './value';
-
 export const profileTableItems = {
   bestScore: 'ベストスコア',
   averageDistance: '平均飛距離',
@@ -76,54 +74,3 @@ export const profileSubTableTargetkey = [
 export const gearTableKeys = ['種類', '名前', 'メーカー', 'シャフト', '硬さ'];
 export const targetkey = ['name', 'shaftId', 'makerId', 'typeId'];
 export const resultTableKeys = ['年', '競技', '順位'];
-
-export interface userObjectType {
-  id: number;
-  name: string;
-  profileImage: string;
-  facebook: string;
-  twitter: string;
-  instagram: string;
-  youtube: string;
-  sex: string;
-  residence: string;
-  birthPlace: string;
-  school: string;
-  job: string;
-  hobby: string;
-  bestScore: string;
-  averageDistance: string;
-  homeCource: string;
-  email: string;
-  password: string;
-  clubImage: string;
-  [key: string]: any;
-}
-export type PartialUserObjectType = Partial<userObjectType>;
-
-export interface clubObjectType {
-  id: number;
-  name: string;
-  shaftId: number;
-  userId: number;
-  makerId: number;
-  typeId: number;
-  [key: string]: string | number;
-}
-export type clubTableTypes = clubObjectType[];
-export type PartialClubObjectType = Partial<clubObjectType>;
-export type PartialClubTableTypes = Partial<clubTableTypes>;
-
-export interface resultObjectType {
-  year: string;
-  com: string;
-  rank: string;
-  [key: string]: string;
-}
-export type PartialResultObjectType = Partial<resultObjectType>;
-export type resultTableTypes = resultObjectType[];
-export type PartialResultTableTypes = Partial<resultTableTypes>;
-
-export interface TableDataTypes {
-  datas: clubTableTypes | userObjectType | resultTableTypes;
-}

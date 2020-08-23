@@ -1,4 +1,5 @@
-import { ACTIONTYPES, TypesData, TypesActionTypes, TypeData } from '../actions';
+import { ACTIONTYPES, TypesActionTypes } from '../actions';
+import { TypesData } from '../utils/constant/storeType';
 
 const initialState: TypesData = [];
 

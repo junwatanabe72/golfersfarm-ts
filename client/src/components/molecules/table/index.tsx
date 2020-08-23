@@ -7,6 +7,8 @@ import {
   PartialUserObjectType,
   PartialClubTableTypes,
   PartialResultTableTypes,
+} from '../../../utils/constant/storeType';
+import {
   profileTableItemsType,
   gearTableItemsType,
   resultTableItemsType,

@@ -3,15 +3,17 @@ import styled from 'styled-components';
 import { SIZE, PartialIWIDTH } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
 import {
-  clubObjectType,
-  resultObjectType,
-  PartialUserObjectType,
-  PartialClubTableTypes,
-  PartialResultTableTypes,
   resultTableItemsType,
   profileTableItemsType,
   gearTableItemsType,
 } from '../../../utils/constant/text/body/user/text';
+import {
+  PartialUserObjectType,
+  PartialClubTableTypes,
+  PartialResultTableTypes,
+  clubObjectType,
+  resultObjectType,
+} from '../../../utils/constant/storeType';
 
 interface Props extends PartialIWIDTH {
   datas: PartialUserObjectType | PartialClubTableTypes | PartialResultTableTypes;

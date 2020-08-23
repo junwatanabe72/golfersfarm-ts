@@ -4,10 +4,9 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
-import { PartialIUserData } from '../../actions';
-
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
 
 //style

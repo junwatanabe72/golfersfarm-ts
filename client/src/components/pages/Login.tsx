@@ -16,10 +16,10 @@ import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { initialUser } from '../../utils/constant/text/body/user/value';
 import { LoginText } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIUserData } from '../../actions';
 
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 interface Props extends RouteComponentProps<{}> {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
 
 const Container = styled.div`

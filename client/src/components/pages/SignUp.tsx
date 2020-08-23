@@ -12,12 +12,11 @@ import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { BASICCOLORS, COLORTYPES } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIUserData } from '../../actions';
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
-
 const Container = styled.div`
   width: 60vw;
   max-width: 1200px;
