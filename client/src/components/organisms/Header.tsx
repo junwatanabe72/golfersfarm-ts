@@ -7,7 +7,7 @@ import LinkButton from '../atoms/LinkButton';
 import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
 import { HeaderText } from '../../utils/constant/text/header/text';
-import { FONTAWEICON } from '../../utils/constant/text/text';
+import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 
 interface Props extends PartialICOLOR {
   route: any;

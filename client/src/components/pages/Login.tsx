@@ -13,7 +13,7 @@ import { Padding, ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
-import { initialUser } from '../../utils/constant/text/body/user/text';
+import { initialUser } from '../../utils/constant/text/body/user/value';
 import { LoginText } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
 import { PartialIUserData } from '../../actions';

@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
-import { ICOLOR } from "../../utils/constant/color"
-import { MENUZTYPE } from "../../utils/constant/text/text";
+import { ICOLOR } from '../../utils/constant/color';
+import { MENUZTYPE } from '../../utils/constant/text/fontAweicon';
 
-interface Props extends ICOLOR,MENUZTYPE{
-  workModal: ()=> void,
-  modalIsOpen: boolean,
-  list: ReactElement,
-};
+interface Props extends ICOLOR, MENUZTYPE {
+  workModal: () => void;
+  modalIsOpen: boolean;
+  list: ReactElement;
+}
 
 const Container = styled.div`
   display: inline-block;
@@ -33,7 +33,7 @@ const PositionAbsolute = styled.div<{ modalIsOpen: boolean }>`
   display: ${(props) => (props.modalIsOpen ? '' : 'none')};
 `;
 
-const SimpleModal: React.FC<Props> =({ modalIsOpen,workModal,color,head,tail,list }) => {
+const SimpleModal: React.FC<Props> = ({ modalIsOpen, workModal, color, head, tail, list }) => {
   const modalRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -43,27 +43,24 @@ const SimpleModal: React.FC<Props> =({ modalIsOpen,workModal,color,head,tail,lis
     };
   });
 
-  const handleClickEvent = (e: MouseEvent) : void => {
+  const handleClickEvent = (e: MouseEvent): void => {
     if (modalIsOpen === false) {
       return;
     }
     if (modalRef && modalRef.current && !modalRef.current.contains(e.target as Node)) {
       workModal();
-      return 
+      return;
     }
   };
 
   return (
-   <Container ref={modalRef} onClick={workModal}>
+    <Container ref={modalRef} onClick={workModal}>
       <ComponentFontAwesomeIcon head={head} tail={tail} color={color} />
       <PositionAbsolute modalIsOpen={modalIsOpen}>
-        <FlexColumn>
-          {list}
-        </FlexColumn>
-      </PositionAbsolute> 
-    </Container >
+        <FlexColumn>{list}</FlexColumn>
+      </PositionAbsolute>
+    </Container>
   );
-}
+};
 
 export default SimpleModal;
-

@@ -8,8 +8,8 @@ interface Props extends PartialIWIDTH, PartialIWIDTHTAB {
 }
 
 const Container = styled.img<{
-  width: PartialIWIDTH['width'];
-  widthTab: PartialIWIDTHTAB['widthTab'];
+  width: Props['width'];
+  widthTab: Props['widthTab'];
 }>`
   width: ${(props) => props.width}vw;
   ${media.tablet`

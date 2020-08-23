@@ -5,21 +5,24 @@ import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
 import VideoPosition from '../../molecules/VideoPosition';
 import { Padding } from '../../../utils/styled/styledSpace';
-import Table from '../../atoms/Table';
-import Tablegear from '../../atoms/Tablegear';
+import Table from '../../molecules/table';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import FlexLayout from '../../atoms/FlexLayout';
 import {
-  profileSubTableKeys,
-  gearTableKeys,
-  allClubs,
+  profileTableSubItems,
+  gearTableItems,
+  resultTableItems,
 } from '../../../utils/constant/text/body/user/text';
+import { allResults } from '../../../utils/constant/text/body/user/value';
+import { TABLETYPES } from '../../../utils/constant/text/tableType';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
 import { PartialIUserData } from '../../../actions';
+import { clubTableTypes } from '../../../utils/constant/text/body/user/text';
 
 interface Props {
   targetUser: PartialIUserData;
+  storeClubs: clubTableTypes;
 }
 
 const Container = styled.div`
@@ -48,11 +51,15 @@ const videos = [URL, URL, URL, URL];
 const ImageURL =
   'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';
 
-const UserSub: React.FC<Props> = ({ targetUser }) => {
-  const { sex, residence, birthPlace, job, school, hobby } = targetUser;
-  const tableData = { sex, residence, birthPlace, job, school, hobby };
-
-  const rightContent = <Tablegear datas={allClubs} keys={gearTableKeys} width={SIZE.SMALL} />;
+const UserSub: React.FC<Props> = ({ targetUser, storeClubs }) => {
+  const rightContent = (
+    <Table
+      datas={storeClubs}
+      width={SIZE.SMALL}
+      type={TABLETYPES.HORIZONTAL}
+      tableItems={gearTableItems}
+    />
+  );
 
   const leftContent = (
     <StyledFlexColumn>
@@ -65,7 +72,7 @@ const UserSub: React.FC<Props> = ({ targetUser }) => {
   return (
     <Container>
       <Card color={BASICCOLORS.WHITELIGHT} title={'PROFILE'}>
-        <Table datas={tableData} keys={profileSubTableKeys} />
+        <Table datas={targetUser} type={TABLETYPES.VERTICAL} tableItems={profileTableSubItems} />
       </Card>
       <Padding all={CLEAR.TINY} />
       <Card color={BASICCOLORS.WHITELIGHT} title={'GEAR'} textAlign={ALIGNITEMS.START}>
@@ -77,7 +84,7 @@ const UserSub: React.FC<Props> = ({ targetUser }) => {
       </Card>
       <Padding all={CLEAR.TINY} />
       <Card color={BASICCOLORS.WHITELIGHT} title={'RESULT'}>
-        {/* <Table datas={sampleResultDatas} /> */}
+        <Table datas={allResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />
       </Card>
     </Container>
   );

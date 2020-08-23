@@ -10,7 +10,7 @@ import {
   PartialIWIDTHTAB,
   PartialIFONTSIZE,
 } from '../../../utils/constant/number';
-import { UserData, PartialIUserData } from '../../../actions';
+import { PartialIUserData } from '../../../actions';
 import { BASICCOLORS } from '../../../utils/constant/color';
 
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {

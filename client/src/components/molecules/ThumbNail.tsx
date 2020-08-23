@@ -8,14 +8,14 @@ import {
   PartialIWIDTHTAB,
 } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { UsersData, UserData } from '../../actions';
-
+import { UsersData } from '../../actions';
+import { userObjectType } from '../../utils/constant/text/body/user/text';
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
   datas: UsersData;
 }
 
 const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize }) => {
-  const player = datas.map((data: UserData) => {
+  const player = datas.map((data: userObjectType) => {
     return (
       <Padding all={CLEAR.TINY}>
         <UserCard data={data} clear={clear} width={width} widthTab={widthTab} fontSize={fontSize} />

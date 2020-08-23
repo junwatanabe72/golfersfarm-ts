@@ -1,6 +1,6 @@
 import { Action } from 'redux';
-import { initialUser, club, clubType, maker, shaft } from '../utils/constant/text/body/user/text';
-
+import { clubType, club, maker, shaft } from '../utils/constant/text/body/user/value';
+import { userObjectType } from '../utils/constant/text/body/user/text';
 //ACTIONTYPES
 export const ACTIONTYPES = {
   ADD_USER: 'ADD_USER',
@@ -13,8 +13,7 @@ export const ACTIONTYPES = {
 } as const;
 
 // userAction
-export type UserData = typeof initialUser;
-export type PartialIUserData = Partial<UserData>;
+export type PartialIUserData = Partial<userObjectType>;
 
 export interface AddUserAction extends Action {
   type: typeof ACTIONTYPES.ADD_USER;
@@ -26,7 +25,7 @@ export interface DeleteUserAction extends Action {
 export type UserActionTypes = AddUserAction | DeleteUserAction;
 
 //usersAction
-export type UsersData = UserData[];
+export type UsersData = userObjectType[];
 export interface AddUsersAction extends Action {
   type: typeof ACTIONTYPES.ADD_USERS;
   payload: UsersData;

@@ -3,10 +3,11 @@ import styled from 'styled-components';
 import { BASICCOLORS } from '../../../utils/constant/color';
 import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
-import Table from '../../atoms/Table';
+import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
 import UserCard from './Card';
-import { profileTableKeys } from '../../../utils/constant/text/body/user/text';
+import { TABLETYPES } from '../../../utils/constant/text/tableType';
+import { profileTableItems } from '../../../utils/constant/text/body/user/text';
 import { PartialIUserData } from '../../../actions';
 
 interface Props {
@@ -30,7 +31,12 @@ const UserMain: React.FC<Props> = ({ targetUser }) => {
       <UserCard data={targetUser} width={SIZE.XXSMALL} />
       <Padding all={CLEAR.XSMALL} />
       <Card color={BASICCOLORS.WHITELIGHT}>
-        <Table datas={tableData} keys={profileTableKeys} width={SIZE.XXSMALL} />
+        <Table
+          datas={tableData}
+          width={SIZE.XXSMALL}
+          type={TABLETYPES.VERTICAL}
+          tableItems={profileTableItems}
+        />
       </Card>
     </Container>
   );

@@ -32,7 +32,7 @@ const InputBar = styled.input`
   background: none;
 `;
 
-const Input: React.FC<InputProps> = ({ placeHolder = '', value = '', onChange }) => {
+const Input: React.FC<InputProps> = ({ placeHolder = '', value, onChange }) => {
   return (
     <Container>
       <Frame>

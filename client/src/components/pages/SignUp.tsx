@@ -12,7 +12,7 @@ import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { BASICCOLORS, COLORTYPES } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIUserData, UserData } from '../../actions';
+import { PartialIUserData } from '../../actions';
 
 interface Props {
   currentUser: PartialIUserData;
