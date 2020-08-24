@@ -11,10 +11,10 @@ import Layout from '../templates/Layout';
 import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
 import { BASICCOLORS, COLORTYPES } from '../../utils/constant/color';
 import { FONTSIZE } from '../../utils/constant/number';
-import { PartialIUserData } from '../../actions';
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
 
 const Tos: React.FC<Props> = ({ currentUser }) => {

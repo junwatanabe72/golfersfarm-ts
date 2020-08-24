@@ -24,15 +24,13 @@ const Container = styled.div`
 `;
 
 const UserMain: React.FC<Props> = ({ targetUser }) => {
-  const { averageDistance, bestScore, homeCource } = targetUser;
-  const tableData = { averageDistance, bestScore, homeCource };
   return (
     <Container>
       <UserCard data={targetUser} width={SIZE.XXSMALL} />
       <Padding all={CLEAR.XSMALL} />
       <Card color={BASICCOLORS.WHITELIGHT}>
         <Table
-          datas={tableData}
+          datas={targetUser}
           width={SIZE.XXSMALL}
           type={TABLETYPES.VERTICAL}
           tableItems={profileTableItems}

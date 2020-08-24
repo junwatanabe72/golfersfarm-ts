@@ -8,10 +8,9 @@ import {
   PartialIWIDTHTAB,
 } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { UsersData } from '../../actions';
-import { userObjectType } from '../../utils/constant/text/body/user/text';
+import { userObjectType, userThumbNailTypes } from '../../utils/constant/storeType';
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
-  datas: UsersData;
+  datas: userThumbNailTypes;
 }
 
 const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize }) => {

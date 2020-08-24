@@ -86,8 +86,12 @@ const App: React.FC<Props> = ({}) => {
         <Route
           exact
           path={ROUTE.SIGNUP}
-          render={() =>
-            existedCurrentUser ? <Redirect to={ROUTE.TOP} /> : <SignUp currentUser={currentUser} />
+          render={(props) =>
+            existedCurrentUser ? (
+              <Redirect to={ROUTE.TOP} />
+            ) : (
+              <SignUp {...props} currentUser={currentUser} />
+            )
           }
         />
         <Route
