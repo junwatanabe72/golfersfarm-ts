@@ -1,4 +1,4 @@
-import express, { Request, Response,NextFunction } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import bodyParser from "body-parser";
 import path from "path";
 import http from "http";
@@ -37,12 +37,12 @@ app.use(function (req: Request, res: Response, next: NextFunction) {
   next();
 });
 //router
-app.get("/", (req: Request, res: Response,next: NextFunction) => {
+app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.json({ message: "ok" });
 });
 
 // app.use("/auth", authRouter);
-app.use("/users",usersRouter);
+app.use("/users", usersRouter);
 // app.use("/posts", passport.authenticate("jwt", { session: false }), postsRouter);
 
 const server = http.createServer(app);

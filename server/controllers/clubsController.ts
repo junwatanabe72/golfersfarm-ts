@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import db from "../models"
+import db from "../models";
 
 const clubs = db.Club;
 const shafts = db.Shaft;
@@ -12,7 +12,8 @@ export default {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
     try {
       const allClubs = await clubs.findAll({
-        where: { userId: req.params.id },raw: false,
+        where: { userId: req.params.id },
+        raw: false,
         include: [
           {
             model: makers,
@@ -29,33 +30,34 @@ export default {
         ],
       });
       const targetBall = await balls.findOne({
-        where: { userId: req.params.id }, raw: false,
+        where: { userId: req.params.id },
+        raw: false,
         include: [
           {
             model: makers,
             required: false,
           },
         ],
-      })
-      res.status(201).json([{ allClubs },{ targetBall}]);
+      });
+      res.status(201).json([{ allClubs }, { targetBall }]);
     } catch (error) {
-        res.status(404)
-        return next(error)
+      res.status(404);
+      return next(error);
     }
   },
   async update(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
     try {
       //woodを更新する。
-      const updateClub = await clubs.clubUpdate(req.params.id, club)
+      const updateClub = await clubs.clubUpdate(req.params.id, club);
       if (!updateClub) {
-        return res.status(404)
+        return res.status(404);
       } else {
         res.status(201).json({ updateClub });
       }
     } catch (error) {
-      res.status(404)
-      return next(error)
+      res.status(404);
+      return next(error);
     }
   },
   // async create(id: number,transaction: any | null) {
@@ -66,7 +68,7 @@ export default {
   //   return newWood;
   // },
   //今のところ使わない。
-  
+
   // async delete(id: string) {
   //   const targetWood: any = await woods.findOne({
   //     where: { id: id },

@@ -1,12 +1,12 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 // const woodss = require("../values/modelValues");
-import User from "./users";
-import Maker from "./makers";
+import User from "./user";
+import Maker from "./maker";
 
-const ball =  {
+const ball = {
   name: "anything",
   makerId: 1,
-}
+};
 
 class Ball extends Model {
   public id!: number;
@@ -14,9 +14,18 @@ class Ball extends Model {
   public userId!: number;
   public makerId!: number;
 
+  static async add(id: string, ball: ballType) {
+    const newBall = await this.create({
+      name: ball.name,
+      userId: id,
+      makerId: ball.makerId,
+    });
+    return [{ newBall }];
+  }
+
   static async updateBall(id: string, ball: ballType) {
     const targetBall: any = await this.findOne({
-      where: { id: id }
+      where: { id: id },
     });
     const updateBall = await targetBall.update({
       name: ball.name,
@@ -24,7 +33,7 @@ class Ball extends Model {
     });
     return updateBall;
   }
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -37,14 +46,13 @@ class Ball extends Model {
           type: DataTypes.STRING(250),
           defaultValue: ball.name,
           allowNull: false,
-
         },
         userId: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
         makerId: {
-          type: DataTypes.INTEGER, 
+          type: DataTypes.INTEGER,
           allowNull: false,
           defaultValue: ball.makerId,
         },
@@ -54,7 +62,7 @@ class Ball extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
     this.belongsTo(User, {
@@ -74,7 +82,7 @@ export interface ballType {
   name: string;
   userId: number;
   makerId: number;
-  updateBall: ()=> void;
+  updateBall: () => void;
 }
 
 export default Ball;

@@ -52,6 +52,13 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
+      school: { type: Sequelize.STRING },
+      hobby: { type: Sequelize.STRING },
+      facebook: { type: Sequelize.STRING },
+      twitter: { type: Sequelize.STRING },
+      instagram: { type: Sequelize.STRING },
+      youtube: { type: Sequelize.STRING },
+      show: { type: Sequelize.BOOLEAN, defaultValue: false },
     });
   },
   down: (queryInterface, Sequelize) => {

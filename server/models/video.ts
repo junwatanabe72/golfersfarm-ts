@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import User from "./users";
+import User from "./user";
 
 class Video extends Model {
   public id!: number;
@@ -7,27 +7,27 @@ class Video extends Model {
   public userId!: number;
   public url!: string;
 
-  static async add(id: string,video: Video) {
+  static async add(id: string, video: Video) {
     const newVideo = await this.create({
       userId: id,
       name: video.name,
       url: video.url,
     });
-    return {newVideo}
+    return { newVideo };
   }
 
   static async updateDatas(video: Video) {
     const targetVideo: any = await this.findOne({
-      where: { id: video.id }
+      where: { id: video.id },
     });
     const updateVideo = await targetVideo.update({
       name: video.name,
       url: video.url,
     });
-    return { updateVideo }
+    return { updateVideo };
   }
 
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -54,7 +54,7 @@ class Video extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
     this.belongsTo(User, {

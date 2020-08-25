@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import Club from "./clubs";
+import Club from "./club";
 
 class Shaft extends Model {
   public id!: number;
@@ -7,7 +7,7 @@ class Shaft extends Model {
   public flex!: string;
   public manufacturer!: string;
 
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -34,13 +34,13 @@ class Shaft extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
     this.hasMany(Club, {
-      sourceKey: 'id',
-      foreignKey: 'shaftId',
-      constraints: false
+      sourceKey: "id",
+      foreignKey: "shaftId",
+      constraints: false,
     });
   }
 }

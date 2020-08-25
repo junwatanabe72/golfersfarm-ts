@@ -1,13 +1,14 @@
 import path from "path";
 import dotenv from "dotenv";
 import { Sequelize } from "sequelize";
-import User from "./users";
-import Ball from "./balls";
-import Club from "./clubs";
-import Video from "./videos";
-import Shaft from "./shafts";
-import Maker from "./makers";
-import ClubType from "./clubTypes";
+import User from "./user";
+import Ball from "./ball";
+import Club from "./club";
+import Video from "./video";
+import Shaft from "./shaft";
+import Maker from "./maker";
+import ClubType from "./clubType";
+import UserClubs from "./user_clubs";
 
 dotenv.config();
 
@@ -25,13 +26,12 @@ const db: dbType = {
   Shaft: Shaft.initialize(sequelize),
   Maker: Maker.initialize(sequelize),
   ClubType: ClubType.initialize(sequelize),
+  UserClubs: UserClubs.initialize(sequelize),
 };
 
-
 interface dbType {
-  [key: string]: any;// ←シグネチャー
+  [key: string]: any; // ←シグネチャー
   // associate(): void;
-
 }
 
 // (2)テーブル同士の関係を作成する

@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
-import dotenv from 'dotenv';
-import users from "../models/users";
+import dotenv from "dotenv";
+import users from "../models/user";
 import passport from "passport";
 import jwt from "jsonwebtoken";
-import {hash} from "bcrypt";
+import { hash } from "bcrypt";
 
 dotenv.config();
 const authRouter = express.Router();
@@ -29,7 +29,6 @@ authRouter.post("/login", async (req: Request, res: Response) => {
     });
   })(req, res);
 });
-
 
 authRouter.post("/signup", async (req: Request, res: Response) => {
   const { user } = req.body;

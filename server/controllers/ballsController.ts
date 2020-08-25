@@ -23,6 +23,16 @@ export default {
       return next(error);
     }
   },
+  async create(req: Request, res: Response, next: NextFunction) {
+    const { ball } = req.body;
+    try {
+      const newData = await balls.add(req.params.id, ball);
+      res.status(201).json({ newData });
+    } catch (error) {
+      res.status(400);
+      return next(error);
+    }
+  },
   async update(req: Request, res: Response, next: NextFunction) {
     const { ball } = req.body;
     try {

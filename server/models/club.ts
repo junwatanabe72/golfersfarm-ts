@@ -1,33 +1,33 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 // import defaultValues from "../values/modelValues"
 // const woodss = require("../values/modelValues");
-import User from "./users";
-import ClubType from "./clubTypes";
-import Shaft from "./shafts";
-import Maker from "./makers";
+import User from "./user";
+import ClubType from "./clubType";
+import UserClubs from "./user_clubs";
+import Shaft from "./shaft";
+import Maker from "./maker";
 
 const club = {
   name: "original",
   shaftId: 1,
   makerId: 1,
   typeId: 1,
-}
+};
 
 class Club extends Model {
   public id!: number;
   public name!: string;
   public typeId!: number;
-  public userId!: number;
+  // public userId!: number;
   public shaftId!: number;
   public makerId!: number;
-  
 
   static async clubUpdate(id: string, club: clubType) {
     const targetClub: any = await this.findOne({
-      where: { 
+      where: {
         id: club.id,
-        userId: id 
-      }
+        // userId: id,
+      },
     });
     const updateClub = await targetClub.update({
       name: club.name,
@@ -37,7 +37,7 @@ class Club extends Model {
     });
     return updateClub;
   }
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -51,10 +51,10 @@ class Club extends Model {
           defaultValue: club.name,
           allowNull: false,
         },
-        userId: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
+        // userId: {
+        //   type: DataTypes.INTEGER,
+        //   allowNull: false,
+        // },
         typeId: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -76,12 +76,17 @@ class Club extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
-    this.belongsTo(User, {
-      foreignKey: "userId",
-      onDelete: "CASCADE",
+    // this.belongsTo(User, {
+    //   foreignKey: "userId",
+    //   onDelete: "CASCADE",
+    //   constraints: false,
+    // });
+    this.hasMany(UserClubs, {
+      sourceKey: "id",
+      foreignKey: "clubId",
       constraints: false,
     });
     this.belongsTo(Shaft, {
@@ -103,7 +108,7 @@ export interface clubType {
   id: number;
   name: string;
   typeId: number;
-  userId: number;
+  // userId: number;
   shaftId: number;
   makerId: number;
 }
