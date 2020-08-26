@@ -1,19 +1,20 @@
 import React from 'react';
 import UserCard from '../organisms/user/Card';
-import { CLEAR, IFONTSIZE, ICLEAR, IWIDTHSIZE, IWIDTHTAB } from '../../utils/constant/number';
+import {
+  CLEAR,
+  PartialIFONTSIZE,
+  PartialICLEAR,
+  PartialIWIDTH,
+  PartialIWIDTHTAB,
+} from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { UsersData, UserData } from '../../actions';
-
-type PartialIWIDTH = Partial<IWIDTHSIZE>;
-type PartialICLEAR = Partial<ICLEAR>;
-type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
+import { userObjectType, userThumbNailTypes } from '../../utils/constant/storeType';
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
-  datas: UsersData;
+  datas: userThumbNailTypes;
 }
 
 const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize }) => {
-  const player = datas.map((data: UserData) => {
+  const player = datas.map((data: userObjectType) => {
     return (
       <Padding all={CLEAR.TINY}>
         <UserCard data={data} clear={clear} width={width} widthTab={widthTab} fontSize={fontSize} />

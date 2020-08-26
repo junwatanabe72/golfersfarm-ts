@@ -5,15 +5,15 @@ import { State } from '../../store';
 import { addUsers } from '../../actions';
 import Layout from '../templates/Layout';
 import ThumbNail from '../molecules/ThumbNail';
-import { users } from '../../utils/constant/text/body/user/text';
+import { users } from '../../utils/constant/text/body/user/value';
 import { media } from '../../utils/styled/styledRdesign';
 import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData, UsersData } from '../../actions';
+import { PartialUserObjectType, userThumbNailTypes } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
-  allUsers: UsersData;
+  currentUser: PartialUserObjectType;
+  allUsers: userThumbNailTypes;
 }
 
 const Container = styled.div`
@@ -34,13 +34,7 @@ const Users: React.FC<Props> = ({ currentUser, allUsers }) => {
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
         <Container>
-          <ThumbNail
-            datas={allUsers}
-            clear={CLEAR.TINY}
-            width={SIZE.XXXSMALL}
-            widthTab={SIZE.MEDIUM}
-            fontSize={FONTSIZE.MEDIUM}
-          />
+          <ThumbNail datas={allUsers} clear={CLEAR.TINY} width={SIZE.XXXSMALL} />
         </Container>
       </Padding>
     </Layout>

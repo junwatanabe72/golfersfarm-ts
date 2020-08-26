@@ -1,33 +1,62 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 // import defaultValues from "../values/modelValues"
 // const woodss = require("../values/modelValues");
-import User from "./users";
-import ClubType from "./clubTypes";
-import Shaft from "./shafts";
-import Maker from "./makers";
+import User from "./user";
+import ClubType from "./clubType";
+import UserClubs from "./user_clubs";
+import Shaft from "./shaft";
+import Maker from "./maker";
 
 const club = {
   name: "original",
   shaftId: 1,
   makerId: 1,
   typeId: 1,
-}
+};
 
 class Club extends Model {
   public id!: number;
   public name!: string;
   public typeId!: number;
-  public userId!: number;
   public shaftId!: number;
   public makerId!: number;
-  
 
-  static async clubUpdate(id: string, club: clubType) {
+  static async add(id: string, club: clubType, sequelize: Sequelize) {
+    const newData = await sequelize.transaction(async (t) => {
+      const newClub = await this.create(
+        {
+          name: club.name,
+          typeId: club.typeId,
+          shaftId: club.shaftId,
+          makerId: club.makerId,
+        },
+        { transaction: t }
+      );
+      const newUserClubs = await UserClubs.create(
+        {
+          userId: parseInt(id),
+          clubId: newClub.id,
+        },
+        { transaction: t }
+      );
+      return { newClub, newUserClubs };
+    });
+    return { newData };
+  }
+  static async clubUpdate(id: string, clubId: string, club: clubType) {
+    const checkedClub = await UserClubs.findOne({
+      where: {
+        userId: parseInt(id),
+        clubId: parseInt(clubId),
+      },
+    });
+    if (!checkedClub) {
+      return;
+    }
     const targetClub: any = await this.findOne({
-      where: { 
-        id: club.id,
-        userId: id 
-      }
+      where: {
+        id: parseInt(clubId),
+      },
     });
     const updateClub = await targetClub.update({
       name: club.name,
@@ -35,9 +64,9 @@ class Club extends Model {
       shaftId: club.shaftId,
       makerId: club.makerId,
     });
-    return updateClub;
+    return { updateClub };
   }
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -49,10 +78,6 @@ class Club extends Model {
         name: {
           type: DataTypes.STRING(250),
           defaultValue: club.name,
-          allowNull: false,
-        },
-        userId: {
-          type: DataTypes.INTEGER,
           allowNull: false,
         },
         typeId: {
@@ -76,12 +101,12 @@ class Club extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
-    this.belongsTo(User, {
-      foreignKey: "userId",
-      onDelete: "CASCADE",
+    this.hasMany(UserClubs, {
+      sourceKey: "id",
+      foreignKey: "clubId",
       constraints: false,
     });
     this.belongsTo(Shaft, {
@@ -103,7 +128,6 @@ export interface clubType {
   id: number;
   name: string;
   typeId: number;
-  userId: number;
   shaftId: number;
   makerId: number;
 }

@@ -4,16 +4,13 @@ import TopTitle from '../organisms/top/Title';
 import TopConcept from '../organisms/top/Concept';
 import Layout from '../templates/Layout';
 import TopUsage from '../organisms/top/Usage';
-import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
+import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
 import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIUserData, UserData } from '../../actions';
-
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
-
-type PartialICOLOR = Partial<ICOLOR>;
 
 const BackColor = styled.div<PartialICOLOR>`
   background-color: ${(props) => props.color};

@@ -15,7 +15,7 @@ import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
 import { State } from './store';
 import { addUsers, addTypes, addShafts, addMakers } from './actions';
-import { users, allTypes, shafts, makers } from './utils/constant/text/body/user/text';
+import { users, allTypes, shafts, makers } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
@@ -35,9 +35,9 @@ const App: React.FC<Props> = ({}) => {
   const clubTypes = useSelector((state: State) => state.Types);
   const allShafts = useSelector((state: State) => state.Shafts);
   const Makers = useSelector((state: State) => state.Maker);
-  const allClubs = useSelector((state: State) => state.Clubs);
+  const storeClubs = useSelector((state: State) => state.Clubs);
   const dispatch = useDispatch();
-  const existedCurrentUser = 0 !== Object.keys(currentUser).length ? true : false;
+  const existedCurrentUser = 0 !== Object.keys(currentUser).length;
   const route = allUsers.map((user) => {
     return (
       <Route
@@ -45,9 +45,9 @@ const App: React.FC<Props> = ({}) => {
         path={`/users/${user.id}`}
         render={() =>
           user.id === currentUser.id ? (
-            <User currentUser={currentUser} targetUser={currentUser} />
+            <User currentUser={currentUser} targetUser={currentUser} storeClubs={storeClubs} />
           ) : (
-            <User currentUser={currentUser} targetUser={user} />
+            <User currentUser={currentUser} targetUser={user} storeClubs={storeClubs} />
           )
         }
       />
@@ -86,8 +86,12 @@ const App: React.FC<Props> = ({}) => {
         <Route
           exact
           path={ROUTE.SIGNUP}
-          render={() =>
-            existedCurrentUser ? <Redirect to={ROUTE.TOP} /> : <SignUp currentUser={currentUser} />
+          render={(props) =>
+            existedCurrentUser ? (
+              <Redirect to={ROUTE.TOP} />
+            ) : (
+              <SignUp {...props} currentUser={currentUser} />
+            )
           }
         />
         <Route

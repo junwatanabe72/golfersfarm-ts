@@ -7,7 +7,6 @@ module.exports = {
       [
         {
           name: "JBEAM 435",
-          userId: 1,
           typeId: 2,
           shaftId: 3,
           makerId: 2,
@@ -16,7 +15,6 @@ module.exports = {
         },
         {
           name: "Ibrade",
-          userId: 1,
           typeId: 2,
           shaftId: 2,
           makerId: 1,
@@ -25,7 +23,6 @@ module.exports = {
         },
         {
           name: "X-Drive",
-          userId: 1,
           typeId: 1,
           shaftId: 2,
           makerId: 1,

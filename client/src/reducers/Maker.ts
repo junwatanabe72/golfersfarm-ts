@@ -1,5 +1,5 @@
-import { ACTIONTYPES, MakersData, MakersActionTypes } from '../actions';
-
+import { ACTIONTYPES, MakersActionTypes } from '../actions';
+import { MakersData } from '../utils/constant/storeType';
 const initialState: MakersData = [];
 
 export default function ShaftsReducer(state = initialState, action: MakersActionTypes): MakersData {

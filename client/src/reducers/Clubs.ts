@@ -1,8 +1,11 @@
-import { ACTIONTYPES, ClubsData, ClubsActionTypes } from '../actions';
+import { ACTIONTYPES, ClubsActionTypes } from '../actions';
+import { clubTableTypes } from '../utils/constant/storeType';
+const initialState: clubTableTypes = [];
 
-const initialState: ClubsData = [];
-
-export default function ClubsReducer(state = initialState, action: ClubsActionTypes): ClubsData {
+export default function ClubsReducer(
+  state = initialState,
+  action: ClubsActionTypes
+): clubTableTypes {
   let newState = state;
   const Clubs = action.payload || [];
   switch (action.type) {

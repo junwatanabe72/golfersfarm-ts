@@ -1,6 +1,6 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import Ball from "./balls";
-import Club from "./clubs";
+import Ball from "./ball";
+import Club from "./club";
 
 // const models:any =[Ball,Wood]
 
@@ -8,7 +8,7 @@ class Maker extends Model {
   public id!: number;
   public name!: string;
 
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -27,10 +27,9 @@ class Maker extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
-
     // for (const model of models){
     //   this.hasMany(model, {
     //     sourceKey: 'id',
@@ -39,14 +38,14 @@ class Maker extends Model {
     //   });
     // }
     this.hasMany(Ball, {
-      sourceKey: 'id',
-      foreignKey: 'makerId',
-      constraints: false
+      sourceKey: "id",
+      foreignKey: "makerId",
+      constraints: false,
     });
     this.hasMany(Club, {
-      sourceKey: 'id',
-      foreignKey: 'makerId',
-      constraints: false
+      sourceKey: "id",
+      foreignKey: "makerId",
+      constraints: false,
     });
   }
 }

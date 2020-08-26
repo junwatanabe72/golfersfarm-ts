@@ -1,5 +1,5 @@
-import { ACTIONTYPES, ShaftsData, ShaftsActionTypes, TypeData } from '../actions';
-
+import { ACTIONTYPES, ShaftsActionTypes } from '../actions';
+import { ShaftsData } from '../utils/constant/storeType';
 const initialState: ShaftsData = [];
 
 export default function ShaftsReducer(state = initialState, action: ShaftsActionTypes): ShaftsData {

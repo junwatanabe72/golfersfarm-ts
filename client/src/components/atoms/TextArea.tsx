@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Padding } from "../../utils/styled/styledSpace";
-import { CLEAR } from "../../utils/constant/number";
+import { Padding } from '../../utils/styled/styledSpace';
+import { CLEAR } from '../../utils/constant/number';
 
 interface TextAreaProps {
-  placeHolder?: string,
-  value: string,
-  onChange?: () => void,
-} 
+  placeHolder?: string;
+  value: string;
+  onChange?: () => void;
+}
 
 const Container = styled.div`
   width: 100%;
@@ -25,7 +25,7 @@ const InputTextarea = styled.textarea`
   background: none;
 `;
 
-const TextArea: React.FC<TextAreaProps> = ({ placeHolder, value = '', onChange }) => {
+const TextArea: React.FC<TextAreaProps> = ({ placeHolder = '', value = '', onChange }) => {
   return (
     <Container>
       <Padding top={CLEAR.SMALL} bottom={CLEAR.SMALL} right={CLEAR.XSMALL} left={CLEAR.XSMALL}>
@@ -35,6 +35,6 @@ const TextArea: React.FC<TextAreaProps> = ({ placeHolder, value = '', onChange }
       </Padding>
     </Container>
   );
-}
+};
 
 export default TextArea;

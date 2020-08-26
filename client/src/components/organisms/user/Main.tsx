@@ -1,25 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS, ICOLOR } from '../../../utils/constant/color';
-import { SIZE, CLEAR, FONTSIZE } from '../../../utils/constant/number';
+import { BASICCOLORS } from '../../../utils/constant/color';
+import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
-import Table from '../../atoms/Table';
+import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
 import UserCard from './Card';
-import { profileTableKeys } from '../../../utils/constant/text/body/user/text';
-import { PartialIUserData, UserData } from '../../../actions';
+import { TABLETYPES } from '../../../utils/constant/text/tableType';
+import { profileTableItems } from '../../../utils/constant/text/body/user/text';
+import { PartialUserObjectType } from '../../../utils/constant/storeType';
 
 interface Props {
-  targetUser: PartialIUserData;
+  targetUser: PartialUserObjectType;
 }
-
-type PartialICOLOR = Partial<ICOLOR>;
-const BackColor = styled.div<PartialICOLOR>`
-  background-color: ${(props) => props.color};
-`;
-BackColor.defaultProps = {
-  color: BASICCOLORS.WHITE,
-};
 
 const Container = styled.div`
   display: flex;
@@ -31,20 +24,17 @@ const Container = styled.div`
 `;
 
 const UserMain: React.FC<Props> = ({ targetUser }) => {
-  const { averageDistance, bestScore, homeCource } = targetUser;
-  const tableData = { averageDistance, bestScore, homeCource };
   return (
     <Container>
-      <UserCard
-        data={targetUser}
-        clear={CLEAR.XSMALL}
-        width={SIZE.XXSMALL}
-        widthTab={SIZE.LARGE}
-        fontSize={FONTSIZE.XLARGE}
-      />
+      <UserCard data={targetUser} width={SIZE.XXSMALL} />
       <Padding all={CLEAR.XSMALL} />
-      <Card color={BASICCOLORS.WHITELIGHT} clear={CLEAR.XSMALL}>
-        <Table datas={tableData} keys={profileTableKeys} width={SIZE.XXSMALL} />
+      <Card color={BASICCOLORS.WHITELIGHT}>
+        <Table
+          datas={targetUser}
+          width={SIZE.XXSMALL}
+          type={TABLETYPES.VERTICAL}
+          tableItems={profileTableItems}
+        />
       </Card>
     </Container>
   );

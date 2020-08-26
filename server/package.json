@@ -8,6 +8,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "db:migrate": "sequelize-cli db:migrate",
+    "db:modelCreate": "node_modules/.bin/sequelize model:generate --name",
     "db:migrate:generate": "sequelize-cli migration:generate --name ",
     "db:seed": "sequelize-cli db:seed:all",
     "db:seed:generate": "sequelize-cli seed:generate --name ",

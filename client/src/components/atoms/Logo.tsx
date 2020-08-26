@@ -1,16 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { IFONTSIZE, IFONTSIZEWEIGHT} from "../../utils/constant/number";
-import { BASICCOLORS,ICOLOR } from "../../utils/constant/color";
-import { ALIGNITEMSTYPE, ALIGNITEMS } from "../../utils/styled/styledSpace";
+import { FONTSIZE, PartialIFONTSIZE, PartialIFONTSIZEWEIGHT } from '../../utils/constant/number';
+import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
+import { PartialITEXTALIGNTYPE, ALIGNITEMS } from '../../utils/styled/styledSpace';
 
-type PartialIFONTSIZE = Partial<IFONTSIZE>
-type PartialICOLOR = Partial<ICOLOR>
-type PartialIFONTSIZEWEIGHT = Partial<IFONTSIZEWEIGHT>
-type PartialALIGNITEMSTYPE = Partial<ALIGNITEMSTYPE>
-interface Props extends PartialICOLOR, PartialIFONTSIZE, PartialIFONTSIZEWEIGHT {
-  textAlign?: ALIGNITEMSTYPE,
-} 
+interface Props
+  extends PartialICOLOR,
+    PartialIFONTSIZE,
+    PartialIFONTSIZEWEIGHT,
+    PartialITEXTALIGNTYPE {}
 
 const Styledh2 = styled.h2<Props>`
   font-size: ${(props) => props.fontSize}px;
@@ -19,9 +17,18 @@ const Styledh2 = styled.h2<Props>`
   text-align: ${(props) => props.textAlign};
 `;
 
-const Logo: React.FC<Props> = ({ fontSize, textAlign=ALIGNITEMS.CENTER,fontWeight = 400, children ,color = BASICCOLORS.BASIC })=>{
-  return <Styledh2 color={color} fontWeight={fontWeight} fontSize={fontSize} textAlign={textAlign}>{children}</Styledh2>;
-}
+const Logo: React.FC<Props> = ({
+  fontSize = FONTSIZE.MEDIUM,
+  textAlign = ALIGNITEMS.CENTER,
+  fontWeight = 400,
+  children,
+  color = BASICCOLORS.PRIMARY,
+}) => {
+  return (
+    <Styledh2 color={color} fontWeight={fontWeight} fontSize={fontSize} textAlign={textAlign}>
+      {children}
+    </Styledh2>
+  );
+};
 
 export default Logo;
-

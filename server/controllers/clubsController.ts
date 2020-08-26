@@ -1,7 +1,9 @@
 import { Request, Response, NextFunction } from "express";
-import db from "../models"
+import { Model, DataTypes, Sequelize } from "sequelize";
+import db, { sequelize } from "../models";
 
 const clubs = db.Club;
+const UserClubs = db.userClubs;
 const shafts = db.Shaft;
 const makers = db.Maker;
 const balls = db.Ball;
@@ -9,10 +11,11 @@ const clubTypes = db.ClubType;
 
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
-    // const queryStatus: any = req.query.status ? req.query.status : statusValues;
+    const clubIds: any = req.query.cids ? req.query.cids : [];
     try {
       const allClubs = await clubs.findAll({
-        where: { userId: req.params.id },raw: false,
+        where: { id: clubIds },
+        raw: false,
         include: [
           {
             model: makers,
@@ -29,44 +32,47 @@ export default {
         ],
       });
       const targetBall = await balls.findOne({
-        where: { userId: req.params.id }, raw: false,
+        where: { userId: req.params.id },
+        raw: false,
         include: [
           {
             model: makers,
             required: false,
           },
         ],
-      })
-      res.status(201).json([{ allClubs },{ targetBall}]);
+      });
+      res.status(200).json({ data: { allClubs, targetBall } });
     } catch (error) {
-        res.status(404)
-        return next(error)
+      res.status(404);
+      return next(error);
     }
+  },
+  async create(req: Request, res: Response, next: NextFunction) {
+    const { club } = req.body;
+    const data = await clubs.add(req.params.id, club, sequelize);
+    res.status(201).json(data);
   },
   async update(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
     try {
-      //woodを更新する。
-      const updateClub = await clubs.clubUpdate(req.params.id, club)
+      const updateClub = await clubs.clubUpdate(
+        req.params.id,
+        req.params.cid,
+        club
+      );
       if (!updateClub) {
-        return res.status(404)
+        return res.status(404);
       } else {
-        res.status(201).json({ updateClub });
+        res.status(201).json(updateClub);
       }
     } catch (error) {
-      res.status(404)
-      return next(error)
+      res.status(404);
+      return next(error);
     }
   },
-  // async create(id: number,transaction: any | null) {
-  //   const newWood = await clubs.create({
-  //         userId: id
-  //       },transaction
-  //     );
-  //   return newWood;
-  // },
+
   //今のところ使わない。
-  
+
   // async delete(id: string) {
   //   const targetWood: any = await woods.findOne({
   //     where: { id: id },

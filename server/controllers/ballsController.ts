@@ -17,7 +17,17 @@ export default {
           },
         ],
       });
-      res.json({ targetBall });
+      res.json(targetBall);
+    } catch (error) {
+      res.status(400);
+      return next(error);
+    }
+  },
+  async create(req: Request, res: Response, next: NextFunction) {
+    const { ball } = req.body;
+    try {
+      const newBall = await balls.add(req.params.id, ball);
+      res.status(201).json(newBall);
     } catch (error) {
       res.status(400);
       return next(error);
@@ -26,8 +36,8 @@ export default {
   async update(req: Request, res: Response, next: NextFunction) {
     const { ball } = req.body;
     try {
-      const updateBall = await balls.updateBall(req.params.id, ball);
-      res.status(201).json({ updateBall });
+      const targetBall = await balls.updateBall(req.params.id, ball);
+      res.status(201).json(targetBall);
     } catch (error) {
       res.status(404);
       return next(error);

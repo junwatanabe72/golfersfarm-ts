@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import db from "../models"
+import db from "../models";
 
 const videos = db.Video;
 
@@ -10,25 +10,25 @@ export default {
       const allVideos = await videos.findAll({
         where: { userId: req.params.id },
         raw: false,
-      })
+      });
       if (!allVideos) {
-        res.status(204).json({ message: 'not exist' });
+        res.status(204).json({ message: "not exist" });
       } else {
         res.json({ allVideos });
       }
     } catch (error) {
-      res.status(404)
-      return next(error)
+      res.status(404);
+      return next(error);
     }
   },
   async create(req: Request, res: Response, next: NextFunction) {
     const { video } = req.body;
     try {
-      const newVideo = await videos.add(req.params.id,video);
+      const newVideo = await videos.add(req.params.id, video);
       res.status(201).json({ newVideo });
     } catch (error) {
-      res.status(404)
-      return next(error)
+      res.status(404);
+      return next(error);
     }
   },
   async update(req: Request, res: Response, next: NextFunction) {
@@ -36,28 +36,28 @@ export default {
     try {
       const updateVideo = await videos.updateDatas(video);
       if (!updateVideo) {
-        return res.status(404)
+        return res.status(404);
       } else {
         res.status(201).json({ updateVideo });
       }
     } catch (error) {
-      res.status(404)
-      return next(error)
+      res.status(404);
+      return next(error);
     }
   },
- 
+
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
       videos.findOne({
         where: { id: req.params.videoId, userId: req.params.id },
-      })
+      });
       res.status(204).json({});
     } catch (error) {
-      res.status(404)
-      return next(error)
+      res.status(404);
+      return next(error);
     }
   },
-  
+
   // async show(id: number, transaction: any | null) {
   //   const targetVideo = await videos.findOne({
   //     where: { userId: id },

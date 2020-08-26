@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ICOLOR } from '../../utils/constant/color';
-import { FONTSIZE, IFONTSIZE } from '../../utils/constant/number';
+import { PartialICOLOR, BASICCOLORS } from '../../utils/constant/color';
+import { FONTSIZE, PartialIFONTSIZE } from '../../utils/constant/number';
 import Url from '../atoms/Url';
-import { FONTAWEICON } from '../../utils/constant/text/text';
+import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
 
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
-interface Props extends ICOLOR, PartialIFONTSIZE {
+interface Props extends PartialICOLOR, PartialIFONTSIZE {
   urls: {
     facebook?: string;
     twitter?: string;

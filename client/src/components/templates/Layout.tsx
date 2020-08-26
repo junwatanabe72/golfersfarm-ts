@@ -4,11 +4,9 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
-import { media } from '../../utils/styled/styledRdesign';
-import { UserData, PartialIUserData } from '../../actions';
-
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
 
 //style
@@ -27,9 +25,9 @@ const Layout: React.FC<Props> = ({ currentUser, children }) => {
 
   return (
     <Container>
-      <Header color={BASICCOLORS.WHITELIGHT} route={route} />
+      <Header route={route} />
       {children}
-      <Footer color={BASICCOLORS.WHITELIGHT} route={route} infoRoute={INFOROUTE} />
+      <Footer route={route} infoRoute={INFOROUTE} />
     </Container>
   );
 };

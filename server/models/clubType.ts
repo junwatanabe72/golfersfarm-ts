@@ -1,11 +1,11 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import Club from "./clubs";
+import Club from "./club";
 
 class ClubType extends Model {
   public id!: number;
   public type!: string;
 
-  public static initialize(sequelize: Sequelize){
+  public static initialize(sequelize: Sequelize) {
     this.init(
       {
         id: {
@@ -24,15 +24,13 @@ class ClubType extends Model {
         sequelize: sequelize,
       }
     );
-  return this;
+    return this;
   }
   public static associate() {
-
-    
     this.hasMany(Club, {
-      sourceKey: 'id',
-      foreignKey: 'typeId',
-      constraints: false
+      sourceKey: "id",
+      foreignKey: "typeId",
+      constraints: false,
     });
   }
 }

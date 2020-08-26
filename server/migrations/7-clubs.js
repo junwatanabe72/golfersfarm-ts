@@ -6,7 +6,7 @@ const club = {
   shaftId: 1,
   makerId: 1,
   typeId: 1,
-}
+};
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable("clubs", {
@@ -27,15 +27,6 @@ module.exports = {
         defaultValue: club.makerId,
         references: {
           model: "clubTypes",
-          key: "id",
-        },
-      },
-      userId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        onDelete: "CASCADE",
-        references: {
-          model: "users",
           key: "id",
         },
       },

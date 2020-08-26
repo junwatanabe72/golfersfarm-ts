@@ -6,24 +6,27 @@ import videosController from "../controllers/videosController";
 
 const usersRouter = express.Router();
 
-
 //usersprofileAPI(UsersTable)
-usersRouter.get("/:id", usersController.show);
+//動作確認のため、仮作成。
+usersRouter.post("/login", usersController.show);
+//
 usersRouter.get("/", usersController.index);
 usersRouter.post("/", usersController.create);
 usersRouter.patch("/:id", usersController.update);
 usersRouter.delete("/:id", usersController.delete);
 
 //usersGearsAPI(clubsTable,BallsTable)
-usersRouter.get("/:id/gears",clubsController.index);
-usersRouter.patch("/:id/gears", clubsController.update);
-usersRouter.patch("/:id/gears/ball", ballsController.update);
+usersRouter.get("/:id/gears", clubsController.index);
+usersRouter.post("/:id/gears", clubsController.create);
+usersRouter.patch("/:id/clubs/:cid", clubsController.update);
+usersRouter.post("/:id/ball", ballsController.create);
+usersRouter.patch("/:id/ball", ballsController.update);
 // usersRouter.delete("/:id/gears/:id");
 
 //usersVideosAPI(VideosTable)
-usersRouter.post("/:id/videos/",videosController.create);
+usersRouter.post("/:id/videos/", videosController.create);
 usersRouter.get("/:id/videos/", videosController.index);
-usersRouter.patch("/:id/videos/:videoid", videosController.update );
+usersRouter.patch("/:id/videos/:videoid", videosController.update);
 usersRouter.delete("/:id/videos/:videoid", videosController.delete);
 
 //usersTournamentsAPI(TournamentsTable)

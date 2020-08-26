@@ -1,18 +1,15 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { IWIDTHSIZE, SIZE, CLEAR } from '../../utils/constant/number';
+import { PartialIWIDTH } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { Padding, ALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
-import { BASICCOLORS, ICOLOR, COLORTYPES } from '../../utils/constant/color';
+import { PartialIALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
 
-type PartialIWIDTH = Partial<IWIDTHSIZE>;
-interface Props extends PartialIWIDTH {
+interface Props extends PartialIWIDTH, PartialIALIGNITEMSTYPE {
   right: ReactElement;
   left: ReactElement;
-  alignItems?: ALIGNITEMSTYPE;
 }
 
-const Container = styled.div<{ alignItems?: ALIGNITEMSTYPE }>`
+const Container = styled.div<PartialIALIGNITEMSTYPE>`
   display: flex;
   justify-content: space-around;
   align-items: ${(props) => props.alignItems};
@@ -22,7 +19,7 @@ const Container = styled.div<{ alignItems?: ALIGNITEMSTYPE }>`
       `}
 `;
 
-const FixedWidth = styled.div<{ width: Props['width'] }>`
+const FixedWidth = styled.div<PartialIWIDTH>`
   width: ${(props) => props.width}vw;
   ${media.tablet`
       width: 60vw;

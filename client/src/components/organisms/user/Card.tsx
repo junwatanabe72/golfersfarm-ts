@@ -4,16 +4,17 @@ import LinkButton from '../../atoms/LinkButton';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import SNS from '../../molecules/SNSIcons';
-import { ICLEAR, IWIDTHSIZE, IWIDTHTAB, IFONTSIZE } from '../../../utils/constant/number';
-import { UserData, PartialIUserData } from '../../../actions';
+import {
+  PartialICLEAR,
+  PartialIWIDTH,
+  PartialIWIDTHTAB,
+  PartialIFONTSIZE,
+} from '../../../utils/constant/number';
+import { PartialUserObjectType } from '../../../utils/constant/storeType';
 import { BASICCOLORS } from '../../../utils/constant/color';
 
-type PartialIWIDTH = Partial<IWIDTHSIZE>;
-type PartialICLEAR = Partial<ICLEAR>;
-type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
-  data: PartialIUserData;
+  data: PartialUserObjectType;
 }
 
 const Container = styled.div`
@@ -28,13 +29,13 @@ const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize }) =
   const urls = { facebook, twitter, instagram, youtube };
 
   return (
-    <Card color={BASICCOLORS.WHITELIGHT} clear={clear}>
+    <Card clear={clear}>
       <Container>
         <Image image={data.profileImage} width={width} widthTab={widthTab} />
-        <LinkButton to={`/users/${data.id}`} fontSize={fontSize} color={BASICCOLORS.PRIMARY}>
+        <LinkButton to={`/users/${data.id}`} fontSize={fontSize}>
           {data.name}
         </LinkButton>
-        <SNS urls={urls} color={BASICCOLORS.SECONDARY} fontSize={fontSize} />
+        <SNS urls={urls} fontSize={fontSize} />
       </Container>
     </Card>
   );

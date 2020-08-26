@@ -1,7 +1,7 @@
 "use strict";
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable("posts", {
+  up: async (queryInterface, Sequelize) => {
+    await queryInterface.createTable("user_clubs", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,21 +10,21 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER,
+        allowNull: false,
         onDelete: "CASCADE",
         references: {
           model: "users",
           key: "id",
         },
       },
-      title: {
-        type: Sequelize.STRING,
-      },
-      body: {
-        type: Sequelize.TEXT,
-      },
-      status: {
+      clubId: {
         type: Sequelize.INTEGER,
-        defaultValue: 0,
+        allowNull: false,
+        onDelete: "CASCADE",
+        references: {
+          model: "clubs",
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
@@ -36,7 +36,7 @@ module.exports = {
       },
     });
   },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable("posts");
+  down: async (queryInterface, Sequelize) => {
+    await queryInterface.dropTable("user_clubs");
   },
 };

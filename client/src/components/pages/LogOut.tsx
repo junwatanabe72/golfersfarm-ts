@@ -1,25 +1,22 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { deleteUser } from '../../actions';
-import Button from '../atoms/Button';
-import LinkButton from '../atoms/LinkButton';
-import Logo from '../atoms/Logo';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
-import { Padding, ALIGNITEMS } from '../../utils/styled/styledSpace';
-import { BASICCOLORS, ICOLOR } from '../../utils/constant/color';
-import { FONTSIZE, CLEAR } from '../../utils/constant/number';
-import { ROUTE, ROUTETYPE } from '../../utils/constant/route';
-import { initialUser } from '../../utils/constant/text/body/user/text';
+import LinkButton from '../atoms/LinkButton';
+import Logo from '../atoms/Logo';
+import { Padding } from '../../utils/styled/styledSpace';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { CLEAR } from '../../utils/constant/number';
+import { ROUTE } from '../../utils/constant/route';
 import { LogoutText } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIUserData } from '../../actions';
+import { PartialUserObjectType } from '../../utils/constant/storeType';
 
 interface Props {
-  currentUser: PartialIUserData;
+  currentUser: PartialUserObjectType;
 }
-
 const Container = styled.div`
   width: 60vw;
   max-width: 1200px;
@@ -41,13 +38,11 @@ const LogOut: React.FC<Props> = ({ currentUser }) => {
     <Layout currentUser={currentUser}>
       <Container>
         <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
-          <Sign textAlign={ALIGNITEMS.CENTER} color={BASICCOLORS.WHITELIGHT} clear={CLEAR.SMALL}>
+          <Sign>
             <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
               <Logo color={BASICCOLORS.BASICLIGHT}>{LogoutText.LogoutMessage}</Logo>
               <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}></Padding>
-              <LinkButton to={ROUTE.LOGIN} color={BASICCOLORS.PRIMARY}>
-                {LogoutText.LogoutLoginUser}
-              </LinkButton>
+              <LinkButton to={ROUTE.LOGIN}>{LogoutText.LogoutLoginUser}</LinkButton>
             </Padding>
           </Sign>
         </Padding>

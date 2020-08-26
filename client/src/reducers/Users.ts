@@ -1,8 +1,11 @@
-import { ACTIONTYPES, UsersData, UsersActionTypes } from '../actions';
+import { ACTIONTYPES, UsersActionTypes } from '../actions';
+import { userThumbNailTypes } from '../utils/constant/storeType';
+const initialState: userThumbNailTypes = [];
 
-const initialState: UsersData = [];
-
-export default function UsersReducer(state = initialState, action: UsersActionTypes): UsersData {
+export default function UsersReducer(
+  state = initialState,
+  action: UsersActionTypes
+): userThumbNailTypes {
   let newState = state;
   const Users = action.payload || [];
   switch (action.type) {
