@@ -17,21 +17,21 @@ class Ball extends Model {
   static async add(id: string, ball: ballType) {
     const newBall = await this.create({
       name: ball.name,
-      userId: id,
+      userId: parseInt(id),
       makerId: ball.makerId,
     });
-    return [{ newBall }];
+    return { newBall };
   }
 
   static async updateBall(id: string, ball: ballType) {
     const targetBall: any = await this.findOne({
-      where: { id: id },
+      where: { userId: parseInt(id) },
     });
     const updateBall = await targetBall.update({
       name: ball.name,
       makerId: ball.makerId,
     });
-    return updateBall;
+    return { updateBall };
   }
   public static initialize(sequelize: Sequelize) {
     this.init(
@@ -82,7 +82,6 @@ export interface ballType {
   name: string;
   userId: number;
   makerId: number;
-  updateBall: () => void;
 }
 
 export default Ball;

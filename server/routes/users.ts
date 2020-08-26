@@ -7,15 +7,18 @@ import videosController from "../controllers/videosController";
 const usersRouter = express.Router();
 
 //usersprofileAPI(UsersTable)
-usersRouter.get("/:id", usersController.show);
+//動作確認のため、仮作成。
+usersRouter.post("/login", usersController.show);
+//
 usersRouter.get("/", usersController.index);
 usersRouter.post("/", usersController.create);
 usersRouter.patch("/:id", usersController.update);
 usersRouter.delete("/:id", usersController.delete);
 
 //usersGearsAPI(clubsTable,BallsTable)
-usersRouter.get("/:id/clubs", clubsController.index);
-usersRouter.patch("/:id/clubs", clubsController.update);
+usersRouter.get("/:id/gears", clubsController.index);
+usersRouter.post("/:id/gears", clubsController.create);
+usersRouter.patch("/:id/clubs/:cid", clubsController.update);
 usersRouter.post("/:id/ball", ballsController.create);
 usersRouter.patch("/:id/ball", ballsController.update);
 // usersRouter.delete("/:id/gears/:id");

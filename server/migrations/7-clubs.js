@@ -30,15 +30,6 @@ module.exports = {
           key: "id",
         },
       },
-      // userId: {
-      //   type: Sequelize.INTEGER,
-      //   allowNull: false,
-      //   onDelete: "CASCADE",
-      //   references: {
-      //     model: "users",
-      //     key: "id",
-      //   },
-      // },
       shaftId: {
         type: Sequelize.INTEGER,
         allowNull: false,

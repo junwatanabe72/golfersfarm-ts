@@ -29,12 +29,12 @@ class User extends Model {
       name: user.name,
       email: user.email,
     });
-    return [{ newUser }];
+    return newUser;
   }
 
-  static async updateProfile(user: User) {
+  static async updateProfile(id: string, user: User) {
     const targetUser: any = await this.findOne({
-      where: { id: user.id },
+      where: { id: id },
     });
     const updateUser = await targetUser.update({
       sex: user.sex,
@@ -144,8 +144,6 @@ export interface userType {
   job?: string;
   profileImage?: string;
   clubImage?: string;
-  add: () => void;
-  updateProfile: () => void;
   school?: string;
   hobby?: string;
   facebook?: string;

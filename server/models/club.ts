@@ -18,15 +18,44 @@ class Club extends Model {
   public id!: number;
   public name!: string;
   public typeId!: number;
-  // public userId!: number;
   public shaftId!: number;
   public makerId!: number;
 
-  static async clubUpdate(id: string, club: clubType) {
+  static async add(id: string, club: clubType, sequelize: Sequelize) {
+    const newData = await sequelize.transaction(async (t) => {
+      const newClub = await this.create(
+        {
+          name: club.name,
+          typeId: club.typeId,
+          shaftId: club.shaftId,
+          makerId: club.makerId,
+        },
+        { transaction: t }
+      );
+      const newUserClubs = await UserClubs.create(
+        {
+          userId: parseInt(id),
+          clubId: newClub.id,
+        },
+        { transaction: t }
+      );
+      return { newClub, newUserClubs };
+    });
+    return { newData };
+  }
+  static async clubUpdate(id: string, clubId: string, club: clubType) {
+    const checkedClub = await UserClubs.findOne({
+      where: {
+        userId: parseInt(id),
+        clubId: parseInt(clubId),
+      },
+    });
+    if (!checkedClub) {
+      return;
+    }
     const targetClub: any = await this.findOne({
       where: {
-        id: club.id,
-        // userId: id,
+        id: parseInt(clubId),
       },
     });
     const updateClub = await targetClub.update({
@@ -35,7 +64,7 @@ class Club extends Model {
       shaftId: club.shaftId,
       makerId: club.makerId,
     });
-    return updateClub;
+    return { updateClub };
   }
   public static initialize(sequelize: Sequelize) {
     this.init(
@@ -51,10 +80,6 @@ class Club extends Model {
           defaultValue: club.name,
           allowNull: false,
         },
-        // userId: {
-        //   type: DataTypes.INTEGER,
-        //   allowNull: false,
-        // },
         typeId: {
           type: DataTypes.INTEGER,
           allowNull: false,
@@ -79,11 +104,6 @@ class Club extends Model {
     return this;
   }
   public static associate() {
-    // this.belongsTo(User, {
-    //   foreignKey: "userId",
-    //   onDelete: "CASCADE",
-    //   constraints: false,
-    // });
     this.hasMany(UserClubs, {
       sourceKey: "id",
       foreignKey: "clubId",
@@ -108,7 +128,6 @@ export interface clubType {
   id: number;
   name: string;
   typeId: number;
-  // userId: number;
   shaftId: number;
   makerId: number;
 }
