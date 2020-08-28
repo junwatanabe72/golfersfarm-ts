@@ -20,7 +20,7 @@ export default {
       });
       res.json({ targetUser });
     } catch (error) {
-      res.status(400);
+      res.status(404);
       return next(error);
     }
   },
@@ -60,12 +60,12 @@ export default {
     try {
       const updateUser = await users.updateProfile(req.params.id, user);
       if (!updateUser) {
-        return res.status(404);
+        return res.status(400);
       } else {
         res.status(201).json({ updateUser });
       }
     } catch (error) {
-      res.status(404);
+      res.status(400);
       return next(error);
     }
   },
@@ -80,7 +80,7 @@ export default {
       await targetUser.destroy();
       res.status(204).json({});
     } catch (error) {
-      res.status(404);
+      res.status(400);
       return next(error);
     }
   },
