@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { PartialICOLOR, BASICCOLORS } from '../../utils/constant/color';
-import { PartialIFONTSIZE, FONTSIZE } from '../../utils/constant/number';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { FONTSIZE } from '../../utils/constant/number';
 import {
   IconName,
   IconLookup,
   IconDefinition,
   findIconDefinition,
 } from '@fortawesome/fontawesome-svg-core';
+import { PartialIFONTSIZE } from '../../@type/utils/numer';
+import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   head: 'fas' | 'fab' | 'far';

@@ -4,19 +4,30 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
-import { PartialUserObjectType } from '../../utils/constant/storeType';
-interface Props {
+import { PartialIWIDTH } from '../../@type/utils/numer';
+import { SIZE } from '../../utils/constant/number';
+import { media } from '../../utils/styled/styledRdesign';
+interface Props extends PartialIWIDTH {
   currentUser: PartialUserObjectType;
 }
 
 //style
-const Container = styled.div`
+const BackColor = styled.div`
   background-color: ${BASICCOLORS.WHITE};
+`;
+
+const Container = styled.div<PartialIWIDTH>`
+  width: ${(props) => props.width}vw;
+  margin: 0vw auto;
+  text-align: center;
+  ${media.tablet`
+    width: 90vw;
+      `}
 `;
 
 //仮の数値
 
-const Layout: React.FC<Props> = ({ currentUser, children }) => {
+const Layout: React.FC<Props> = ({ currentUser, children, width = SIZE.XXXLARGE }) => {
   const isLogin: boolean = 0 !== Object.keys(currentUser).length;
   const { id } = currentUser;
   const addRoute = { USER: `/users/${id}`, EDIT: `/users/${id}/edit`, LOGOUT: '/logout' };
@@ -24,11 +35,11 @@ const Layout: React.FC<Props> = ({ currentUser, children }) => {
   const route = isLogin ? { TOP, USERS, ...addRoute } : ROUTE;
 
   return (
-    <Container>
+    <BackColor>
       <Header route={route} />
-      {children}
+      <Container width={width}>{children}</Container>
       <Footer route={route} infoRoute={INFOROUTE} />
-    </Container>
+    </BackColor>
   );
 };
 

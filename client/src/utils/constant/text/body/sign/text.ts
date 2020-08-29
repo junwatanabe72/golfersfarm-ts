@@ -25,13 +25,6 @@ export const signUpFormDatas = {
   },
 };
 
-export interface signUpInitialValuesDataType {
-  email: string;
-  name: string;
-  password: string;
-  confirmedPassword: string;
-}
-
 export const signUpValidation = () =>
   yup.object().shape({
     email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
@@ -53,22 +46,6 @@ export const signUpValidationType = yup.object({
   confirmedPassword: yup.string().oneOf([yup.ref('password'), undefined]),
 });
 
-interface signUpFormDatasType {
-  initialValuesData: {
-    email: string;
-    name: string;
-    password: string;
-    confirmedPassword: string;
-    [key: string]: string;
-  };
-  placeHolder: {
-    email: string;
-    name: string;
-    password: string;
-    confirmedPassword: string;
-    [key: string]: string;
-  };
-}
 //
 
 // login
@@ -89,10 +66,6 @@ export const formDatas = {
     password: '英数字８字以上のパスワード',
   },
 };
-export interface loginInitialValuesDataType {
-  email: string;
-  password: string;
-}
 
 export const validation = () =>
   yup.object().shape({
@@ -109,27 +82,6 @@ export const loginValidationType = yup.object({
   password: yup.string().defined().min(8).max(30),
 });
 
-interface loginFormDatasType {
-  initialValuesData: {
-    email: string;
-    password: string;
-    [key: string]: string;
-  };
-  placeHolder: {
-    email: string;
-    password: string;
-    [key: string]: string;
-  };
-}
-
-//common
-export type initialValuesDataType = loginInitialValuesDataType | signUpFormDatasType;
-export type ValidationType =
-  | yup.InferType<typeof loginValidationType>
-  | yup.InferType<typeof signUpValidationType>;
-export interface formDataTypes {
-  formDatas: loginFormDatasType | signUpFormDatasType;
-}
 //
 
 // logout

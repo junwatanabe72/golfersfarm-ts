@@ -3,11 +3,14 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import Button from './Button';
 import { Padding } from '../../utils/styled/styledSpace';
-import { formDataTypes } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../utils/constant/number';
 import { BASICCOLORS } from '../../utils/constant/color';
-import { ValidationType, initialValuesDataType } from '../../utils/constant/text/body/sign/text';
+import {
+  formDataTypes,
+  ValidationType,
+  initialValuesDataType,
+} from '../../@type/components/signupPage';
 
 interface Props extends formDataTypes {
   validation: ValidationType;
@@ -50,21 +53,21 @@ const FormikForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onSub
     onSubmit: onSubmit,
   });
 
-  const InputItems = Object.entries(formDatas.placeHolder).map((item: string[]) => {
+  const InputItems = Object.entries(formDatas.placeHolder).map(([key, value]: string[]) => {
     return (
       <>
         <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
           <StyledField
-            type={item[0]}
-            name={item[0]}
-            placeholder={item[1]}
+            type={key}
+            name={key}
+            placeholder={value}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values[item[1]]}
+            value={formik.values[value]}
           />
         </Padding>
-        {formik.touched[item[0]] && formik.errors[item[0]] ? (
-          <Styleddiv>{formik.errors[item[0]]}</Styleddiv>
+        {formik.touched[key] && formik.errors[key] ? (
+          <Styleddiv>{formik.errors[key]}</Styleddiv>
         ) : null}
       </>
     );

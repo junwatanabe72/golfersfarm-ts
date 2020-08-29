@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { PartialICOLOR, BASICCOLORS } from '../../utils/constant/color';
-import { FONTSIZE, PartialIFONTSIZE } from '../../utils/constant/number';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { FONTSIZE } from '../../utils/constant/number';
 import Url from '../atoms/Url';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
+import { PartialICOLOR } from '../../@type/utils/color';
+import { PartialIFONTSIZE } from '../../@type/utils/numer';
 
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   urls: {

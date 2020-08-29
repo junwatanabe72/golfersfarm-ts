@@ -4,10 +4,11 @@ import TopTitle from '../organisms/top/Title';
 import TopConcept from '../organisms/top/Concept';
 import Layout from '../templates/Layout';
 import TopUsage from '../organisms/top/Usage';
-import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
-import { CLEAR } from '../../utils/constant/number';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialUserObjectType } from '../../utils/constant/storeType';
+import { PartialICOLOR } from '../../@type/utils/color';
+
 interface Props {
   currentUser: PartialUserObjectType;
 }
@@ -21,7 +22,6 @@ const Container = styled.div`
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
 `;
 
 const components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />];
@@ -39,7 +39,11 @@ const contents = components.map((d: JSX.Element, i: number) => {
 });
 
 const Top: React.FC<Props> = ({ currentUser }) => {
-  return <Layout currentUser={currentUser}>{contents}</Layout>;
+  return (
+    <Layout currentUser={currentUser} width={SIZE.MAX}>
+      {contents}
+    </Layout>
+  );
 };
 
 export default Top;

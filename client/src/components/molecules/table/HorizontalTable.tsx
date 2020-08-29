@@ -1,19 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SIZE, PartialIWIDTH } from '../../../utils/constant/number';
+import { SIZE } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
-import {
-  resultTableItemsType,
-  profileTableItemsType,
-  gearTableItemsType,
-} from '../../../utils/constant/text/body/user/text';
-import {
-  PartialUserObjectType,
-  PartialClubTableTypes,
-  PartialResultTableTypes,
-  clubObjectType,
-  resultObjectType,
-} from '../../../utils/constant/storeType';
+import { PartialIWIDTH } from '../../../@type/utils/numer';
 
 interface Props extends PartialIWIDTH {
   datas: PartialUserObjectType | PartialClubTableTypes | PartialResultTableTypes;

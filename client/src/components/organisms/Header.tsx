@@ -5,9 +5,10 @@ import LinkList from '../molecules/LinkList';
 import Toggle from '../molecules/Toggle';
 import LinkButton from '../atoms/LinkButton';
 import { FONTSIZE } from '../../utils/constant/number';
-import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
-import { HeaderText } from '../../utils/constant/text/header/text';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { HeaderTitleText } from '../../utils/constant/text/header/text';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
+import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props extends PartialICOLOR {
   route: any;
@@ -50,7 +51,7 @@ const Header: React.FC<Props> = ({ color = BASICCOLORS.WHITELIGHT, route }) => {
     <BackgroundColor color={color}>
       <Container>
         <LinkButton to={route.TOP} fontSize={FONTSIZE.XXLARGE} color={fontColor}>
-          {HeaderText.HeaderTitleText.appTitle}
+          {HeaderTitleText.appTitle}
         </LinkButton>
         <Toggle linkList={linkList} modalInLinks={modalInLinks} />
       </Container>

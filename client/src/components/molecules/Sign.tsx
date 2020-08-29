@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../atoms/Logo';
-import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
-import { CLEAR, PartialICLEAR, FONTSIZE } from '../../utils/constant/number';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { CLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { ALIGNITEMSTYPE, ALIGNITEMS } from '../../utils/styled/styledSpace';
+import { ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
+import { PartialICOLOR } from '../../@type/utils/color';
+import { PartialICLEAR } from '../../@type/utils/numer';
 
 interface Props extends PartialICOLOR, PartialICLEAR {
   title?: string;

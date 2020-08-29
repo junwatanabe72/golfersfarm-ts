@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS, PartialICOLOR } from '../../utils/constant/color';
+import { BASICCOLORS } from '../../utils/constant/color';
 import { Padding } from '../../utils/styled/styledSpace';
-import { FONTSIZE, CLEARTYPE, CLEAR, PartialIFONTSIZE } from '../../utils/constant/number';
+import { FONTSIZE, CLEAR } from '../../utils/constant/number';
+import { PartialIFONTSIZE, CLEARTYPE } from '../../@type/utils/numer';
+import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   onClick?: () => void;

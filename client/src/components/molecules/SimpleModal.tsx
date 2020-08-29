@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
-import { ICOLOR } from '../../utils/constant/color';
-import { MENUZTYPE } from '../../utils/constant/text/fontAweicon';
+import { ICOLOR } from '../../@type/utils/color';
+import { MENUZTYPE } from '../../@type/components/fontAweicon';
 
 interface Props extends ICOLOR, MENUZTYPE {
   workModal: () => void;
