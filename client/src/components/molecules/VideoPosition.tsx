@@ -2,8 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import Iframe from '../atoms/Iframe';
 import { media } from '../../utils/styled/styledRdesign';
-import { SIZE, SIZETYPE, CLEAR } from '../../utils/constant/number';
+import { SIZE, CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
+import { SIZETYPE } from '../../@type/utils/numer';
 
 interface Props {
   videos: string[];

@@ -16,9 +16,11 @@ class Ball extends Model {
 
   static async add(id: string, ball: ballType) {
     const newBall = await this.create({
-      name: ball.name,
+      ...ball,
       userId: parseInt(id),
-      makerId: ball.makerId,
+      // name: ball.name,
+      // userId: parseInt(id),
+      // makerId: ball.makerId,
     });
     return { newBall };
   }
@@ -28,8 +30,7 @@ class Ball extends Model {
       where: { userId: parseInt(id) },
     });
     const updateBall = await targetBall.update({
-      name: ball.name,
-      makerId: ball.makerId,
+      ...ball,
     });
     return { updateBall };
   }

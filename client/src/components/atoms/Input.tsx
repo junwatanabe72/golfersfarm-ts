@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SIZE, CLEAR, ICLEAR, FONTSIZE } from '../../utils/constant/number';
+import { SIZE, CLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 

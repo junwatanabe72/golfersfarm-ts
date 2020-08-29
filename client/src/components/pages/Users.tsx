@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { State } from '../../store';
 import { addUsers } from '../../actions';
 import Layout from '../templates/Layout';
 import ThumbNail from '../molecules/ThumbNail';
@@ -9,7 +8,6 @@ import { users } from '../../utils/constant/text/body/user/value';
 import { media } from '../../utils/styled/styledRdesign';
 import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialUserObjectType, userThumbNailTypes } from '../../utils/constant/storeType';
 
 interface Props {
   currentUser: PartialUserObjectType;
@@ -18,11 +16,7 @@ interface Props {
 
 const Container = styled.div`
   display: flex;
-  width: 90vw;
   flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-  text-align: center;
   ${media.tablet`
       flex-direction: column;
       justify-content: space-around;

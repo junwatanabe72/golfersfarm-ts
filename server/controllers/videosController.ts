@@ -27,7 +27,7 @@ export default {
       const newVideo = await videos.add(req.params.id, video);
       res.status(201).json({ newVideo });
     } catch (error) {
-      res.status(404);
+      res.status(400);
       return next(error);
     }
   },
@@ -36,12 +36,12 @@ export default {
     try {
       const updateVideo = await videos.updateDatas(video);
       if (!updateVideo) {
-        return res.status(404);
+        return res.status(400);
       } else {
         res.status(201).json({ updateVideo });
       }
     } catch (error) {
-      res.status(404);
+      res.status(400);
       return next(error);
     }
   },

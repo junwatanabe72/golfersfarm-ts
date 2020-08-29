@@ -1,19 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinkButton from '../atoms/LinkButton';
-import { ICOLOR } from '../../utils/constant/color';
-import { CLEAR, PartialICLEAR } from '../../utils/constant/number';
+import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
+import { ICOLOR } from '../../@type/utils/color';
+import { PartialICLEAR } from '../../@type/utils/numer';
 
 interface Props extends ICOLOR, PartialICLEAR {
   route: any;
 }
 
 const LinkList: React.FC<Props> = ({ color, route, clear = CLEAR.TINY }) => {
-  const list = Object.entries(route).map((eachRoute: any) => {
+  const list = Object.entries(route).map(([key, value]: any) => {
     return (
-      <LinkButton to={eachRoute[1]} color={color}>
-        <Padding all={clear}>{eachRoute[0]}</Padding>
+      <LinkButton to={value} color={color}>
+        <Padding all={clear}>{key}</Padding>
       </LinkButton>
     );
   });

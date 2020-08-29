@@ -14,34 +14,12 @@ export const profileTableSubItems = {
   school: '出身校',
   hobby: '趣味',
 };
-export interface profileTableSubItemsType {
-  sex: string;
-  residence: string;
-  birthPlace: string;
-  school: string;
-  job: string;
-  hobby: string;
-  [key: string]: string;
-}
-export interface profileTablemainItemsType {
-  bestScore: string;
-  averageDistance: string;
-  homeCource: string;
-  [key: string]: string;
-}
-export type profileTableItemsType = profileTablemainItemsType | profileTableSubItemsType;
 
 export const resultTableItems = {
   year: '年',
   com: '競技',
   rank: '順位',
 };
-export interface resultTableItemsType {
-  year: string;
-  com: string;
-  rank: string;
-  [key: string]: string;
-}
 
 export const gearTableItems = {
   typeId: '種類',
@@ -50,15 +28,6 @@ export const gearTableItems = {
   shaftId: 'シャフト',
   userId: '硬さ',
 };
-
-export interface gearTableItemsType {
-  typeId: string;
-  name: string;
-  makerId: string;
-  shaftId: string;
-  userId: string;
-  [key: string]: string;
-}
 
 export const profileTableKeys = ['ベストスコア', '平均飛距離', 'ホームコース'];
 export const profileTableTargetkey = ['bestScore', 'averageDistance', 'homeCource'];

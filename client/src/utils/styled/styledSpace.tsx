@@ -1,13 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { CLEAR, CLEARTYPE } from '../constant/number';
-type PaddingProps = {
-  top?: CLEARTYPE;
-  right?: CLEARTYPE;
-  bottom?: CLEARTYPE;
-  left?: CLEARTYPE;
-  all?: CLEARTYPE;
-};
+import { PaddingProps } from '../../@type/utils/space';
 
 //  export const Padding = styled.div<PaddingProps>`
 //   padding-top: ${(props) => props.top}px;
@@ -30,21 +23,6 @@ export const ALIGNITEMS = {
   END: 'end',
 } as const;
 
-export type ALIGNITEMSTYPE =
-  | typeof ALIGNITEMS.CENTER
-  | typeof ALIGNITEMS.START
-  | typeof ALIGNITEMS.END;
-
-export interface IALIGNITEMSTYPE {
-  alignItems: ALIGNITEMSTYPE;
-}
-
-export interface ITEXTALIGNTYPE {
-  textAlign: ALIGNITEMSTYPE;
-}
-
-export type PartialIALIGNITEMSTYPE = Partial<IALIGNITEMSTYPE>;
-export type PartialITEXTALIGNTYPE = Partial<ITEXTALIGNTYPE>;
 // type MarginProps = {
 //   top?: CLEARTYPE,
 //   right?: CLEARTYPE,

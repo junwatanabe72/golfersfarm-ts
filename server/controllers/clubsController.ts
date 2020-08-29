@@ -15,7 +15,6 @@ export default {
     try {
       const allClubs = await clubs.findAll({
         where: { id: clubIds },
-        raw: false,
         include: [
           {
             model: makers,
@@ -33,7 +32,6 @@ export default {
       });
       const targetBall = await balls.findOne({
         where: { userId: req.params.id },
-        raw: false,
         include: [
           {
             model: makers,
@@ -61,12 +59,12 @@ export default {
         club
       );
       if (!updateClub) {
-        return res.status(404);
+        return res.status(400);
       } else {
         res.status(201).json(updateClub);
       }
     } catch (error) {
-      res.status(404);
+      res.status(400);
       return next(error);
     }
   },

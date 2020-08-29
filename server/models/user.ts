@@ -25,9 +25,7 @@ class User extends Model {
 
   static async add(user: User) {
     const newUser = await this.create({
-      password: user.password,
-      name: user.name,
-      email: user.email,
+      ...user,
     });
     return newUser;
   }
@@ -37,21 +35,7 @@ class User extends Model {
       where: { id: id },
     });
     const updateUser = await targetUser.update({
-      sex: user.sex,
-      residence: user.residence,
-      averageDistance: user.averageDistance,
-      bestScore: user.bestScore,
-      email: user.email,
-      job: user.job,
-      profileImage: user.profileImage,
-      clubImage: user.clubImage,
-      school: user.school,
-      hobby: user.hobby,
-      facebook: user.facebook,
-      twitter: user.twitter,
-      instagram: user.instagram,
-      youtube: user.youtube,
-      show: user.show,
+      ...user,
     });
     return { updateUser };
   }

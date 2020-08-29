@@ -1,5 +1,6 @@
-import { ACTIONTYPES, ClubsActionTypes } from '../actions';
-import { clubTableTypes } from '../utils/constant/storeType';
+import { ACTIONTYPES } from '../actions';
+import { ClubsActionTypes } from '../@type/action';
+
 const initialState: clubTableTypes = [];
 
 export default function ClubsReducer(

@@ -6,9 +6,8 @@ import { Padding } from '../../../utils/styled/styledSpace';
 import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
 import UserCard from './Card';
-import { TABLETYPES } from '../../../utils/constant/text/tableType';
+import { TABLETYPES } from '../../../utils/constant/text/table';
 import { profileTableItems } from '../../../utils/constant/text/body/user/text';
-import { PartialUserObjectType } from '../../../utils/constant/storeType';
 
 interface Props {
   targetUser: PartialUserObjectType;

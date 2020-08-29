@@ -1,13 +1,11 @@
-import { Action } from 'redux';
-import { clubType, club, maker, shaft } from '../utils/constant/text/body/user/value';
 import {
-  PartialUserObjectType,
-  userThumbNailTypes,
-  clubTableTypes,
-  TypesData,
-  ShaftsData,
-  MakersData,
-} from '../utils/constant/storeType';
+  UserActionTypes,
+  UsersActionTypes,
+  ClubsActionTypes,
+  TypesActionTypes,
+  ShaftsActionTypes,
+  MakersActionTypes,
+} from '../@type/action';
 //ACTIONTYPES
 export const ACTIONTYPES = {
   ADD_USER: 'ADD_USER',
@@ -19,61 +17,6 @@ export const ACTIONTYPES = {
   ADD_MAKERS: 'ADD_MAKERS',
 } as const;
 
-// userAction
-// export type PartialIUserData = Partial<userObjectType>;
-
-export interface AddUserAction extends Action {
-  type: typeof ACTIONTYPES.ADD_USER;
-  payload: PartialUserObjectType;
-}
-export interface DeleteUserAction extends Action {
-  type: typeof ACTIONTYPES.DELETE_USER;
-}
-export type UserActionTypes = AddUserAction | DeleteUserAction;
-
-//usersAction
-
-export interface AddUsersAction extends Action {
-  type: typeof ACTIONTYPES.ADD_USERS;
-  payload: userThumbNailTypes;
-}
-export type UsersActionTypes = AddUsersAction;
-
-//clubsAction
-// export type ClubData = typeof club;
-// export type ClubsData = ClubData[];
-export interface AddClubAction extends Action {
-  type: typeof ACTIONTYPES.ADD_CLUBS;
-  payload: clubTableTypes;
-}
-export type ClubsActionTypes = AddClubAction;
-
-//typesAction
-// export type TypeData = typeof clubType;
-// export type TypesData = TypeData[];
-export interface AddTypeAction extends Action {
-  type: typeof ACTIONTYPES.ADD_TYPES;
-  payload: TypesData;
-}
-export type TypesActionTypes = AddTypeAction;
-
-//shaftsAction
-// export type ShaftData = typeof shaft;
-// export type ShaftsData = ShaftData[];
-export interface AddShaftAction extends Action {
-  type: typeof ACTIONTYPES.ADD_SHAFTS;
-  payload: ShaftsData;
-}
-export type ShaftsActionTypes = AddShaftAction;
-
-//makersAction
-// export type MakerData = typeof maker;
-// export type MakersData = MakerData[];
-export interface AddMakerAction extends Action {
-  type: typeof ACTIONTYPES.ADD_MAKERS;
-  payload: MakersData;
-}
-export type MakersActionTypes = AddMakerAction;
 //REDUX_SAGA
 // export const ISSUE_REQUESTED = 'ISSUE_REQUESTED';
 // export function getIssue(issue) {

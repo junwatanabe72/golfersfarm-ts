@@ -9,7 +9,6 @@ export default {
     try {
       const targetBall = await balls.findOne({
         where: { userId: req.params.id },
-        raw: false,
         include: [
           {
             model: makers,
@@ -19,7 +18,7 @@ export default {
       });
       res.json(targetBall);
     } catch (error) {
-      res.status(400);
+      res.status(404);
       return next(error);
     }
   },
@@ -39,7 +38,7 @@ export default {
       const targetBall = await balls.updateBall(req.params.id, ball);
       res.status(201).json(targetBall);
     } catch (error) {
-      res.status(404);
+      res.status(400);
       return next(error);
     }
   },

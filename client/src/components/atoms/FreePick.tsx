@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Image from './Image';
-import { PartialIWIDTH, SIZE } from '../../utils/constant/number';
+import { SIZE } from '../../utils/constant/number';
+import { PartialIWIDTH } from '../../@type/utils/numer';
 
 interface Props extends PartialIWIDTH {
   image: string;

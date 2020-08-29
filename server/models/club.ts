@@ -25,10 +25,7 @@ class Club extends Model {
     const newData = await sequelize.transaction(async (t) => {
       const newClub = await this.create(
         {
-          name: club.name,
-          typeId: club.typeId,
-          shaftId: club.shaftId,
-          makerId: club.makerId,
+          ...club,
         },
         { transaction: t }
       );
@@ -59,10 +56,7 @@ class Club extends Model {
       },
     });
     const updateClub = await targetClub.update({
-      name: club.name,
-      typeId: club.typeId,
-      shaftId: club.shaftId,
-      makerId: club.makerId,
+      ...club,
     });
     return { updateClub };
   }

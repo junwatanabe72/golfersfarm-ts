@@ -15,9 +15,8 @@ import {
   resultTableItems,
 } from '../../../utils/constant/text/body/user/text';
 import { allResults } from '../../../utils/constant/text/body/user/value';
-import { TABLETYPES } from '../../../utils/constant/text/tableType';
+import { TABLETYPES } from '../../../utils/constant/text/table';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
-import { PartialUserObjectType, clubTableTypes } from '../../../utils/constant/storeType';
 
 interface Props {
   targetUser: PartialUserObjectType;

@@ -9,9 +9,7 @@ import {
   PartialIWIDTH,
   PartialIWIDTHTAB,
   PartialIFONTSIZE,
-} from '../../../utils/constant/number';
-import { PartialUserObjectType } from '../../../utils/constant/storeType';
-import { BASICCOLORS } from '../../../utils/constant/color';
+} from '../../../@type/utils/numer';
 
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
   data: PartialUserObjectType;

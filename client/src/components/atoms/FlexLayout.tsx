@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { PartialIWIDTH } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIALIGNITEMSTYPE } from '../../utils/styled/styledSpace';
+import { PartialIWIDTH } from '../../@type/utils/numer';
+import { PartialIALIGNITEMSTYPE } from '../../@type/utils/space';
 
 interface Props extends PartialIWIDTH, PartialIALIGNITEMSTYPE {
   right: ReactElement;

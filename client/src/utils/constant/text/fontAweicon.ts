@@ -1,5 +1,3 @@
-import { IconName } from '@fortawesome/fontawesome-svg-core';
-
 export const FONTAWEICON = {
   question: {
     head: 'fas',
@@ -26,8 +24,3 @@ export const FONTAWEICON = {
     tail: 'bars',
   },
 } as const;
-
-export interface MENUZTYPE {
-  head: "fas" | "fab" | "far",
-  tail: IconName,
-}

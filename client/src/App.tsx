@@ -13,7 +13,6 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
-import { State } from './store';
 import { addUsers, addTypes, addShafts, addMakers } from './actions';
 import { users, allTypes, shafts, makers } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
@@ -22,6 +21,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコ
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
 import { far } from '@fortawesome/free-regular-svg-icons'; //fontawesomeのregularアイコンのインポート
+import { State } from './@type/store';
 library.add(fas, far, fab);
 
 interface Props {}
@@ -38,7 +38,7 @@ const App: React.FC<Props> = ({}) => {
   const storeClubs = useSelector((state: State) => state.Clubs);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
-  const route = allUsers.map((user) => {
+  const route = allUsers.map((user: PartialUserObjectType) => {
     return (
       <Route
         exact

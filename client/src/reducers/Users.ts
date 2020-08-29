@@ -1,5 +1,6 @@
-import { ACTIONTYPES, UsersActionTypes } from '../actions';
-import { userThumbNailTypes } from '../utils/constant/storeType';
+import { ACTIONTYPES } from '../actions';
+import { UsersActionTypes } from '../@type/action';
+
 const initialState: userThumbNailTypes = [];
 
 export default function UsersReducer(

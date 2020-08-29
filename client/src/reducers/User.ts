@@ -1,5 +1,6 @@
-import { ACTIONTYPES, UserActionTypes } from '../actions';
-import { PartialUserObjectType } from '../utils/constant/storeType';
+import { ACTIONTYPES } from '../actions';
+import { UserActionTypes } from '../@type/action';
+
 const initialState: PartialUserObjectType = {};
 
 export default function UserReducer(
