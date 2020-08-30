@@ -18,8 +18,19 @@ interface userObjectType {
   email: string;
   password: string;
   clubImage: string;
+  show: boolean;
+  clubs: number[];
   [key: string]: any;
 }
 
 type PartialUserObjectType = Partial<userObjectType>;
 type userThumbNailTypes = PartialUserObjectType[];
+
+interface clubListType {
+  id: number;
+  userId: number;
+  clubId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+type clubListsType = clubListType[];

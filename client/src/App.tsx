@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Route, BrowserRouter as Router, Redirect, RouteComponentProps } from 'react-router-dom';
-import axios from 'axios';
 import Top from './components/pages/Top';
 import Users from './components/pages/Users';
 import User from './components/pages/User';
@@ -16,7 +15,7 @@ import SignUp from './components/pages/SignUp';
 import { addUsers, addTypes, addShafts, addMakers } from './actions';
 import { users, allTypes, shafts, makers } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
-
+import { getUsers } from './services/axios/user';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
@@ -38,6 +37,20 @@ const App: React.FC<Props> = ({}) => {
   const storeClubs = useSelector((state: State) => state.Clubs);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
+
+  async function catchUser() {
+    const data = await getUsers();
+    const dbUsers = data.data.allUsers;
+    const allUserClubs: clubListsType = data.data.allUserClubs;
+    const storeUsers = dbUsers.map((user: PartialUserObjectType) => {
+      const clubList = Object.values(allUserClubs)
+        .filter((list: clubListType) => list.userId === user.id)
+        .map((list: clubListType) => list.clubId);
+      return { ...user, clubs: [...clubList] };
+    });
+    dispatch(addUsers(storeUsers));
+  }
+
   const route = allUsers.map((user: PartialUserObjectType) => {
     return (
       <Route
@@ -55,7 +68,7 @@ const App: React.FC<Props> = ({}) => {
   });
 
   useEffect(() => {
-    dispatch(addUsers(users));
+    catchUser();
     dispatch(addTypes(allTypes));
     dispatch(addShafts(shafts));
     dispatch(addMakers(makers));
