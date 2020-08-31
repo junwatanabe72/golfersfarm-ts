@@ -18,7 +18,10 @@ export default {
       const targetUser: userType = await users.findOne({
         where: { password: user.password, email: user.email },
       });
-      res.json({ targetUser });
+      const targetUserClubs = await UserClubs.findAll({
+        where: { userId: targetUser.id },
+      });
+      res.json({ data: { targetUser, targetUserClubs } });
     } catch (error) {
       res.status(404);
       return next(error);
