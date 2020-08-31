@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RouteComponentProps } from 'react-router-dom';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
@@ -15,18 +14,14 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { ROUTE } from '../../utils/constant/route';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
-import { media } from '../../utils/styled/styledRdesign';
 import { initialValuesDataType } from '../../@type/components/signupPage';
 
-interface Props extends RouteComponentProps<{}> {
+interface Props {
   currentUser: PartialUserObjectType;
+  onSubmit: (values: initialValuesDataType) => void;
 }
 
-const SignUp: React.FC<Props> = ({ currentUser, history }) => {
-  const onSubmit = (values: initialValuesDataType) => {
-    history.push(`/login/`);
-  };
-
+const SignUp: React.FC<Props> = ({ currentUser, onSubmit }) => {
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>

@@ -1,29 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import App from './App';
+import reducers, { router } from './reducers/Combine';
+import mySaga from './sagas';
 import { GlobalStyle } from './utils/styled/globalStyle';
-import { store } from './store';
-// import mySaga from './sagas';
 // import Toastify from './utils/Toastify';
 import * as serviceWorker from './serviceWorker';
 
-// const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware();
+const store = createStore(
+  reducers(router),
+  compose(composeWithDevTools(applyMiddleware(sagaMiddleware, routerMiddleware(router))))
+);
 
-// const store = createStore(reducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
-// //saga
-// sagaMiddleware.run(mySaga);
+// // //saga
+sagaMiddleware.run(mySaga);
 //saga
 
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyle />
     <Provider store={store}>
-      {/* <Toastify /> */}
-      <App />
+      <ConnectedRouter history={router}>
+        {/* <Toastify /> */}
+        <App />
+      </ConnectedRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

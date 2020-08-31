@@ -1,5 +1,4 @@
 import { Action } from 'redux';
-// import { ACTIONTYPES } from '../action';
 
 const ACTIONTYPES = {
   ADD_USER: 'ADD_USER',
@@ -9,7 +8,25 @@ const ACTIONTYPES = {
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
+  REQUESTED_USER: 'REQUESTED_USER',
+  CREATE_USER: 'CREATE_USER',
+  LOGIN_USER: 'LOGIN_USER',
 } as const;
+
+//saga
+interface getUsersAction extends Action {
+  type: typeof ACTIONTYPES.REQUESTED_USER;
+}
+interface createUserAction extends Action {
+  type: typeof ACTIONTYPES.CREATE_USER;
+  payload: signupUserType;
+}
+interface loginUserAction extends Action {
+  type: typeof ACTIONTYPES.LOGIN_USER;
+  payload: loginUserType;
+}
+type sagaActionTypes = getUsersAction | createUserAction | loginUserAction;
+//saga
 
 interface AddUserAction extends Action {
   type: typeof ACTIONTYPES.ADD_USER;

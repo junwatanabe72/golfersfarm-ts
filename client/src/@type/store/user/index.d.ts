@@ -26,6 +26,8 @@ interface userObjectType {
 type PartialUserObjectType = Partial<userObjectType>;
 type userThumbNailTypes = PartialUserObjectType[];
 
+type signupUserType = Pick<userObjectType, 'name' | 'password' | 'email'>;
+type loginUserType = Pick<userObjectType, 'password' | 'email'>;
 interface clubListType {
   id: number;
   userId: number;

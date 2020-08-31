@@ -1,33 +1,60 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-// import {
-//   ISSUE_REQUESTED,
-//   ISSUE_POSTREQUESTED,
-//   ISSUE_PUTREQUESTED,
-//   addIssue,
-//   addUser,
-//   USER_REQUESTED,
-// } from '../actions/index';
-// import { getAxios, postAxios, putAxios, getUserAxios } from '../service/Axios';
+import { ACTIONTYPES, addUser, addUsers, createUser, getUsers } from '../actions/index';
+import { getUsersAxios, createUserAxios, loginUserAxios } from '../services/axios/user';
+import { push } from 'connected-react-router';
 // import { options } from '../utils/Toastify';
 // import { toast } from 'react-toastify';
 
-// export function* getIssueAsync(action) {
-//   const { data } = yield call(getAxios, action.payload);
-//   yield put(addIssue(data.data));
-//   return;
-// }
+export function* getUsersAsync() {
+  const { data } = yield call(getUsersAxios);
+  const dbUsers = data.allUsers;
+  const allUserClubs: clubListsType = data.allUserClubs;
+  const storeUsers: userThumbNailTypes = dbUsers.map((user: PartialUserObjectType) => {
+    const clubList = Object.values(allUserClubs)
+      .filter((list: clubListType) => list.userId === user.id)
+      .map((list: clubListType) => list.clubId);
+    return { ...user, clubs: [...clubList] };
+  });
+  yield put(addUsers(storeUsers));
+  return;
+}
 
-// export function* postIssueAsync(action) {
-//   const { data } = yield call(postAxios, action.payload);
-//   if (data !== undefined) {
-//     yield toast.success('投稿に成功しました。', options);
-//     yield call(getIssueAsync, action.payload);
-//     return;
-//   } else {
-//     yield toast.error('投稿に失敗しました。', options);
-//     return;
-//   }
-// }
+export function* createUserAsync(action: {
+  type: typeof ACTIONTYPES.CREATE_USER;
+  payload: signupUserType;
+}) {
+  const { data } = yield call(createUserAxios, action.payload);
+  if (data !== undefined) {
+    // yield toast.success('投稿に成功しました。', options);
+    console.log('成功しました。');
+    yield put(push('/login'));
+    return;
+  } else {
+    // yield toast.error('投稿に失敗しました。', options);
+    return;
+  }
+}
+
+export function* loginUserAsync(action: {
+  type: typeof ACTIONTYPES.LOGIN_USER;
+  payload: loginUserType;
+}) {
+  const { data } = yield call(loginUserAxios, action.payload);
+  if (data !== undefined) {
+    // yield toast.success('投稿に成功しました。', options);
+    const loginUserClubs: clubListsType = data.data.targetUserClubs;
+    const clubList = Object.values(loginUserClubs).map((list: clubListType) => list.clubId);
+    const loginUser = { ...data.data.targetUser, clubs: [...clubList] };
+    yield put(getUsers());
+    yield put(addUser(loginUser));
+    console.log('成功しました。');
+    yield put(push(`/users/${loginUser.id}`));
+    return;
+  } else {
+    // yield toast.error('投稿に失敗しました。', options);
+    return;
+  }
+}
 
 // export function* putIssueAsync(action) {
 //   const response = yield call(putAxios, action.payload);
@@ -53,11 +80,10 @@ import { call, put, takeLatest, all } from 'redux-saga/effects';
 //   }
 // }
 
-// export default function* rootSaga() {
-//   yield all([
-//     yield takeLatest(ISSUE_REQUESTED, getIssueAsync),
-//     yield takeLatest(ISSUE_POSTREQUESTED, postIssueAsync),
-//     yield takeLatest(ISSUE_PUTREQUESTED, putIssueAsync),
-//     yield takeLatest(USER_REQUESTED, getUserAsync),
-//   ]);
-// }
+export default function* rootSaga() {
+  yield all([
+    yield takeLatest(ACTIONTYPES.REQUESTED_USER, getUsersAsync),
+    yield takeLatest(ACTIONTYPES.CREATE_USER, createUserAsync),
+    yield takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
+  ]);
+}

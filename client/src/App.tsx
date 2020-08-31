@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { Route, BrowserRouter as Router, Redirect, RouteComponentProps } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Top from './components/pages/Top';
 import Users from './components/pages/Users';
 import User from './components/pages/User';
@@ -12,15 +12,16 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
-import { addUsers, addTypes, addShafts, addMakers } from './actions';
-import { users, allTypes, shafts, makers } from './utils/constant/text/body/user/value';
+import { getUsers, addTypes, addShafts, addMakers, createUser, loginUser } from './actions';
+import { allTypes, shafts, makers } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
-import { getUsers } from './services/axios/user';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
 import { far } from '@fortawesome/free-regular-svg-icons'; //fontawesomeのregularアイコンのインポート
 import { State } from './@type/store';
+import { initialValuesDataType } from './@type/components/signupPage';
+
 library.add(fas, far, fab);
 
 interface Props {}
@@ -38,18 +39,17 @@ const App: React.FC<Props> = ({}) => {
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
-  async function catchUser() {
-    const data = await getUsers();
-    const dbUsers = data.data.allUsers;
-    const allUserClubs: clubListsType = data.data.allUserClubs;
-    const storeUsers = dbUsers.map((user: PartialUserObjectType) => {
-      const clubList = Object.values(allUserClubs)
-        .filter((list: clubListType) => list.userId === user.id)
-        .map((list: clubListType) => list.clubId);
-      return { ...user, clubs: [...clubList] };
-    });
-    dispatch(addUsers(storeUsers));
-  }
+  const onSubmit = (values: initialValuesDataType) => {
+    if ('name' in values) {
+      const { name, password, email } = values;
+      const signItems = { name, password, email };
+      dispatch(createUser(signItems));
+    } else {
+      const { password, email } = values;
+      const loginItems = { password, email };
+      dispatch(loginUser(loginItems));
+    }
+  };
 
   const route = allUsers.map((user: PartialUserObjectType) => {
     return (
@@ -68,7 +68,7 @@ const App: React.FC<Props> = ({}) => {
   });
 
   useEffect(() => {
-    catchUser();
+    dispatch(getUsers());
     dispatch(addTypes(allTypes));
     dispatch(addShafts(shafts));
     dispatch(addMakers(makers));
@@ -76,50 +76,40 @@ const App: React.FC<Props> = ({}) => {
 
   return (
     <Container>
-      <Router>
-        <Route
-          exact
-          path={ROUTE.USERS}
-          render={() => <Users currentUser={currentUser} allUsers={allUsers} />}
-        />
-        {route}
-        <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
-        <Route
-          exact
-          path={ROUTE.LOGIN}
-          render={(props) =>
-            existedCurrentUser ? (
-              <Redirect to={ROUTE.TOP} />
-            ) : (
-              <Login {...props} currentUser={currentUser} />
-            )
-          }
-        />
-        <Route exact path={`/logout`} render={() => <LogOut currentUser={currentUser} />} />
-        <Route
-          exact
-          path={ROUTE.SIGNUP}
-          render={(props) =>
-            existedCurrentUser ? (
-              <Redirect to={ROUTE.TOP} />
-            ) : (
-              <SignUp {...props} currentUser={currentUser} />
-            )
-          }
-        />
-        <Route
-          exact
-          path={INFOROUTE.CONTACT}
-          render={() => <Contact currentUser={currentUser} />}
-        />
-        <Route exact path={INFOROUTE.ABOUT} render={() => <About currentUser={currentUser} />} />
-        <Route
-          exact
-          path={INFOROUTE.PRIVACY}
-          render={() => <Privacy currentUser={currentUser} />}
-        />
-        <Route exact path={INFOROUTE.TOS} render={() => <Tos currentUser={currentUser} />} />
-      </Router>
+      <Route
+        exact
+        path={ROUTE.USERS}
+        render={() => <Users currentUser={currentUser} allUsers={allUsers} />}
+      />
+      {route}
+      <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
+      <Route
+        exact
+        path={ROUTE.LOGIN}
+        render={(props) =>
+          existedCurrentUser ? (
+            <Redirect to={ROUTE.TOP} />
+          ) : (
+            <Login {...props} currentUser={currentUser} onSubmit={onSubmit} />
+          )
+        }
+      />
+      <Route exact path={`/logout`} render={() => <LogOut currentUser={currentUser} />} />
+      <Route
+        exact
+        path={ROUTE.SIGNUP}
+        render={(props) =>
+          existedCurrentUser ? (
+            <Redirect to={ROUTE.TOP} />
+          ) : (
+            <SignUp {...props} currentUser={currentUser} onSubmit={onSubmit} />
+          )
+        }
+      />
+      <Route exact path={INFOROUTE.CONTACT} render={() => <Contact currentUser={currentUser} />} />
+      <Route exact path={INFOROUTE.ABOUT} render={() => <About currentUser={currentUser} />} />
+      <Route exact path={INFOROUTE.PRIVACY} render={() => <Privacy currentUser={currentUser} />} />
+      <Route exact path={INFOROUTE.TOS} render={() => <Tos currentUser={currentUser} />} />
     </Container>
   );
 };
