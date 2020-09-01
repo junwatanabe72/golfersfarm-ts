@@ -9,8 +9,10 @@ const ACTIONTYPES = {
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
   REQUESTED_USER: 'REQUESTED_USER',
+  REQUESTED_GEARS: 'REQUESTED_GEARS',
   CREATE_USER: 'CREATE_USER',
   LOGIN_USER: 'LOGIN_USER',
+  LOGOUT_USER: 'LOGOUT_USER',
 } as const;
 
 //saga
@@ -25,7 +27,19 @@ interface loginUserAction extends Action {
   type: typeof ACTIONTYPES.LOGIN_USER;
   payload: loginUserType;
 }
-type sagaActionTypes = getUsersAction | createUserAction | loginUserAction;
+interface logoutUserAction extends Action {
+  type: typeof ACTIONTYPES.LOGOUT_USER;
+}
+interface getGearsAction extends Action {
+  type: typeof ACTIONTYPES.REQUESTED_GEARS;
+  payload: PartialUserObjectType;
+}
+type sagaActionTypes =
+  | getUsersAction
+  | createUserAction
+  | loginUserAction
+  | logoutUserAction
+  | getGearsAction;
 //saga
 
 interface AddUserAction extends Action {

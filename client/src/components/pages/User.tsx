@@ -6,7 +6,7 @@ import UserMain from '../organisms/user/Main';
 import UserSub from '../organisms/user/Sub';
 import Layout from '../templates/Layout';
 import { CLEAR } from '../../utils/constant/number';
-import { addClubs } from '../../actions';
+import { addClubs, getGears } from '../../actions';
 import { allClubs } from '../../utils/constant/text/body/user/value';
 import { Padding } from '../../utils/styled/styledSpace';
 import FlexLayout from '../atoms/FlexLayout';
@@ -18,12 +18,15 @@ interface Props {
 }
 
 const User: React.FC<Props> = ({ currentUser, targetUser, storeClubs }) => {
-  const checkedClubs = Object.values(allClubs).filter((club) => club.userId === targetUser.id);
+  const targetClubs: number[] = targetUser.clubs !== undefined ? targetUser.clubs : [];
+  const checkedClub: clubTableTypes = Object.values(storeClubs).filter((club: clubObjectType) =>
+    targetClubs.includes(club.id)
+  );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(addClubs(checkedClubs));
+    dispatch(getGears(targetUser));
   }, []);
-  const rightContent = <UserSub targetUser={targetUser} storeClubs={storeClubs} />;
+  const rightContent = <UserSub targetUser={targetUser} storeClubs={checkedClub} />;
   const leftContent = <UserMain targetUser={targetUser} />;
   return (
     <Layout currentUser={currentUser}>

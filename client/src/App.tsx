@@ -110,6 +110,7 @@ const App: React.FC<Props> = ({}) => {
       <Route exact path={INFOROUTE.ABOUT} render={() => <About currentUser={currentUser} />} />
       <Route exact path={INFOROUTE.PRIVACY} render={() => <Privacy currentUser={currentUser} />} />
       <Route exact path={INFOROUTE.TOS} render={() => <Tos currentUser={currentUser} />} />
+      <Route exact path={'*'} render={() => <Redirect to={ROUTE.TOP} />} />
     </Container>
   );
 };

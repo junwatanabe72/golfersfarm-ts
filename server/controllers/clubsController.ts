@@ -11,7 +11,7 @@ const clubTypes = db.ClubType;
 
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
-    const clubIds: any = req.query.cids ? req.query.cids : [];
+    const clubIds: any = req.query.cids ? req.query.cids : "";
     try {
       const allClubs = await clubs.findAll({
         where: { id: clubIds },

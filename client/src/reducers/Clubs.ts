@@ -11,7 +11,7 @@ export default function ClubsReducer(
   const Clubs = action.payload || [];
   switch (action.type) {
     case ACTIONTYPES.ADD_CLUBS: {
-      newState = [...Clubs];
+      newState = [...state, ...Clubs];
       return newState;
     }
     default: {
