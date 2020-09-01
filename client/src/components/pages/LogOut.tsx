@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { deleteUser } from '../../actions';
+import { logoutUser } from '../../actions';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import LinkButton from '../atoms/LinkButton';
@@ -21,7 +21,7 @@ const LogOut: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(deleteUser());
+    dispatch(logoutUser());
   }, []);
 
   return (

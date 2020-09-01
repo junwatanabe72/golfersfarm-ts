@@ -1,10 +1,10 @@
 interface clubObjectType {
   id: number;
   name: string;
-  shaftId: number;
-  userId: number;
-  makerId: number;
-  typeId: number;
+  shaft: string;
+  maker: string;
+  type: string;
+  flex: string;
   [key: string]: string | number;
 }
 type clubTableTypes = clubObjectType[];

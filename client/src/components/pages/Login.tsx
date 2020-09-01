@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { RouteComponentProps } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addUser } from '../../actions';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
@@ -12,21 +9,15 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
-import { initialUser } from '../../utils/constant/text/body/user/value';
 import { validation, formDatas, LoginText } from '../../utils/constant/text/body/sign/text';
-import { media } from '../../utils/styled/styledRdesign';
 import { initialValuesDataType } from '../../@type/components/signupPage';
 
-interface Props extends RouteComponentProps<{}> {
+interface Props {
   currentUser: PartialUserObjectType;
+  onSubmit: (values: initialValuesDataType) => void;
 }
 
-const Login: React.FC<Props> = ({ currentUser, history }) => {
-  const dispatch = useDispatch();
-  const onSubmit = (values: initialValuesDataType) => {
-    dispatch(addUser(initialUser));
-    history.push(`/users/`);
-  };
+const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>

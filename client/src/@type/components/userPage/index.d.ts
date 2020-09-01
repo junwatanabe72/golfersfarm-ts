@@ -23,10 +23,10 @@ interface resultTableItemsType {
 }
 
 interface gearTableItemsType {
-  typeId: string;
+  type: string;
   name: string;
-  makerId: string;
-  shaftId: string;
-  userId: string;
+  maker: string;
+  shaft: string;
+  flex: string;
   [key: string]: string;
 }

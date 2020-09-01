@@ -15,7 +15,7 @@ import {
 interface Props extends formDataTypes {
   validation: ValidationType;
   buttonValue: string;
-  onSubmit: (e: initialValuesDataType) => void;
+  onSubmit: (values: initialValuesDataType) => void;
 }
 
 const StyledForm = styled.form`

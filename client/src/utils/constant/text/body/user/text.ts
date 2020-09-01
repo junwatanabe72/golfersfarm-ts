@@ -22,11 +22,11 @@ export const resultTableItems = {
 };
 
 export const gearTableItems = {
-  typeId: '種類',
+  type: '種類',
   name: '名前',
-  makerId: 'メーカー',
-  shaftId: 'シャフト',
-  userId: '硬さ',
+  maker: 'メーカー',
+  shaft: 'シャフト',
+  flex: '硬さ',
 };
 
 export const profileTableKeys = ['ベストスコア', '平均飛距離', 'ホームコース'];
@@ -41,5 +41,5 @@ export const profileSubTableTargetkey = [
   'hobby',
 ];
 export const gearTableKeys = ['種類', '名前', 'メーカー', 'シャフト', '硬さ'];
-export const targetkey = ['name', 'shaftId', 'makerId', 'typeId'];
+export const targetkey = ['name', 'shaft', 'maker', 'type', 'flex'];
 export const resultTableKeys = ['年', '競技', '順位'];

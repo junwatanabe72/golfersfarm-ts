@@ -43,7 +43,7 @@ interface loginFormDatasType {
 }
 
 //common
-type initialValuesDataType = loginInitialValuesDataType | signUpFormDatasType;
+type initialValuesDataType = loginInitialValuesDataType | signUpInitialValuesDataType;
 type ValidationType =
   | yup.InferType<typeof loginValidationType>
   | yup.InferType<typeof signUpValidationType>;
