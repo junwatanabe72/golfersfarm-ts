@@ -13,23 +13,14 @@ import { TopTitleText } from '../../../utils/constant/text/body/top/text';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { Padding, ALIGNITEMS } from '../../../utils/styled/styledSpace';
 
-const StyledFlex = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const StyledFlexColumn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+const Container = styled.div`
+  text-align: center;
 `;
 
 const rightContent = <FreePick image={TopImage} />;
 
 const leftContent = (
-  <>
+  <Container>
     <Padding bottom={CLEAR.XSMALL}>
       <Logo fontSize={FONTSIZE.XXXLARGE}>{TopTitleText.TitleTitle}</Logo>
     </Padding>
@@ -39,7 +30,7 @@ const leftContent = (
         <Button color={BASICCOLORS.WHITELIGHT}>{TopTitleText.TitleLink}</Button>
       </LinkButton>
     </Padding>
-  </>
+  </Container>
 );
 
 const TopTitle: React.FC = () => {

@@ -1,21 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
+import * as yup from 'yup';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
-import FormikForm from '../atoms/Form';
+import Form from '../molecules/form';
 import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
-import { validation, formDatas, LoginText } from '../../utils/constant/text/body/sign/text';
-import { initialValuesDataType } from '../../@type/components/signupPage';
+import { initialValuesDataType } from '../../@type/components/form';
+import { FORMTYPES } from '../../utils/constant/text/form';
 
 interface Props {
   currentUser: PartialUserObjectType;
   onSubmit: (values: initialValuesDataType) => void;
 }
+
+const LoginTitle = 'LOGIN';
+const LoginNoUser = 'アカウントをお持ちでない方はこちら';
+export const LoginText = {
+  LoginNoUser,
+  LoginTitle,
+};
+
+export const formDatas = {
+  initialValuesData: {
+    email: '',
+    password: '',
+  },
+  placeHolder: {
+    email: 'メールアドレス',
+    password: '英数字８字以上のパスワード',
+  },
+};
+
+export const validation = () =>
+  yup.object().shape({
+    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
+    password: yup
+      .string()
+      .required('必須項目です')
+      .min(8, '8字以上にしてください。')
+      .max(30, '30字以下にしてください。'),
+  });
 
 const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {
   return (
@@ -23,7 +52,8 @@ const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={LoginText.LoginTitle}>
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <FormikForm
+            <Form
+              type={FORMTYPES.SIGNLOGIN}
               formDatas={formDatas}
               validation={validation}
               buttonValue={LoginText.LoginTitle}

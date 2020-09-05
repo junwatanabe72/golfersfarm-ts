@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
-import Button from './Button';
-import { Padding } from '../../utils/styled/styledSpace';
-import { media } from '../../utils/styled/styledRdesign';
-import { FONTSIZE, SIZE, CLEAR } from '../../utils/constant/number';
-import { BASICCOLORS } from '../../utils/constant/color';
+import Button from '../../atoms/Button';
+import { Padding } from '../../../utils/styled/styledSpace';
+import { media } from '../../../utils/styled/styledRdesign';
+import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
+import { BASICCOLORS } from '../../../utils/constant/color';
 import {
   formDataTypes,
   ValidationType,
   initialValuesDataType,
-} from '../../@type/components/signupPage';
+} from '../../../@type/components/form';
 
 interface Props extends formDataTypes {
   validation: ValidationType;
@@ -46,7 +46,7 @@ const Styleddiv = styled.div`
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
 
-const FormikForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onSubmit }) => {
+const SignLoginForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onSubmit }) => {
   const formik = useFormik({
     initialValues: { ...formDatas.initialValuesData },
     validationSchema: validation,
@@ -63,7 +63,7 @@ const FormikForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onSub
             placeholder={value}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            value={formik.values[value]}
+            value={formik.values[key]}
           />
         </Padding>
         {formik.touched[key] && formik.errors[key] ? (
@@ -85,4 +85,4 @@ const FormikForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onSub
   );
 };
 
-export default FormikForm;
+export default SignLoginForm;

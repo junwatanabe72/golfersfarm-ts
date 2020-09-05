@@ -5,6 +5,7 @@ import { Route, Redirect } from 'react-router-dom';
 import Top from './components/pages/Top';
 import Users from './components/pages/Users';
 import User from './components/pages/User';
+import UserEdit from './components/pages/UserEdit';
 import Contact from './components/pages/Contact';
 import About from './components/pages/About';
 import Privacy from './components/pages/Privacy';
@@ -20,7 +21,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrand�
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
 import { far } from '@fortawesome/free-regular-svg-icons'; //fontawesomeのregularアイコンのインポート
 import { State } from './@type/store';
-import { initialValuesDataType } from './@type/components/signupPage';
+import { initialValuesDataType } from './@type/components/form';
 
 library.add(fas, far, fab);
 
@@ -31,7 +32,7 @@ const Container = styled.div`
 
 const App: React.FC<Props> = ({}) => {
   const currentUser = useSelector((state: State) => state.CurrentUser);
-  const allUsers = useSelector((state: State) => state.Users);
+  const storeUsers = useSelector((state: State) => state.Users);
   const clubTypes = useSelector((state: State) => state.Types);
   const allShafts = useSelector((state: State) => state.Shafts);
   const Makers = useSelector((state: State) => state.Maker);
@@ -50,20 +51,33 @@ const App: React.FC<Props> = ({}) => {
       dispatch(loginUser(loginItems));
     }
   };
-
+  const allUsers = [...storeUsers, currentUser];
   const route = allUsers.map((user: PartialUserObjectType) => {
     return (
-      <Route
-        exact
-        path={`/users/${user.id}`}
-        render={() =>
-          user.id === currentUser.id ? (
-            <User currentUser={currentUser} targetUser={currentUser} storeClubs={storeClubs} />
-          ) : (
-            <User currentUser={currentUser} targetUser={user} storeClubs={storeClubs} />
-          )
-        }
-      />
+      <>
+        <Route
+          exact
+          path={`/users/${user.id}`}
+          render={() =>
+            user.id === currentUser.id ? (
+              <User currentUser={currentUser} targetUser={currentUser} storeClubs={storeClubs} />
+            ) : (
+              <User currentUser={currentUser} targetUser={user} storeClubs={storeClubs} />
+            )
+          }
+        />
+        <Route
+          exact
+          path={`/users/${user.id}/edit`}
+          render={() =>
+            user.id === currentUser.id ? (
+              <UserEdit currentUser={currentUser} onSubmit={onSubmit} />
+            ) : (
+              <Redirect to={ROUTE.TOP} />
+            )
+          }
+        />
+      </>
     );
   });
 

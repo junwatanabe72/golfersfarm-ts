@@ -13,11 +13,8 @@ import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { TopConceptText } from '../../../utils/constant/text/body/top/text';
 import { Padding, ALIGNITEMS } from '../../../utils/styled/styledSpace';
 
-const StyledFlexColumn = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+const Container = styled.div`
+  text-align: center;
 `;
 
 const headContent = (
@@ -29,14 +26,14 @@ const headContent = (
 );
 
 const rightContent = (
-  <StyledFlexColumn>
+  <Container>
     <Text text={TopConceptText.ConceptText} />
     <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
       <LinkButton to={ROUTE.LOGIN}>
         <Button color={BASICCOLORS.WHITELIGHT}>{TopConceptText.ConceptLink}</Button>
       </LinkButton>
     </Padding>
-  </StyledFlexColumn>
+  </Container>
 );
 
 const leftContent = (
@@ -52,7 +49,7 @@ const TopConcept: React.FC = () => {
       <FlexLayout
         right={rightContent}
         left={leftContent}
-        width={SIZE.SMALL}
+        width={SIZE.BASESMALL}
         alignItems={ALIGNITEMS.CENTER}
       />
     </div>
