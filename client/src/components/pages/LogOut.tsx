@@ -10,12 +10,17 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
-import { LogoutText } from '../../utils/constant/text/body/sign/text';
 import { media } from '../../utils/styled/styledRdesign';
 
 interface Props {
   currentUser: PartialUserObjectType;
 }
+const LogoutMessage = 'ログアウトしました';
+const LogoutLoginUser = 'ログインはこちら';
+export const LogoutText = {
+  LogoutMessage,
+  LogoutLoginUser,
+};
 
 const LogOut: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();

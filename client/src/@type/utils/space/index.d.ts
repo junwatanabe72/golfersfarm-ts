@@ -1,4 +1,4 @@
-import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
+import { ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
 import { CLEARTYPE } from '../numer';
 
 type PaddingProps = {
@@ -10,6 +10,16 @@ type PaddingProps = {
 };
 
 type ALIGNITEMSTYPE = typeof ALIGNITEMS.CENTER | typeof ALIGNITEMS.START | typeof ALIGNITEMS.END;
+type JUSTIFYCONTENTTYPE =
+  | typeof JUSTIFYCONTENT.CENTER
+  | typeof JUSTIFYCONTENT.START
+  | typeof JUSTIFYCONTENT.BETWEEN
+  | typeof JUSTIFYCONTENT.AROUND
+  | typeof JUSTIFYCONTENT.EVENLY;
+
+interface IJUSTIFYCONTENTTYPE {
+  justifyContent: JUSTIFYCONTENTTYPE;
+}
 
 interface IALIGNITEMSTYPE {
   alignItems: ALIGNITEMSTYPE;
@@ -18,6 +28,6 @@ interface IALIGNITEMSTYPE {
 interface ITEXTALIGNTYPE {
   textAlign: ALIGNITEMSTYPE;
 }
-
+type PartialIJUSTIFYCONTENTTYPE = Partial<IJUSTIFYCONTENTTYPE>;
 type PartialIALIGNITEMSTYPE = Partial<IALIGNITEMSTYPE>;
 type PartialITEXTALIGNTYPE = Partial<ITEXTALIGNTYPE>;

@@ -19,7 +19,6 @@ const BackColor = styled.div`
 const Container = styled.div<PartialIWIDTH>`
   width: ${(props) => props.width}vw;
   margin: 0vw auto;
-  text-align: center;
   ${media.tablet`
     width: 90vw;
       `}

@@ -1,32 +1,67 @@
 import React from 'react';
 import styled from 'styled-components';
+import * as yup from 'yup';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
-import FormikForm from '../atoms/Form';
-import {
-  SignUpText,
-  signUpValidation,
-  signUpFormDatas,
-} from '../../utils/constant/text/body/sign/text';
+import Form from '../molecules/form';
 import { Padding } from '../../utils/styled/styledSpace';
 import { ROUTE } from '../../utils/constant/route';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
-import { initialValuesDataType } from '../../@type/components/signupPage';
+import { initialValuesDataType } from '../../@type/components/form';
+import { FORMTYPES } from '../../utils/constant/text/form';
 
 interface Props {
   currentUser: PartialUserObjectType;
   onSubmit: (values: initialValuesDataType) => void;
 }
 
+const SignUpCheck = '利用規約とプライバシーポリシーを御覧ください。';
+const SignUpLoginUser = 'アカウントをお持ちの方はこちら';
+const SignUpTitle = 'SIGN UP';
+export const SignUpText = {
+  SignUpCheck,
+  SignUpLoginUser,
+  SignUpTitle,
+};
+export const signUpFormDatas = {
+  initialValuesData: {
+    email: '',
+    name: '',
+    password: '',
+    confirmedPassword: '',
+  },
+  placeHolder: {
+    email: 'メールアドレス',
+    name: 'ユーザ名',
+    password: '英数字８字以上のパスワード',
+    confirmedPassword: '確認用パスワード',
+  },
+};
+
+export const signUpValidation = () =>
+  yup.object().shape({
+    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
+    name: yup.string().required('必須項目です'),
+    password: yup
+      .string()
+      .required('必須項目です')
+      .min(8, '8字以上にしてください。')
+      .max(30, '30字以下にしてください。'),
+    confirmedPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), undefined], '入力したパスワードではありません。'),
+  });
+
 const SignUp: React.FC<Props> = ({ currentUser, onSubmit }) => {
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={SignUpText.SignUpTitle}>
-          <FormikForm
+          <Form
+            type={FORMTYPES.SIGNLOGIN}
             formDatas={signUpFormDatas}
             validation={signUpValidation}
             buttonValue={SignUpText.SignUpTitle}

@@ -2,16 +2,20 @@ import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
 import { PartialIWIDTH } from '../../@type/utils/numer';
-import { PartialIALIGNITEMSTYPE } from '../../@type/utils/space';
+import { PartialIALIGNITEMSTYPE, PartialIJUSTIFYCONTENTTYPE } from '../../@type/utils/space';
+import { JUSTIFYCONTENT } from '../../utils/styled/styledSpace';
 
-interface Props extends PartialIWIDTH, PartialIALIGNITEMSTYPE {
+interface Props extends PartialIWIDTH, PartialIALIGNITEMSTYPE, PartialIJUSTIFYCONTENTTYPE {
   right: ReactElement;
   left: ReactElement;
 }
 
-const Container = styled.div<PartialIALIGNITEMSTYPE>`
+const Container = styled.div<{
+  alignItems: Props['alignItems'];
+  justifyContent: Props['justifyContent'];
+}>`
   display: flex;
-  justify-content: space-around;
+  justify-content: ${(props) => props.justifyContent};
   align-items: ${(props) => props.alignItems};
   ${media.tablet`
         flex-direction: column;
@@ -27,9 +31,15 @@ const FixedWidth = styled.div<PartialIWIDTH>`
       `}
 `;
 
-const FlexLayout: React.FC<Props> = ({ right, left, width, alignItems }) => {
+const FlexLayout: React.FC<Props> = ({
+  right,
+  left,
+  width,
+  alignItems,
+  justifyContent = JUSTIFYCONTENT.AROUND,
+}) => {
   return (
-    <Container alignItems={alignItems}>
+    <Container alignItems={alignItems} justifyContent={justifyContent}>
       <FixedWidth width={width}>{left}</FixedWidth>
       {right}
     </Container>

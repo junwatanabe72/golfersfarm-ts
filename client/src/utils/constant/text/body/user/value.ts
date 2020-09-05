@@ -32,7 +32,7 @@ export const initialUser = {
   bestScore: '69',
   averageDistance: '250',
   homeCource: '姉ヶ崎CC',
-  email: 'Email',
+  email: 'junwatanabe72@gmail.com',
   password: 'Password',
   job: 'free',
   clubImage: ImageURL,

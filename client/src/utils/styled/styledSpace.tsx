@@ -23,6 +23,14 @@ export const ALIGNITEMS = {
   END: 'end',
 } as const;
 
+export const JUSTIFYCONTENT = {
+  CENTER: 'center',
+  START: 'start',
+  BETWEEN: 'space-between',
+  AROUND: 'space-around',
+  EVENLY: 'space-evenly',
+} as const;
+
 // type MarginProps = {
 //   top?: CLEARTYPE,
 //   right?: CLEARTYPE,

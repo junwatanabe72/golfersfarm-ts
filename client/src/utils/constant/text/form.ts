@@ -1,0 +1,4 @@
+export const FORMTYPES = {
+  SIGNLOGIN: 'SIGNLOGIN',
+  USERPROFILE: 'USERPROFILE',
+} as const;

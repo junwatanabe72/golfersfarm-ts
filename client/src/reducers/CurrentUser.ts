@@ -1,6 +1,7 @@
 import { ACTIONTYPES } from '../actions';
 import { UserActionTypes } from '../@type/action';
-const initialState: PartialUserObjectType = {};
+import { initialUser } from '../utils/constant/text/body/user/value';
+const initialState: PartialUserObjectType = initialUser;
 
 export default function CurrentUserReducer(
   state = initialState,
