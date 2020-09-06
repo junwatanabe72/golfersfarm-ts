@@ -7,7 +7,6 @@ import TopUsage from '../organisms/top/Usage';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props {
   currentUser: PartialUserObjectType;

@@ -1,12 +1,3 @@
-import {
-  UserActionTypes,
-  UsersActionTypes,
-  ClubsActionTypes,
-  TypesActionTypes,
-  ShaftsActionTypes,
-  MakersActionTypes,
-  sagaActionTypes,
-} from '../@type/action';
 //ACTIONTYPES
 export const ACTIONTYPES = {
   ADD_USER: 'ADD_USER',
@@ -24,49 +15,48 @@ export const ACTIONTYPES = {
 } as const;
 
 //REDUX_SAGA
-export function getUsers(): sagaActionTypes {
+export function getUsers(): TypeAction {
   return { type: ACTIONTYPES.REQUESTED_USER };
 }
-export function createUser(data: signupUserType): sagaActionTypes {
+export function createUser(data: SignupUserType): Action<SignupUserType> {
   return { type: ACTIONTYPES.CREATE_USER, payload: data };
 }
-export function loginUser(data: loginUserType): sagaActionTypes {
+export function loginUser(data: LoginUserType): Action<LoginUserType> {
   return { type: ACTIONTYPES.LOGIN_USER, payload: data };
 }
-export function logoutUser(): sagaActionTypes {
+export function logoutUser(): TypeAction {
   return { type: ACTIONTYPES.LOGOUT_USER };
 }
-export function getGears(data: PartialUserObjectType): sagaActionTypes {
+export function getGears(data: PartialUserObjectType): Action<PartialUserObjectType> {
   return { type: ACTIONTYPES.REQUESTED_GEARS, payload: data };
 }
 //REDUX_SAGA
 
-//userActionCreater
-export function addUser(data: PartialUserObjectType): UserActionTypes {
+export function addUser(data: PartialUserObjectType): Action<PartialUserObjectType> {
   return { type: ACTIONTYPES.ADD_USER, payload: data };
 }
-export function deleteUser(): UserActionTypes {
+export function deleteUser(): TypeAction {
   return { type: ACTIONTYPES.DELETE_USER };
 }
 //usersActionCreater
-export function addUsers(data: userThumbNailTypes): UsersActionTypes {
+export function addUsers(data: UserThumbNailTypes): Action<UserThumbNailTypes> {
   return { type: ACTIONTYPES.ADD_USERS, payload: data };
 }
 //clubsActionCreater
-export function addClubs(data: clubTableTypes): ClubsActionTypes {
+export function addClubs(data: ClubTableTypes): Action<ClubTableTypes> {
   return { type: ACTIONTYPES.ADD_CLUBS, payload: data };
 }
 //typesActionCreater
-export function addTypes(data: TypesData): TypesActionTypes {
+export function addTypes(data: TypesData): Action<TypesData> {
   return { type: ACTIONTYPES.ADD_TYPES, payload: data };
 }
 
 //typesActionCreater
-export function addShafts(data: ShaftsData): ShaftsActionTypes {
+export function addShafts(data: ShaftsData): Action<ShaftsData> {
   return { type: ACTIONTYPES.ADD_SHAFTS, payload: data };
 }
 //typesActionCreater
-export function addMakers(data: MakersData): MakersActionTypes {
+export function addMakers(data: MakersData): Action<MakersData> {
   return { type: ACTIONTYPES.ADD_MAKERS, payload: data };
 }
 // Issue Action Creators & Action Type:

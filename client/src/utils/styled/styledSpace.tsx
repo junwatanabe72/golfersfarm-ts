@@ -1,6 +1,5 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { PaddingProps } from '../../@type/utils/space';
 
 //  export const Padding = styled.div<PaddingProps>`
 //   padding-top: ${(props) => props.top}px;

@@ -5,28 +5,26 @@ import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
-import Form from '../molecules/form';
+import Form from '../organisms/form/SignLoginForm';
 import { Padding } from '../../utils/styled/styledSpace';
 import { ROUTE } from '../../utils/constant/route';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
-import { initialValuesDataType } from '../../@type/components/form';
-import { FORMTYPES } from '../../utils/constant/text/form';
 
 interface Props {
   currentUser: PartialUserObjectType;
-  onSubmit: (values: initialValuesDataType) => void;
+  onSubmit: (values: LoginSignUpValuesDataType) => void;
 }
 
 const SignUpCheck = '利用規約とプライバシーポリシーを御覧ください。';
 const SignUpLoginUser = 'アカウントをお持ちの方はこちら';
 const SignUpTitle = 'SIGN UP';
-export const SignUpText = {
+const SignUpText = {
   SignUpCheck,
   SignUpLoginUser,
   SignUpTitle,
 };
-export const signUpFormDatas = {
+const signUpFormDatas = {
   initialValuesData: {
     email: '',
     name: '',
@@ -41,7 +39,7 @@ export const signUpFormDatas = {
   },
 };
 
-export const signUpValidation = () =>
+const signUpValidation = () =>
   yup.object().shape({
     email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
     name: yup.string().required('必須項目です'),
@@ -61,7 +59,6 @@ const SignUp: React.FC<Props> = ({ currentUser, onSubmit }) => {
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={SignUpText.SignUpTitle}>
           <Form
-            type={FORMTYPES.SIGNLOGIN}
             formDatas={signUpFormDatas}
             validation={signUpValidation}
             buttonValue={SignUpText.SignUpTitle}

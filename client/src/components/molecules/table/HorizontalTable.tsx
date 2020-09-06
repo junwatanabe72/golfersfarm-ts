@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { SIZE } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
-import { PartialIWIDTH } from '../../../@type/utils/numer';
 
 interface Props extends PartialIWIDTH {
-  datas: PartialUserObjectType | PartialClubTableTypes | PartialResultTableTypes;
-  tableItems: profileTableItemsType | gearTableItemsType | resultTableItemsType;
+  datas: any;
+  tableItems: any;
 }
 const StyledTable = styled.table<{ width: Props['width'] }>`
   width: ${(props) => props.width}vw;
@@ -43,7 +42,7 @@ const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
     return key;
   });
 
-  const body = Object.values(datas).map((data: clubObjectType | resultObjectType) => {
+  const body = Object.values(datas).map((data: any) => {
     return order.map((key: string) => {
       return <StyledTd>{data[key]}</StyledTd>;
     });

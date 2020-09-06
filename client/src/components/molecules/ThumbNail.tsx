@@ -1,15 +1,9 @@
 import React from 'react';
 import UserCard from '../organisms/user/Card';
-import {
-  PartialIFONTSIZE,
-  PartialICLEAR,
-  PartialIWIDTH,
-  PartialIWIDTHTAB,
-} from '../../@type/utils/numer';
 import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
-  datas: userThumbNailTypes;
+  datas: UserThumbNailTypes;
 }
 
 const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize }) => {

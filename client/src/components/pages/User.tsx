@@ -14,19 +14,15 @@ import FlexLayout from '../atoms/FlexLayout';
 interface Props {
   currentUser: PartialUserObjectType;
   targetUser: PartialUserObjectType;
-  storeClubs: clubTableTypes;
+  storeClubs: ClubTableTypes;
 }
 
 const User: React.FC<Props> = ({ currentUser, targetUser, storeClubs }) => {
-  const targetClubs: number[] = targetUser.clubs !== undefined ? targetUser.clubs : [];
-  const checkedClub: clubTableTypes = Object.values(storeClubs).filter((club: clubObjectType) =>
-    targetClubs.includes(club.id)
-  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGears(targetUser));
   }, []);
-  const rightContent = <UserSub targetUser={targetUser} storeClubs={checkedClub} />;
+  const rightContent = <UserSub targetUser={targetUser} storeClubs={storeClubs} />;
   const leftContent = <UserMain targetUser={targetUser} />;
   return (
     <Layout currentUser={currentUser}>

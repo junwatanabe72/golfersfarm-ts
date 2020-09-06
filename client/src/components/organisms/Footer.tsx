@@ -4,7 +4,6 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { Padding } from '../../utils/styled/styledSpace';
 import { CLEAR } from '../../utils/constant/number';
 import LinkList from '../molecules/LinkList';
-import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props extends PartialICOLOR {
   route: any;

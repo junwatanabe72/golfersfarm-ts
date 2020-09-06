@@ -5,12 +5,11 @@ import { media } from '../../../utils/styled/styledRdesign';
 import { TABLETYPES } from '../../../utils/constant/text/table';
 import VerticalTable from './VerticalTable';
 import HorizontalTable from './HorizontalTable';
-import { PartialIWIDTH } from '../../../@type/utils/numer';
-import { ITABLETYPES } from '../../../@type/components/table';
 
-interface Props extends PartialIWIDTH, ITABLETYPES {
-  datas: PartialUserObjectType | PartialClubTableTypes | PartialResultTableTypes;
-  tableItems: profileTableItemsType | gearTableItemsType | resultTableItemsType;
+interface Props extends PartialIWIDTH {
+  datas: object;
+  tableItems: object;
+  type: typeof TABLETYPES.HORIZONTAL | typeof TABLETYPES.VERTICAL;
 }
 
 const StyledTable = styled.table<{ width: Props['width'] }>`

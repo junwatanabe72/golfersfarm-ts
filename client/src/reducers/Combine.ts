@@ -1,23 +1,23 @@
 import { combineReducers } from 'redux';
 import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
-import CurrentUser from './CurrentUser';
-import Shafts from './Shafts';
-import Maker from './Maker';
-import Clubs from './Clubs';
-import Types from './Types';
-import Users from './Users';
+import currentUser from './CurrentUser';
+import shafts from './Shafts';
+import maker from './Maker';
+import clubs from './Clubs';
+import types from './Types';
+import users from './Users';
 export const router = createBrowserHistory();
 
 const reducers = (history: typeof router) =>
   combineReducers({
     router: connectRouter(history),
-    CurrentUser,
-    Users,
-    Clubs,
-    Types,
-    Shafts,
-    Maker,
+    currentUser,
+    users,
+    clubs,
+    types,
+    shafts,
+    maker,
   });
 
 export default reducers;

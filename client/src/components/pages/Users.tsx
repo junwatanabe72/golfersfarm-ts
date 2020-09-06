@@ -11,7 +11,7 @@ import { Padding } from '../../utils/styled/styledSpace';
 
 interface Props {
   currentUser: PartialUserObjectType;
-  allUsers: userThumbNailTypes;
+  allUsers: UserThumbNailTypes;
 }
 
 const Container = styled.div`

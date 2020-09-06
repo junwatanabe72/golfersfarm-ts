@@ -4,7 +4,6 @@ import Header from '../organisms/Header';
 import Footer from '../organisms/Footer';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
-import { PartialIWIDTH } from '../../@type/utils/numer';
 import { SIZE } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
 interface Props extends PartialIWIDTH {

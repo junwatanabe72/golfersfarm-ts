@@ -1,4 +1,5 @@
-import React, { ReactHTMLElement } from 'react';
+import React from 'react';
+import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import Button from '../../atoms/Button';
@@ -6,18 +7,17 @@ import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/style
 import { media } from '../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { BASICCOLORS } from '../../../utils/constant/color';
-import {
-  ValidationType,
-  initialValuesDataType,
-  formDataTypes,
-} from '../../../@type/components/form';
 import Logo from '../../atoms/Logo';
 import FlexLayout from '../../atoms/FlexLayout';
+import { baseUser } from '../../../utils/constant/text/body/user/value';
 
-interface Props extends formDataTypes {
-  validation: ValidationType;
-  buttonValue: string;
-  onSubmit: (values: initialValuesDataType) => void;
+type ISelectItems = typeof selectProfileItems | typeof selectGolfItems;
+type IEditItems = typeof baseItems | typeof snsItems | typeof golfItems | typeof otherItems;
+type INoteItems = typeof snsNoteItems | typeof profileNoteItems;
+
+interface Props {
+  currentUser: UserObjectType;
+  onSubmit: (values: ProfileEditInitialValuesDataType) => void;
 }
 
 const StyledForm = styled.form``;
@@ -116,15 +116,46 @@ const snsNoteItems = {
 const profileNoteItems = {
   show: 'ログインユーザーのみに情報が公開されます。',
 };
-const editTitles = ['基本情報', 'ゴルフ', 'SNS', 'その他'];
-type ISelectItems = typeof selectProfileItems | typeof selectGolfItems;
-type IEditItems = typeof baseItems | typeof snsItems | typeof golfItems | typeof otherItems;
-type INoteItems = typeof snsNoteItems | typeof profileNoteItems;
 
-const UserEditForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onSubmit }) => {
+const editTitles = ['基本情報', 'ゴルフ', 'SNS', 'その他'];
+
+const buttonValue = 'プロフィールを編集する。';
+
+const signUpValidation = () =>
+  yup.object().shape({
+    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
+    name: yup.string().required('必須項目です'),
+    password: yup
+      .string()
+      .required('必須項目です')
+      .min(8, '8字以上にしてください。')
+      .max(30, '30字以下にしてください。'),
+    confirmedPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), undefined], '入力したパスワードではありません。'),
+  });
+
+const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
+  const showValue = currentUser.show
+    ? selectProfileItems.show.body[0]
+    : selectProfileItems.show.body[1];
+  const profileEditFormDatas = {
+    initialValuesData: {
+      ...currentUser,
+      show: showValue,
+      password: '',
+      confirmedPassword: '',
+    },
+    placeHolder: {
+      ...baseUser,
+      password: '英数字８字以上のパスワード',
+      confirmedPassword: '確認用パスワード',
+    },
+  };
+
   const formik = useFormik({
-    initialValues: { ...formDatas.initialValuesData },
-    validationSchema: validation,
+    initialValues: { ...profileEditFormDatas.initialValuesData },
+    validationSchema: signUpValidation,
     onSubmit: onSubmit,
   });
 
@@ -146,9 +177,11 @@ const UserEditForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onS
               right={
                 <Padding left={CLEAR.MEDIUM}>
                   <StyledSelect name={key} onChange={formik.handleChange}>
-                    <option value={formik.values[key]}>{formik.values[key]}</option>
+                    <option value={formik.values[key as keyof UserObjectType]}>
+                      {formik.values[key as keyof UserObjectType]}
+                    </option>
                     {body.map((data: any) => {
-                      return formik.values[key] !== data ? (
+                      return formik.values[key as keyof UserObjectType] !== data ? (
                         <option value={data}>{data}</option>
                       ) : null;
                     })}
@@ -158,8 +191,9 @@ const UserEditForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onS
               }
             />
           </Padding>
-          {formik.touched[key] && formik.errors[key] ? (
-            <Styleddiv>{formik.errors[key]}</Styleddiv>
+          {formik.touched[key as keyof UserObjectType] &&
+          formik.errors[key as keyof UserObjectType] ? (
+            <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
           ) : null}
         </>
       );
@@ -171,42 +205,45 @@ const UserEditForm: React.FC<Props> = ({ formDatas, validation, buttonValue, onS
     const keyItems = Object.keys(obj).map((key: string) => {
       return key;
     });
-    const element = Object.entries(formDatas.placeHolder).map(([key, value]: string[]) => {
-      return keyItems.includes(key) ? (
-        <>
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <FlexLayout
-              justifyContent={JUSTIFYCONTENT.START}
-              width={SIZE.XXXSMALL}
-              alignItems={ALIGNITEMS.START}
-              left={
-                <Padding left={CLEAR.TINY}>
-                  <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
-                </Padding>
-              }
-              right={
-                <Padding left={CLEAR.MEDIUM}>
-                  <StyledField
-                    type={key}
-                    name={key}
-                    placeholder={value}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values[key]}
-                  />
-                  {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
-                </Padding>
-              }
-            />
-          </Padding>
-          {formik.touched[key] && formik.errors[key] ? (
-            <Styleddiv>{formik.errors[key]}</Styleddiv>
-          ) : null}
-        </>
-      ) : (
-        <></>
-      );
-    });
+    const element = Object.entries(profileEditFormDatas.placeHolder).map(
+      ([key, value]: string[]) => {
+        return keyItems.includes(key) ? (
+          <>
+            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+              <FlexLayout
+                justifyContent={JUSTIFYCONTENT.START}
+                width={SIZE.XXXSMALL}
+                alignItems={ALIGNITEMS.START}
+                left={
+                  <Padding left={CLEAR.TINY}>
+                    <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
+                  </Padding>
+                }
+                right={
+                  <Padding left={CLEAR.MEDIUM}>
+                    <StyledField
+                      type={key}
+                      name={key}
+                      placeholder={value}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values[key as keyof UserObjectType]}
+                    />
+                    {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
+                  </Padding>
+                }
+              />
+            </Padding>
+            {formik.touched[key as keyof UserObjectType] &&
+            formik.errors[key as keyof UserObjectType] ? (
+              <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
+            ) : null}
+          </>
+        ) : (
+          <></>
+        );
+      }
+    );
     return element;
   };
 

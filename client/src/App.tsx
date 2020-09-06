@@ -20,8 +20,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコ
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
 import { fas } from '@fortawesome/free-solid-svg-icons'; //fontawesomeのsolidアイコンのインポート
 import { far } from '@fortawesome/free-regular-svg-icons'; //fontawesomeのregularアイコンのインポート
-import { State } from './@type/store';
-import { initialValuesDataType } from './@type/components/form';
+import { State } from './@types/store';
 
 library.add(fas, far, fab);
 
@@ -31,16 +30,16 @@ const Container = styled.div`
 `;
 
 const App: React.FC<Props> = ({}) => {
-  const currentUser = useSelector((state: State) => state.CurrentUser);
-  const storeUsers = useSelector((state: State) => state.Users);
-  const clubTypes = useSelector((state: State) => state.Types);
-  const allShafts = useSelector((state: State) => state.Shafts);
-  const Makers = useSelector((state: State) => state.Maker);
-  const storeClubs = useSelector((state: State) => state.Clubs);
+  const currentUser = useSelector((state: State) => state.currentUser);
+  const storeUsers = useSelector((state: State) => state.users);
+  const clubTypes = useSelector((state: State) => state.types);
+  const allShafts = useSelector((state: State) => state.shafts);
+  const Makers = useSelector((state: State) => state.maker);
+  const storeClubs = useSelector((state: State) => state.clubs);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
-  const onSubmit = (values: initialValuesDataType) => {
+  const loginSignUponSubmit = (values: LoginSignUpValuesDataType) => {
     if ('name' in values) {
       const { name, password, email } = values;
       const signItems = { name, password, email };
@@ -51,6 +50,7 @@ const App: React.FC<Props> = ({}) => {
       dispatch(loginUser(loginItems));
     }
   };
+
   const allUsers = [...storeUsers, currentUser];
   const route = allUsers.map((user: PartialUserObjectType) => {
     return (
@@ -71,7 +71,7 @@ const App: React.FC<Props> = ({}) => {
           path={`/users/${user.id}/edit`}
           render={() =>
             user.id === currentUser.id ? (
-              <UserEdit currentUser={currentUser} onSubmit={onSubmit} />
+              <UserEdit currentUser={currentUser} />
             ) : (
               <Redirect to={ROUTE.TOP} />
             )
@@ -104,7 +104,7 @@ const App: React.FC<Props> = ({}) => {
           existedCurrentUser ? (
             <Redirect to={ROUTE.TOP} />
           ) : (
-            <Login {...props} currentUser={currentUser} onSubmit={onSubmit} />
+            <Login {...props} currentUser={currentUser} onSubmit={loginSignUponSubmit} />
           )
         }
       />
@@ -116,7 +116,7 @@ const App: React.FC<Props> = ({}) => {
           existedCurrentUser ? (
             <Redirect to={ROUTE.TOP} />
           ) : (
-            <SignUp {...props} currentUser={currentUser} onSubmit={onSubmit} />
+            <SignUp {...props} currentUser={currentUser} onSubmit={loginSignUponSubmit} />
           )
         }
       />

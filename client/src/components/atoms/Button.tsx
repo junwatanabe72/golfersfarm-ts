@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { Padding } from '../../utils/styled/styledSpace';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
-import { PartialIFONTSIZE, CLEARTYPE } from '../../@type/utils/numer';
-import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   onClick?: () => void;

@@ -5,27 +5,25 @@ import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
-import Form from '../molecules/form';
+import Form from '../organisms/form/SignLoginForm';
 import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
-import { initialValuesDataType } from '../../@type/components/form';
-import { FORMTYPES } from '../../utils/constant/text/form';
 
 interface Props {
   currentUser: PartialUserObjectType;
-  onSubmit: (values: initialValuesDataType) => void;
+  onSubmit: (values: LoginSignUpValuesDataType) => void;
 }
 
 const LoginTitle = 'LOGIN';
 const LoginNoUser = 'アカウントをお持ちでない方はこちら';
-export const LoginText = {
+const LoginText = {
   LoginNoUser,
   LoginTitle,
 };
 
-export const formDatas = {
+const formDatas = {
   initialValuesData: {
     email: '',
     password: '',
@@ -36,7 +34,7 @@ export const formDatas = {
   },
 };
 
-export const validation = () =>
+const validation = () =>
   yup.object().shape({
     email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
     password: yup
@@ -53,7 +51,6 @@ const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {
         <Sign title={LoginText.LoginTitle}>
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
             <Form
-              type={FORMTYPES.SIGNLOGIN}
               formDatas={formDatas}
               validation={validation}
               buttonValue={LoginText.LoginTitle}

@@ -2,11 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { SIZE } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
-import { PartialIWIDTH } from '../../../@type/utils/numer';
 
 interface Props extends PartialIWIDTH {
-  datas: PartialUserObjectType | PartialClubObjectType | PartialResultObjectType;
-  tableItems: profileTableItemsType | gearTableItemsType | resultTableItemsType;
+  datas: any;
+  tableItems: any;
 }
 
 const StyledTable = styled.table<{ width: Props['width'] }>`
@@ -42,15 +41,12 @@ const VerticalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
   const order = Object.keys(tableItems).map((key: string) => {
     return key;
   });
-  const orderd = Object.keys(datas).map((key: string) => {
-    return key;
-  });
 
   const Data = order.map((value: string) => {
     return (
       <StyledTrd>
         <StyledTd>{tableItems[value]}</StyledTd>
-        <StyledTd>{datas[value]}</StyledTd>
+        <StyledTd>{datas[value as keyof PartialUserObjectType]}</StyledTd>
       </StyledTrd>
     );
   });

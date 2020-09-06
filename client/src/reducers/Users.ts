@@ -1,17 +1,16 @@
 import { ACTIONTYPES } from '../actions';
-import { UsersActionTypes } from '../@type/action';
 
-const initialState: userThumbNailTypes = [];
+const initialState: UserThumbNailTypes = [];
 
 export default function UsersReducer(
   state = initialState,
-  action: UsersActionTypes
-): userThumbNailTypes {
+  action: Action<UserThumbNailTypes>
+): UserThumbNailTypes {
   let newState = state;
-  const Users = action.payload || [];
+  const users = action.payload || [];
   switch (action.type) {
     case ACTIONTYPES.ADD_USERS: {
-      newState = [...Users];
+      newState = [...users];
       return newState;
     }
     default: {

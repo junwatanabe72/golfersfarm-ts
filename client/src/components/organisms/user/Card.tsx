@@ -4,12 +4,6 @@ import LinkButton from '../../atoms/LinkButton';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import SNS from '../../molecules/SNSIcons';
-import {
-  PartialICLEAR,
-  PartialIWIDTH,
-  PartialIWIDTHTAB,
-  PartialIFONTSIZE,
-} from '../../../@type/utils/numer';
 
 interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
   data: PartialUserObjectType;

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS } from '../../utils/constant/color';
 import styled from 'styled-components';
-import { PartialICOLOR } from '../../@type/utils/color';
-import { PartialIFONTSIZE } from '../../@type/utils/numer';
 
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   to: string;

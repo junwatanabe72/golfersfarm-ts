@@ -6,9 +6,6 @@ import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialICOLOR } from '../../@type/utils/color';
-import { PartialICLEAR } from '../../@type/utils/numer';
-import { PartialITEXTALIGNTYPE } from '../../@type/utils/space';
 
 interface Props extends PartialICOLOR, PartialICLEAR, PartialITEXTALIGNTYPE {
   title?: string;
