@@ -2,7 +2,6 @@ import React from 'react';
 import { SIZE } from '../../utils/constant/number';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
-import { PartialIWIDTH, PartialIHEIGHTSIZE } from '../../@type/utils/numer';
 
 interface Props extends PartialIWIDTH, PartialIHEIGHTSIZE {
   source: string;

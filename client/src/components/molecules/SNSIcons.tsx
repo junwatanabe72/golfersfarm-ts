@@ -5,8 +5,6 @@ import { FONTSIZE } from '../../utils/constant/number';
 import Url from '../atoms/Url';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
-import { PartialICOLOR } from '../../@type/utils/color';
-import { PartialIFONTSIZE } from '../../@type/utils/numer';
 
 interface Props extends PartialICOLOR, PartialIFONTSIZE {
   urls: {

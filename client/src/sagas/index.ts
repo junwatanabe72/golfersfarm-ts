@@ -8,90 +8,91 @@ import { getGearsAxios } from '../services/axios/gear';
 
 //users
 export function* getUsersAsync() {
-  const { data } = yield call(getUsersAxios);
-  const dbUsers = data.allUsers;
-  const allUserClubs: clubListsType = data.allUserClubs;
-  const storeUsers: userThumbNailTypes = dbUsers.map((user: PartialUserObjectType) => {
-    const clubList = Object.values(allUserClubs)
-      .filter((list: clubListType) => list.userId === user.id)
-      .map((list: clubListType) => list.clubId);
-    return { ...user, clubs: [...clubList] };
-  });
-  yield put(addUsers(storeUsers));
-  return;
-}
-
-export function* createUserAsync(action: {
-  type: typeof ACTIONTYPES.CREATE_USER;
-  payload: signupUserType;
-}) {
-  const { data } = yield call(createUserAxios, action.payload);
-  if (data !== undefined) {
-    // yield toast.success('投稿に成功しました。', options);
-    console.log('成功しました。');
-    yield put(push('/login'));
+  const { allUsers } = yield call(getUsersAxios);
+  try {
+    const dbUsers = allUsers;
+    yield put(addUsers(dbUsers));
     return;
-  } else {
-    // yield toast.error('投稿に失敗しました。', options);
-    return;
+  } catch (e) {
+    return { e };
   }
 }
 
-export function* loginUserAsync(action: {
-  type: typeof ACTIONTYPES.LOGIN_USER;
-  payload: loginUserType;
-}) {
-  const { data } = yield call(loginUserAxios, action.payload);
-  if (data !== undefined) {
-    // yield toast.success('投稿に成功しました。', options);
-    const loginUserClubs: clubListsType = data.data.targetUserClubs;
-    const clubList = Object.values(loginUserClubs).map((list: clubListType) => list.clubId);
-    const loginUser = { ...data.data.targetUser, clubs: [...clubList] };
-    yield put(getUsers());
-    yield put(addUser(loginUser));
-    console.log('成功しました。');
-    yield put(push(`/users/${loginUser.id}`));
-    return;
-  } else {
-    // yield toast.error('投稿に失敗しました。', options);
-    return;
+export function* createUserAsync(action: Action<SignupUserType>) {
+  try {
+    const { data } = yield call(createUserAxios, action.payload);
+    if (data !== undefined) {
+      // yield toast.success('投稿に成功しました。', options);
+      console.log('成功しました。');
+      yield put(push('/login'));
+      return;
+    } else {
+      // yield toast.error('投稿に失敗しました。', options);
+      return;
+    }
+  } catch (e) {
+    return { e };
+  }
+}
+
+export function* loginUserAsync(action: Action<LoginUserType>) {
+  const { targetUser } = yield call(loginUserAxios, action.payload);
+  try {
+    if (targetUser !== undefined) {
+      // yield toast.success('投稿に成功しました。', options);
+      // const loginUserClubs: clubListsType = data.data.targetUserClubs;
+      // const clubList = Object.values(loginUserClubs).map((list: clubListType) => list.clubId);
+      yield put(getUsers());
+      yield put(addUser(targetUser));
+      console.log('成功しました。');
+      yield put(push(`/users/${targetUser.id}`));
+      return;
+    } else {
+      // yield toast.error('投稿に失敗しました。', options);
+      return;
+    }
+  } catch (e) {
+    return { e };
   }
 }
 export function* logoutUserAsync() {
-  yield put(deleteUser());
-  yield put(getUsers());
-  console.log('成功しました。');
-  return;
+  try {
+    yield put(deleteUser());
+    yield put(getUsers());
+    console.log('成功しました。');
+    return;
+  } catch (e) {
+    return { e };
+  }
 }
 
-export function* getGearsAsync(action: {
-  type: typeof ACTIONTYPES.REQUESTED_GEARS;
-  payload: PartialUserObjectType;
-}) {
+export function* getGearsAsync(action: Action<PartialUserObjectType>) {
   const { data } = yield call(getGearsAxios, action.payload);
-
-  if (data !== undefined) {
-    const editClubs = data.allClubs.map((value: any) => {
-      const { Maker, Shaft, ClubType, id, name } = value;
-      const club = {
-        id,
-        name,
-        maker: Maker.name,
-        shaft: Shaft.name,
-        flex: Shaft.flex,
-        type: ClubType.type,
-      };
-      return club;
-    });
-    // const { id, name, Maker } = data.targetBall;
-    // const ball = { id, name, maker: Maker.name };
-    // console.log(ball);
-    yield put(addClubs(editClubs));
-
-    return;
-  } else {
-    // yield toast.error('取得に失敗しました。', options);
-    return;
+  try {
+    if (data !== undefined) {
+      const editClubs = data.allClubs.map((value: any) => {
+        const { Club } = value;
+        const { Maker, Shaft, ClubType, id, name } = Club;
+        const club = {
+          id,
+          name,
+          maker: Maker.name,
+          shaft: Shaft.name,
+          flex: Shaft.flex,
+          type: ClubType.type,
+        };
+        return club;
+      });
+      const { id, name, Maker } = data.targetBall;
+      const ball = { id, name, maker: Maker.name };
+      yield put(addClubs(editClubs));
+      return;
+    } else {
+      // yield toast.error('取得に失敗しました。', options);
+      return;
+    }
+  } catch (e) {
+    return { e };
   }
 }
 

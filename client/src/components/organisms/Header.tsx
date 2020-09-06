@@ -6,9 +6,7 @@ import Toggle from '../molecules/Toggle';
 import LinkButton from '../atoms/LinkButton';
 import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS } from '../../utils/constant/color';
-import { HeaderTitleText } from '../../utils/constant/text/header/text';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
-import { PartialICOLOR } from '../../@type/utils/color';
 
 interface Props extends PartialICOLOR {
   route: any;
@@ -29,6 +27,9 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const HeaderTitleText = {
+  appTitle: 'Golfersfarm',
+};
 const Header: React.FC<Props> = ({ color = BASICCOLORS.WHITELIGHT, route }) => {
   const [modalIsOpen, setModal] = useState<boolean>(false);
   const workModal = () => {

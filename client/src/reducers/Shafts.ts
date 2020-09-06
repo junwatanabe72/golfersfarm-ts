@@ -1,14 +1,16 @@
 import { ACTIONTYPES } from '../actions';
-import { ShaftsActionTypes } from '../@type/action';
 
 const initialState: ShaftsData = [];
 
-export default function ShaftsReducer(state = initialState, action: ShaftsActionTypes): ShaftsData {
+export default function ShaftsReducer(
+  state = initialState,
+  action: Action<ShaftsData>
+): ShaftsData {
   let newState = state;
-  const Shafts = action.payload || [];
+  const shafts = action.payload || [];
   switch (action.type) {
     case ACTIONTYPES.ADD_SHAFTS: {
-      newState = [...Shafts];
+      newState = [...shafts];
       return newState;
     }
     default: {

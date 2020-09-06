@@ -1,4 +1,5 @@
 import React from 'react';
+import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import Button from '../../atoms/Button';
@@ -6,16 +7,11 @@ import { Padding } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { BASICCOLORS } from '../../../utils/constant/color';
-import {
-  formDataTypes,
-  ValidationType,
-  initialValuesDataType,
-} from '../../../@type/components/form';
 
-interface Props extends formDataTypes {
-  validation: ValidationType;
+interface Props extends LoginSignUpFormDataTypes {
+  validation: any;
   buttonValue: string;
-  onSubmit: (values: initialValuesDataType) => void;
+  onSubmit: (values: LoginSignUpValuesDataType) => void;
 }
 
 const StyledForm = styled.form`

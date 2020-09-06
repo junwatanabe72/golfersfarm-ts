@@ -3,19 +3,9 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE } from '../../utils/constant/number';
-import {
-  IconName,
-  IconLookup,
-  IconDefinition,
-  findIconDefinition,
-} from '@fortawesome/fontawesome-svg-core';
-import { PartialIFONTSIZE } from '../../@type/utils/numer';
-import { PartialICOLOR } from '../../@type/utils/color';
+import { IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-interface Props extends PartialICOLOR, PartialIFONTSIZE {
-  head: 'fas' | 'fab' | 'far';
-  tail: IconName;
-}
+interface Props extends PartialICOLOR, PartialIFONTSIZE, MENUZTYPE {}
 
 const Container = styled.div<{ color: Props['color']; fontSize: Props['fontSize'] }>`
   font-size: ${(props) => props.fontSize}px;

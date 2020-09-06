@@ -7,7 +7,6 @@ import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
 import UserCard from './Card';
 import { TABLETYPES } from '../../../utils/constant/text/table';
-import { profileTableItems } from '../../../utils/constant/text/body/user/text';
 
 interface Props {
   targetUser: PartialUserObjectType;
@@ -21,6 +20,12 @@ const Container = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
+const profileTableItems = {
+  bestScore: 'ベストスコア',
+  averageDistance: '平均飛距離',
+  homeCource: 'ホームコース',
+};
 
 const UserMain: React.FC<Props> = ({ targetUser }) => {
   return (

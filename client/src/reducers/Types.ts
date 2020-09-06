@@ -1,14 +1,13 @@
 import { ACTIONTYPES } from '../actions';
-import { TypesActionTypes } from '../@type/action';
 
 const initialState: TypesData = [];
 
-export default function TypesReducer(state = initialState, action: TypesActionTypes): TypesData {
+export default function TypesReducer(state = initialState, action: Action<TypesData>): TypesData {
   let newState = state;
-  const Types = action.payload || [];
+  const types = action.payload || [];
   switch (action.type) {
     case ACTIONTYPES.ADD_TYPES: {
-      newState = [...Types];
+      newState = [...types];
       return newState;
     }
     default: {

@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { CLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import { PartialIFONTSIZE } from '../../@type/utils/numer';
 
 interface Props extends PartialIFONTSIZE {
   text: string[];

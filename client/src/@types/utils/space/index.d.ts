@@ -1,6 +1,3 @@
-import { ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
-import { CLEARTYPE } from '../numer';
-
 type PaddingProps = {
   top?: CLEARTYPE;
   right?: CLEARTYPE;
@@ -31,3 +28,17 @@ interface ITEXTALIGNTYPE {
 type PartialIJUSTIFYCONTENTTYPE = Partial<IJUSTIFYCONTENTTYPE>;
 type PartialIALIGNITEMSTYPE = Partial<IALIGNITEMSTYPE>;
 type PartialITEXTALIGNTYPE = Partial<ITEXTALIGNTYPE>;
+
+const ALIGNITEMS = {
+  CENTER: 'center',
+  START: 'start',
+  END: 'end',
+} as const;
+
+const JUSTIFYCONTENT = {
+  CENTER: 'center',
+  START: 'start',
+  BETWEEN: 'space-between',
+  AROUND: 'space-around',
+  EVENLY: 'space-evenly',
+} as const;

@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { ALIGNITEMS } from '../../utils/styled/styledSpace';
-import { PartialICOLOR } from '../../@type/utils/color';
-import { PartialIFONTSIZE, PartialIFONTSIZEWEIGHT } from '../../@type/utils/numer';
-import { PartialITEXTALIGNTYPE } from '../../@type/utils/space';
 
 interface Props
   extends PartialICOLOR,
