@@ -3,7 +3,7 @@ import db, { sequelize } from "../models";
 import { userType } from "../models/user";
 const users = db.User;
 const clubs = db.Club;
-const UserClubs = db.UserClubs;
+const userClubs = db.UserClubs;
 const balls = db.Ball;
 const videos = db.Video;
 const makers = db.Maker;
@@ -18,33 +18,31 @@ export default {
       const targetUser: userType = await users.findOne({
         where: { password: user.password, email: user.email },
       });
-      const targetUserClubs = await UserClubs.findAll({
-        where: { userId: targetUser.id },
-      });
-      res.json({ data: { targetUser, targetUserClubs } });
+      res.json({ targetUser });
     } catch (error) {
       res.status(404);
       return next(error);
     }
   },
   //topPage
-  async index(req: Request, res: Response) {
-    // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-    const allUsers: userType = await users.findAll({
-      // where: { show: true },
-    });
+  async index(req: Request, res: Response, next: NextFunction) {
+    try {
+      // const queryStatus: any = req.query.status ? req.query.status : statusValues;
+      const allUsers: userType = await users.findAll({
+        // where: { show: true },
+      });
 
-    if (!allUsers) {
-      res.status(204).json({ message: "not exist" });
+      if (!allUsers) {
+        res.status(204).json({ message: "not exist" });
+        return;
+      }
+
+      res.json({ allUsers });
       return;
+    } catch (error) {
+      res.status(404);
+      return next(error);
     }
-    const allUsersId = Object.values(allUsers).map((user) => user.id);
-    const allUserClubs = await UserClubs.findAll({
-      where: { userId: allUsersId },
-    });
-
-    res.json({ data: { allUsers, allUserClubs } });
-    return;
   },
   //signupPage
   async create(req: Request, res: Response, next: NextFunction) {

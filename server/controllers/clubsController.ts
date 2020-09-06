@@ -3,7 +3,7 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 import db, { sequelize } from "../models";
 
 const clubs = db.Club;
-const UserClubs = db.userClubs;
+const userClubs = db.UserClubs;
 const shafts = db.Shaft;
 const makers = db.Maker;
 const balls = db.Ball;
@@ -11,22 +11,27 @@ const clubTypes = db.ClubType;
 
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
-    const clubIds: any = req.query.cids ? req.query.cids : "";
     try {
-      const allClubs = await clubs.findAll({
-        where: { id: clubIds },
+      const allClubs = await userClubs.findAll({
+        where: { userId: req.params.id },
         include: [
           {
-            model: makers,
+            model: clubs,
             required: false,
-          },
-          {
-            model: shafts,
-            required: false,
-          },
-          {
-            model: clubTypes,
-            required: false,
+            include: [
+              {
+                model: shafts,
+                required: false,
+              },
+              {
+                model: clubTypes,
+                required: false,
+              },
+              {
+                model: makers,
+                required: false,
+              },
+            ],
           },
         ],
       });
@@ -47,8 +52,13 @@ export default {
   },
   async create(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
-    const data = await clubs.add(req.params.id, club, sequelize);
-    res.status(201).json(data);
+    try {
+      const data = await clubs.add(req.params.id, club, sequelize);
+      res.status(201).json(data);
+    } catch (error) {
+      res.status(400);
+      return next(error);
+    }
   },
   async update(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
