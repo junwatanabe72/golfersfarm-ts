@@ -1,6 +1,11 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { ACTIONTYPES, addUser, addUsers, getUsers, deleteUser, addClubs } from '../actions/index';
-import { getUsersAxios, createUserAxios, loginUserAxios } from '../services/axios/user';
+import {
+  getUsersAxios,
+  createUserAxios,
+  loginUserAxios,
+  updateUserAxios,
+} from '../services/axios/user';
 import { push } from 'connected-react-router';
 import { getGearsAxios } from '../services/axios/gear';
 // import { options } from '../utils/Toastify';
@@ -25,6 +30,23 @@ export function* createUserAsync(action: Action<SignupUserType>) {
       // yield toast.success('投稿に成功しました。', options);
       console.log('成功しました。');
       yield put(push('/login'));
+      return;
+    } else {
+      // yield toast.error('投稿に失敗しました。', options);
+      return;
+    }
+  } catch (e) {
+    return { e };
+  }
+}
+
+export function* updateUserAsync(action: Action<PartialUserObjectType>) {
+  try {
+    const { updateUser } = yield call(updateUserAxios, action.payload);
+    if (updateUser !== undefined) {
+      // yield toast.success('投稿に成功しました。', options);
+      console.log('成功しました。');
+      yield put(addUser(updateUser));
       return;
     } else {
       // yield toast.error('投稿に失敗しました。', options);
@@ -101,6 +123,7 @@ export default function* rootSaga() {
     yield takeLatest(ACTIONTYPES.REQUESTED_USER, getUsersAsync),
     yield takeLatest(ACTIONTYPES.REQUESTED_GEARS, getGearsAsync),
     yield takeLatest(ACTIONTYPES.CREATE_USER, createUserAsync),
+    yield takeLatest(ACTIONTYPES.UPDATE_USER, updateUserAsync),
     yield takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
     yield takeLatest(ACTIONTYPES.LOGOUT_USER, logoutUserAsync),
   ]);

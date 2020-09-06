@@ -34,7 +34,7 @@ const App: React.FC<Props> = ({}) => {
   const storeUsers = useSelector((state: State) => state.users);
   const clubTypes = useSelector((state: State) => state.types);
   const allShafts = useSelector((state: State) => state.shafts);
-  const Makers = useSelector((state: State) => state.maker);
+  const makers = useSelector((state: State) => state.maker);
   const storeClubs = useSelector((state: State) => state.clubs);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;

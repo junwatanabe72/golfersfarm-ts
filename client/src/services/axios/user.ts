@@ -11,6 +11,17 @@ export async function createUserAxios(data: SignupUserType) {
     return { e };
   }
 }
+
+export async function updateUserAxios(data: PartialUserObjectType) {
+  const { id } = data;
+  const queries = { user: { ...data } };
+  try {
+    const data = await client.post(`/${id}`, queries);
+    return data;
+  } catch (e) {
+    return { e };
+  }
+}
 //login
 export async function loginUserAxios(data: LoginUserType) {
   const queries = { user: { email: data.email, password: data.password } };
