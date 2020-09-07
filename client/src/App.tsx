@@ -51,7 +51,7 @@ const App: React.FC<Props> = ({}) => {
     }
   };
 
-  const allUsers = [...storeUsers, currentUser];
+  const allUsers = storeUsers.length === 0 ? [currentUser] : [...storeUsers];
   const route = allUsers.map((user: PartialUserObjectType) => {
     return (
       <>

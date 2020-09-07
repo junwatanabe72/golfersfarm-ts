@@ -1,5 +1,6 @@
 interface ClubObjectType {
   id: number;
+  userId: number;
   name: string;
   shaft: string;
   maker: string;

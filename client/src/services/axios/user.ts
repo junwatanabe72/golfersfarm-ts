@@ -16,7 +16,18 @@ export async function updateUserAxios(data: PartialUserObjectType) {
   const { id } = data;
   const queries = { user: { ...data } };
   try {
-    const data = await client.post(`/${id}`, queries);
+    const { data } = await client.patch(`/${id}`, queries);
+    return data;
+  } catch (e) {
+    return { e };
+  }
+}
+export async function postImageUserAxios(data: any) {
+  const { id } = data;
+  // const queries = { user: { ...data } };
+  const queries = data;
+  try {
+    const { data } = await client.post(`/${id}/image`, queries);
     return data;
   } catch (e) {
     return { e };

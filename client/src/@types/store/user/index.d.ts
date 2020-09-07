@@ -26,3 +26,4 @@ type UserThumbNailTypes = PartialUserObjectType[];
 
 type SignupUserType = Pick<UerObjectType, 'name' | 'password' | 'email'>;
 type LoginUserType = Pick<UserObjectType, 'password' | 'email'>;
+type ImageUserType = Pick<UserObjectType, 'profileImage' | 'clubImage'>;

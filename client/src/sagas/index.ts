@@ -46,7 +46,8 @@ export function* updateUserAsync(action: Action<PartialUserObjectType>) {
     if (updateUser !== undefined) {
       // yield toast.success('投稿に成功しました。', options);
       console.log('成功しました。');
-      yield put(addUser(updateUser));
+      const user = updateUser.updateUser;
+      yield put(addUser(user));
       return;
     } else {
       // yield toast.error('投稿に失敗しました。', options);
@@ -93,11 +94,12 @@ export function* getGearsAsync(action: Action<PartialUserObjectType>) {
   try {
     if (data !== undefined) {
       const editClubs = data.allClubs.map((value: any) => {
-        const { Club } = value;
+        const { Club, userId } = value;
         const { Maker, Shaft, ClubType, id, name } = Club;
         const club = {
           id,
           name,
+          userId: userId,
           maker: Maker.name,
           shaft: Shaft.name,
           flex: Shaft.flex,
@@ -105,8 +107,8 @@ export function* getGearsAsync(action: Action<PartialUserObjectType>) {
         };
         return club;
       });
-      const { id, name, Maker } = data.targetBall;
-      const ball = { id, name, maker: Maker.name };
+      // const { id, name, Maker } = data.targetBall;
+      // const ball = { id, name, maker: Maker.name };
       yield put(addClubs(editClubs));
       return;
     } else {
