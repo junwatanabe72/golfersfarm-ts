@@ -1,5 +1,4 @@
 import { Request, Response, NextFunction } from "express";
-import path from "path";
 import db, { sequelize } from "../models";
 import { userType } from "../models/user";
 const users = db.User;
@@ -10,7 +9,6 @@ const videos = db.Video;
 const makers = db.Maker;
 const shafts = db.Shaft;
 const clubTypes = db.ClubType;
-const URL = "http://localhost:3000/";
 
 export default {
   //loginPage
