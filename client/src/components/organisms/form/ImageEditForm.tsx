@@ -62,29 +62,44 @@ const Image = styled.img`
 `;
 const baseItems = {
   profileImage: 'プロフィールイメージ',
-  clubImage: 'クラブティングイメージ',
+  clubImage: 'クラブセッティングイメージ',
 };
 
 const profileNoteItems = {
   profileImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
   clubImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
 };
-
-const buttonValue = 'イメージを編集する。';
-
-const profileValidation = () =>
+const editTitle = 'イメージ';
+const buttonValue = 'イメージを変更する。';
+const FILE_SIZE = 5000000;
+const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
+const imageValidation = () =>
   yup.object().shape({
-    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
-    name: yup.string().required('必須項目です'),
+    profileImage: yup
+      .mixed()
+      .test('fileSize', 'ファイル容量が大きすぎます。', (value) => value && value.size < FILE_SIZE)
+      .test(
+        'fileFormat',
+        '画像形式が違います。',
+        (value) => value && SUPPORTED_FORMATS.includes(value.type)
+      ),
+    clubImage: yup
+      .mixed()
+      .test('fileSize', 'ファイル容量が大きすぎます。', (value) => value && value.size < FILE_SIZE)
+      .test(
+        'fileFormat',
+        '画像形式が違います。',
+        (value) => value && SUPPORTED_FORMATS.includes(value.type)
+      ),
   });
 
 const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   const [cImage, setCImage] = useState<any>(currentUser.clubImage);
   const [PImage, setPImage] = useState<any>(currentUser.profileImage);
-  const editCImage = (value: any) => {
+  const editCImage = (value: string | ArrayBuffer | null) => {
     setCImage(value);
   };
-  const editPImage = (value: any) => {
+  const editPImage = (value: string | ArrayBuffer | null) => {
     setPImage(value);
   };
   const profileEditFormDatas = {
@@ -100,81 +115,74 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
 
   const formik = useFormik({
     initialValues: { ...profileEditFormDatas.initialValuesData },
-    // validationSchema: profileValidation,
+    validationSchema: imageValidation,
     onSubmit: onSubmit,
   });
 
   const InputItems = (obj: IEditItems, note?: INoteItems) => {
-    const element = Object.entries(profileEditFormDatas.placeHolder).map(
-      ([key, value]: string[]) => {
-        return (
-          <>
-            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <FlexLayout
-                justifyContent={JUSTIFYCONTENT.START}
-                width={SIZE.XXXSMALL}
-                alignItems={ALIGNITEMS.START}
-                left={
-                  <Padding left={CLEAR.TINY}>
-                    <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
-                  </Padding>
-                }
-                right={
-                  <Padding left={CLEAR.MEDIUM}>
-                    <Center>
-                      <StyledField
-                        type={'file'}
-                        accept={'image/*'}
-                        name={key}
-                        placeholder={value}
-                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                          const file =
-                            event.currentTarget.files !== null
-                              ? event.currentTarget.files[0]
-                              : null;
-                          if (file === null) {
-                            return;
-                          }
-                          formik.setFieldValue(key, file);
-                          const reader = new FileReader();
-                          reader.onload = () => {
-                            key === 'clubImage'
-                              ? editCImage(reader.result)
-                              : editPImage(reader.result);
-                          };
-                          reader.readAsDataURL(file);
-                        }}
-                        onBlur={formik.handleBlur}
-                      />
-                      {key === 'clubImage' ? <Image src={cImage} /> : <Image src={PImage} />}
+    const element = Object.keys(profileEditFormDatas.initialValuesData).map((key: string) => {
+      return (
+        <>
+          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+            <FlexLayout
+              justifyContent={JUSTIFYCONTENT.START}
+              width={SIZE.XXXSMALL}
+              alignItems={ALIGNITEMS.START}
+              left={
+                <Padding left={CLEAR.TINY}>
+                  <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
+                </Padding>
+              }
+              right={
+                <Padding left={CLEAR.MEDIUM}>
+                  <Center>
+                    <StyledField
+                      type={'file'}
+                      accept={'image/*'}
+                      name={key}
+                      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        const file =
+                          event.currentTarget.files !== null ? event.currentTarget.files[0] : null;
+                        if (file === null) {
+                          return;
+                        }
+                        formik.setFieldValue(key, file);
+                        const reader = new FileReader();
+                        reader.onload = () => {
+                          key === 'clubImage'
+                            ? editCImage(reader.result)
+                            : editPImage(reader.result);
+                        };
+                        reader.readAsDataURL(file);
+                      }}
+                      onBlur={formik.handleBlur}
+                    />
+                    {key === 'clubImage' ? <Image src={cImage} /> : <Image src={PImage} />}
 
-                      {note === undefined ? (
-                        <></>
-                      ) : (
-                        <Inline>{note[key as keyof INoteItems]}</Inline>
-                      )}
-                    </Center>
-                  </Padding>
-                }
-              />
-            </Padding>
-            {formik.touched[key as keyof ImageUserType] &&
-            formik.errors[key as keyof ImageUserType] ? (
-              <Styleddiv>{formik.errors[key as keyof ImageUserType]}</Styleddiv>
-            ) : null}
-          </>
-        );
-      }
-    );
+                    {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
+                    {formik.touched[key as keyof ImageUserType] &&
+                    formik.errors[key as keyof ImageUserType] ? (
+                      <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                        <Styleddiv>{formik.errors[key as keyof ImageUserType]}</Styleddiv>
+                      </Padding>
+                    ) : null}
+                  </Center>
+                </Padding>
+              }
+            />
+          </Padding>
+        </>
+      );
+    });
     return element;
   };
-  // console.log(formik.values);
+
   return (
     <Padding all={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
           <Logo fontSize={FONTSIZE.XLARGE} textAlign={ALIGNITEMS.START}>
-            <ExtendPadding all={CLEAR.TINY}>イメージ</ExtendPadding>
+            <ExtendPadding all={CLEAR.TINY}>{editTitle}</ExtendPadding>
           </Logo>
           {InputItems(baseItems, profileNoteItems)}
         </Padding>

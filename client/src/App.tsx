@@ -50,8 +50,9 @@ const App: React.FC<Props> = ({}) => {
       dispatch(loginUser(loginItems));
     }
   };
-
+  //develop時に一時的に使用。
   const allUsers = storeUsers.length === 0 ? [currentUser] : [...storeUsers];
+  //
   const route = allUsers.map((user: PartialUserObjectType) => {
     return (
       <>

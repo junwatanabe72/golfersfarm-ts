@@ -68,11 +68,3 @@ interface ProfileEditInitialValuesDataType {
   confirmedPassword: string;
 }
 type PartialProfileEditInitialValuesDataType = Partial<ProfileEditInitialValuesDataType>;
-
-interface IFormDataType {
-  [x: string]: any;
-  FormData;
-  // id: string;
-  // profileImage: File | null;
-  // clubImage: File | null;
-}
