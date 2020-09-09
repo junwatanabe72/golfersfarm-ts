@@ -15,7 +15,7 @@ type INoteItems = typeof profileNoteItems;
 
 interface Props {
   currentUser: UserObjectType;
-  onSubmit: (values: PartialUserObjectType) => void;
+  onSubmit: (values: PartialImageUserType) => void;
 }
 
 const StyledForm = styled.form``;
@@ -136,7 +136,6 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
                             return;
                           }
                           formik.setFieldValue(key, file);
-
                           const reader = new FileReader();
                           reader.onload = () => {
                             key === 'clubImage'
@@ -159,9 +158,9 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
                 }
               />
             </Padding>
-            {formik.touched[key as keyof UserObjectType] &&
-            formik.errors[key as keyof UserObjectType] ? (
-              <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
+            {formik.touched[key as keyof ImageUserType] &&
+            formik.errors[key as keyof ImageUserType] ? (
+              <Styleddiv>{formik.errors[key as keyof ImageUserType]}</Styleddiv>
             ) : null}
           </>
         );

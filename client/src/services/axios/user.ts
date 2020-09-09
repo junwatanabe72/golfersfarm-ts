@@ -1,5 +1,4 @@
 import { client } from '../../utils/axiosConf';
-
 //userAPI
 //signup
 export async function createUserAxios(data: SignupUserType) {
@@ -22,12 +21,16 @@ export async function updateUserAxios(data: PartialUserObjectType) {
     return { e };
   }
 }
-export async function postImageUserAxios(data: any) {
-  const { id } = data;
-  // const queries = { user: { ...data } };
+export async function updateUserImageAxios(data: FormData) {
+  const id = data.get('id');
   const queries = data;
+  const config = {
+    headers: {
+      'content-type': 'multipart/form-data',
+    },
+  };
   try {
-    const { data } = await client.post(`/${id}/image`, queries);
+    const { data } = await client.post(`/${id}/images`, queries, config);
     return data;
   } catch (e) {
     return { e };

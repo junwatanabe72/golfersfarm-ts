@@ -11,6 +11,7 @@ export const ACTIONTYPES = {
   REQUESTED_GEARS: 'REQUESTED_GEARS',
   CREATE_USER: 'CREATE_USER',
   UPDATE_USER: 'UPDATE_USER',
+  UPDATE_IMAGE_USER: 'UPDATE_IMAGE_USER',
   LOGIN_USER: 'LOGIN_USER',
   LOGOUT_USER: 'LOGOUT_USER',
 } as const;
@@ -24,6 +25,9 @@ export function createUser(data: SignupUserType): Action<SignupUserType> {
 }
 export function updateUser(data: PartialUserObjectType): Action<PartialUserObjectType> {
   return { type: ACTIONTYPES.UPDATE_USER, payload: data };
+}
+export function updateImageUser(data: FormData): Action<FormData> {
+  return { type: ACTIONTYPES.UPDATE_IMAGE_USER, payload: data };
 }
 export function loginUser(data: LoginUserType): Action<LoginUserType> {
   return { type: ACTIONTYPES.LOGIN_USER, payload: data };

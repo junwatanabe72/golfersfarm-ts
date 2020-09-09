@@ -1,9 +1,22 @@
 import express from "express";
+const multer = require("multer");
+import path from "path";
+// import { upload } from "../app";
 import usersController from "../controllers/usersController";
 import clubsController from "../controllers/clubsController";
 import ballsController from "../controllers/ballsController";
 import videosController from "../controllers/videosController";
 
+const storage = multer.diskStorage({
+  destination: "./public/uploads/",
+  filename: function (req: any, file: any, cb: any) {
+    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
+  },
+});
+export const upload = multer({
+  storage: storage,
+  limits: { fileSize: 5000000 },
+});
 const usersRouter = express.Router();
 
 //usersprofileAPI(UsersTable)
@@ -12,6 +25,14 @@ usersRouter.post("/login", usersController.show);
 //
 usersRouter.get("/", usersController.index);
 usersRouter.post("/", usersController.create);
+usersRouter.post(
+  "/:id/images",
+  upload.fields([
+    { name: "profileImage", maxCount: 1 },
+    { name: "clubImage", maxCount: 1 },
+  ]),
+  usersController.updateImage
+);
 usersRouter.patch("/:id", usersController.update);
 usersRouter.delete("/:id", usersController.delete);
 

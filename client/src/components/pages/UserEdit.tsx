@@ -7,9 +7,8 @@ import { Padding } from '../../utils/styled/styledSpace';
 import Form from '../organisms/form/UserEditForm';
 import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
-import { updateUser } from '../../actions';
+import { updateUser, updateImageUser } from '../../actions';
 import ImageEditForm from '../organisms/form/ImageEditForm';
-import { postImageUserAxios } from '../../services/axios/user';
 
 interface Props {
   currentUser: UserObjectType;
@@ -34,12 +33,28 @@ const UserEdit: React.FC<Props> = ({ currentUser }) => {
     setEditPage(value);
   };
   const dispatch = useDispatch();
-  const editProfileonSubmit = (values: any) => {
+
+  const editProfileonSubmit = (values: PartialProfileEditInitialValuesDataType) => {
     const showValue = values.show === selectProfileItems.show.body[0] ? true : false;
     dispatch(updateUser({ ...values, show: showValue }));
   };
-
-  const editImageonSubmit = (values: any) => {};
+  const editImageonSubmit = async (values: PartialImageUserType) => {
+    if (
+      values.profileImage === currentUser.profileImage &&
+      values.clubImage === currentUser.clubImage
+    ) {
+      return;
+    }
+    const formData = new FormData();
+    if (values.clubImage === currentUser.clubImage && values.profileImage) {
+      formData.append('profileImage', values.profileImage);
+    }
+    if (values.profileImage === currentUser.profileImage && values.clubImage) {
+      formData.append('clubImage', values.clubImage);
+    }
+    formData.append('id', String(currentUser.id));
+    dispatch(updateImageUser(formData));
+  };
 
   const Color = styled.div`
     background-color: ${BASICCOLORS.WHITELIGHT};

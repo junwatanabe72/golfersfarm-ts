@@ -135,8 +135,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     initialValuesData: {
       ...currentUser,
       show: showValue,
-      password: '',
-      confirmedPassword: '',
+      confirmedPassword: currentUser.password,
     },
     placeHolder: {
       ...baseUser,
