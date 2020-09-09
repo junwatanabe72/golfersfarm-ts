@@ -18,11 +18,14 @@ interface Props {
 }
 
 const User: React.FC<Props> = ({ currentUser, targetUser, storeClubs }) => {
+  const checkedClub: ClubTableTypes = Object.values(storeClubs).filter(
+    (club: ClubObjectType) => club.userId === targetUser.id
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getGears(targetUser));
   }, []);
-  const rightContent = <UserSub targetUser={targetUser} storeClubs={storeClubs} />;
+  const rightContent = <UserSub targetUser={targetUser} storeClubs={checkedClub} />;
   const leftContent = <UserMain targetUser={targetUser} />;
   return (
     <Layout currentUser={currentUser}>

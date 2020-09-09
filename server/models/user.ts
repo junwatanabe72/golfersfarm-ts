@@ -30,10 +30,12 @@ class User extends Model {
     return newUser;
   }
 
-  static async updateProfile(id: string, user: User) {
+  static async updateProfile(id: string, user: any) {
+    // console.log(user);
     const targetUser: any = await this.findOne({
       where: { id: id },
     });
+    // console.log(targetUser);
     const updateUser = await targetUser.update({
       ...user,
     });

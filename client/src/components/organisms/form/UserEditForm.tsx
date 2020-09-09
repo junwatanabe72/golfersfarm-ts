@@ -121,18 +121,10 @@ const editTitles = ['基本情報', 'ゴルフ', 'SNS', 'その他'];
 
 const buttonValue = 'プロフィールを編集する。';
 
-const signUpValidation = () =>
+const profileValidation = () =>
   yup.object().shape({
     email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
     name: yup.string().required('必須項目です'),
-    password: yup
-      .string()
-      .required('必須項目です')
-      .min(8, '8字以上にしてください。')
-      .max(30, '30字以下にしてください。'),
-    confirmedPassword: yup
-      .string()
-      .oneOf([yup.ref('password'), undefined], '入力したパスワードではありません。'),
   });
 
 const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
@@ -143,8 +135,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     initialValuesData: {
       ...currentUser,
       show: showValue,
-      password: '',
-      confirmedPassword: '',
+      confirmedPassword: currentUser.password,
     },
     placeHolder: {
       ...baseUser,
@@ -152,10 +143,9 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
       confirmedPassword: '確認用パスワード',
     },
   };
-
   const formik = useFormik({
     initialValues: { ...profileEditFormDatas.initialValuesData },
-    validationSchema: signUpValidation,
+    validationSchema: profileValidation,
     onSubmit: onSubmit,
   });
 

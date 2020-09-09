@@ -1,5 +1,4 @@
 import { client } from '../../utils/axiosConf';
-// import { queries } from '@testing-library/react';
 
 export async function getGearsAxios(data: PartialUserObjectType) {
   const { id } = data;
