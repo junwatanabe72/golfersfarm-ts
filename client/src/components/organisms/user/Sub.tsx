@@ -10,7 +10,12 @@ import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import FlexLayout from '../../atoms/FlexLayout';
 import { allResults } from '../../../utils/constant/text/body/user/value';
-import { TABLETYPES } from '../../../utils/constant/text/table';
+import {
+  TABLETYPES,
+  gearTableItems,
+  profileTableSubItems,
+  resultTableItems,
+} from '../../../utils/constant/text/table';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
 
 interface Props {
@@ -38,28 +43,6 @@ const StyledFlexColumn = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const profileTableSubItems = {
-  sex: '性別',
-  residence: '現住所',
-  birthPlace: '出生地',
-  job: '職業',
-  school: '出身校',
-  hobby: '趣味',
-};
-
-export const resultTableItems = {
-  year: '年',
-  com: '競技',
-  rank: '順位',
-};
-
-export const gearTableItems = {
-  type: '種類',
-  name: '名前',
-  maker: 'メーカー',
-  shaft: 'シャフト',
-  flex: '硬さ',
-};
 
 const URL = 'https://www.youtube.com/embed/wet97FIk2iY';
 const videos = [URL, URL, URL, URL];

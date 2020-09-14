@@ -51,6 +51,16 @@ const getButtonBcolor = (props: Props['color']) => {
         background-color: ${BASICCOLORS.PRIMARY};
       }
   `;
+  } else if (props === BASICCOLORS.WHITE) {
+    return `
+      color: ${BASICCOLORS.SECONDARY};
+      background-color: ${BASICCOLORS.WHITELIGHT};
+      border: 2px solid ${BASICCOLORS.SECONDARY};
+      &:hover {
+        color: ${BASICCOLORS.WHITE};
+        background-color: ${BASICCOLORS.SECONDARY};
+      }
+  `;
   }
 };
 

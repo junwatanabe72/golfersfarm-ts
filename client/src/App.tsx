@@ -72,7 +72,7 @@ const App: React.FC<Props> = ({}) => {
           path={`/users/${user.id}/edit`}
           render={() =>
             user.id === currentUser.id ? (
-              <UserEdit currentUser={currentUser} />
+              <UserEdit currentUser={currentUser} storeClubs={storeClubs} />
             ) : (
               <Redirect to={ROUTE.TOP} />
             )

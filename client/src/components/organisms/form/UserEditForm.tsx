@@ -2,14 +2,15 @@ import React from 'react';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
-import Button from '../../atoms/Button';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { BASICCOLORS } from '../../../utils/constant/color';
-import Logo from '../../atoms/Logo';
 import FlexLayout from '../../atoms/FlexLayout';
 import { baseUser } from '../../../utils/constant/text/body/user/value';
+import { selectProfileItems } from '../../pages/UserEdit';
+import FormTitle from '../../atoms/form/FormTitle';
+import FormSubmit from '../../atoms/form/FormSubmit';
 
 type ISelectItems = typeof selectProfileItems | typeof selectGolfItems;
 type IEditItems = typeof baseItems | typeof snsItems | typeof golfItems | typeof otherItems;
@@ -102,10 +103,6 @@ const selectGolfItems = {
   bestScore: { head: 'ベストスコア', body: bScore },
   averageDistance: { head: '平均飛距離', body: aDistance },
 };
-const selectProfileItems = {
-  sex: { head: '性別', body: ['男性', '女性'] },
-  show: { head: '公開・非公開', body: ['公開', '非公開'] },
-};
 
 const snsNoteItems = {
   twitter: 'twitter.com/後のアカウント名。',
@@ -131,7 +128,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   const showValue = currentUser.show
     ? selectProfileItems.show.body[0]
     : selectProfileItems.show.body[1];
-  const profileEditFormDatas = {
+  const editFormDatas = {
     initialValuesData: {
       ...currentUser,
       show: showValue,
@@ -144,7 +141,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     },
   };
   const formik = useFormik({
-    initialValues: { ...profileEditFormDatas.initialValuesData },
+    initialValues: { ...editFormDatas.initialValuesData },
     validationSchema: profileValidation,
     onSubmit: onSubmit,
   });
@@ -195,45 +192,43 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     const keyItems = Object.keys(obj).map((key: string) => {
       return key;
     });
-    const element = Object.entries(profileEditFormDatas.placeHolder).map(
-      ([key, value]: string[]) => {
-        return keyItems.includes(key) ? (
-          <>
-            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <FlexLayout
-                justifyContent={JUSTIFYCONTENT.START}
-                width={SIZE.XXXSMALL}
-                alignItems={ALIGNITEMS.START}
-                left={
-                  <Padding left={CLEAR.TINY}>
-                    <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
-                  </Padding>
-                }
-                right={
-                  <Padding left={CLEAR.MEDIUM}>
-                    <StyledField
-                      type={key}
-                      name={key}
-                      placeholder={value}
-                      onChange={formik.handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values[key as keyof UserObjectType]}
-                    />
-                    {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
-                  </Padding>
-                }
-              />
-            </Padding>
-            {formik.touched[key as keyof UserObjectType] &&
-            formik.errors[key as keyof UserObjectType] ? (
-              <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
-            ) : null}
-          </>
-        ) : (
-          <></>
-        );
-      }
-    );
+    const element = Object.entries(editFormDatas.placeHolder).map(([key, value]: string[]) => {
+      return keyItems.includes(key) ? (
+        <>
+          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+            <FlexLayout
+              justifyContent={JUSTIFYCONTENT.START}
+              width={SIZE.XXXSMALL}
+              alignItems={ALIGNITEMS.START}
+              left={
+                <Padding left={CLEAR.TINY}>
+                  <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
+                </Padding>
+              }
+              right={
+                <Padding left={CLEAR.MEDIUM}>
+                  <StyledField
+                    type={key}
+                    name={key}
+                    placeholder={value}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values[key as keyof UserObjectType]}
+                  />
+                  {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
+                </Padding>
+              }
+            />
+          </Padding>
+          {formik.touched[key as keyof UserObjectType] &&
+          formik.errors[key as keyof UserObjectType] ? (
+            <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
+          ) : null}
+        </>
+      ) : (
+        <></>
+      );
+    });
     return element;
   };
 
@@ -253,16 +248,12 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   const editTitleElemensts = editElements.map((element, i) => {
     return i === 0 ? (
       <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
-        <Logo fontSize={FONTSIZE.XLARGE} textAlign={ALIGNITEMS.START}>
-          <ExtendPadding all={CLEAR.TINY}>{editTitles[i]}</ExtendPadding>
-        </Logo>
+        <FormTitle>{editTitles[i]}</FormTitle>
         {element}
       </Padding>
     ) : (
       <Padding bottom={CLEAR.SMALL}>
-        <Logo fontSize={FONTSIZE.XLARGE} textAlign={ALIGNITEMS.START}>
-          <ExtendPadding all={CLEAR.TINY}>{editTitles[i]}</ExtendPadding>
-        </Logo>
+        <FormTitle>{editTitles[i]}</FormTitle>
         {element}
       </Padding>
     );
@@ -272,13 +263,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     <Padding all={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         {editTitleElemensts}
-        <Center>
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <StyledButton type="submit">
-              <Button pWidth={CLEAR.LARGE}>{buttonValue}</Button>
-            </StyledButton>
-          </Padding>
-        </Center>
+        <FormSubmit>{buttonValue}</FormSubmit>
       </StyledForm>
     </Padding>
   );

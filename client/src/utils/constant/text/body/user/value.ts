@@ -79,6 +79,14 @@ export const club = {
   typeId: 1,
 };
 
+export const baseClub = {
+  id: '',
+  name: '',
+  userId: '',
+  maker: '',
+  type: '',
+  flex: '',
+};
 export const allClubs = [
   club,
   { ...club, id: 2, name: 'V-steel', typeId: 2 },

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
-import Button from '../../atoms/Button';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { BASICCOLORS } from '../../../utils/constant/color';
-import Logo from '../../atoms/Logo';
 import FlexLayout from '../../atoms/FlexLayout';
+import FormTitle from '../../atoms/form/FormTitle';
+import FormSubmit from '../../atoms/form/FormSubmit';
 
 type IEditItems = typeof baseItems;
 type INoteItems = typeof profileNoteItems;
@@ -27,12 +27,6 @@ const StyledField = styled.input`
       `}
 `;
 
-const StyledButton = styled.button`
-  padding: 0;
-  margin: 0;
-  border-style: none;
-`;
-
 const Styleddiv = styled.div`
   margin: 0 auto;
   color: ${BASICCOLORS.SECONDARYDARK};
@@ -49,9 +43,6 @@ const Inline = styled.div`
 const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
-`;
-const ExtendPadding = styled(Padding)`
-  border-bottom: 1px solid #ccc;
 `;
 
 const Image = styled.img`
@@ -102,7 +93,7 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   const editPImage = (value: string | ArrayBuffer | null) => {
     setPImage(value);
   };
-  const profileEditFormDatas = {
+  const editFormDatas = {
     initialValuesData: {
       profileImage: currentUser.profileImage,
       clubImage: currentUser.clubImage,
@@ -114,13 +105,13 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   };
 
   const formik = useFormik({
-    initialValues: { ...profileEditFormDatas.initialValuesData },
+    initialValues: { ...editFormDatas.initialValuesData },
     validationSchema: imageValidation,
     onSubmit: onSubmit,
   });
 
   const InputItems = (obj: IEditItems, note?: INoteItems) => {
-    const element = Object.keys(profileEditFormDatas.initialValuesData).map((key: string) => {
+    const element = Object.keys(editFormDatas.initialValuesData).map((key: string) => {
       return (
         <>
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
@@ -181,18 +172,10 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     <Padding all={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
-          <Logo fontSize={FONTSIZE.XLARGE} textAlign={ALIGNITEMS.START}>
-            <ExtendPadding all={CLEAR.TINY}>{editTitle}</ExtendPadding>
-          </Logo>
+          <FormTitle>{editTitle}</FormTitle>
           {InputItems(baseItems, profileNoteItems)}
         </Padding>
-        <Center>
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <StyledButton type="submit">
-              <Button pWidth={CLEAR.LARGE}>{buttonValue}</Button>
-            </StyledButton>
-          </Padding>
-        </Center>
+        <FormSubmit>{buttonValue}</FormSubmit>
       </StyledForm>
     </Padding>
   );

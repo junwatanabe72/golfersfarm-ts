@@ -1,6 +1,10 @@
 import { ACTIONTYPES } from '../actions';
 
-const initialState: ClubTableTypes = [];
+const sample = [
+  { id: 1, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
+  { id: 1, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
+];
+const initialState: ClubTableTypes = sample;
 
 export default function ClubsReducer(
   state = initialState,
