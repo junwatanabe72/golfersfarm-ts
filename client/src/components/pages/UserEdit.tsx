@@ -9,9 +9,11 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
 import { updateUser, updateImageUser } from '../../actions';
 import ImageEditForm from '../organisms/form/ImageEditForm';
+import ClubEditForm from '../organisms/form/club';
 
 interface Props {
   currentUser: UserObjectType;
+  storeClubs: ClubTableTypes;
 }
 
 export const editTitleList = {
@@ -22,16 +24,19 @@ export const editTitleList = {
   result: 'RESULT',
 } as const;
 
-const selectProfileItems = {
+export const selectProfileItems = {
   sex: { head: '性別', body: ['男性', '女性'] },
   show: { head: '公開・非公開', body: ['公開', '非公開'] },
 };
 
-const UserEdit: React.FC<Props> = ({ currentUser }) => {
+const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
   const [currentEditPage, setEditPage] = useState<string>(editTitleList.profile);
   const moveEditPage = (value: string) => {
     setEditPage(value);
   };
+  const checkedClub: ClubTableTypes = Object.values(storeClubs).filter(
+    (club: ClubObjectType) => club.userId === currentUser.id
+  );
   const dispatch = useDispatch();
 
   const editProfileonSubmit = (values: PartialProfileEditInitialValuesDataType) => {
@@ -75,7 +80,11 @@ const UserEdit: React.FC<Props> = ({ currentUser }) => {
           {currentEditPage === editTitleList.image && (
             <ImageEditForm currentUser={currentUser} onSubmit={editImageonSubmit} />
           )}
-          {currentEditPage === editTitleList.gear && <div>GEAR</div>}
+          {currentEditPage === editTitleList.gear && (
+            <>
+              <ClubEditForm storeClubs={checkedClub} onSubmit={editProfileonSubmit} />
+            </>
+          )}
           {currentEditPage === editTitleList.video && <div>VIDEO</div>}
           {currentEditPage === editTitleList.result && <div>RESULT</div>}
         </Color>
