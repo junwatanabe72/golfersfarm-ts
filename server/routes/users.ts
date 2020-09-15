@@ -2,10 +2,11 @@ import express from "express";
 const multer = require("multer");
 import path from "path";
 // import { upload } from "../app";
-import usersController from "../controllers/usersController";
-import clubsController from "../controllers/clubsController";
-import ballsController from "../controllers/ballsController";
-import videosController from "../controllers/videosController";
+import usersController from "../controllers/users/usersController";
+import imagesController from "../controllers/users/imagesController";
+import clubsController from "../controllers/users/clubsController";
+import ballsController from "../controllers/users/ballsController";
+import videosController from "../controllers/users/videosController";
 
 const storage = multer.diskStorage({
   destination: "./public/uploads/",
@@ -31,7 +32,7 @@ usersRouter.post(
     { name: "profileImage", maxCount: 1 },
     { name: "clubImage", maxCount: 1 },
   ]),
-  usersController.updateImage
+  imagesController.update
 );
 usersRouter.patch("/:id", usersController.update);
 usersRouter.delete("/:id", usersController.delete);

@@ -19,7 +19,7 @@ const URL =
 export const initialUser = {
   id: 1,
   name: userName,
-  profileImage: URL,
+  profileImage: '',
   facebook: facebook,
   twitter: twitter,
   instagram: instagram,
@@ -35,7 +35,7 @@ export const initialUser = {
   email: 'junwatanabe72@gmail.com',
   password: 'Password',
   job: 'free',
-  clubImage: ImageURL,
+  clubImage: '',
   show: false,
 };
 

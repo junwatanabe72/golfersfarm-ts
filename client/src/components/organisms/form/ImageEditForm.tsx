@@ -64,25 +64,6 @@ const editTitle = 'イメージ';
 const buttonValue = 'イメージを変更する。';
 const FILE_SIZE = 5000000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
-const imageValidation = () =>
-  yup.object().shape({
-    profileImage: yup
-      .mixed()
-      .test('fileSize', 'ファイル容量が大きすぎます。', (value) => value && value.size < FILE_SIZE)
-      .test(
-        'fileFormat',
-        '画像形式が違います。',
-        (value) => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-    clubImage: yup
-      .mixed()
-      .test('fileSize', 'ファイル容量が大きすぎます。', (value) => value && value.size < FILE_SIZE)
-      .test(
-        'fileFormat',
-        '画像形式が違います。',
-        (value) => value && SUPPORTED_FORMATS.includes(value.type)
-      ),
-  });
 
 const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   const [cImage, setCImage] = useState<any>(currentUser.clubImage);
@@ -103,6 +84,42 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
       clubImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
     },
   };
+
+  const imageValidation = () =>
+    yup.object().shape({
+      profileImage: yup
+        .mixed()
+        .test('fileSize', 'ファイル容量が大きすぎます。', (value) => {
+          if (value !== undefined && value !== currentUser.profileImage) {
+            return value.size <= FILE_SIZE;
+          } else {
+            return true;
+          }
+        })
+        .test('fileFormat', '画像形式が違います。', (value) => {
+          if (value !== undefined && value !== currentUser.profileImage) {
+            return SUPPORTED_FORMATS.includes(value.type);
+          } else {
+            return true;
+          }
+        }),
+      clubImage: yup
+        .mixed()
+        .test('fileSize', 'ファイル容量が大きすぎます。', (value) => {
+          if (value !== undefined && value !== currentUser.clubImage) {
+            return value.size <= FILE_SIZE;
+          } else {
+            return true;
+          }
+        })
+        .test('fileFormat', '画像形式が違います。', (value) => {
+          if (value !== undefined && value !== currentUser.clubImage) {
+            return SUPPORTED_FORMATS.includes(value.type);
+          } else {
+            return true;
+          }
+        }),
+    });
 
   const formik = useFormik({
     initialValues: { ...editFormDatas.initialValuesData },

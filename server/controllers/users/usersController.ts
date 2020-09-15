@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import db, { sequelize } from "../models";
-import { userType } from "../models/user";
+import db from "../../models";
+import { userType } from "../../models/user";
 const users = db.User;
 const clubs = db.Club;
 const userClubs = db.UserClubs;
@@ -70,36 +70,36 @@ export default {
       return next(error);
     }
   },
-  async updateImage(req: any, res: Response, next: NextFunction) {
-    const { files } = req;
-    const regex = /public/;
+  // async updateImage(req: any, res: Response, next: NextFunction) {
+  //   const { files } = req;
+  //   const regex = /public/;
 
-    const imagePath = files.profileImage
-      ? `${URL}${files.profileImage[0].path.replace(regex, "")}`
-      : null;
+  //   const imagePath = files.profileImage
+  //     ? `${URL}${files.profileImage[0].path.replace(regex, "")}`
+  //     : null;
 
-    const clubPath = files.clubImage
-      ? `${URL}${files.clubImage[0].path.replace(regex, "")}`
-      : null;
+  //   const clubPath = files.clubImage
+  //     ? `${URL}${files.clubImage[0].path.replace(regex, "")}`
+  //     : null;
 
-    const user = !imagePath
-      ? { clubImage: clubPath }
-      : clubPath
-      ? { profileImage: imagePath, clubImage: clubPath }
-      : { profileImage: imagePath };
+  //   const user = !imagePath
+  //     ? { clubImage: clubPath }
+  //     : clubPath
+  //     ? { profileImage: imagePath, clubImage: clubPath }
+  //     : { profileImage: imagePath };
 
-    try {
-      const updateUser = await users.updateProfile(req.params.id, user);
-      if (!updateUser) {
-        return res.status(400);
-      } else {
-        res.status(201).json({ updateUser });
-      }
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
-  },
+  //   try {
+  //     const updateUser = await users.updateProfile(req.params.id, user);
+  //     if (!updateUser) {
+  //       return res.status(400);
+  //     } else {
+  //       res.status(201).json({ updateUser });
+  //     }
+  //   } catch (error) {
+  //     res.status(400);
+  //     return next(error);
+  //   }
+  // },
   // (req: any, res: Response) => {
   //   const { files, body } = req;
   //   if (files.profileImage) {
