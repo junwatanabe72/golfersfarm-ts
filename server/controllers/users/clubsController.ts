@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { Model, DataTypes, Sequelize } from "sequelize";
-import db, { sequelize } from "../models";
+import db, { sequelize } from "../../models";
 
 const clubs = db.Club;
 const userClubs = db.UserClubs;

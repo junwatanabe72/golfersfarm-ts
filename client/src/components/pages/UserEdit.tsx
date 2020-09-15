@@ -51,10 +51,10 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
       return;
     }
     const formData = new FormData();
-    if (values.clubImage === currentUser.clubImage && values.profileImage) {
+    if (values.profileImage !== currentUser.profileImage && values.profileImage !== undefined) {
       formData.append('profileImage', values.profileImage);
     }
-    if (values.profileImage === currentUser.profileImage && values.clubImage) {
+    if (values.clubImage !== currentUser.clubImage && values.clubImage !== undefined) {
       formData.append('clubImage', values.clubImage);
     }
     formData.append('id', String(currentUser.id));
