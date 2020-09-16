@@ -11,6 +11,7 @@ import { baseUser } from '../../../utils/constant/text/body/user/value';
 import { selectProfileItems } from '../../pages/UserEdit';
 import FormTitle from '../../atoms/form/FormTitle';
 import FormSubmit from '../../atoms/form/FormSubmit';
+import { emailValidation, nameValidation } from '../../../validations';
 
 type ISelectItems = typeof selectProfileItems | typeof selectGolfItems;
 type IEditItems = typeof baseItems | typeof snsItems | typeof golfItems | typeof otherItems;
@@ -120,8 +121,8 @@ const buttonValue = 'プロフィールを編集する。';
 
 const profileValidation = () =>
   yup.object().shape({
-    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
-    name: yup.string().required('必須項目です'),
+    email: emailValidation(),
+    name: nameValidation(),
   });
 
 const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {

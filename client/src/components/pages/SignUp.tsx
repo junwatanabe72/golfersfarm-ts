@@ -10,6 +10,12 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { ROUTE } from '../../utils/constant/route';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
+import {
+  emailValidation,
+  passwordValidation,
+  nameValidation,
+  confirmedPasswordValidation,
+} from '../../validations';
 
 interface Props {
   currentUser: PartialUserObjectType;
@@ -41,16 +47,10 @@ const signUpFormDatas = {
 
 const signUpValidation = () =>
   yup.object().shape({
-    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
-    name: yup.string().required('必須項目です'),
-    password: yup
-      .string()
-      .required('必須項目です')
-      .min(8, '8字以上にしてください。')
-      .max(30, '30字以下にしてください。'),
-    confirmedPassword: yup
-      .string()
-      .oneOf([yup.ref('password'), undefined], '入力したパスワードではありません。'),
+    email: emailValidation(),
+    name: nameValidation(),
+    password: passwordValidation(),
+    confirmedPassword: confirmedPasswordValidation(),
   });
 
 const SignUp: React.FC<Props> = ({ currentUser, onSubmit }) => {
