@@ -10,6 +10,7 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
+import { emailValidation, passwordValidation } from '../../validations';
 
 interface Props {
   currentUser: PartialUserObjectType;
@@ -36,12 +37,8 @@ const formDatas = {
 
 const validation = () =>
   yup.object().shape({
-    email: yup.string().email('メールアドレスの形式で入力してください').required('必須項目です'),
-    password: yup
-      .string()
-      .required('必須項目です')
-      .min(8, '8字以上にしてください。')
-      .max(30, '30字以下にしてください。'),
+    email: emailValidation(),
+    password: passwordValidation(),
   });
 
 const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {

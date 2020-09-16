@@ -8,7 +8,7 @@ import Form from '../organisms/form/UserEditForm';
 import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
 import { updateUser, updateImageUser } from '../../actions';
-import ImageEditForm from '../organisms/form/ImageEditForm';
+import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 
 interface Props {
