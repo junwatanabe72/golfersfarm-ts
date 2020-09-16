@@ -1,4 +1,5 @@
 interface resultObjectType {
+  id: number;
   year: string;
   com: string;
   rank: string;

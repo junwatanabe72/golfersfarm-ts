@@ -148,10 +148,10 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   });
 
   const selectItems = (obj: ISelectItems, note?: INoteItems) => {
-    const element = Object.entries(obj).map(([key, value]) => {
+    const element = Object.entries(obj).map(([key, value], num: number) => {
       const { head, body } = value;
       return (
-        <>
+        <React.Fragment key={num}>
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
             <FlexLayout
               justifyContent={JUSTIFYCONTENT.START}
@@ -168,9 +168,11 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
                     <option value={formik.values[key as keyof UserObjectType]}>
                       {formik.values[key as keyof UserObjectType]}
                     </option>
-                    {body.map((data: any) => {
+                    {body.map((data: any, num: number) => {
                       return formik.values[key as keyof UserObjectType] !== data ? (
-                        <option value={data}>{data}</option>
+                        <option key={num} value={data}>
+                          {data}
+                        </option>
                       ) : null;
                     })}
                   </StyledSelect>
@@ -183,7 +185,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
           formik.errors[key as keyof UserObjectType] ? (
             <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
           ) : null}
-        </>
+        </React.Fragment>
       );
     });
     return element;
@@ -193,43 +195,45 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     const keyItems = Object.keys(obj).map((key: string) => {
       return key;
     });
-    const element = Object.entries(editFormDatas.placeHolder).map(([key, value]: string[]) => {
-      return keyItems.includes(key) ? (
-        <>
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <FlexLayout
-              justifyContent={JUSTIFYCONTENT.START}
-              width={SIZE.XXXSMALL}
-              alignItems={ALIGNITEMS.START}
-              left={
-                <Padding left={CLEAR.TINY}>
-                  <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
-                </Padding>
-              }
-              right={
-                <Padding left={CLEAR.MEDIUM}>
-                  <StyledField
-                    type={key}
-                    name={key}
-                    placeholder={value}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values[key as keyof UserObjectType]}
-                  />
-                  {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
-                </Padding>
-              }
-            />
-          </Padding>
-          {formik.touched[key as keyof UserObjectType] &&
-          formik.errors[key as keyof UserObjectType] ? (
-            <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
-          ) : null}
-        </>
-      ) : (
-        <></>
-      );
-    });
+    const element = Object.entries(editFormDatas.placeHolder).map(
+      ([key, value]: string[], num: number) => {
+        return keyItems.includes(key) ? (
+          <React.Fragment key={num}>
+            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+              <FlexLayout
+                justifyContent={JUSTIFYCONTENT.START}
+                width={SIZE.XXXSMALL}
+                alignItems={ALIGNITEMS.START}
+                left={
+                  <Padding left={CLEAR.TINY}>
+                    <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
+                  </Padding>
+                }
+                right={
+                  <Padding left={CLEAR.MEDIUM}>
+                    <StyledField
+                      type={key}
+                      name={key}
+                      placeholder={value}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values[key as keyof UserObjectType]}
+                    />
+                    {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
+                  </Padding>
+                }
+              />
+            </Padding>
+            {formik.touched[key as keyof UserObjectType] &&
+            formik.errors[key as keyof UserObjectType] ? (
+              <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
+            ) : null}
+          </React.Fragment>
+        ) : (
+          <React.Fragment key={num}></React.Fragment>
+        );
+      }
+    );
     return element;
   };
 
@@ -248,12 +252,12 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
 
   const editTitleElemensts = editElements.map((element, i) => {
     return i === 0 ? (
-      <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
+      <Padding key={i} top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
         <FormTitle>{editTitles[i]}</FormTitle>
         {element}
       </Padding>
     ) : (
-      <Padding bottom={CLEAR.SMALL}>
+      <Padding key={i} bottom={CLEAR.SMALL}>
         <FormTitle>{editTitles[i]}</FormTitle>
         {element}
       </Padding>

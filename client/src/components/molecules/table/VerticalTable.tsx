@@ -42,9 +42,9 @@ const VerticalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
     return key;
   });
 
-  const Data = order.map((value: string) => {
+  const Data = order.map((value: string, num: number) => {
     return (
-      <StyledTrd>
+      <StyledTrd key={num}>
         <StyledTd>{tableItems[value]}</StyledTd>
         <StyledTd>{datas[value as keyof PartialUserObjectType]}</StyledTd>
       </StyledTrd>

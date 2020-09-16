@@ -9,7 +9,7 @@ interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialI
 const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize }) => {
   const player = datas.map((data: PartialUserObjectType) => {
     return (
-      <Padding all={CLEAR.TINY}>
+      <Padding all={CLEAR.TINY} key={data.id}>
         <UserCard data={data} clear={clear} width={width} widthTab={widthTab} fontSize={fontSize} />
       </Padding>
     );

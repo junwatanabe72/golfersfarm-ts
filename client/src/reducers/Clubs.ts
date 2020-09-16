@@ -2,7 +2,7 @@ import { ACTIONTYPES } from '../actions';
 
 const sample = [
   { id: 1, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
-  { id: 1, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
+  { id: 2, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
 ];
 const initialState: ClubTableTypes = sample;
 

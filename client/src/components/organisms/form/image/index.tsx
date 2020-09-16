@@ -8,8 +8,6 @@ import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import InputItem from './InputItem';
 
-type IEditItems = typeof baseItems;
-
 interface Props {
   currentUser: UserObjectType;
   onSubmit: (values: PartialImageUserType) => void;
@@ -87,13 +85,14 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
       <StyledForm onSubmit={formik.handleSubmit}>
         <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
           <FormTitle>{editTitle}</FormTitle>
-          {imageItemsKeys.map((key: string) => {
+          {imageItemsKeys.map((key: string, num: number) => {
             return (
               <InputItem
+                key={num}
                 formik={formik}
                 pKey={key}
-                label={baseItems[key as keyof IEditItems]}
-                note={profileNoteItems[key as keyof IEditItems]}
+                label={baseItems[key as keyof ImageUserType]}
+                note={profileNoteItems[key as keyof ImageUserType]}
                 currentUser={currentUser}
               />
             );

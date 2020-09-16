@@ -9,7 +9,7 @@ interface Props extends PartialICOLOR, PartialIFONTSIZE {
   pWidth?: CLEARTYPE;
   pHeight?: CLEARTYPE;
 }
-const DefaultButton = styled.a<Props>`
+const DefaultButton = styled.div<Props>`
   font-size: ${(props) => props.fontSize}px;
   cursor: pointer;
   display: inline-block;

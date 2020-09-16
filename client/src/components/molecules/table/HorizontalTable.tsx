@@ -43,19 +43,20 @@ const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
   });
 
   const body = Object.values(datas).map((data: any) => {
-    return order.map((key: string) => {
-      return <StyledTd>{data[key]}</StyledTd>;
+    return order.map((pKey: string, num) => {
+      return <StyledTd key={num}>{data[pKey]}</StyledTd>;
     });
   });
-  const head = order.map((key: string) => {
-    return <StyledTd>{tableItems[key]}</StyledTd>;
+  const head = order.map((pKey: string, num: number) => {
+    return <StyledTd key={pKey}>{tableItems[pKey]}</StyledTd>;
   });
   const records = [head, ...body];
+
   return (
     <StyledTable width={width}>
       <tbody>
-        {records.map((value) => {
-          return <StyledTrd>{value}</StyledTrd>;
+        {records.map((value, num: number) => {
+          return <StyledTrd key={num}>{value}</StyledTrd>;
         })}
       </tbody>
     </StyledTable>

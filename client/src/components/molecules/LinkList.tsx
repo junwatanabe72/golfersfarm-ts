@@ -11,7 +11,7 @@ interface Props extends ICOLOR, PartialICLEAR {
 const LinkList: React.FC<Props> = ({ color, route, clear = CLEAR.TINY }) => {
   const list = Object.entries(route).map(([key, value]: any) => {
     return (
-      <LinkButton to={value} color={color}>
+      <LinkButton key={key} to={value} color={color}>
         <Padding all={clear}>{key}</Padding>
       </LinkButton>
     );
