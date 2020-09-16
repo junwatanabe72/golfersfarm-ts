@@ -85,9 +85,10 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
       <StyledForm onSubmit={formik.handleSubmit}>
         <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
           <FormTitle>{editTitle}</FormTitle>
-          {imageItemsKeys.map((key: string) => {
+          {imageItemsKeys.map((key: string, num: number) => {
             return (
               <InputItem
+                key={num}
                 formik={formik}
                 pKey={key}
                 label={baseItems[key as keyof ImageUserType]}

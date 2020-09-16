@@ -142,21 +142,25 @@ export const makers = [
 
 export const allResults = [
   {
+    id: 1,
     year: '2013年11月',
     com: 'ゴルフネットワーク選手権RomaroCUP',
     rank: '21位',
   },
   {
+    id: 2,
     year: '2007年4月',
     com: '関東大学春季Dブロック対抗戦',
     rank: '団体４位',
   },
   {
+    id: 3,
     year: '2007年８月',
     com: '関東大学春季Dブロック対抗戦',
     rank: '団体1位',
   },
   {
+    id: 4,
     year: '2006年8月',
     com: '関東大学春季Cブロック対抗戦',
     rank: '団体8位',

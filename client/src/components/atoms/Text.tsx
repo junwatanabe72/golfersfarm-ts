@@ -16,7 +16,11 @@ const Text: React.FC<Props> = ({ text, fontSize = FONTSIZE.LARGE }) => {
   return (
     <Container fontSize={fontSize}>
       {text.map((t: string) => {
-        return <Padding bottom={CLEAR.TINY}>{t}</Padding>;
+        return (
+          <Padding key={t} bottom={CLEAR.TINY}>
+            {t}
+          </Padding>
+        );
       })}
     </Container>
   );

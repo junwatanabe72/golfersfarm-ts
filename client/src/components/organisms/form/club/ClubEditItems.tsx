@@ -97,24 +97,40 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
             <StyledSelect name={name} onChange={onChange}>
               <option value={arg}>{club[arg]}</option>
               {arg === 'type'
-                ? Object.values(allTypes).map((data: TypeData) => {
+                ? Object.values(allTypes).map((data: TypeData, num: number) => {
                     const { type } = data;
-                    return club[arg] !== type ? <option value={type}>{type}</option> : null;
+                    return club[arg] !== type ? (
+                      <option key={num} value={type}>
+                        {type}
+                      </option>
+                    ) : null;
                   })
                 : arg === 'maker'
-                ? Object.values(makers).map((data: MakerData) => {
+                ? Object.values(makers).map((data: MakerData, num: number) => {
                     const { name } = data;
-                    return club[arg] !== name ? <option value={name}>{name}</option> : null;
+                    return club[arg] !== name ? (
+                      <option key={num} value={name}>
+                        {name}
+                      </option>
+                    ) : null;
                   })
                 : arg === 'shaft'
-                ? Object.values(shafts).map((data: ShaftData) => {
+                ? Object.values(shafts).map((data: ShaftData, num: number) => {
                     const { name } = data;
-                    return club[arg] !== name ? <option value={name}>{name}</option> : null;
+                    return club[arg] !== name ? (
+                      <option key={num} value={name}>
+                        {name}
+                      </option>
+                    ) : null;
                   })
                 : arg === 'flex'
-                ? Object.values(shafts).map((data: ShaftData) => {
+                ? Object.values(shafts).map((data: ShaftData, num: number) => {
                     const { flex } = data;
-                    return club[arg] !== flex ? <option value={flex}>{flex}</option> : null;
+                    return club[arg] !== flex ? (
+                      <option key={num} value={flex}>
+                        {flex}
+                      </option>
+                    ) : null;
                   })
                 : null}
             </StyledSelect>

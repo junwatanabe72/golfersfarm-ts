@@ -30,9 +30,10 @@ const StyledTargetDiv = styled(StyledDiv)`
 const ItemList: React.FC<Props> = ({ list, onClick, state }) => {
   return (
     <Flex>
-      {list.map((title: string) => {
+      {list.map((title: string, num: number) => {
         return title === state ? (
           <StyledTargetDiv
+            key={title}
             onClick={() => {
               onClick(title);
             }}
@@ -43,6 +44,7 @@ const ItemList: React.FC<Props> = ({ list, onClick, state }) => {
           </StyledTargetDiv>
         ) : (
           <StyledDiv
+            key={title}
             onClick={() => {
               onClick(title);
             }}

@@ -28,9 +28,9 @@ const VideoPosition: React.FC<Props> = ({ maxWidth = SIZE.MEDIUM, videos }) => {
   const [width, height] = [3, 4].includes(videos.length)
     ? [SIZE.SXMALL, SIZE.XSMALL]
     : [SIZE.LARGE, SIZE.SMALL];
-  const content = videos.map((data) => {
+  const content = videos.map((data, num) => {
     return (
-      <Padding top={CLEAR.TINY}>
+      <Padding key={num} top={CLEAR.TINY}>
         <Iframe width={width} height={height} source={data} />
       </Padding>
     );

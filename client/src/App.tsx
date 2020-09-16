@@ -53,9 +53,9 @@ const App: React.FC<Props> = ({}) => {
   //develop時に一時的に使用。
   const allUsers = storeUsers.length === 0 ? [currentUser] : [...storeUsers];
   //
-  const route = allUsers.map((user: PartialUserObjectType) => {
+  const route = allUsers.map((user: PartialUserObjectType, num: number) => {
     return (
-      <>
+      <React.Fragment key={user.id}>
         <Route
           exact
           path={`/users/${user.id}`}
@@ -78,7 +78,7 @@ const App: React.FC<Props> = ({}) => {
             )
           }
         />
-      </>
+      </React.Fragment>
     );
   });
 

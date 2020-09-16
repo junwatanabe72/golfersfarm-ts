@@ -29,7 +29,7 @@ const contents = components.map((d: JSX.Element, i: number) => {
   const color = i % 2 == 0 ? BASICCOLORS.WHITE : BASICCOLORS.WHITELIGHT;
 
   return (
-    <BackColor color={color}>
+    <BackColor key={i} color={color}>
       <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
         <Container>{d}</Container>
       </Padding>
