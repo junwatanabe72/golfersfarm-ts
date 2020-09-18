@@ -2,7 +2,7 @@ import { client } from '../../utils/axiosConf';
 //userAPI
 //signup
 export async function createUserAxios(data: SignupUserType) {
-  const queries = { user: { name: data.name, email: data.email, password: data.password } };
+  const queries = { user: { ...data } };
   try {
     const data = await client.post('/', queries);
     return data;
@@ -38,7 +38,7 @@ export async function updateUserImageAxios(data: FormData) {
 }
 //login
 export async function loginUserAxios(data: LoginUserType) {
-  const queries = { user: { email: data.email, password: data.password } };
+  const queries = { user: { ...data } };
   try {
     const { data } = await client.post('/login', queries);
     return data;

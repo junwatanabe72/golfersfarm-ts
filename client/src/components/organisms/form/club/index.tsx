@@ -58,13 +58,7 @@ const ClubEditForm: React.FC<Props> = ({ storeClubs, onSubmit }) => {
     <Formik<FormikValueType>
       initialValues={initialValuesData}
       validationSchema={clubValidation}
-      onSubmit={(values, actions) => {
-        // Submit した時の記述
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
-      }}
+      onSubmit={onSubmit}
     >
       <Padding top={CLEAR.MEDIUM} right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
         <Form>

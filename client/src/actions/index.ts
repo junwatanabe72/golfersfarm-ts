@@ -4,6 +4,7 @@ export const ACTIONTYPES = {
   DELETE_USER: 'DELETE_USER',
   ADD_USERS: 'ADD_USERS',
   ADD_CLUBS: 'ADD_CLUBS',
+  REMOVE_CLUBS: 'REMOVE_CLUBS',
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
@@ -11,6 +12,7 @@ export const ACTIONTYPES = {
   REQUESTED_GEARS: 'REQUESTED_GEARS',
   CREATE_USER: 'CREATE_USER',
   UPDATE_USER: 'UPDATE_USER',
+  UPDATE_CLUBS: 'UPDATE_CLUBS',
   UPDATE_IMAGE_USER: 'UPDATE_IMAGE_USER',
   LOGIN_USER: 'LOGIN_USER',
   LOGOUT_USER: 'LOGOUT_USER',
@@ -38,6 +40,9 @@ export function logoutUser(): TypeAction {
 export function getGears(data: PartialUserObjectType): Action<PartialUserObjectType> {
   return { type: ACTIONTYPES.REQUESTED_GEARS, payload: data };
 }
+export function updateClubs(data: any): Action<any> {
+  return { type: ACTIONTYPES.UPDATE_CLUBS, payload: data };
+}
 //REDUX_SAGA
 
 export function addUser(data: PartialUserObjectType): Action<PartialUserObjectType> {
@@ -53,6 +58,9 @@ export function addUsers(data: UserThumbNailTypes): Action<UserThumbNailTypes> {
 //clubsActionCreater
 export function addClubs(data: ClubTableTypes): Action<ClubTableTypes> {
   return { type: ACTIONTYPES.ADD_CLUBS, payload: data };
+}
+export function removeClubs(data: ClubTableTypes): Action<ClubTableTypes> {
+  return { type: ACTIONTYPES.REMOVE_CLUBS, payload: data };
 }
 //typesActionCreater
 export function addTypes(data: TypesData): Action<TypesData> {

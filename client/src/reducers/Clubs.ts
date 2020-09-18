@@ -17,6 +17,16 @@ export default function ClubsReducer(
       newState = [...state, ...clubs];
       return newState;
     }
+    case ACTIONTYPES.REMOVE_CLUBS: {
+      const clubsIds = Object.values(clubs).map((value: ClubObjectType) => {
+        return value.id;
+      });
+      newState = newState.filter((value: ClubObjectType) => {
+        const data = clubsIds.includes(value.id);
+        return !data;
+      });
+      return newState;
+    }
     default: {
       return state;
     }

@@ -1,30 +1,57 @@
 import { call, put } from 'redux-saga/effects';
-import { addClubs } from '../actions/index';
-import { getGearsAxios } from '../services/axios/gear';
+import { addClubs, removeClubs } from '../actions/index';
+import {
+  getGearsAxios,
+  createClubAxios,
+  deleteClubAxios,
+  updateClubAxios,
+} from '../services/axios/gear';
 // import { options } from '../utils/Toastify';
 // import { toast } from 'react-toastify';
+
+export function* updateClubsAsync(action: Action<any>) {
+  const updateClubs = action.payload.submitClubs;
+  const deleteTargetClubs = action.payload.deleteTargetClubs;
+
+  let newState: ClubTableTypes = [];
+  let updateState: ClubTableTypes = [];
+  let deleteState: ClubTableTypes = [];
+  try {
+    for (let value of deleteTargetClubs) {
+      const { data } = yield call(deleteClubAxios, value);
+      if (data !== undefined) {
+        deleteState = [...deleteTargetClubs];
+      }
+    }
+
+    for (let value of updateClubs) {
+      if (value.id) {
+        const { data } = yield call(updateClubAxios, value);
+        if (data !== undefined) {
+          updateState = [...data];
+        }
+      } else {
+        const { data } = yield call(createClubAxios, value);
+        if (data !== undefined) {
+          newState = [...data];
+        }
+      }
+    }
+    newState = [...newState, ...updateState];
+    deleteState = [...deleteState, ...updateState];
+    yield put(removeClubs(deleteState));
+    yield put(addClubs(newState));
+    return;
+  } catch (e) {
+    return { e };
+  }
+}
 
 export function* getGearsAsync(action: Action<PartialUserObjectType>) {
   const { data } = yield call(getGearsAxios, action.payload);
   try {
     if (data !== undefined) {
-      const editClubs = data.allClubs.map((value: any) => {
-        const { Club, userId } = value;
-        const { Maker, Shaft, ClubType, id, name } = Club;
-        const club = {
-          id,
-          name,
-          userId: userId,
-          maker: Maker.name,
-          shaft: Shaft.name,
-          flex: Shaft.flex,
-          type: ClubType.type,
-        };
-        return club;
-      });
-      // const { id, name, Maker } = data.targetBall;
-      // const ball = { id, name, maker: Maker.name };
-      yield put(addClubs(editClubs));
+      yield put(addClubs(data.allClubs));
       return;
     } else {
       // yield toast.error('取得に失敗しました。', options);

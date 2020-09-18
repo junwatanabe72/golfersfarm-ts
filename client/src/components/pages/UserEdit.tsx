@@ -7,9 +7,13 @@ import { Padding } from '../../utils/styled/styledSpace';
 import Form from '../organisms/form/UserEditForm';
 import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
-import { updateUser, updateImageUser } from '../../actions';
+import { updateUser, updateImageUser, updateClubs } from '../../actions';
 import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
+
+type FormikValueType = {
+  formikClubs: ClubTableTypes;
+};
 
 interface Props {
   currentUser: UserObjectType;
@@ -61,6 +65,25 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
     dispatch(updateImageUser(formData));
   };
 
+  const editClubsonSubmit = (values: FormikValueType) => {
+    // update用
+    const submitClubs = Object.values(values.formikClubs);
+
+    // delete用
+    const submitClubsIds = submitClubs.map((value) => {
+      return value.id;
+    });
+    const deleteTargetClubs = Object.values(checkedClub).filter((value) => {
+      const data = submitClubsIds.includes(value.id);
+      return !data;
+    });
+    //
+    if (submitClubs === checkedClub) {
+      return;
+    }
+    dispatch(updateClubs([{ submitClubs }, { deleteTargetClubs }]));
+  };
+
   const Color = styled.div`
     background-color: ${BASICCOLORS.WHITELIGHT};
   `;
@@ -82,7 +105,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
           )}
           {currentEditPage === editTitleList.gear && (
             <>
-              <ClubEditForm storeClubs={checkedClub} onSubmit={editProfileonSubmit} />
+              <ClubEditForm storeClubs={checkedClub} onSubmit={editClubsonSubmit} />
             </>
           )}
           {currentEditPage === editTitleList.video && <div>VIDEO</div>}
