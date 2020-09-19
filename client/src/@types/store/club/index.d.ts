@@ -10,4 +10,4 @@ interface ClubObjectType {
 }
 type ClubTableTypes = ClubObjectType[];
 type PartialClubObjectType = Partial<ClubObjectType>;
-type PartialClubTableTypes = Partial<ClubTableTypes>;
+type PartialClubTableTypes = PartialClubObjectType[];

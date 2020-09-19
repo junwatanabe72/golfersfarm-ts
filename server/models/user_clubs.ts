@@ -10,6 +10,12 @@ class User_clubs extends Model {
   public static initialize(sequelize: Sequelize) {
     User_clubs.init(
       {
+        id: {
+          allowNull: false,
+          type: DataTypes.INTEGER,
+          autoIncrement: true,
+          primaryKey: true,
+        },
         userId: { type: DataTypes.INTEGER },
         clubId: { type: DataTypes.INTEGER },
       },

@@ -1,46 +1,18 @@
 import { call, put } from 'redux-saga/effects';
 import { addClubs, removeClubs } from '../actions/index';
-import {
-  getGearsAxios,
-  createClubAxios,
-  deleteClubAxios,
-  updateClubAxios,
-} from '../services/axios/gear';
+import { getGearsAxios, updateClubsAxios } from '../services/axios/gear';
 // import { options } from '../utils/Toastify';
 // import { toast } from 'react-toastify';
 
-export function* updateClubsAsync(action: Action<any>) {
-  const updateClubs = action.payload.submitClubs;
-  const deleteTargetClubs = action.payload.deleteTargetClubs;
-
-  let newState: ClubTableTypes = [];
-  let updateState: ClubTableTypes = [];
-  let deleteState: ClubTableTypes = [];
+export function* updateClubsAsync(action: Action<PartialClubTableTypes>) {
   try {
-    for (let value of deleteTargetClubs) {
-      const { data } = yield call(deleteClubAxios, value);
-      if (data !== undefined) {
-        deleteState = [...deleteTargetClubs];
-      }
+    const { data } = yield call(updateClubsAxios, action.payload);
+    if (!data) {
+      return;
     }
-
-    for (let value of updateClubs) {
-      if (value.id) {
-        const { data } = yield call(updateClubAxios, value);
-        if (data !== undefined) {
-          updateState = [...data];
-        }
-      } else {
-        const { data } = yield call(createClubAxios, value);
-        if (data !== undefined) {
-          newState = [...data];
-        }
-      }
-    }
-    newState = [...newState, ...updateState];
-    deleteState = [...deleteState, ...updateState];
-    yield put(removeClubs(deleteState));
-    yield put(addClubs(newState));
+    console.log(data.returnData);
+    yield put(removeClubs(action.payload));
+    yield put(addClubs(data.returnData));
     return;
   } catch (e) {
     return { e };

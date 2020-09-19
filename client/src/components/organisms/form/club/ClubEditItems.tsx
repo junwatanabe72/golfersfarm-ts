@@ -98,10 +98,10 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
               <option value={arg}>{club[arg]}</option>
               {arg === 'type'
                 ? Object.values(allTypes).map((data: TypeData, num: number) => {
-                    const { type } = data;
-                    return club[arg] !== type ? (
-                      <option key={num} value={type}>
-                        {type}
+                    // const { type } = data;
+                    return club[arg] !== data[arg] ? (
+                      <option key={num} value={data[arg]}>
+                        {data[arg]}
                       </option>
                     ) : null;
                   })

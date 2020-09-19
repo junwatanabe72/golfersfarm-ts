@@ -38,9 +38,12 @@ usersRouter.patch("/:id", usersController.update);
 usersRouter.delete("/:id", usersController.delete);
 
 //usersGearsAPI(clubsTable,BallsTable)
-usersRouter.get("/:id/gears", clubsController.index);
-usersRouter.post("/:id/gears", clubsController.create);
-usersRouter.patch("/:id/clubs/:cid", clubsController.update);
+usersRouter.get("/:id/clubs", clubsController.index);
+usersRouter.post("/:id/clubs", clubsController.create);
+// replace
+usersRouter.post("/:id/clubs/replace", clubsController.replace);
+//
+usersRouter.delete("/:id/clubs/:cid", clubsController.delete);
 usersRouter.post("/:id/ball", ballsController.create);
 usersRouter.patch("/:id/ball", ballsController.update);
 // usersRouter.delete("/:id/gears/:id");

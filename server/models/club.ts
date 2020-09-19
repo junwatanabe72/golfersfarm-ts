@@ -21,7 +21,11 @@ class Club extends Model {
   public shaftId!: number;
   public makerId!: number;
 
-  static async add(id: string, club: clubType, sequelize: Sequelize) {
+  static async add(id: string, club: any, sequelize: Sequelize) {
+    if (!club.name) {
+      return;
+    }
+
     const newData = await sequelize.transaction(async (t) => {
       const newClub = await this.create(
         {
@@ -40,26 +44,77 @@ class Club extends Model {
     });
     return { newData };
   }
-  static async clubUpdate(id: string, clubId: string, club: clubType) {
-    const checkedClub = await UserClubs.findOne({
+  static async clubReplace(userId: string, club: any, sequelize: Sequelize) {
+    const { id } = club;
+    const newClubData = { ...club, id: undefined };
+    const targetClub = await this.findOne({
       where: {
-        userId: parseInt(id),
-        clubId: parseInt(clubId),
+        id: id,
       },
     });
-    if (!checkedClub) {
+    if (!targetClub) {
       return;
     }
-    const targetClub: any = await this.findOne({
+    const targetuserClubs = await UserClubs.findOne({
       where: {
-        id: parseInt(clubId),
+        userId: parseInt(userId),
+        clubId: id,
       },
     });
-    const updateClub = await targetClub.update({
-      ...club,
+    if (!targetuserClubs) {
+      return;
+    }
+    const newData = await sequelize.transaction(async (t) => {
+      await targetClub.destroy({ transaction: t });
+      await targetuserClubs.destroy({ transaction: t });
+      const newClub = await this.create(
+        {
+          ...newClubData,
+        },
+        { transaction: t }
+      );
+      const newUserClubs = await UserClubs.create(
+        {
+          userId: parseInt(userId),
+          clubId: newClub.id,
+        },
+        { transaction: t }
+      );
+      return { newClub, newUserClubs };
     });
-    return { updateClub };
+    return { newData };
   }
+
+  static async clubDelete(userId: string, club: any, sequelize: Sequelize) {
+    if (!club.id) {
+      return;
+    }
+    const { id } = club;
+    const targetClub = await this.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!targetClub) {
+      return;
+    }
+    const targetuserClubs = await UserClubs.findOne({
+      where: {
+        userId: parseInt(userId),
+        clubId: id,
+      },
+    });
+    if (!targetuserClubs) {
+      return;
+    }
+    await sequelize.transaction(async (t) => {
+      await targetClub.destroy({ transaction: t });
+      await targetuserClubs.destroy({ transaction: t });
+      return;
+    });
+    return;
+  }
+
   public static initialize(sequelize: Sequelize) {
     this.init(
       {
@@ -117,7 +172,7 @@ class Club extends Model {
     });
   }
 }
-
+export type PartialClubType = Partial<clubType>;
 export interface clubType {
   id: number;
   name: string;

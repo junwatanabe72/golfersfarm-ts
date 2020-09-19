@@ -40,7 +40,7 @@ export function logoutUser(): TypeAction {
 export function getGears(data: PartialUserObjectType): Action<PartialUserObjectType> {
   return { type: ACTIONTYPES.REQUESTED_GEARS, payload: data };
 }
-export function updateClubs(data: any): Action<any> {
+export function updateClubs(data: PartialClubTableTypes): Action<PartialClubTableTypes> {
   return { type: ACTIONTYPES.UPDATE_CLUBS, payload: data };
 }
 //REDUX_SAGA
@@ -59,7 +59,7 @@ export function addUsers(data: UserThumbNailTypes): Action<UserThumbNailTypes> {
 export function addClubs(data: ClubTableTypes): Action<ClubTableTypes> {
   return { type: ACTIONTYPES.ADD_CLUBS, payload: data };
 }
-export function removeClubs(data: ClubTableTypes): Action<ClubTableTypes> {
+export function removeClubs(data: PartialClubTableTypes): Action<PartialClubTableTypes> {
   return { type: ACTIONTYPES.REMOVE_CLUBS, payload: data };
 }
 //typesActionCreater
