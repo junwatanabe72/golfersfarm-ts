@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from "express";
 import db, { sequelize } from "../../models";
-
+import {
+  convertArrayClubDataToClient,
+  convertClubDataToServer,
+  convertClubDataToClient,
+  convertArrayClubDataToServer,
+} from "../../utils/convert";
 const clubs = db.Club;
 const userClubs = db.UserClubs;
 const shafts = db.Shaft;
@@ -11,7 +16,7 @@ const clubTypes = db.ClubType;
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const allClubs = await userClubs.findAll({
+      const targetClubs = await userClubs.findAll({
         where: { userId: req.params.id },
         include: [
           {
@@ -34,16 +39,8 @@ export default {
           },
         ],
       });
-      const targetBall = await balls.findOne({
-        where: { userId: req.params.id },
-        include: [
-          {
-            model: makers,
-            required: false,
-          },
-        ],
-      });
-      res.status(200).json({ data: { allClubs, targetBall } });
+      const allClubs = convertArrayClubDataToClient(targetClubs);
+      res.status(200).json({ data: { allClubs } });
     } catch (error) {
       res.status(404);
       return next(error);
@@ -53,38 +50,72 @@ export default {
     const { club } = req.body;
     try {
       const data = await clubs.add(req.params.id, club, sequelize);
-      res.status(201).json(data);
+      const newClub = await convertClubDataToClient(data.newData);
+      res.status(201).json(newClub);
     } catch (error) {
       res.status(400);
       return next(error);
     }
   },
-  async update(req: Request, res: Response, next: NextFunction) {
+
+  async replace(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
     try {
-      const updateClub = await clubs.clubUpdate(
-        req.params.id,
-        req.params.cid,
-        club
+      const newData = await Promise.all(
+        club.map(async (value: any) => {
+          // console.log(value);
+          const targetClub = await convertClubDataToServer(value);
+          if (!targetClub.id) {
+            const { newData } = await clubs.add(
+              req.params.id,
+              targetClub,
+              sequelize
+            );
+            const club = await convertClubDataToClient(newData);
+            return club;
+          }
+          if (!targetClub.name) {
+            await clubs.clubDelete(req.params.id, targetClub, sequelize);
+            return;
+          }
+
+          const { newData } = await clubs.clubReplace(
+            req.params.id,
+            targetClub,
+            sequelize
+          );
+          const club = await convertClubDataToClient(newData);
+          return club;
+        })
       );
-      if (!updateClub) {
+      if (!newData) {
         return res.status(400);
       } else {
-        res.status(201).json(updateClub);
+        const returnData = newData.filter((value) => value);
+        res.status(201).json({ data: { returnData } });
       }
     } catch (error) {
       res.status(400);
       return next(error);
     }
   },
-
-  //今のところ使わない。
-
-  // async delete(id: string) {
-  //   const targetWood: any = await woods.findOne({
-  //     where: { id: id },
-  //   })
-  //   await targetWood.destroy();
-  //   return { message: "ok" }
-  // }
+  async delete(req: Request, res: Response, next: NextFunction) {
+    const { club } = req.body;
+    const targetClub = convertClubDataToServer(club);
+    try {
+      const deleteClub = await clubs.clubDelete(
+        req.params.id,
+        targetClub,
+        sequelize
+      );
+      if (!deleteClub) {
+        return res.status(400);
+      } else {
+        res.status(201).json({ deleteClub });
+      }
+    } catch (error) {
+      res.status(400);
+      return next(error);
+    }
+  },
 };

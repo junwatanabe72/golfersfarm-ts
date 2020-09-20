@@ -18,6 +18,7 @@ type FormikValueType = {
 
 interface Props {
   storeClubs: ClubTableTypes;
+  currentUser: UserObjectType;
   onSubmit: (values: any) => void;
 }
 
@@ -40,7 +41,6 @@ const editSubTitles = '使用クラブ';
 const AddButtonText = ['クラブを追加'];
 const buttonValue = 'クラブを登録・編集する。';
 const formikKey = 'formikClubs';
-const addItem = { name: '', type: '', maker: '', shaft: '', flex: '' };
 
 const clubValidation = () =>
   yup.object({
@@ -51,20 +51,15 @@ const clubValidation = () =>
     ),
   });
 
-const ClubEditForm: React.FC<Props> = ({ storeClubs, onSubmit }) => {
+const ClubEditForm: React.FC<Props> = ({ currentUser, storeClubs, onSubmit }) => {
+  const addItem = { name: '', userId: currentUser.id, type: '', maker: '', shaft: '', flex: '' };
   const initialValuesData = { formikClubs: storeClubs };
 
   return (
     <Formik<FormikValueType>
       initialValues={initialValuesData}
       validationSchema={clubValidation}
-      onSubmit={(values, actions) => {
-        // Submit した時の記述
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
-      }}
+      onSubmit={onSubmit}
     >
       <Padding top={CLEAR.MEDIUM} right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
         <Form>

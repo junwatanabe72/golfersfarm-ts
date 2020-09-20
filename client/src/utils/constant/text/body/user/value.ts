@@ -113,31 +113,31 @@ export const allTypes = [
 
 export const shaft = {
   id: 1,
-  name: 'TOUR-AD PT-7',
+  name: 'TOUR AD DI-7',
   flex: 's',
   manufacturer: 'GRAPHITE DESIGN',
 };
 export const shafts = [
   shaft,
   { ...shaft, id: 2, name: 'TOUR-AD DI-7' },
-  { ...shaft, id: 3, type: 'TOUR-AD DJ-7' },
-  { ...shaft, id: 4, type: 'TOUR-AD MD-7' },
-  { ...shaft, id: 5, type: 'TOUR-AD GT-7' },
-  { ...shaft, id: 6, type: 'TOUR-AD BB-7' },
+  { ...shaft, id: 3, name: 'TOUR-AD DJ-7' },
+  { ...shaft, id: 4, name: 'TOUR-AD MD-7' },
+  { ...shaft, id: 5, name: 'TOUR-AD GT-7' },
+  { ...shaft, id: 6, name: 'TOUR-AD BB-7' },
 ];
 
 export const maker = {
   id: 1,
-  name: 'MIZUNO',
+  name: 'Mizuno',
 };
 
 export const makers = [
   maker,
   { ...maker, id: 2, name: 'Titleist' },
-  { ...maker, id: 3, type: 'HONMMA' },
-  { ...maker, id: 4, type: 'TOURSTAGE' },
-  { ...maker, id: 5, type: 'SRIXON' },
-  { ...maker, id: 6, type: 'PING' },
+  { ...maker, id: 3, name: 'HONMMA' },
+  { ...maker, id: 4, name: 'TOURSTAGE' },
+  { ...maker, id: 5, name: 'SRIXON' },
+  { ...maker, id: 6, name: 'PING' },
 ];
 
 export const allResults = [
