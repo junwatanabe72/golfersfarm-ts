@@ -5,8 +5,11 @@ import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { allTypes, makers, shafts } from '../../../../utils/constant/text/body/user/value';
-import { Padding } from '../../../../utils/styled/styledSpace';
 import Button from '../../../atoms/Button';
+
+type TypeoptionDatasKey = typeof optionDatasKey;
+type TypeoptionDatasValue = TypeData | MakerData | ShaftData;
+
 interface Props {
   arg: string;
   index: number;
@@ -20,12 +23,6 @@ interface Props {
       : (e: string | React.ChangeEvent<any>) => void;
   };
 }
-
-const StyledTd = styled.td`
-  min-width: 20px;
-  border-bottom: solid 1px #ccc;
-  border-right: solid 1px white;
-`;
 
 const StyledField = styled.input`
   width: ${SIZE.XXXSMALL}vw;
@@ -64,80 +61,72 @@ const Styleddiv = styled.div`
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
 
+const optionDatasKey = {
+  type: 'type',
+  maker: 'name',
+  shaft: 'name',
+  flex: 'flex',
+} as const;
+
 const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remove }) => {
   const [, meta] = useField(name);
-  return (
-    <StyledTd>
-      <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-        {arg === 'name' ? (
-          <>
-            <StyledField
-              type={'text'}
-              name={name}
-              placeholder={'入力してください。'}
-              onChange={onChange}
-              value={club[arg]}
-            />
-            {meta.touched && meta.error ? <Styleddiv>{meta.error}</Styleddiv> : null}
-          </>
-        ) : arg === '' ? (
-          <Button
-            pWidth={CLEAR.TINY}
-            pHeight={CLEAR.TINY}
-            color={BASICCOLORS.SECONDARY}
-            fontSize={FONTSIZE.BASE}
-            onClick={() => {
-              remove(index);
-            }}
-          >
-            ×
-          </Button>
-        ) : (
-          <>
-            <StyledSelect name={name} onChange={onChange}>
-              <option value={arg}>{club[arg]}</option>
-              {arg === 'type'
-                ? Object.values(allTypes).map((data: TypeData, num: number) => {
-                    // const { type } = data;
-                    return club[arg] !== data[arg] ? (
-                      <option key={num} value={data[arg]}>
-                        {data[arg]}
-                      </option>
-                    ) : null;
-                  })
-                : arg === 'maker'
-                ? Object.values(makers).map((data: MakerData, num: number) => {
-                    const { name } = data;
-                    return club[arg] !== name ? (
-                      <option key={num} value={name}>
-                        {name}
-                      </option>
-                    ) : null;
-                  })
-                : arg === 'shaft'
-                ? Object.values(shafts).map((data: ShaftData, num: number) => {
-                    const { name } = data;
-                    return club[arg] !== name ? (
-                      <option key={num} value={name}>
-                        {name}
-                      </option>
-                    ) : null;
-                  })
-                : arg === 'flex'
-                ? Object.values(shafts).map((data: ShaftData, num: number) => {
-                    const { flex } = data;
-                    return club[arg] !== flex ? (
-                      <option key={num} value={flex}>
-                        {flex}
-                      </option>
-                    ) : null;
-                  })
-                : null}
-            </StyledSelect>
-          </>
+
+  type TypeoptionDatas = typeof optionDatas;
+
+  const optionDatas = {
+    type: allTypes,
+    maker: makers,
+    shaft: shafts,
+    flex: shafts,
+  };
+
+  const selectComponent = (selectName: string, selectKey: string, targetClub: ClubObjectType) => {
+    const key = optionDatasKey[selectKey as keyof TypeoptionDatasKey];
+    return (
+      <StyledSelect name={selectName} onChange={onChange}>
+        <option value={selectKey}>{targetClub[selectKey]}</option>
+        {Object.values(optionDatas[selectKey as keyof TypeoptionDatas]).map(
+          (data: TypeoptionDatasValue, num: number) => {
+            return targetClub[selectKey] !== data[key as keyof TypeoptionDatasValue] ? (
+              <option key={num} value={data[key as keyof TypeoptionDatasValue]}>
+                {data[key as keyof TypeoptionDatasValue]}
+              </option>
+            ) : null;
+          }
         )}
-      </Padding>
-    </StyledTd>
+      </StyledSelect>
+    );
+  };
+
+  return (
+    <>
+      {arg === 'name' ? (
+        <>
+          <StyledField
+            type={'text'}
+            name={name}
+            placeholder={'入力してください。'}
+            onChange={onChange}
+            value={club[arg]}
+          />
+          {meta.touched && meta.error ? <Styleddiv>{meta.error}</Styleddiv> : null}
+        </>
+      ) : arg === '' ? (
+        <Button
+          pWidth={CLEAR.TINY}
+          pHeight={CLEAR.TINY}
+          color={BASICCOLORS.SECONDARY}
+          fontSize={FONTSIZE.BASE}
+          onClick={() => {
+            remove(index);
+          }}
+        >
+          ×
+        </Button>
+      ) : (
+        <>{selectComponent(name, arg, club)}</>
+      )}
+    </>
   );
 };
 

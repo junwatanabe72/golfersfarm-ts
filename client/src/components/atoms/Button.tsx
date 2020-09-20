@@ -4,7 +4,7 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { Padding } from '../../utils/styled/styledSpace';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 
-interface Props extends IButtonCOLOR, PartialIFONTSIZE {
+interface Props extends PartialIButtonCOLOR, PartialIFONTSIZE {
   onClick?: () => void;
   pWidth?: CLEARTYPE;
   pHeight?: CLEARTYPE;
@@ -15,7 +15,12 @@ const DefaultButton = styled.div<{ color: Props['color']; fontSize: Props['fontS
   display: inline-block;
   text-align: center;
   border-radius: 6px;
-  ${(props) => buttonColor[props.color]};
+  ${(props) => {
+    if (!props.color) {
+      return;
+    }
+    return buttonColor[props.color];
+  }};
   &:active {
     border-bottom: none;
   }
