@@ -10,7 +10,7 @@ export function* updateClubsAsync(action: Action<PartialClubTableTypes>) {
     if (!data) {
       return;
     }
-    console.log(data.returnData);
+
     yield put(removeClubs(action.payload));
     yield put(addClubs(data.returnData));
     return;
@@ -22,13 +22,13 @@ export function* updateClubsAsync(action: Action<PartialClubTableTypes>) {
 export function* getGearsAsync(action: Action<PartialUserObjectType>) {
   const { data } = yield call(getGearsAxios, action.payload);
   try {
-    if (data !== undefined) {
-      yield put(addClubs(data.allClubs));
-      return;
-    } else {
+    if (!data) {
       // yield toast.error('取得に失敗しました。', options);
       return;
     }
+
+    yield put(addClubs(data.allClubs));
+    return;
   } catch (e) {
     return { e };
   }

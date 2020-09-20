@@ -135,7 +135,11 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
           )}
           {currentEditPage === editTitleList.gear && (
             <>
-              <ClubEditForm storeClubs={checkedClubs} onSubmit={editClubsonSubmit} />
+              <ClubEditForm
+                currentUser={currentUser}
+                storeClubs={checkedClubs}
+                onSubmit={editClubsonSubmit}
+              />
             </>
           )}
           {currentEditPage === editTitleList.video && <div>VIDEO</div>}

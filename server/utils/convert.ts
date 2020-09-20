@@ -58,7 +58,6 @@ export const convertArrayClubDataToServer = async (data: any) => {
 // replace
 export const convertClubDataToServer = async (data: any) => {
   const { type, maker, shaft } = data;
-
   const targetShaft = await shafts.findOne({
     where: {
       name: shaft,
@@ -74,7 +73,6 @@ export const convertClubDataToServer = async (data: any) => {
       type: type,
     },
   });
-
   const club = {
     id: data.id || undefined,
     name: data.name || undefined,

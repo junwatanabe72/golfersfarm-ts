@@ -113,7 +113,7 @@ export const allTypes = [
 
 export const shaft = {
   id: 1,
-  name: 'TOUR-AD PT-7',
+  name: 'TOUR AD DI-7',
   flex: 's',
   manufacturer: 'GRAPHITE DESIGN',
 };
@@ -128,7 +128,7 @@ export const shafts = [
 
 export const maker = {
   id: 1,
-  name: 'MIZUNO',
+  name: 'Mizuno',
 };
 
 export const makers = [

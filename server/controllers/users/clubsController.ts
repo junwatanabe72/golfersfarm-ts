@@ -50,7 +50,6 @@ export default {
     const { club } = req.body;
     try {
       const data = await clubs.add(req.params.id, club, sequelize);
-      console.log(data.newData);
       const newClub = await convertClubDataToClient(data.newData);
       res.status(201).json(newClub);
     } catch (error) {
@@ -64,6 +63,7 @@ export default {
     try {
       const newData = await Promise.all(
         club.map(async (value: any) => {
+          // console.log(value);
           const targetClub = await convertClubDataToServer(value);
           if (!targetClub.id) {
             const { newData } = await clubs.add(
@@ -89,11 +89,10 @@ export default {
         })
       );
       if (!newData) {
-        console.log("ng");
         return res.status(400);
       } else {
         const returnData = newData.filter((value) => value);
-        res.status(201).json({ returnData });
+        res.status(201).json({ data: { returnData } });
       }
     } catch (error) {
       res.status(400);
