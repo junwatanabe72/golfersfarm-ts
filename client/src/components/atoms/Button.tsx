@@ -4,26 +4,25 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { Padding } from '../../utils/styled/styledSpace';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 
-interface Props extends PartialICOLOR, PartialIFONTSIZE {
+interface Props extends IButtonCOLOR, PartialIFONTSIZE {
   onClick?: () => void;
   pWidth?: CLEARTYPE;
   pHeight?: CLEARTYPE;
 }
-const DefaultButton = styled.div<Props>`
+const DefaultButton = styled.div<{ color: Props['color']; fontSize: Props['fontSize'] }>`
   font-size: ${(props) => props.fontSize}px;
   cursor: pointer;
   display: inline-block;
   text-align: center;
   border-radius: 6px;
-  ${(props) => getButtonBcolor(props.color)};
+  ${(props) => buttonColor[props.color]};
   &:active {
     border-bottom: none;
   }
 `;
 
-const getButtonBcolor = (props: Props['color']) => {
-  if (props === BASICCOLORS.PRIMARY) {
-    return `
+const buttonColor = {
+  [BASICCOLORS.PRIMARY]: `
       color: ${BASICCOLORS.WHITE};
       background-color: ${BASICCOLORS.PRIMARY};
       border-bottom: 2px solid ${BASICCOLORS.PRIMARYDARK};
@@ -31,18 +30,16 @@ const getButtonBcolor = (props: Props['color']) => {
         color: ${BASICCOLORS.WHITE};
         background-color: ${BASICCOLORS.PRIMARYDARK};
       }
-  `;
-  } else if (props === BASICCOLORS.SECONDARY) {
-    return `
+  `,
+  [BASICCOLORS.SECONDARY]: `
       color: ${BASICCOLORS.WHITE};
       background-color: ${BASICCOLORS.SECONDARY};
       border-bottom: 2px solid ${BASICCOLORS.SECONDARYDARK};
       &:hover {
         background-color: ${BASICCOLORS.SECONDARYDARK};
       }
-  `;
-  } else if (props === BASICCOLORS.WHITELIGHT) {
-    return `
+  `,
+  [BASICCOLORS.WHITELIGHT]: `
       color: ${BASICCOLORS.PRIMARY};
       background-color: ${BASICCOLORS.WHITELIGHT};
       border: 2px solid ${BASICCOLORS.PRIMARY};
@@ -50,9 +47,8 @@ const getButtonBcolor = (props: Props['color']) => {
         color: ${BASICCOLORS.WHITE};
         background-color: ${BASICCOLORS.PRIMARY};
       }
-  `;
-  } else if (props === BASICCOLORS.WHITE) {
-    return `
+  `,
+  [BASICCOLORS.WHITE]: `
       color: ${BASICCOLORS.SECONDARY};
       background-color: ${BASICCOLORS.WHITELIGHT};
       border: 2px solid ${BASICCOLORS.SECONDARY};
@@ -60,8 +56,7 @@ const getButtonBcolor = (props: Props['color']) => {
         color: ${BASICCOLORS.WHITE};
         background-color: ${BASICCOLORS.SECONDARY};
       }
-  `;
-  }
+  `,
 };
 
 const Button: React.FC<Props> = ({

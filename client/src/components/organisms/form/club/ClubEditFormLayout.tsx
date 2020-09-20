@@ -29,9 +29,7 @@ const StyledTd = styled.td`
   border-right: solid 1px white;
 `;
 
-const order = Object.keys(gearTableItems).map((key: string) => {
-  return key;
-});
+const order = Object.keys(gearTableItems);
 
 const ClubEditFormLayout: React.FC<Props> = ({ remove }) => {
   const { values, handleChange } = useFormikContext<FormikValueType>();

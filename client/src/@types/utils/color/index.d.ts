@@ -18,6 +18,14 @@ interface ICOLOR {
   color: COLORTYPES;
 }
 
+interface IButtonCOLOR {
+  color:
+    | typeof BASICCOLORS.PRIMARY
+    | typeof BASICCOLORS.SECONDARY
+    | typeof BASICCOLORS.WHITE
+    | typeof BASICCOLORS.WHITELIGHT;
+}
+
 type COLORTYPES =
   | typeof BASICCOLORS.PRIMARY
   | typeof BASICCOLORS.PRIMARYDARK
