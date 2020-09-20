@@ -4,6 +4,8 @@ import { useFormikContext } from 'formik';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { gearTableItems } from '../../../../utils/constant/text/table';
 import ClubEditItems from './ClubEditItems';
+import { CLEAR } from '../../../../utils/constant/number';
+import { Padding } from '../../../../utils/styled/styledSpace';
 
 type FormikValueType = {
   formikClubs: ClubTableTypes;
@@ -31,48 +33,47 @@ const StyledTd = styled.td`
 
 const order = Object.keys(gearTableItems);
 
+const head = [...order, ''].map((arg: string, num: number) => {
+  return (
+    <StyledTd key={arg}>
+      <StyledLabel htmlFor={arg}>{gearTableItems[arg as keyof TypeGearTableItems]}</StyledLabel>
+    </StyledTd>
+  );
+});
+
 const ClubEditFormLayout: React.FC<Props> = ({ remove }) => {
   const { values, handleChange } = useFormikContext<FormikValueType>();
-
-  const head = [...order, ''].map((arg: string, num: number) => {
-    return (
-      <StyledTd key={arg}>
-        <StyledLabel htmlFor={arg}>{gearTableItems[arg as keyof TypeGearTableItems]}</StyledLabel>
-      </StyledTd>
-    );
-  });
 
   const selectItems = Object.values(values.formikClubs).map(
     (club: ClubObjectType, index: number) => {
       return [...order, ''].map((key: string) => {
         const name = `formikClubs.${index}.${key}`;
         return (
-          <React.Fragment key={key}>
-            <ClubEditItems
-              remove={remove}
-              club={club}
-              index={index}
-              arg={key}
-              name={name}
-              onChange={handleChange}
-            />
-          </React.Fragment>
+          <StyledTd key={key}>
+            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+              <ClubEditItems
+                remove={remove}
+                club={club}
+                index={index}
+                arg={key}
+                name={name}
+                onChange={handleChange}
+              />
+            </Padding>
+          </StyledTd>
         );
       });
-    }
-  );
-
-  const editElements = [...selectItems];
-  const elements = editElements.map(
-    (value: JSX.Element[], num: number): JSX.Element => {
-      return <StyledTrd key={num}>{value}</StyledTrd>;
     }
   );
 
   return (
     <>
       <StyledTrd>{head}</StyledTrd>
-      {elements}
+      {[...selectItems].map(
+        (value: JSX.Element[], num: number): JSX.Element => {
+          return <StyledTrd key={num}>{value}</StyledTrd>;
+        }
+      )}
     </>
   );
 };

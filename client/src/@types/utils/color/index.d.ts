@@ -42,3 +42,4 @@ type COLORTYPES =
   | typeof BASICCOLORS.CAUTION;
 
 type PartialICOLOR = Partial<ICOLOR>;
+type PartialIButtonCOLOR = Partial<IButtonCOLOR>;
