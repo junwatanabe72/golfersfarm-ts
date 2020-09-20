@@ -38,9 +38,7 @@ const StyledTd = styled.td`
   border-right: solid 1px white;
 `;
 const VerticalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
-  const order = Object.keys(tableItems).map((key: string) => {
-    return key;
-  });
+  const order = Object.keys(tableItems);
 
   const Data = order.map((value: string, num: number) => {
     return (

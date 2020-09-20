@@ -47,12 +47,6 @@ const StyledSelect = styled.select`
       `}
 `;
 
-const StyledButton = styled.button`
-  padding: 0;
-  margin: 0;
-  border-style: none;
-`;
-
 const Styleddiv = styled.div`
   margin: 0 auto;
   color: ${BASICCOLORS.SECONDARYDARK};
@@ -67,9 +61,6 @@ const Inline = styled.div`
 const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
-`;
-const ExtendPadding = styled(Padding)`
-  border-bottom: 1px solid #ccc;
 `;
 
 const baseItems = {
@@ -192,12 +183,9 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   };
 
   const InputItems = (obj: IEditItems, note?: INoteItems) => {
-    const keyItems = Object.keys(obj).map((key: string) => {
-      return key;
-    });
     const element = Object.entries(editFormDatas.placeHolder).map(
       ([key, value]: string[], num: number) => {
-        return keyItems.includes(key) ? (
+        return obj[key as keyof IEditItems] ? (
           <React.Fragment key={num}>
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
               <FlexLayout

@@ -38,9 +38,7 @@ const StyledTd = styled.td`
 `;
 
 const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
-  const order = Object.keys(tableItems).map((key: string) => {
-    return key;
-  });
+  const order = Object.keys(tableItems);
 
   const body = Object.values(datas).map((data: any) => {
     return order.map((pKey: string, num) => {

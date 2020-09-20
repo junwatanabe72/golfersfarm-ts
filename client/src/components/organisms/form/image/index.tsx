@@ -44,34 +44,30 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
       profileImage: yup
         .mixed()
         .test('fileSize', 'ファイル容量が大きすぎます。', (value) => {
-          if (value !== undefined && value !== currentUser.profileImage) {
-            return value.size <= FILE_SIZE;
-          } else {
+          if (!value || value === currentUser.profileImage) {
             return true;
           }
+          return value.size <= FILE_SIZE;
         })
         .test('fileFormat', '画像形式が違います。', (value) => {
-          if (value !== undefined && value !== currentUser.profileImage) {
-            return SUPPORTED_FORMATS.includes(value.type);
-          } else {
+          if (!value || value === currentUser.profileImage) {
             return true;
           }
+          return SUPPORTED_FORMATS.includes(value.type);
         }),
       clubImage: yup
         .mixed()
         .test('fileSize', 'ファイル容量が大きすぎます。', (value) => {
-          if (value !== undefined && value !== currentUser.clubImage) {
-            return value.size <= FILE_SIZE;
-          } else {
+          if (!value || value === currentUser.clubImage) {
             return true;
           }
+          return value.size <= FILE_SIZE;
         })
         .test('fileFormat', '画像形式が違います。', (value) => {
-          if (value !== undefined && value !== currentUser.clubImage) {
-            return SUPPORTED_FORMATS.includes(value.type);
-          } else {
+          if (!value || value === currentUser.clubImage) {
             return true;
           }
+          return SUPPORTED_FORMATS.includes(value.type);
         }),
     });
 
