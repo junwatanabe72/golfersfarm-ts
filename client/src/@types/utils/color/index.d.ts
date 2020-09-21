@@ -14,11 +14,11 @@ const BASICCOLORS = {
   CAUTION: '#4527a0',
 } as const;
 
-interface ICOLOR {
+interface Color {
   color: COLORTYPES;
 }
 
-interface IButtonCOLOR {
+interface ButtonColor {
   color:
     | typeof BASICCOLORS.PRIMARY
     | typeof BASICCOLORS.SECONDARY
@@ -41,5 +41,5 @@ type COLORTYPES =
   | typeof BASICCOLORS.WHITELIGHT
   | typeof BASICCOLORS.CAUTION;
 
-type PartialICOLOR = Partial<ICOLOR>;
-type PartialIButtonCOLOR = Partial<IButtonCOLOR>;
+type PartialColor = Partial<Color>;
+type PartialButtonColor = Partial<ButtonColor>;

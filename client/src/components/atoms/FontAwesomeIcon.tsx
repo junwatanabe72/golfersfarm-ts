@@ -5,7 +5,7 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE } from '../../utils/constant/number';
 import { IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-interface Props extends PartialICOLOR, PartialIFONTSIZE, MENUZTYPE {}
+interface Props extends PartialColor, PartialFontSize, MENUZTYPE {}
 
 const Container = styled.div<{ color: Props['color']; fontSize: Props['fontSize'] }>`
   font-size: ${(props) => props.fontSize}px;

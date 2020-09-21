@@ -19,8 +19,8 @@ import {
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
 
 interface Props {
-  targetUser: PartialUserObjectType;
-  checkedClubs: ClubArrayTypes;
+  targetUser: PartialUserType;
+  checkedClubs: ArrayClubType;
 }
 
 const Container = styled.div`

@@ -1,18 +1,3 @@
-interface SignUpInitialValuesDataType {
-  email: string;
-  name: string;
-  password: string;
-  confirmedPassword: string;
-}
-
-interface LoginInitialValuesDataType {
-  email: string;
-  password: string;
-}
-interface LoginSignUpValuesDataType {
-  onSubmit: (values: LoginInitialValuesDataType | SignUpInitialValuesDataType) => void;
-}
-
 interface SignUpFormDatasType {
   initialValuesData: {
     email: string;
@@ -47,7 +32,7 @@ interface LoginSignUpFormDataTypes {
   formDatas: LoginFormDatasType | SignUpFormDatasType;
 }
 
-interface ProfileEditInitialValuesDataType {
+interface ProfileEditDataType {
   email: string;
   name: string;
   password: string;
@@ -69,4 +54,3 @@ interface ProfileEditInitialValuesDataType {
   show: string;
   confirmedPassword: string;
 }
-type PartialProfileEditInitialValuesDataType = Partial<ProfileEditInitialValuesDataType>;

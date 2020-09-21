@@ -18,8 +18,15 @@ import {
 } from '../../validations';
 import { createUser } from '../../actions';
 
+interface SignUpDataType {
+  email: string;
+  name: string;
+  password: string;
+  confirmedPassword: string;
+}
+
 interface Props {
-  currentUser: PartialUserObjectType;
+  currentUser: PartialUserType;
 }
 
 const SignUpCheck = '利用規約とプライバシーポリシーを御覧ください。';
@@ -55,7 +62,7 @@ const signUpValidation = () =>
 
 const SignUp: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
-  const signUponSubmit = (values: SignUpInitialValuesDataType) => {
+  const signUponSubmit = (values: SignUpDataType) => {
     console.log(values);
     const { name, password, email } = values;
     const signItems = { name, password, email };

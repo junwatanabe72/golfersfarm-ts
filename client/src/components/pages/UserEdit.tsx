@@ -12,12 +12,12 @@ import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 
 type FormikValueType = {
-  formikClubs: ClubArrayTypes;
+  formikClubs: ArrayClubType;
 };
 
 interface Props {
-  currentUser: UserObjectType;
-  storeClubs: ClubTableTypes;
+  currentUser: UserType;
+  storeClubs: ObjectClubType;
 }
 const Color = styled.div`
   background-color: ${BASICCOLORS.WHITELIGHT};
@@ -36,14 +36,14 @@ export const selectProfileItems = {
   show: { head: '公開・非公開', body: ['公開', '非公開'] },
 };
 
-const checkObject = (obj: PartialClubObjectType) => {
+const checkObject = (obj: PartialClubType) => {
   // まずキーのみをソートする
   const keys = Object.keys(obj).sort();
   // 返却する空のオブジェクトを作る
-  let map: PartialClubObjectType = {};
+  let map: PartialClubType = {};
   // ソート済みのキー順に返却用のオブジェクトに値を格納する
   keys.forEach((key) => {
-    map[key as keyof PartialClubObjectType] = obj[key];
+    map[key as keyof PartialClubType] = obj[key];
   });
   return map;
 };
@@ -53,12 +53,12 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
   const moveEditPage = (value: string) => {
     setEditPage(value);
   };
-  const checkedClubs: ClubArrayTypes = Object.values(storeClubs).filter(
-    (club: ClubObjectType) => club.userId === currentUser.id
+  const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
+    (club: ClubType) => club.userId === currentUser.id
   );
   const dispatch = useDispatch();
 
-  const editProfileonSubmit = (values: PartialProfileEditInitialValuesDataType) => {
+  const editProfileonSubmit = (values: ProfileEditDataType) => {
     const showValue = values.show === selectProfileItems.show.body[0] ? true : false;
     dispatch(updateUser({ ...values, show: showValue }));
   };
@@ -81,7 +81,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
   };
 
   const editClubsonSubmit = (values: FormikValueType) => {
-    let editClubs: PartialClubArrayTypes = [];
+    let editClubs: PartialArrayClubType = [];
     const submitClubs = values.formikClubs;
 
     // ojbectに変化がなければ、return

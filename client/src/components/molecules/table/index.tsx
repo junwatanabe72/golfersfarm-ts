@@ -6,7 +6,7 @@ import { TABLETYPES } from '../../../utils/constant/text/table';
 import VerticalTable from './VerticalTable';
 import HorizontalTable from './HorizontalTable';
 
-interface Props extends PartialIWIDTH {
+interface Props extends PartialWidthSize {
   datas: object;
   tableItems: object;
   type: typeof TABLETYPES.HORIZONTAL | typeof TABLETYPES.VERTICAL;

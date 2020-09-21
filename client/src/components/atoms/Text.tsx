@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import { CLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 
-interface Props extends PartialIFONTSIZE {
+interface Props extends PartialFontSize {
   text: string[];
 }
 
-const Container = styled.div<PartialIFONTSIZE>`
+const Container = styled.div<PartialFontSize>`
   font-size: ${(props) => props.fontSize}px;
   text-align: center;
 `;

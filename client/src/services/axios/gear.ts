@@ -1,6 +1,6 @@
 import { client } from '../../utils/axiosConf';
 
-export async function getGearsAxios(data: PartialUserObjectType) {
+export async function getGearsAxios(data: PartialUserType) {
   const { id } = data;
   try {
     const { data } = await client.get(`/${id}/clubs`);
@@ -11,7 +11,7 @@ export async function getGearsAxios(data: PartialUserObjectType) {
   }
 }
 
-export async function updateClubsAxios(data: PartialClubArrayTypes) {
+export async function updateClubsAxios(data: PartialArrayClubType) {
   const { userId } = data[0];
   const queries = { club: [...data] };
 

@@ -14,7 +14,7 @@ import { emailValidation, passwordValidation } from '../../validations';
 import { loginUser } from '../../actions';
 
 interface Props {
-  currentUser: PartialUserObjectType;
+  currentUser: PartialUserType;
 }
 
 const LoginTitle = 'LOGIN';
@@ -43,7 +43,7 @@ const validation = () =>
 
 const Login: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
-  const loginonSubmit = (values: LoginInitialValuesDataType) => {
+  const loginonSubmit = (values: LoginUserType) => {
     console.log(values);
     const { password, email } = values;
     const loginItems = { password, email };

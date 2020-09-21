@@ -38,7 +38,7 @@ export function* createUserAsync(action: Action<SignupUserType>) {
   }
 }
 
-export function* updateUserAsync(action: Action<PartialUserObjectType>) {
+export function* updateUserAsync(action: Action<PartialUserType>) {
   try {
     const { updateUser } = yield call(updateUserAxios, action.payload);
     if (updateUser !== undefined) {

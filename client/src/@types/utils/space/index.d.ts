@@ -14,20 +14,20 @@ type JUSTIFYCONTENTTYPE =
   | typeof JUSTIFYCONTENT.AROUND
   | typeof JUSTIFYCONTENT.EVENLY;
 
-interface IJUSTIFYCONTENTTYPE {
+interface JustifyContentType {
   justifyContent: JUSTIFYCONTENTTYPE;
 }
 
-interface IALIGNITEMSTYPE {
+interface AlignItemsType {
   alignItems: ALIGNITEMSTYPE;
 }
 
-interface ITEXTALIGNTYPE {
+interface TextAlignType {
   textAlign: ALIGNITEMSTYPE;
 }
-type PartialIJUSTIFYCONTENTTYPE = Partial<IJUSTIFYCONTENTTYPE>;
-type PartialIALIGNITEMSTYPE = Partial<IALIGNITEMSTYPE>;
-type PartialITEXTALIGNTYPE = Partial<ITEXTALIGNTYPE>;
+type PartialJustifyContentType = Partial<JustifyContentType>;
+type PartialAlignItemsType = Partial<AlignItemsType>;
+type PartialTextAlignType = Partial<TextAlignType>;
 
 const ALIGNITEMS = {
   CENTER: 'center',

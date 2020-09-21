@@ -6,7 +6,7 @@ import { CLEAR, FONTSIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props extends PartialICOLOR, PartialICLEAR {
+interface Props extends PartialColor, PartialClear {
   title?: string;
 }
 
@@ -16,11 +16,11 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Color = styled.div<PartialICOLOR>`
+const Color = styled.div<PartialColor>`
   background-color: ${(props) => props.color};
 `;
 
-const PaddingExtend = styled(Padding)<PartialICLEAR>`
+const PaddingExtend = styled(Padding)<PartialClear>`
   padding: ${(props) => props.clear}vw;
   ${media.tablet`
       padding: ${CLEAR.XSMALL}vw;

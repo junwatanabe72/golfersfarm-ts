@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { SIZE } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
 
-interface Props extends PartialIWIDTH {
+interface Props extends PartialWidthSize {
   datas: any;
   tableItems: any;
 }
@@ -44,7 +44,7 @@ const VerticalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
     return (
       <StyledTrd key={num}>
         <StyledTd>{tableItems[value]}</StyledTd>
-        <StyledTd>{datas[value as keyof PartialUserObjectType]}</StyledTd>
+        <StyledTd>{datas[value]}</StyledTd>
       </StyledTrd>
     );
   });

@@ -4,7 +4,7 @@ import Url from '../atoms/Url';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
 
-interface Props extends PartialICOLOR, PartialIFONTSIZE {
+interface Props extends PartialColor, PartialFontSize {
   urls: {
     facebook?: string;
     twitter?: string;

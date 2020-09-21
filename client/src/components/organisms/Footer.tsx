@@ -5,13 +5,13 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { CLEAR } from '../../utils/constant/number';
 import LinkList from '../molecules/LinkList';
 
-interface Props extends PartialICOLOR {
+interface Props extends PartialColor {
   route: any;
   infoRoute: any;
 }
 
 //style
-const BackgroundColor = styled.div<PartialICOLOR>`
+const BackgroundColor = styled.div<PartialColor>`
   background-color: ${(props) => props.color};
 `;
 

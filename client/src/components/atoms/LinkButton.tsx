@@ -4,7 +4,7 @@ import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS } from '../../utils/constant/color';
 import styled from 'styled-components';
 
-interface Props extends PartialICOLOR, PartialIFONTSIZE {
+interface Props extends PartialColor, PartialFontSize {
   to: string;
 }
 

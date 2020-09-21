@@ -11,7 +11,7 @@ interface Props {
   label: string;
   pKey: string;
   note: string;
-  currentUser: UserObjectType;
+  currentUser: UserType;
 }
 
 const StyledField = styled.input`
@@ -46,7 +46,7 @@ const StyledImage = styled.img`
 `;
 
 const InputItem: React.FC<Props> = ({ formik, label, pKey, currentUser, note }) => {
-  const [targetImage, setImage] = useState<any>(currentUser[pKey as keyof UserObjectType]);
+  const [targetImage, setImage] = useState<any>(currentUser[pKey as keyof UserType]);
   const editImage = (value: string | ArrayBuffer | null) => {
     setImage(value);
   };

@@ -5,8 +5,8 @@ import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import SNS from '../../molecules/SNSIcons';
 
-interface Props extends PartialICLEAR, PartialIWIDTH, PartialIWIDTHTAB, PartialIFONTSIZE {
-  data: PartialUserObjectType;
+interface Props extends PartialClear, PartialWidthSize, PartialWidthTab, PartialFontSize {
+  data: PartialUserType;
 }
 
 const Container = styled.div`

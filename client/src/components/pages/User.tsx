@@ -9,14 +9,14 @@ import { Padding } from '../../utils/styled/styledSpace';
 import FlexLayout from '../atoms/FlexLayout';
 
 interface Props {
-  currentUser: PartialUserObjectType;
-  targetUser: PartialUserObjectType;
-  storeClubs: ClubTableTypes;
+  currentUser: PartialUserType;
+  targetUser: PartialUserType;
+  storeClubs: ObjectClubType;
 }
 
 const User: React.FC<Props> = ({ currentUser, targetUser, storeClubs }) => {
-  const checkedClubs: ClubArrayTypes = Object.values(storeClubs).filter(
-    (club: ClubObjectType) => club.userId === targetUser.id
+  const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
+    (club: ClubType) => club.userId === targetUser.id
   );
   const dispatch = useDispatch();
   useEffect(() => {

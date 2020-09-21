@@ -13,13 +13,13 @@ import FormTitle from '../../atoms/form/FormTitle';
 import FormSubmit from '../../atoms/form/FormSubmit';
 import { emailValidation, nameValidation } from '../../../validations';
 
-type ISelectItems = typeof selectProfileItems | typeof selectGolfItems;
-type IEditItems = typeof baseItems | typeof snsItems | typeof golfItems | typeof otherItems;
-type INoteItems = typeof snsNoteItems | typeof profileNoteItems;
+type SelectItems = typeof selectProfileItems | typeof selectGolfItems;
+type EditItems = typeof baseItems | typeof snsItems | typeof golfItems | typeof otherItems;
+type NoteItems = typeof snsNoteItems | typeof profileNoteItems;
 
 interface Props {
-  currentUser: UserObjectType;
-  onSubmit: (values: ProfileEditInitialValuesDataType) => void;
+  currentUser: UserType;
+  onSubmit: (values: ProfileEditDataType) => void;
 }
 
 const StyledForm = styled.form``;
@@ -135,7 +135,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     onSubmit: onSubmit,
   });
 
-  const selectItems = (obj: ISelectItems, note?: INoteItems) => {
+  const selectItems = (obj: SelectItems, note?: NoteItems) => {
     const element = Object.entries(obj).map(([key, value], num: number) => {
       const { head, body } = value;
       return (
@@ -153,25 +153,24 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
               right={
                 <Padding left={CLEAR.MEDIUM}>
                   <StyledSelect name={key} onChange={formik.handleChange}>
-                    <option value={formik.values[key as keyof UserObjectType]}>
-                      {formik.values[key as keyof UserObjectType]}
+                    <option value={formik.values[key as keyof UserType]}>
+                      {formik.values[key as keyof UserType]}
                     </option>
                     {body.map((data: any, num: number) => {
-                      return formik.values[key as keyof UserObjectType] !== data ? (
+                      return formik.values[key as keyof UserType] !== data ? (
                         <option key={num} value={data}>
                           {data}
                         </option>
                       ) : null;
                     })}
                   </StyledSelect>
-                  {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
+                  {note === undefined ? <></> : <Inline>{note[key as keyof NoteItems]}</Inline>}
                 </Padding>
               }
             />
           </Padding>
-          {formik.touched[key as keyof UserObjectType] &&
-          formik.errors[key as keyof UserObjectType] ? (
-            <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
+          {formik.touched[key as keyof UserType] && formik.errors[key as keyof UserType] ? (
+            <Styleddiv>{formik.errors[key as keyof UserType]}</Styleddiv>
           ) : null}
         </React.Fragment>
       );
@@ -179,10 +178,10 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     return element;
   };
 
-  const InputItems = (obj: IEditItems, note?: INoteItems) => {
+  const InputItems = (obj: EditItems, note?: NoteItems) => {
     const element = Object.entries(editFormDatas.placeHolder).map(
       ([key, value]: string[], num: number) => {
-        return obj[key as keyof IEditItems] ? (
+        return obj[key as keyof EditItems] ? (
           <React.Fragment key={num}>
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
               <FlexLayout
@@ -191,7 +190,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
                 alignItems={ALIGNITEMS.START}
                 left={
                   <Padding left={CLEAR.TINY}>
-                    <StyledLabel htmlFor={key}>{obj[key as keyof IEditItems]}</StyledLabel>
+                    <StyledLabel htmlFor={key}>{obj[key as keyof EditItems]}</StyledLabel>
                   </Padding>
                 }
                 right={
@@ -202,16 +201,15 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
                       placeholder={value}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values[key as keyof UserObjectType]}
+                      value={formik.values[key as keyof UserType]}
                     />
-                    {note === undefined ? <></> : <Inline>{note[key as keyof INoteItems]}</Inline>}
+                    {note === undefined ? <></> : <Inline>{note[key as keyof NoteItems]}</Inline>}
                   </Padding>
                 }
               />
             </Padding>
-            {formik.touched[key as keyof UserObjectType] &&
-            formik.errors[key as keyof UserObjectType] ? (
-              <Styleddiv>{formik.errors[key as keyof UserObjectType]}</Styleddiv>
+            {formik.touched[key as keyof UserType] && formik.errors[key as keyof UserType] ? (
+              <Styleddiv>{formik.errors[key as keyof UserType]}</Styleddiv>
             ) : null}
           </React.Fragment>
         ) : (

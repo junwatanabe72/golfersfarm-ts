@@ -1,11 +1,11 @@
 import { ACTIONTYPES } from '../actions';
 
-const initialState: UserThumbNailTypes = [];
+const initialState: ArrayPartialUserType = [];
 
 export default function UsersReducer(
   state = initialState,
-  action: Action<UserThumbNailTypes>
-): UserThumbNailTypes {
+  action: Action<ArrayPartialUserType>
+): ArrayPartialUserType {
   let newState = state;
   const users = action.payload || [];
   switch (action.type) {

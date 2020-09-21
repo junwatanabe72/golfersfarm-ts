@@ -6,8 +6,8 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { ROUTE, INFOROUTE } from '../../utils/constant/route';
 import { SIZE } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
-interface Props extends PartialIWIDTH {
-  currentUser: PartialUserObjectType;
+interface Props extends PartialWidthSize {
+  currentUser: PartialUserType;
 }
 
 //style
@@ -15,7 +15,7 @@ const BackColor = styled.div`
   background-color: ${BASICCOLORS.WHITE};
 `;
 
-const Container = styled.div<PartialIWIDTH>`
+const Container = styled.div<PartialWidthSize>`
   width: ${(props) => props.width}vw;
   margin: 0vw auto;
   ${media.tablet`

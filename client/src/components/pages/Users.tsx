@@ -7,8 +7,8 @@ import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 
 interface Props {
-  currentUser: PartialUserObjectType;
-  allUsers: UserThumbNailTypes;
+  currentUser: PartialUserType;
+  allUsers: ArrayPartialUserType;
 }
 
 const Container = styled.div`
