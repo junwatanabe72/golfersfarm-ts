@@ -7,15 +7,15 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props extends PartialICOLOR, PartialICLEAR, PartialITEXTALIGNTYPE {
+interface Props extends PartialColor, PartialClear, PartialTextAlignType {
   title?: string;
 }
 
-const Color = styled.div<PartialICOLOR>`
+const Color = styled.div<PartialColor>`
   background-color: ${(props) => props.color};
 `;
 
-const PaddingExtend = styled(Padding)<PartialICLEAR>`
+const PaddingExtend = styled(Padding)<PartialClear>`
   padding: ${(props) => props.clear}vw;
   ${media.tablet`
       padding: ${CLEAR.XSMALL}vw;

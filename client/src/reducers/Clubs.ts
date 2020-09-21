@@ -21,12 +21,12 @@ const sample = {
     flex: 's',
   },
 };
-const initialState: ClubTableTypes = {};
+const initialState: ObjectClubType = sample;
 
 export default function ClubsReducer(
   state = initialState,
-  action: Action<ClubTableTypes>
-): ClubTableTypes {
+  action: Action<ObjectClubType>
+): ObjectClubType {
   let newState = state;
   const clubs = action.payload || [];
   switch (action.type) {

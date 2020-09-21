@@ -4,7 +4,7 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { Padding } from '../../utils/styled/styledSpace';
 import { FONTSIZE, CLEAR } from '../../utils/constant/number';
 
-interface Props extends PartialIButtonCOLOR, PartialIFONTSIZE {
+interface Props extends PartialButtonColor, PartialFontSize {
   onClick?: () => void;
   pWidth?: CLEARTYPE;
   pHeight?: CLEARTYPE;

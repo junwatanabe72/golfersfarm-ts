@@ -9,10 +9,10 @@ import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 
 interface Props {
-  currentUser: PartialUserObjectType;
+  currentUser: PartialUserType;
 }
 
-const BackColor = styled.div<PartialICOLOR>`
+const BackColor = styled.div<PartialColor>`
   background-color: ${(props) => props.color};
 `;
 

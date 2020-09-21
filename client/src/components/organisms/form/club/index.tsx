@@ -13,12 +13,12 @@ import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 
 type FormikValueType = {
-  formikClubs: ClubArrayTypes;
+  formikClubs: ArrayClubType;
 };
 
 interface Props {
-  checkedClubs: ClubArrayTypes;
-  currentUser: UserObjectType;
+  checkedClubs: ArrayClubType;
+  currentUser: UserType;
   onSubmit: (values: any) => void;
 }
 

@@ -7,14 +7,14 @@ import { BASICCOLORS } from '../../../../utils/constant/color';
 import { allTypes, makers, shafts } from '../../../../utils/constant/text/body/user/value';
 import Button from '../../../atoms/Button';
 
-type TypeoptionDatasKey = typeof optionDatasKey;
-type TypeoptionDatasValue = TypeData | MakerData | ShaftData;
+type OptionDatasKey = typeof optionDatasKey;
+type OptionDatasValue = TypeData | MakerData | ShaftData;
 
 interface Props {
   arg: string;
   index: number;
   remove: <T>(index: number) => T | undefined;
-  club: ClubObjectType;
+  club: ClubType;
   name: string;
   onChange: {
     (e: React.ChangeEvent<any>): void;
@@ -71,7 +71,7 @@ const optionDatasKey = {
 const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remove }) => {
   const [, meta] = useField(name);
 
-  type TypeoptionDatas = typeof optionDatas;
+  type OptionDatas = typeof optionDatas;
 
   const optionDatas = {
     type: allTypes,
@@ -80,16 +80,16 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
     flex: shafts,
   };
 
-  const selectComponent = (selectName: string, selectKey: string, targetClub: ClubObjectType) => {
-    const key = optionDatasKey[selectKey as keyof TypeoptionDatasKey];
+  const selectComponent = (selectName: string, selectKey: string, targetClub: ClubType) => {
+    const key = optionDatasKey[selectKey as keyof OptionDatasKey];
     return (
       <StyledSelect name={selectName} onChange={onChange}>
         <option value={selectKey}>{targetClub[selectKey]}</option>
-        {Object.values(optionDatas[selectKey as keyof TypeoptionDatas]).map(
-          (data: TypeoptionDatasValue, num: number) => {
-            return targetClub[selectKey] !== data[key as keyof TypeoptionDatasValue] ? (
-              <option key={num} value={data[key as keyof TypeoptionDatasValue]}>
-                {data[key as keyof TypeoptionDatasValue]}
+        {Object.values(optionDatas[selectKey as keyof OptionDatas]).map(
+          (data: OptionDatasValue, num: number) => {
+            return targetClub[selectKey] !== data[key as keyof OptionDatasValue] ? (
+              <option key={num} value={data[key as keyof OptionDatasValue]}>
+                {data[key as keyof OptionDatasValue]}
               </option>
             ) : null;
           }

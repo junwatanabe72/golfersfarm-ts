@@ -9,7 +9,7 @@ import FormSubmit from '../../../atoms/form/FormSubmit';
 import InputItem from './InputItem';
 
 interface Props {
-  currentUser: UserObjectType;
+  currentUser: UserType;
   onSubmit: (values: PartialImageUserType) => void;
 }
 

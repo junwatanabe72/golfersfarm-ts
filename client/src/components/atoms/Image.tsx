@@ -3,7 +3,7 @@ import { SIZE } from '../../utils/constant/number';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props extends PartialIWIDTH, PartialIWIDTHTAB {
+interface Props extends PartialWidthSize, PartialWidthTab {
   image: string | undefined;
 }
 
@@ -13,7 +13,7 @@ const Container = styled.img<{
 }>`
   width: ${(props) => props.width}vw;
   ${media.tablet`
-        width: ${(props: { widthTab: PartialIWIDTHTAB }) => props.widthTab}vw
+        width: ${(props: { widthTab: PartialWidthTab }) => props.widthTab}vw
       `}
 `;
 

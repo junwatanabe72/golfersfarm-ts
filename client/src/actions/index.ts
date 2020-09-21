@@ -19,13 +19,13 @@ export const ACTIONTYPES = {
 } as const;
 
 //REDUX_SAGA
-export function getUsers(): TypeAction {
+export function getUsers(): BasicAction {
   return { type: ACTIONTYPES.REQUESTED_USER };
 }
 export function createUser(data: SignupUserType): Action<SignupUserType> {
   return { type: ACTIONTYPES.CREATE_USER, payload: data };
 }
-export function updateUser(data: PartialUserObjectType): Action<PartialUserObjectType> {
+export function updateUser(data: PartialUserType): Action<PartialUserType> {
   return { type: ACTIONTYPES.UPDATE_USER, payload: data };
 }
 export function updateImageUser(data: FormData): Action<FormData> {
@@ -34,32 +34,32 @@ export function updateImageUser(data: FormData): Action<FormData> {
 export function loginUser(data: LoginUserType): Action<LoginUserType> {
   return { type: ACTIONTYPES.LOGIN_USER, payload: data };
 }
-export function logoutUser(): TypeAction {
+export function logoutUser(): BasicAction {
   return { type: ACTIONTYPES.LOGOUT_USER };
 }
-export function getGears(data: PartialUserObjectType): Action<PartialUserObjectType> {
+export function getGears(data: PartialUserType): Action<PartialUserType> {
   return { type: ACTIONTYPES.REQUESTED_GEARS, payload: data };
 }
-export function updateClubs(data: PartialClubArrayTypes): Action<PartialClubArrayTypes> {
+export function updateClubs(data: PartialArrayClubType): Action<PartialArrayClubType> {
   return { type: ACTIONTYPES.UPDATE_CLUBS, payload: data };
 }
 //REDUX_SAGA
 
-export function addUser(data: PartialUserObjectType): Action<PartialUserObjectType> {
+export function addUser(data: PartialUserType): Action<PartialUserType> {
   return { type: ACTIONTYPES.ADD_USER, payload: data };
 }
-export function deleteUser(): TypeAction {
+export function deleteUser(): BasicAction {
   return { type: ACTIONTYPES.DELETE_USER };
 }
 //usersActionCreater
-export function addUsers(data: UserThumbNailTypes): Action<UserThumbNailTypes> {
+export function addUsers(data: ArrayPartialUserType): Action<ArrayPartialUserType> {
   return { type: ACTIONTYPES.ADD_USERS, payload: data };
 }
 //clubsActionCreater
-export function addClubs(data: ClubTableTypes): Action<ClubTableTypes> {
+export function addClubs(data: ObjectClubType): Action<ObjectClubType> {
   return { type: ACTIONTYPES.ADD_CLUBS, payload: data };
 }
-export function removeClubs(data: PartialClubTableTypes): Action<PartialClubTableTypes> {
+export function removeClubs(data: PartialObjectClubType): Action<PartialObjectClubType> {
   return { type: ACTIONTYPES.REMOVE_CLUBS, payload: data };
 }
 //typesActionCreater
@@ -75,18 +75,3 @@ export function addShafts(data: ShaftsData): Action<ShaftsData> {
 export function addMakers(data: MakersData): Action<MakersData> {
   return { type: ACTIONTYPES.ADD_MAKERS, payload: data };
 }
-// Issue Action Creators & Action Type:
-// export const ADD_ISSUE = 'ADD_ISSUE';
-// export function addIssue(issue) {
-//   return { type: ADD_ISSUE, payload: { issue } };
-// }
-
-// Modal Action Creators & Action Type
-// export const MODAL_PUSH = 'MODAL_PUSH';
-// export function modalPush(argComponent) {
-//   return { type: MODAL_PUSH, payload: { argComponent } };
-// }
-// export const MODAL_POP = 'MODAL_POP';
-// export function modalPop() {
-//   return { type: MODAL_POP, payload: {} };
-// }

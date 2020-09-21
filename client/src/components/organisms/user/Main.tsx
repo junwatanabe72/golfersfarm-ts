@@ -9,7 +9,7 @@ import UserCard from './Card';
 import { TABLETYPES } from '../../../utils/constant/text/table';
 
 interface Props {
-  targetUser: PartialUserObjectType;
+  targetUser: PartialUserType;
 }
 
 const Container = styled.div`

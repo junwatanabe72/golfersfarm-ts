@@ -1,25 +1,25 @@
 //interface
-interface IFONTSIZE {
+interface FontSize {
   fontSize: FONTSIZETYPE;
 }
 
-interface IWIDTHSIZE {
+interface WidthSize {
   width: SIZETYPE;
 }
 
-interface IHEIGHTSIZE {
+interface HeightSize {
   height: SIZETYPE;
 }
 
-interface IWIDTHTAB {
+interface WidthTab {
   widthTab: SIZETYPE;
 }
 
-interface IFONTSIZEWEIGHT {
+interface FontSizeWeight {
   fontWeight: FONTSIZEWEIGHTTYPE;
 }
 
-interface ICLEAR {
+interface Clear {
   clear: CLEARTYPE;
 }
 // types
@@ -75,12 +75,12 @@ type CLEARTYPE =
   | typeof CLEAR.ZERO;
 
 // partial
-type PartialIWIDTH = Partial<IWIDTHSIZE>;
-type PartialIHEIGHTSIZE = Partial<IHEIGHTSIZE>;
-type PartialIWIDTHTAB = Partial<IWIDTHTAB>;
-type PartialICLEAR = Partial<ICLEAR>;
-type PartialIFONTSIZE = Partial<IFONTSIZE>;
-type PartialIFONTSIZEWEIGHT = Partial<IFONTSIZEWEIGHT>;
+type PartialWidthSize = Partial<WidthSize>;
+type PartialHeightSize = Partial<HeightSize>;
+type PartialWidthTab = Partial<WidthTab>;
+type PartialClear = Partial<Clear>;
+type PartialFontSize = Partial<FontSize>;
+type PartialFontSizeWeight = Partial<FontSizeWeight>;
 
 const FONTSIZE = {
   ICONXLARGE: 60,

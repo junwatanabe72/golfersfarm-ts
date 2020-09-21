@@ -8,12 +8,12 @@ import { FONTSIZE } from '../../utils/constant/number';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 
-interface Props extends PartialICOLOR {
+interface Props extends PartialColor {
   route: any;
 }
 
 //style
-const BackgroundColor = styled.div<PartialICOLOR>`
+const BackgroundColor = styled.div<PartialColor>`
   background-color: ${(props) => props.color};
 `;
 

@@ -1,4 +1,4 @@
-interface ClubObjectType {
+interface ClubType {
   id: number;
   userId: number;
   name: string;
@@ -8,8 +8,9 @@ interface ClubObjectType {
   flex: string;
   [key: string]: string | number;
 }
-type ClubArrayTypes = ClubObjectType[];
-type ClubTableTypes = { [key: number]: ClubObjectType };
-type PartialClubObjectType = Partial<ClubObjectType>;
-type PartialClubArrayTypes = PartialClubObjectType[];
-type PartialClubTableTypes = { [key: number]: PartialClubObjectType };
+type ArrayClubType = ClubType[];
+type ObjectClubType = { [key: number]: ClubType };
+
+type PartialClubType = Partial<ClubType>;
+type PartialArrayClubType = PartialClubType[];
+type PartialObjectClubType = { [key: number]: PartialClubType };

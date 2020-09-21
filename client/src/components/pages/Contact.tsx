@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from '../templates/Layout';
 
 interface Props {
-  currentUser: PartialUserObjectType;
+  currentUser: PartialUserType;
 }
 
 const Contact: React.FC<Props> = ({ currentUser }) => {

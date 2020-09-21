@@ -3,7 +3,7 @@ import { SIZE } from '../../utils/constant/number';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props extends PartialIWIDTH, PartialIHEIGHTSIZE {
+interface Props extends PartialWidthSize, PartialHeightSize {
   source: string;
 }
 

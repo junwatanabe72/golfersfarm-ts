@@ -5,10 +5,10 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { ALIGNITEMS } from '../../utils/styled/styledSpace';
 
 interface Props
-  extends PartialICOLOR,
-    PartialIFONTSIZE,
-    PartialIFONTSIZEWEIGHT,
-    PartialITEXTALIGNTYPE {}
+  extends PartialColor,
+    PartialFontSize,
+    PartialFontSizeWeight,
+    PartialTextAlignType {}
 
 const Styledh2 = styled.h2<Props>`
   font-size: ${(props) => props.fontSize}px;

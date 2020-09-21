@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Image from './Image';
 import { SIZE } from '../../utils/constant/number';
 
-interface Props extends PartialIWIDTH {
+interface Props extends PartialWidthSize {
   image: string;
 }
 

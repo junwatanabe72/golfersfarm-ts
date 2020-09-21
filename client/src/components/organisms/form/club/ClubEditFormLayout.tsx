@@ -8,10 +8,10 @@ import { CLEAR } from '../../../../utils/constant/number';
 import { Padding } from '../../../../utils/styled/styledSpace';
 
 type FormikValueType = {
-  formikClubs: ClubArrayTypes;
+  formikClubs: ArrayClubType;
 };
 
-type TypeGearTableItems = typeof gearTableItems;
+type GearTableItems = typeof gearTableItems;
 interface Props {
   remove: <T>(index: number) => T | undefined;
 }
@@ -36,7 +36,7 @@ const order = Object.keys(gearTableItems);
 const head = [...order, ''].map((arg: string, num: number) => {
   return (
     <StyledTd key={arg}>
-      <StyledLabel htmlFor={arg}>{gearTableItems[arg as keyof TypeGearTableItems]}</StyledLabel>
+      <StyledLabel htmlFor={arg}>{gearTableItems[arg as keyof GearTableItems]}</StyledLabel>
     </StyledTd>
   );
 });
@@ -44,27 +44,25 @@ const head = [...order, ''].map((arg: string, num: number) => {
 const ClubEditFormLayout: React.FC<Props> = ({ remove }) => {
   const { values, handleChange } = useFormikContext<FormikValueType>();
 
-  const selectItems = Object.values(values.formikClubs).map(
-    (club: ClubObjectType, index: number) => {
-      return [...order, ''].map((key: string) => {
-        const name = `formikClubs.${index}.${key}`;
-        return (
-          <StyledTd key={key}>
-            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <ClubEditItems
-                remove={remove}
-                club={club}
-                index={index}
-                arg={key}
-                name={name}
-                onChange={handleChange}
-              />
-            </Padding>
-          </StyledTd>
-        );
-      });
-    }
-  );
+  const selectItems = Object.values(values.formikClubs).map((club: ClubType, index: number) => {
+    return [...order, ''].map((key: string) => {
+      const name = `formikClubs.${index}.${key}`;
+      return (
+        <StyledTd key={key}>
+          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+            <ClubEditItems
+              remove={remove}
+              club={club}
+              index={index}
+              arg={key}
+              name={name}
+              onChange={handleChange}
+            />
+          </Padding>
+        </StyledTd>
+      );
+    });
+  });
 
   return (
     <>

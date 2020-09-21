@@ -11,7 +11,7 @@ export async function createUserAxios(data: SignupUserType) {
   }
 }
 
-export async function updateUserAxios(data: PartialUserObjectType) {
+export async function updateUserAxios(data: PartialUserType) {
   const { id } = data;
   const queries = { user: { ...data } };
   try {

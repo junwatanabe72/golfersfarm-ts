@@ -2,7 +2,7 @@ import React, { useRef, useEffect, ReactElement } from 'react';
 import styled from 'styled-components';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
 
-interface Props extends ICOLOR, MENUZTYPE {
+interface Props extends Color, MENUZTYPE {
   workModal: () => void;
   modalIsOpen: boolean;
   list: ReactElement;

@@ -1,11 +1,11 @@
 import { ACTIONTYPES } from '../actions';
 import { initialUser } from '../utils/constant/text/body/user/value';
-const initialState: PartialUserObjectType = {};
+const initialState: PartialUserType = initialUser;
 
 export default function CurrentUserReducer(
   state = initialState,
-  action: Action<PartialUserObjectType>
-): PartialUserObjectType {
+  action: Action<PartialUserType>
+): PartialUserType {
   let newState = state;
   switch (action.type) {
     case ACTIONTYPES.ADD_USER: {

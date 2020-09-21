@@ -1,4 +1,4 @@
-interface UserObjectType {
+interface UserType {
   id: number;
   name: string;
   profileImage: string;
@@ -21,10 +21,10 @@ interface UserObjectType {
   show: boolean;
 }
 
-type PartialUserObjectType = Partial<UserObjectType>;
-type UserThumbNailTypes = PartialUserObjectType[];
+type PartialUserType = Partial<UserType>;
+type ArrayPartialUserType = PartialUserType[];
 
-type SignupUserType = Pick<UerObjectType, 'name' | 'password' | 'email'>;
-type LoginUserType = Pick<UserObjectType, 'password' | 'email'>;
-type ImageUserType = Pick<UserObjectType, 'profileImage' | 'clubImage'>;
+type SignupUserType = Pick<UserType, 'name' | 'password' | 'email'>;
+type LoginUserType = Pick<UserType, 'password' | 'email'>;
+type ImageUserType = Pick<UserType, 'profileImage' | 'clubImage'>;
 type PartialImageUserType = Partial<ImageUserType>;

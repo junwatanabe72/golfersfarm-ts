@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
 import { JUSTIFYCONTENT } from '../../utils/styled/styledSpace';
 
-interface Props extends PartialIWIDTH, PartialIALIGNITEMSTYPE, PartialIJUSTIFYCONTENTTYPE {
+interface Props extends PartialWidthSize, PartialAlignItemsType, PartialJustifyContentType {
   right: ReactElement;
   left: ReactElement;
 }
@@ -21,7 +21,7 @@ const Container = styled.div<{
       `}
 `;
 
-const FixedWidth = styled.div<PartialIWIDTH>`
+const FixedWidth = styled.div<PartialWidthSize>`
   width: ${(props) => props.width}vw;
   ${media.tablet`
       width: 60vw;

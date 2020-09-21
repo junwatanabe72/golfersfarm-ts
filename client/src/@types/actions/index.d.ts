@@ -20,6 +20,6 @@ interface Action<T> extends Action<ACTIONTYPES, T> {
   type: ACTIONTYPES;
   payload: T;
 }
-interface TypeAction extends Action {
+interface BasicAction extends Action {
   type: ACTIONTYPES;
 }
