@@ -51,10 +51,7 @@ const Styleddiv = styled.div`
   margin: 0 auto;
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
-const Center = styled.div`
-  display: flex;
-  justify-content: center;
-`;
+
 const Inline = styled.div`
   font-size: ${FONTSIZE.SMALL}px;
 `;

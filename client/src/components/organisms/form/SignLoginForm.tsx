@@ -1,5 +1,4 @@
 import React from 'react';
-import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import Button from '../../atoms/Button';
@@ -11,7 +10,7 @@ import { BASICCOLORS } from '../../../utils/constant/color';
 interface Props extends LoginSignUpFormDataTypes {
   validation: any;
   buttonValue: string;
-  onSubmit: (values: LoginSignUpValuesDataType) => void;
+  onSubmit: (values: any) => void;
 }
 
 const StyledForm = styled.form`
@@ -49,25 +48,27 @@ const SignLoginForm: React.FC<Props> = ({ formDatas, validation, buttonValue, on
     onSubmit: onSubmit,
   });
 
-  const InputItems = Object.entries(formDatas.placeHolder).map(([key, value]: string[]) => {
-    return (
-      <>
-        <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-          <StyledField
-            type={key}
-            name={key}
-            placeholder={value}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values[key]}
-          />
-        </Padding>
-        {formik.touched[key] && formik.errors[key] ? (
-          <Styleddiv>{formik.errors[key]}</Styleddiv>
-        ) : null}
-      </>
-    );
-  });
+  const InputItems = Object.entries(formDatas.placeHolder).map(
+    ([key, value]: string[], num: number) => {
+      return (
+        <React.Fragment key={num}>
+          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+            <StyledField
+              type={key}
+              name={key}
+              placeholder={value}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values[key]}
+            />
+          </Padding>
+          {formik.touched[key] && formik.errors[key] ? (
+            <Styleddiv>{formik.errors[key]}</Styleddiv>
+          ) : null}
+        </React.Fragment>
+      );
+    }
+  );
 
   return (
     <StyledForm onSubmit={formik.handleSubmit}>

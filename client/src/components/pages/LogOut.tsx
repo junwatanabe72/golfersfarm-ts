@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../actions';
 import Layout from '../templates/Layout';
@@ -10,7 +9,6 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
-import { media } from '../../utils/styled/styledRdesign';
 
 interface Props {
   currentUser: PartialUserObjectType;

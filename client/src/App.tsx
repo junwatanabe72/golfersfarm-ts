@@ -13,8 +13,8 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
-import { getUsers, addTypes, addShafts, addMakers, createUser, loginUser } from './actions';
-import { allTypes, shafts, makers } from './utils/constant/text/body/user/value';
+import { getUsers, addTypes, addShafts, addMakers } from './actions';
+import { allTypes, shafts } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
@@ -32,24 +32,11 @@ const Container = styled.div`
 const App: React.FC<Props> = ({}) => {
   const currentUser = useSelector((state: State) => state.currentUser);
   const storeUsers = useSelector((state: State) => state.users);
-  const clubTypes = useSelector((state: State) => state.types);
-  const allShafts = useSelector((state: State) => state.shafts);
   const makers = useSelector((state: State) => state.maker);
   const storeClubs = useSelector((state: State) => state.clubs);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
-  const loginSignUponSubmit = (values: LoginSignUpValuesDataType) => {
-    if ('name' in values) {
-      const { name, password, email } = values;
-      const signItems = { name, password, email };
-      dispatch(createUser(signItems));
-    } else {
-      const { password, email } = values;
-      const loginItems = { password, email };
-      dispatch(loginUser(loginItems));
-    }
-  };
   //develop時に一時的に使用。
   const allUsers = storeUsers.length === 0 ? [currentUser] : [...storeUsers];
   //
@@ -105,7 +92,7 @@ const App: React.FC<Props> = ({}) => {
           existedCurrentUser ? (
             <Redirect to={ROUTE.TOP} />
           ) : (
-            <Login {...props} currentUser={currentUser} onSubmit={loginSignUponSubmit} />
+            <Login {...props} currentUser={currentUser} />
           )
         }
       />
@@ -117,7 +104,7 @@ const App: React.FC<Props> = ({}) => {
           existedCurrentUser ? (
             <Redirect to={ROUTE.TOP} />
           ) : (
-            <SignUp {...props} currentUser={currentUser} onSubmit={loginSignUponSubmit} />
+            <SignUp {...props} currentUser={currentUser} />
           )
         }
       />

@@ -5,6 +5,7 @@ import {
   convertClubDataToServer,
   convertClubDataToClient,
   convertArrayClubDataToServer,
+  convertArrayClubDataToClientForUpdate,
 } from "../../utils/convert";
 const clubs = db.Club;
 const userClubs = db.UserClubs;
@@ -63,7 +64,7 @@ export default {
     try {
       const newData = await Promise.all(
         club.map(async (value: any) => {
-          // console.log(value);
+          // clientのclub型をserver型に変換
           const targetClub = await convertClubDataToServer(value);
           if (!targetClub.id) {
             const { newData } = await clubs.add(
@@ -71,6 +72,7 @@ export default {
               targetClub,
               sequelize
             );
+            // serverのclub型をclient型に変換
             const club = await convertClubDataToClient(newData);
             return club;
           }
@@ -84,6 +86,7 @@ export default {
             targetClub,
             sequelize
           );
+          // serverのclub型をclient型に変換
           const club = await convertClubDataToClient(newData);
           return club;
         })
@@ -91,8 +94,9 @@ export default {
       if (!newData) {
         return res.status(400);
       } else {
-        const returnData = newData.filter((value) => value);
-        res.status(201).json({ data: { returnData } });
+        // client型のclubデータ配列をclientに返すため、object型に変換 {id:{id: id,name: name,...}}
+        const updateClubs = convertArrayClubDataToClientForUpdate(newData);
+        res.status(201).json({ data: { updateClubs } });
       }
     } catch (error) {
       res.status(400);

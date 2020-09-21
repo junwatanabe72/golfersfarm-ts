@@ -12,13 +12,16 @@ import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 
 type FormikValueType = {
-  formikClubs: ClubTableTypes;
+  formikClubs: ClubArrayTypes;
 };
 
 interface Props {
   currentUser: UserObjectType;
   storeClubs: ClubTableTypes;
 }
+const Color = styled.div`
+  background-color: ${BASICCOLORS.WHITELIGHT};
+`;
 
 export const editTitleList = {
   profile: 'PROFILE',
@@ -33,7 +36,7 @@ export const selectProfileItems = {
   show: { head: '公開・非公開', body: ['公開', '非公開'] },
 };
 
-const checkObject = (obj: any) => {
+const checkObject = (obj: PartialClubObjectType) => {
   // まずキーのみをソートする
   const keys = Object.keys(obj).sort();
   // 返却する空のオブジェクトを作る
@@ -50,7 +53,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
   const moveEditPage = (value: string) => {
     setEditPage(value);
   };
-  const checkedClubs: ClubTableTypes = Object.values(storeClubs).filter(
+  const checkedClubs: ClubArrayTypes = Object.values(storeClubs).filter(
     (club: ClubObjectType) => club.userId === currentUser.id
   );
   const dispatch = useDispatch();
@@ -78,10 +81,10 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
   };
 
   const editClubsonSubmit = (values: FormikValueType) => {
-    const submitClubs = Object.values(values.formikClubs);
-    let editClubs: PartialClubTableTypes = [];
+    let editClubs: PartialClubArrayTypes = [];
+    const submitClubs = values.formikClubs;
 
-    // JsonでObject比較
+    // ojbectに変化がなければ、return
     const storeClubsJsonData = checkedClubs.map((value) => {
       return JSON.stringify(checkObject(value));
     });
@@ -91,17 +94,15 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
         return storeClubsJsonData[num] === data;
       })
       .every((value) => value);
-    //配列の長さで比較
-    const checkedLength = submitClubs.length === checkedClubs.length;
-
-    if (unchanged && checkedLength) {
+    if (unchanged && submitClubs.length === checkedClubs.length) {
       return;
     }
 
+    //deleteするクラブを抽出する。
     const submitClubsIds = submitClubs.map((value) => {
       return value.id;
     });
-    const deleteTargetClubs = Object.values(checkedClubs)
+    const deleteTargetClubs = checkedClubs
       .filter((value) => {
         const data = submitClubsIds.includes(value.id);
         return !data;
@@ -109,14 +110,10 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
       .map((value) => {
         return { ...value, name: undefined };
       });
-
+    //update,create,deleteするクラブを配列にする。
     editClubs = [...submitClubs, ...deleteTargetClubs];
     dispatch(updateClubs(editClubs));
   };
-
-  const Color = styled.div`
-    background-color: ${BASICCOLORS.WHITELIGHT};
-  `;
 
   return (
     <Layout currentUser={currentUser}>
@@ -137,7 +134,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs }) => {
             <>
               <ClubEditForm
                 currentUser={currentUser}
-                storeClubs={checkedClubs}
+                checkedClubs={checkedClubs}
                 onSubmit={editClubsonSubmit}
               />
             </>

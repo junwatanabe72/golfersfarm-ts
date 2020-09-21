@@ -8,6 +8,8 @@ interface ClubObjectType {
   flex: string;
   [key: string]: string | number;
 }
-type ClubTableTypes = ClubObjectType[];
+type ClubArrayTypes = ClubObjectType[];
+type ClubTableTypes = { [key: number]: ClubObjectType };
 type PartialClubObjectType = Partial<ClubObjectType>;
-type PartialClubTableTypes = PartialClubObjectType[];
+type PartialClubArrayTypes = PartialClubObjectType[];
+type PartialClubTableTypes = { [key: number]: PartialClubObjectType };

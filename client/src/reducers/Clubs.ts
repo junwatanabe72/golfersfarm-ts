@@ -1,31 +1,46 @@
 import { ACTIONTYPES } from '../actions';
 
 // objectに変更する。
-const sample = [
-  { id: 1, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
-  { id: 2, type: '1wood', name: 'x-drive', userId: 1, maker: 'mizuno', shaft: 'pt-7', flex: 's' },
-];
-const initialState: PartialClubTableTypes = sample;
+const sample = {
+  5: {
+    id: 5,
+    type: '1wood',
+    name: 'x-drive',
+    userId: 1,
+    maker: 'mizuno',
+    shaft: 'pt-7',
+    flex: 's',
+  },
+  7: {
+    id: 7,
+    type: '1wood',
+    name: 'x-drive',
+    userId: 1,
+    maker: 'mizuno',
+    shaft: 'pt-7',
+    flex: 's',
+  },
+};
+const initialState: ClubTableTypes = {};
 
 export default function ClubsReducer(
   state = initialState,
-  action: Action<PartialClubTableTypes>
-): PartialClubTableTypes {
+  action: Action<ClubTableTypes>
+): ClubTableTypes {
   let newState = state;
   const clubs = action.payload || [];
   switch (action.type) {
     case ACTIONTYPES.ADD_CLUBS: {
-      newState = [...state, ...clubs];
+      newState = { ...state, ...clubs };
       return newState;
     }
     case ACTIONTYPES.REMOVE_CLUBS: {
-      const clubsIds = Object.values(clubs).map((value: PartialClubObjectType) => {
-        return value.id;
-      });
-      newState = newState.filter((value: PartialClubObjectType) => {
-        const data = clubsIds.includes(value.id);
-        return !data;
-      });
+      const clubIds = Object.keys(clubs);
+      for (let club in newState) {
+        if (clubIds.includes(club)) {
+          delete newState[club];
+        }
+      }
       return newState;
     }
     default: {

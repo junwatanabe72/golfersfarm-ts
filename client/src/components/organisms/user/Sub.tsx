@@ -20,7 +20,7 @@ import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
 
 interface Props {
   targetUser: PartialUserObjectType;
-  storeClubs: ClubTableTypes;
+  checkedClubs: ClubArrayTypes;
 }
 
 const Container = styled.div`
@@ -46,13 +46,11 @@ const StyledFlexColumn = styled.div`
 
 const URL = 'https://www.youtube.com/embed/wet97FIk2iY';
 const videos = [URL, URL, URL, URL];
-const ImageURL =
-  'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';
 
-const UserSub: React.FC<Props> = ({ targetUser, storeClubs }) => {
+const UserSub: React.FC<Props> = ({ targetUser, checkedClubs }) => {
   const rightContent = (
     <Table
-      datas={storeClubs}
+      datas={checkedClubs}
       width={SIZE.SMALL}
       type={TABLETYPES.HORIZONTAL}
       tableItems={gearTableItems}

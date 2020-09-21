@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
@@ -16,10 +16,10 @@ import {
   nameValidation,
   confirmedPasswordValidation,
 } from '../../validations';
+import { createUser } from '../../actions';
 
 interface Props {
   currentUser: PartialUserObjectType;
-  onSubmit: (values: LoginSignUpValuesDataType) => void;
 }
 
 const SignUpCheck = '利用規約とプライバシーポリシーを御覧ください。';
@@ -53,7 +53,15 @@ const signUpValidation = () =>
     confirmedPassword: confirmedPasswordValidation(),
   });
 
-const SignUp: React.FC<Props> = ({ currentUser, onSubmit }) => {
+const SignUp: React.FC<Props> = ({ currentUser }) => {
+  const dispatch = useDispatch();
+  const signUponSubmit = (values: SignUpInitialValuesDataType) => {
+    console.log(values);
+    const { name, password, email } = values;
+    const signItems = { name, password, email };
+    dispatch(createUser(signItems));
+  };
+
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
@@ -62,7 +70,7 @@ const SignUp: React.FC<Props> = ({ currentUser, onSubmit }) => {
             formDatas={signUpFormDatas}
             validation={signUpValidation}
             buttonValue={SignUpText.SignUpTitle}
-            onSubmit={onSubmit}
+            onSubmit={signUponSubmit}
           />
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
             <div>{SignUpText.SignUpCheck}</div>

@@ -7,7 +7,8 @@ const makers = db.Maker;
 const clubTypes = db.ClubType;
 // index
 export const convertArrayClubDataToClient = (data: any[]) => {
-  const AllClubs = data.map((value: any) => {
+  let AllClubs: any = {};
+  data.map((value: any) => {
     const { Club, userId } = value;
     const { Maker, Shaft, ClubType, id, name } = Club;
     const club = {
@@ -19,8 +20,9 @@ export const convertArrayClubDataToClient = (data: any[]) => {
       flex: Shaft.flex,
       type: ClubType.type,
     };
-    return club;
+    AllClubs[id] = club;
   });
+
   return AllClubs;
 };
 //index
@@ -113,4 +115,17 @@ export const convertClubDataToClient = async (data: any) => {
     type: targetClubType.type,
   };
   return club;
+};
+
+export const convertArrayClubDataToClientForUpdate = (data: any[]) => {
+  let updateClubs: any = {};
+  data.map((value: any) => {
+    if (!value) {
+      return;
+    }
+    const { id } = value;
+    updateClubs[id] = value;
+  });
+
+  return updateClubs;
 };

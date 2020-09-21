@@ -8,7 +8,7 @@ import { CLEAR } from '../../../../utils/constant/number';
 import { Padding } from '../../../../utils/styled/styledSpace';
 
 type FormikValueType = {
-  formikClubs: ClubTableTypes;
+  formikClubs: ClubArrayTypes;
 };
 
 type TypeGearTableItems = typeof gearTableItems;

@@ -40,12 +40,12 @@ const StyledTd = styled.td`
 const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
   const order = Object.keys(tableItems);
 
-  const body = Object.values(datas).map((data: any) => {
+  const body = datas.map((data: any) => {
     return order.map((pKey: string, num) => {
       return <StyledTd key={num}>{data[pKey]}</StyledTd>;
     });
   });
-  const head = order.map((pKey: string, num: number) => {
+  const head = order.map((pKey: string) => {
     return <StyledTd key={pKey}>{tableItems[pKey]}</StyledTd>;
   });
   const records = [head, ...body];
