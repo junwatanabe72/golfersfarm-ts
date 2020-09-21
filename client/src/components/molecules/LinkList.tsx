@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import LinkButton from '../atoms/LinkButton';
 import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';

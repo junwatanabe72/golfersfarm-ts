@@ -4,14 +4,14 @@ export async function getGearsAxios(data: PartialUserObjectType) {
   const { id } = data;
   try {
     const { data } = await client.get(`/${id}/clubs`);
-    console.log(data);
+
     return data;
   } catch (e) {
     return { e };
   }
 }
 
-export async function updateClubsAxios(data: PartialClubTableTypes) {
+export async function updateClubsAxios(data: PartialClubArrayTypes) {
   const { userId } = data[0];
   const queries = { club: [...data] };
 

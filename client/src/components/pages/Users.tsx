@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
-import { addUsers } from '../../actions';
 import Layout from '../templates/Layout';
 import ThumbNail from '../molecules/ThumbNail';
-import { users } from '../../utils/constant/text/body/user/value';
 import { media } from '../../utils/styled/styledRdesign';
-import { CLEAR, SIZE, FONTSIZE } from '../../utils/constant/number';
+import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 
 interface Props {

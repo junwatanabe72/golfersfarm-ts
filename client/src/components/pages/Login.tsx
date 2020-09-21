@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
@@ -11,10 +11,10 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
 import { emailValidation, passwordValidation } from '../../validations';
+import { loginUser } from '../../actions';
 
 interface Props {
   currentUser: PartialUserObjectType;
-  onSubmit: (values: LoginSignUpValuesDataType) => void;
 }
 
 const LoginTitle = 'LOGIN';
@@ -41,7 +41,14 @@ const validation = () =>
     password: passwordValidation(),
   });
 
-const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {
+const Login: React.FC<Props> = ({ currentUser }) => {
+  const dispatch = useDispatch();
+  const loginonSubmit = (values: LoginInitialValuesDataType) => {
+    console.log(values);
+    const { password, email } = values;
+    const loginItems = { password, email };
+    dispatch(loginUser(loginItems));
+  };
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
@@ -51,7 +58,7 @@ const Login: React.FC<Props> = ({ currentUser, onSubmit }) => {
               formDatas={formDatas}
               validation={validation}
               buttonValue={LoginText.LoginTitle}
-              onSubmit={onSubmit}
+              onSubmit={loginonSubmit}
             />
           </Padding>
           <Padding top={CLEAR.XLARGE} bottom={CLEAR.TINY}>

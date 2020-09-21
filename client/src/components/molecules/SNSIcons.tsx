@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS } from '../../utils/constant/color';
-import { FONTSIZE } from '../../utils/constant/number';
 import Url from '../atoms/Url';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';

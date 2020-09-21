@@ -26,7 +26,7 @@ const Container = styled.div`
 const components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />];
 
 const contents = components.map((d: JSX.Element, i: number) => {
-  const color = i % 2 == 0 ? BASICCOLORS.WHITE : BASICCOLORS.WHITELIGHT;
+  const color = i % 2 === 0 ? BASICCOLORS.WHITE : BASICCOLORS.WHITELIGHT;
 
   return (
     <BackColor key={i} color={color}>

@@ -40,7 +40,7 @@ export function logoutUser(): TypeAction {
 export function getGears(data: PartialUserObjectType): Action<PartialUserObjectType> {
   return { type: ACTIONTYPES.REQUESTED_GEARS, payload: data };
 }
-export function updateClubs(data: PartialClubTableTypes): Action<PartialClubTableTypes> {
+export function updateClubs(data: PartialClubArrayTypes): Action<PartialClubArrayTypes> {
   return { type: ACTIONTYPES.UPDATE_CLUBS, payload: data };
 }
 //REDUX_SAGA

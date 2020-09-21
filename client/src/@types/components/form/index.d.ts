@@ -9,7 +9,9 @@ interface LoginInitialValuesDataType {
   email: string;
   password: string;
 }
-type LoginSignUpValuesDataType = LoginInitialValuesDataType | SignUpInitialValuesDataType;
+interface LoginSignUpValuesDataType {
+  onSubmit: (values: LoginInitialValuesDataType | SignUpInitialValuesDataType) => void;
+}
 
 interface SignUpFormDatasType {
   initialValuesData: {

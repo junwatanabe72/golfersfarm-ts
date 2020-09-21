@@ -13,11 +13,11 @@ import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 
 type FormikValueType = {
-  formikClubs: ClubTableTypes;
+  formikClubs: ClubArrayTypes;
 };
 
 interface Props {
-  storeClubs: ClubTableTypes;
+  checkedClubs: ClubArrayTypes;
   currentUser: UserObjectType;
   onSubmit: (values: any) => void;
 }
@@ -51,9 +51,9 @@ const clubValidation = () =>
     ),
   });
 
-const ClubEditForm: React.FC<Props> = ({ currentUser, storeClubs, onSubmit }) => {
+const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs, onSubmit }) => {
   const addItem = { name: '', userId: currentUser.id, type: '', maker: '', shaft: '', flex: '' };
-  const initialValuesData = { formikClubs: storeClubs };
+  const initialValuesData = { formikClubs: checkedClubs };
 
   return (
     <Formik<FormikValueType>
