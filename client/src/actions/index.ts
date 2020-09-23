@@ -8,14 +8,15 @@ export const ACTIONTYPES = {
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
-  REQUESTED_USER: 'REQUESTED_USER',
-  REQUESTED_GEARS: 'REQUESTED_GEARS',
   CREATE_USER: 'CREATE_USER',
-  UPDATE_USER: 'UPDATE_USER',
-  UPDATE_CLUBS: 'UPDATE_CLUBS',
-  UPDATE_IMAGE_USER: 'UPDATE_IMAGE_USER',
   LOGIN_USER: 'LOGIN_USER',
+  CHECK_LOGIN_USER: 'CHECK_LOGIN_USER',
   LOGOUT_USER: 'LOGOUT_USER',
+  REQUESTED_USER: 'REQUESTED_USER',
+  UPDATE_USER: 'UPDATE_USER',
+  UPDATE_IMAGE_USER: 'UPDATE_IMAGE_USER',
+  REQUESTED_GEARS: 'REQUESTED_GEARS',
+  UPDATE_CLUBS: 'UPDATE_CLUBS',
 } as const;
 
 //REDUX_SAGA
@@ -33,6 +34,9 @@ export function updateImageUser(data: FormData): Action<FormData> {
 }
 export function loginUser(data: LoginUserType): Action<LoginUserType> {
   return { type: ACTIONTYPES.LOGIN_USER, payload: data };
+}
+export function checkLoginUser(): BasicAction {
+  return { type: ACTIONTYPES.CHECK_LOGIN_USER };
 }
 export function logoutUser(): BasicAction {
   return { type: ACTIONTYPES.LOGOUT_USER };

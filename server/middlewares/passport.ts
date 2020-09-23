@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import passportJWT from "passport-jwt";
 import { compare } from "bcrypt";
 import dotenv from "dotenv";
-import users from "../models/user";
+import User from "../models/user";
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
@@ -12,18 +12,18 @@ dotenv.config();
 passport.use(
   new LocalStrategy(
     {
-      usernameField: "loginId",
+      usernameField: "email",
       passwordField: "password",
     },
-    async function (loginId: string, password: string, done: Function) {
+    async function (email: string, password: string, done: Function) {
       let user;
       try {
-        user = await users.findOne({ where: { loginId } });
+        user = await User.findOne({ where: { email } });
+
         if (!user) {
           return done(null, false, { message: "No user by that email" });
         }
         let match = await compare(password, user.password);
-        await console.log(typeof match);
         if (!match) {
           return done(null, false, { message: "Not a matching password" });
         }
@@ -44,7 +44,7 @@ passport.use(
     async function (jwtPayload: any, done: Function) {
       let user;
       try {
-        user = await users.findByPk(jwtPayload.id);
+        user = await User.findByPk(jwtPayload.id);
         if (!user) {
           return done(null, false, { message: "No user" });
         }

@@ -1,14 +1,8 @@
 import { takeLatest, all } from 'redux-saga/effects';
 import { ACTIONTYPES } from '../actions/index';
-import {
-  getUsersAsync,
-  createUserAsync,
-  updateUserAsync,
-  updateUserImageAsync,
-  loginUserAsync,
-  logoutUserAsync,
-} from './user';
+import { getUsersAsync, updateUserAsync, updateUserImageAsync } from './user';
 import { getGearsAsync, updateClubsAsync } from './gear';
+import { createUserAsync, loginUserAsync, logoutUserAsync, checkLoginUserAsync } from './auth';
 // import { options } from '../utils/Toastify';
 // import { toast } from 'react-toastify';
 
@@ -21,6 +15,7 @@ export default function* rootSaga() {
     yield takeLatest(ACTIONTYPES.UPDATE_USER, updateUserAsync),
     yield takeLatest(ACTIONTYPES.UPDATE_IMAGE_USER, updateUserImageAsync),
     yield takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
+    yield takeLatest(ACTIONTYPES.CHECK_LOGIN_USER, checkLoginUserAsync),
     yield takeLatest(ACTIONTYPES.LOGOUT_USER, logoutUserAsync),
   ]);
 }

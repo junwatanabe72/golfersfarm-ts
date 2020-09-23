@@ -1,21 +1,11 @@
 import { client } from '../../utils/axiosConf';
 //userAPI
-//signup
-export async function createUserAxios(data: SignupUserType) {
-  const queries = { user: { ...data } };
-  try {
-    const data = await client.post('/', queries);
-    return data;
-  } catch (e) {
-    return { e };
-  }
-}
 
 export async function updateUserAxios(data: PartialUserType) {
   const { id } = data;
   const queries = { user: { ...data } };
   try {
-    const { data } = await client.patch(`/${id}`, queries);
+    const { data } = await client.patch(`/users/${id}`, queries);
     return data;
   } catch (e) {
     return { e };
@@ -30,26 +20,17 @@ export async function updateUserImageAxios(data: FormData) {
     },
   };
   try {
-    const { data } = await client.post(`/${id}/images`, queries, config);
+    const { data } = await client.post(`/users/${id}/images`, queries, config);
     return data;
   } catch (e) {
     return { e };
   }
 }
-//login
-export async function loginUserAxios(data: LoginUserType) {
-  const queries = { user: { ...data } };
-  try {
-    const { data } = await client.post('/login', queries);
-    return data;
-  } catch (e) {
-    return { e };
-  }
-}
+
 //users
 export async function getUsersAxios() {
   try {
-    const { data } = await client.get('/');
+    const { data } = await client.get('/users');
     return data;
   } catch (e) {
     return { e };
