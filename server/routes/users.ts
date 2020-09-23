@@ -1,12 +1,12 @@
 import express from "express";
 const multer = require("multer");
 import path from "path";
-// import { upload } from "../app";
 import usersController from "../controllers/users/usersController";
 import imagesController from "../controllers/users/imagesController";
 import clubsController from "../controllers/users/clubsController";
 import ballsController from "../controllers/users/ballsController";
 import videosController from "../controllers/users/videosController";
+import passport from "passport";
 
 const storage = multer.diskStorage({
   destination: "./public/uploads/",
@@ -20,47 +20,64 @@ export const upload = multer({
 });
 const usersRouter = express.Router();
 
-//usersprofileAPI(UsersTable)
-//動作確認のため、仮作成。
-usersRouter.post("/login", usersController.show);
-//
-usersRouter.get("/", usersController.index);
-usersRouter.post("/", usersController.create);
+const getrouters = [
+  { path: "/", route: usersController.index },
+  { path: "/:id/clubs", route: clubsController.index },
+];
+
+const postroutersWithAuth = [
+  { path: "/:id/clubs/replace", route: clubsController.replace },
+  { path: "/:id/clubs", route: clubsController.create },
+  { path: "/:id/ball", route: ballsController.create },
+  { path: "/:id/videos", route: videosController.create },
+];
+
+const patchroutersWithAuth = [
+  { path: "/:id", route: usersController.update },
+  { path: "/:id/ball", route: ballsController.update },
+  { path: "/:id/videos/:videoid", route: videosController.update },
+];
+
+const deleteroutersWithAuth = [
+  { path: "/:id/videos/:videoid", route: videosController.delete },
+];
+
 usersRouter.post(
   "/:id/images",
   upload.fields([
     { name: "profileImage", maxCount: 1 },
     { name: "clubImage", maxCount: 1 },
   ]),
+  passport.authenticate("jwt", { session: false }),
   imagesController.update
 );
-usersRouter.patch("/:id", usersController.update);
-usersRouter.delete("/:id", usersController.delete);
 
-//usersGearsAPI(clubsTable,BallsTable)
-usersRouter.get("/:id/clubs", clubsController.index);
-usersRouter.post("/:id/clubs", clubsController.create);
-// replace
-usersRouter.post("/:id/clubs/replace", clubsController.replace);
-//
-usersRouter.delete("/:id/clubs/:cid", clubsController.delete);
-usersRouter.post("/:id/ball", ballsController.create);
-usersRouter.patch("/:id/ball", ballsController.update);
-// usersRouter.delete("/:id/gears/:id");
+getrouters.forEach((route) => {
+  usersRouter.get(route.path, route.route);
+});
 
-//usersVideosAPI(VideosTable)
-usersRouter.post("/:id/videos/", videosController.create);
-usersRouter.get("/:id/videos/", videosController.index);
-usersRouter.patch("/:id/videos/:videoid", videosController.update);
-usersRouter.delete("/:id/videos/:videoid", videosController.delete);
+postroutersWithAuth.forEach((route) => {
+  usersRouter.post(
+    route.path,
+    passport.authenticate("jwt", { session: false }),
+    route.route
+  );
+});
 
-//usersTournamentsAPI(TournamentsTable)
-// usersRouter.post("/:id/tournaments");
-// usersRouter.patch("/:id/tournaments/:id");
-// usersRouter.delete("/:id/tournaments/:id");
+patchroutersWithAuth.forEach((route) => {
+  usersRouter.patch(
+    route.path,
+    passport.authenticate("jwt", { session: false }),
+    route.route
+  );
+});
 
-//test
-// usersRouter.get("/:id/onlyuser", applicationController.userShowtest);
-// usersRouter.get("/:id/onlyuser", applicationController.userShowtest);
+deleteroutersWithAuth.forEach((route) => {
+  usersRouter.delete(
+    route.path,
+    passport.authenticate("jwt", { session: false }),
+    route.route
+  );
+});
 
 export { usersRouter };

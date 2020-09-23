@@ -1,17 +1,17 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 
-const balls = db.Ball;
-const makers = db.Maker;
+const Ball = db.Ball;
+const Maker = db.Maker;
 
 export default {
   async show(req: Request, res: Response, next: NextFunction) {
     try {
-      const targetBall = await balls.findOne({
+      const targetBall = await Ball.findOne({
         where: { userId: req.params.id },
         include: [
           {
-            model: makers,
+            model: Maker,
             required: false,
           },
         ],
@@ -25,7 +25,7 @@ export default {
   async create(req: Request, res: Response, next: NextFunction) {
     const { ball } = req.body;
     try {
-      const newBall = await balls.add(req.params.id, ball);
+      const newBall = await Ball.add(req.params.id, ball);
       res.status(201).json(newBall);
     } catch (error) {
       res.status(400);
@@ -35,27 +35,11 @@ export default {
   async update(req: Request, res: Response, next: NextFunction) {
     const { ball } = req.body;
     try {
-      const targetBall = await balls.updateBall(req.params.id, ball);
+      const targetBall = await Ball.updateBall(req.params.id, ball);
       res.status(201).json(targetBall);
     } catch (error) {
       res.status(400);
       return next(error);
     }
   },
-
-  //今のところ使わない。
-  // async index() {
-  //   // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-  //   const allBall = await balls.findAll({
-  //     // where: { status: queryStatus },
-  //   });
-  //   return allBall;
-  // },
-  // async delete(id: string) {
-  //   const targetBall: any = await balls.findOne({
-  //     where: { id: id },
-  //   })
-  //   await targetBall.destroy();
-  //   return { message: "ok" }
-  // }
 };

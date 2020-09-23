@@ -2,7 +2,7 @@ import { Response, NextFunction } from "express";
 import db from "../../models";
 const dotenv = require("dotenv");
 dotenv.config();
-const users = db.User;
+const User = db.User;
 
 export default {
   async update(req: any, res: Response, next: NextFunction) {
@@ -21,7 +21,7 @@ export default {
       : { profileImage: imagePath };
 
     try {
-      const updateUser = await users.updateProfile(req.params.id, user);
+      const updateUser = await User.updateProfile(req.params.id, user);
       if (!updateUser) {
         return res.status(400);
       } else {

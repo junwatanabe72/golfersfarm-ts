@@ -13,7 +13,7 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
-import { getUsers, addTypes, addShafts, addMakers } from './actions';
+import { getUsers, addTypes, addShafts, addMakers, addUser, checkLoginUser } from './actions';
 import { allTypes, shafts } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
@@ -30,8 +30,8 @@ const Container = styled.div`
 `;
 
 const App: React.FC<Props> = ({}) => {
-  const currentUser = useSelector((state: State) => state.currentUser);
-  const storeUsers = useSelector((state: State) => state.users);
+  const currentUser: UserType = useSelector((state: State) => state.currentUser);
+  const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users);
   const makers = useSelector((state: State) => state.maker);
   const storeClubs = useSelector((state: State) => state.clubs);
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const App: React.FC<Props> = ({}) => {
   //
   const route = allUsers.map((user: PartialUserType, num: number) => {
     return (
-      <React.Fragment key={user.id}>
+      <React.Fragment key={num}>
         <Route
           exact
           path={`/users/${user.id}`}
@@ -70,6 +70,7 @@ const App: React.FC<Props> = ({}) => {
   });
 
   useEffect(() => {
+    dispatch(checkLoginUser());
     dispatch(getUsers());
     dispatch(addTypes(allTypes));
     dispatch(addShafts(shafts));

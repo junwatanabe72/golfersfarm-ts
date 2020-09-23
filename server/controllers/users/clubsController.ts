@@ -4,36 +4,34 @@ import {
   convertArrayClubDataToClient,
   convertClubDataToServer,
   convertClubDataToClient,
-  convertArrayClubDataToServer,
   convertArrayClubDataToClientForUpdate,
 } from "../../utils/convert";
-const clubs = db.Club;
-const userClubs = db.UserClubs;
-const shafts = db.Shaft;
-const makers = db.Maker;
-const balls = db.Ball;
-const clubTypes = db.ClubType;
+const Club = db.Club;
+const UserClubs = db.UserClubs;
+const Shaft = db.Shaft;
+const Maker = db.Maker;
+const ClubTypes = db.ClubType;
 
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
     try {
-      const targetClubs = await userClubs.findAll({
+      const targetClubs = await UserClubs.findAll({
         where: { userId: req.params.id },
         include: [
           {
-            model: clubs,
+            model: Club,
             required: false,
             include: [
               {
-                model: shafts,
+                model: Shaft,
                 required: false,
               },
               {
-                model: clubTypes,
+                model: ClubTypes,
                 required: false,
               },
               {
-                model: makers,
+                model: Maker,
                 required: false,
               },
             ],
@@ -50,7 +48,7 @@ export default {
   async create(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
     try {
-      const data = await clubs.add(req.params.id, club, sequelize);
+      const data = await Club.add(req.params.id, club, sequelize);
       const newClub = await convertClubDataToClient(data.newData);
       res.status(201).json(newClub);
     } catch (error) {
@@ -67,7 +65,7 @@ export default {
           // clientのclub型をserver型に変換
           const targetClub = await convertClubDataToServer(value);
           if (!targetClub.id) {
-            const { newData } = await clubs.add(
+            const { newData } = await Club.add(
               req.params.id,
               targetClub,
               sequelize
@@ -77,11 +75,11 @@ export default {
             return club;
           }
           if (!targetClub.name) {
-            await clubs.clubDelete(req.params.id, targetClub, sequelize);
+            await Club.clubDelete(req.params.id, targetClub, sequelize);
             return;
           }
 
-          const { newData } = await clubs.clubReplace(
+          const { newData } = await Club.clubReplace(
             req.params.id,
             targetClub,
             sequelize
@@ -107,7 +105,7 @@ export default {
     const { club } = req.body;
     const targetClub = convertClubDataToServer(club);
     try {
-      const deleteClub = await clubs.clubDelete(
+      const deleteClub = await Club.clubDelete(
         req.params.id,
         targetClub,
         sequelize

@@ -1,21 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 import { userType } from "../../models/user";
-const users = db.User;
-const clubs = db.Club;
-const userClubs = db.UserClubs;
-const balls = db.Ball;
-const videos = db.Video;
-const makers = db.Maker;
-const shafts = db.Shaft;
-const clubTypes = db.ClubType;
+const User = db.User;
 
 export default {
   //loginPage
   async show(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
     try {
-      const targetUser: userType = await users.findOne({
+      const targetUser: userType = await User.findOne({
         where: { password: user.password, email: user.email },
       });
       res.json({ targetUser });
@@ -28,7 +21,7 @@ export default {
   async index(req: Request, res: Response, next: NextFunction) {
     try {
       // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-      const allUsers: userType = await users.findAll({
+      const allUsers: userType = await User.findAll({
         // where: { show: true },
       });
 
@@ -48,7 +41,7 @@ export default {
   async create(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
     try {
-      const newUser = await users.add(user);
+      const newUser = await User.add(user);
       res.status(201).json({ newUser });
     } catch (error) {
       res.status(400);
@@ -59,7 +52,7 @@ export default {
   async update(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
     try {
-      const updateUser = await users.updateProfile(req.params.id, user);
+      const updateUser = await User.updateProfile(req.params.id, user);
       if (!updateUser) {
         return res.status(400);
       } else {
@@ -70,55 +63,10 @@ export default {
       return next(error);
     }
   },
-  // async updateImage(req: any, res: Response, next: NextFunction) {
-  //   const { files } = req;
-  //   const regex = /public/;
 
-  //   const imagePath = files.profileImage
-  //     ? `${URL}${files.profileImage[0].path.replace(regex, "")}`
-  //     : null;
-
-  //   const clubPath = files.clubImage
-  //     ? `${URL}${files.clubImage[0].path.replace(regex, "")}`
-  //     : null;
-
-  //   const user = !imagePath
-  //     ? { clubImage: clubPath }
-  //     : clubPath
-  //     ? { profileImage: imagePath, clubImage: clubPath }
-  //     : { profileImage: imagePath };
-
-  //   try {
-  //     const updateUser = await users.updateProfile(req.params.id, user);
-  //     if (!updateUser) {
-  //       return res.status(400);
-  //     } else {
-  //       res.status(201).json({ updateUser });
-  //     }
-  //   } catch (error) {
-  //     res.status(400);
-  //     return next(error);
-  //   }
-  // },
-  // (req: any, res: Response) => {
-  //   const { files, body } = req;
-  //   if (files.profileImage) {
-  //     const imagePath = files.profileImage[0].path;
-  //     console.log(path.join(__dirname, imagePath));
-  //   }
-
-  //   if (files.clubImage) {
-  //     const clubPath = files.clubImage[0].path;
-
-  //     console.log(path.join(__dirname, clubPath));
-  //   }
-  //   console.log(files);
-  //   // アップ完了したら200ステータスを送る
-  //   res.status(200).json({ msg: "アップロード完了" });
-  // }
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      const targetUser: any = await users.findOne({
+      const targetUser: any = await User.findOne({
         where: { id: req.params.id },
       });
       if (!targetUser) {

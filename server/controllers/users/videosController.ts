@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 
-const videos = db.Video;
+const Video = db.Video;
 
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
     // const queryStatus: any = req.query.status ? req.query.status : statusValues;
     try {
-      const allVideos = await videos.findAll({
+      const allVideos = await Video.findAll({
         where: { userId: req.params.id },
         raw: false,
       });
@@ -24,7 +24,7 @@ export default {
   async create(req: Request, res: Response, next: NextFunction) {
     const { video } = req.body;
     try {
-      const newVideo = await videos.add(req.params.id, video);
+      const newVideo = await Video.add(req.params.id, video);
       res.status(201).json({ newVideo });
     } catch (error) {
       res.status(400);
@@ -34,7 +34,7 @@ export default {
   async update(req: Request, res: Response, next: NextFunction) {
     const { video } = req.body;
     try {
-      const updateVideo = await videos.updateDatas(video);
+      const updateVideo = await Video.updateDatas(video);
       if (!updateVideo) {
         return res.status(400);
       } else {
@@ -48,7 +48,7 @@ export default {
 
   async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      videos.findOne({
+      Video.findOne({
         where: { id: req.params.videoId, userId: req.params.id },
       });
       res.status(204).json({});
@@ -57,12 +57,4 @@ export default {
       return next(error);
     }
   },
-
-  // async show(id: number, transaction: any | null) {
-  //   const targetVideo = await videos.findOne({
-  //     where: { userId: id },
-  //     raw: false,
-  //   }, transaction)
-  //   return targetVideo;
-  // },
 };

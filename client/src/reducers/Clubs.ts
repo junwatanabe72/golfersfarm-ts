@@ -21,7 +21,7 @@ const sample = {
     flex: 's',
   },
 };
-const initialState: ObjectClubType = sample;
+const initialState: ObjectClubType = {};
 
 export default function ClubsReducer(
   state = initialState,
