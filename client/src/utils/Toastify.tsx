@@ -1,19 +1,22 @@
 import React from 'react';
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// export const options = {
-//   autoClose: 5000,
-//   hideProgressBar: true,
-//   position: toast.POSITION.TOP_CENTER,
-// };
+interface Props {}
 
-// function Toastify() {
-//   return (
-//     <div>
-//       <ToastContainer />
-//     </div>
-//   );
-// }
+export const options = {
+  autoClose: 5000,
+  hideProgressBar: false,
+  position: toast.POSITION.TOP_RIGHT,
+  progress: undefined,
+};
 
-// export default Toastify;
+const Toastify: React.FC<Props> = () => {
+  return (
+    <div>
+      <ToastContainer />
+    </div>
+  );
+};
+
+export default Toastify;
