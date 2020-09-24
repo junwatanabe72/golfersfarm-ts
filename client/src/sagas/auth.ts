@@ -8,14 +8,13 @@ import { toast } from 'react-toastify';
 export function* createUserAsync(action: Action<SignupUserType>) {
   try {
     const { data } = yield call(createUserAxios, action.payload);
-    if (data !== undefined) {
-      yield toast.success('新規登録に成功しました。', options);
-      yield put(push('/login'));
-      return;
-    } else {
+    if (data.e) {
       yield toast.error('失敗しました。', options);
       return;
     }
+    yield toast.success('新規登録に成功しました。', options);
+    yield put(push('/login'));
+    return;
   } catch (e) {
     return { e };
   }
@@ -44,10 +43,9 @@ export function* checkLoginUserAsync() {
   const data = yield call(checkLoginUserAxios);
 
   try {
-    if (!data) {
+    if (data.e) {
       return;
     }
-    console.log(data);
     const user = data.user;
 
     yield put(addUser(user));

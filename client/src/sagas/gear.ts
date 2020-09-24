@@ -8,20 +8,18 @@ export function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   let deleteClubs: PartialObjectClubType = {};
   try {
     const { data } = yield call(updateClubsAxios, action.payload);
-    console.log(data);
+
     if (!data) {
       yield toast.error('失敗しました。', options);
       return;
     }
-    if (!action.payload) {
-      return;
-    }
+
     for (let value of action.payload) {
       if (!value.id) {
-        return;
+      } else {
+        const id = value.id;
+        deleteClubs[id] = value;
       }
-      const id = value.id;
-      deleteClubs[id] = value;
     }
     yield put(removeClubs(deleteClubs));
     yield put(addClubs(data.updateClubs));

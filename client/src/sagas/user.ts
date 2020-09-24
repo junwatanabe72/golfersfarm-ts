@@ -19,16 +19,14 @@ export function* getUsersAsync() {
 export function* updateUserAsync(action: Action<PartialUserType>) {
   try {
     const { updateUser } = yield call(updateUserAxios, action.payload);
-    if (updateUser !== undefined) {
-      yield toast.success('編集に成功しました。', options);
-      console.log('成功しました。');
-      const user = updateUser.updateUser;
-      yield put(addUser(user));
-      return;
-    } else {
+    if (!updateUser) {
       yield toast.error('編集に失敗しました。', options);
       return;
     }
+    yield toast.success('編集に成功しました。', options);
+    const user = updateUser.updateUser;
+    yield put(addUser(user));
+    return;
   } catch (e) {
     return { e };
   }
@@ -37,16 +35,14 @@ export function* updateUserAsync(action: Action<PartialUserType>) {
 export function* updateUserImageAsync(action: Action<FormData>) {
   try {
     const { updateUser } = yield call(updateUserImageAxios, action.payload);
-    if (updateUser !== undefined) {
-      yield toast.success('編集に成功しました。', options);
-      console.log('成功しました。');
-      const user = updateUser.updateUser;
-      yield put(addUser(user));
-      return;
-    } else {
+    if (!updateUser) {
       yield toast.error('失敗しました。', options);
       return;
     }
+    yield toast.success('編集に成功しました。', options);
+    const user = updateUser.updateUser;
+    yield put(addUser(user));
+    return;
   } catch (e) {
     return { e };
   }

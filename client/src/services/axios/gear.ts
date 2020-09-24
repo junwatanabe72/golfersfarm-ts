@@ -31,6 +31,7 @@ export async function updateClubsAxios(data: PartialArrayClubType) {
 
   try {
     const { data } = await client.post(`/users/${userId}/clubs/replace`, queries, config);
+    // console.log(data);
     return data;
   } catch (e) {
     return { e };

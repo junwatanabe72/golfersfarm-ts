@@ -1,9 +1,6 @@
 import db from "../models";
-// const clubs = db.Club;
-// const userClubs = db.UserClubs;
 const shafts = db.Shaft;
 const makers = db.Maker;
-// const balls = db.Ball;
 const clubTypes = db.ClubType;
 // index
 export const convertArrayClubDataToClient = (data: any[]) => {

@@ -13,7 +13,7 @@ export default {
         try {
           if (err || !user) {
             const allUsers: userType[] = await User.findAll({
-              where: { show: false },
+              where: { show: true },
             });
 
             if (!allUsers) {
