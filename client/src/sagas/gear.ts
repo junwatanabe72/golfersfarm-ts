@@ -1,14 +1,16 @@
 import { call, put } from 'redux-saga/effects';
 import { addClubs, removeClubs } from '../actions/index';
 import { getGearsAxios, updateClubsAxios } from '../services/axios/gear';
-// import { options } from '../utils/Toastify';
-// import { toast } from 'react-toastify';
+import { options } from '../utils/Toastify';
+import { toast } from 'react-toastify';
 
 export function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   let deleteClubs: PartialObjectClubType = {};
   try {
     const { data } = yield call(updateClubsAxios, action.payload);
+    console.log(data);
     if (!data) {
+      yield toast.error('失敗しました。', options);
       return;
     }
     if (!action.payload) {
@@ -23,8 +25,10 @@ export function* updateClubsAsync(action: Action<PartialArrayClubType>) {
     }
     yield put(removeClubs(deleteClubs));
     yield put(addClubs(data.updateClubs));
+    yield toast.success('編集に成功しました。', options);
     return;
   } catch (e) {
+    yield toast.error('失敗しました。', options);
     return { e };
   }
 }
@@ -33,7 +37,6 @@ export function* getGearsAsync(action: Action<PartialUserType>) {
   const { data } = yield call(getGearsAxios, action.payload);
   try {
     if (!data) {
-      // yield toast.error('取得に失敗しました。', options);
       return;
     }
     yield put(addClubs(data.allClubs));

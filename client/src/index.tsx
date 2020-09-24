@@ -9,7 +9,7 @@ import App from './App';
 import reducers, { router } from './reducers/Combine';
 import mySaga from './sagas';
 import { GlobalStyle } from './utils/styled/globalStyle';
-// import Toastify from './utils/Toastify';
+import Toastify from './utils/Toastify';
 import * as serviceWorker from './serviceWorker';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -27,7 +27,7 @@ ReactDOM.render(
     <GlobalStyle />
     <Provider store={store}>
       <ConnectedRouter history={router}>
-        {/* <Toastify /> */}
+        <Toastify />
         <App />
       </ConnectedRouter>
     </Provider>
