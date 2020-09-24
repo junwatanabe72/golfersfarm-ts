@@ -1,12 +1,14 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
-import User from "../models/user";
 import passport from "passport";
 import jwt from "jsonwebtoken";
 import { hash } from "bcrypt";
+import db from "../models";
 
 dotenv.config();
 const authRouter = express.Router();
+const User = db.User;
+
 authRouter.post("/login", async (req: Request, res: Response) => {
   passport.authenticate("local", { session: false }, (err: any, user: any) => {
     if (err || !user) {
