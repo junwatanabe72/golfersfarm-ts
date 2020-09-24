@@ -20,28 +20,16 @@ export const upload = multer({
 });
 const usersRouter = express.Router();
 
+// getRoute
 const getrouters = [
   { path: "/", route: usersController.index },
   { path: "/:id/clubs", route: clubsController.index },
 ];
+getrouters.forEach((route) => {
+  usersRouter.get(route.path, route.route);
+});
 
-const postroutersWithAuth = [
-  { path: "/:id/clubs/replace", route: clubsController.replace },
-  { path: "/:id/clubs", route: clubsController.create },
-  { path: "/:id/ball", route: ballsController.create },
-  { path: "/:id/videos", route: videosController.create },
-];
-
-const patchroutersWithAuth = [
-  { path: "/:id", route: usersController.update },
-  { path: "/:id/ball", route: ballsController.update },
-  { path: "/:id/videos/:videoid", route: videosController.update },
-];
-
-const deleteroutersWithAuth = [
-  { path: "/:id/videos/:videoid", route: videosController.delete },
-];
-
+// postRoute
 usersRouter.post(
   "/:id/images",
   upload.fields([
@@ -52,9 +40,12 @@ usersRouter.post(
   imagesController.update
 );
 
-getrouters.forEach((route) => {
-  usersRouter.get(route.path, route.route);
-});
+const postroutersWithAuth = [
+  { path: "/:id/clubs/replace", route: clubsController.replace },
+  { path: "/:id/clubs", route: clubsController.create },
+  { path: "/:id/ball", route: ballsController.create },
+  { path: "/:id/videos", route: videosController.create },
+];
 
 postroutersWithAuth.forEach((route) => {
   usersRouter.post(
@@ -64,6 +55,13 @@ postroutersWithAuth.forEach((route) => {
   );
 });
 
+// patchRoute
+const patchroutersWithAuth = [
+  { path: "/:id", route: usersController.update },
+  { path: "/:id/ball", route: ballsController.update },
+  { path: "/:id/videos/:videoid", route: videosController.update },
+];
+
 patchroutersWithAuth.forEach((route) => {
   usersRouter.patch(
     route.path,
@@ -71,6 +69,11 @@ patchroutersWithAuth.forEach((route) => {
     route.route
   );
 });
+
+// deleteRoute
+const deleteroutersWithAuth = [
+  { path: "/:id/videos/:videoid", route: videosController.delete },
+];
 
 deleteroutersWithAuth.forEach((route) => {
   usersRouter.delete(

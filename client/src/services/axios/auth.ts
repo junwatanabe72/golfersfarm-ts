@@ -24,14 +24,12 @@ export async function loginUserAxios(data: LoginUserType) {
 
 export async function checkLoginUserAxios() {
   const jwt = localStorage.getItem('jwt');
-  if (!jwt) {
-    return;
-  }
   const config = {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
   };
+
   try {
     const { data } = await client.get('/auth/login', config);
     return data;

@@ -23,15 +23,16 @@ export function* createUserAsync(action: Action<SignupUserType>) {
 export function* loginUserAsync(action: Action<LoginUserType>) {
   const { user, token } = yield call(loginUserAxios, action.payload);
   try {
-    if (user !== undefined) {
+    if (!user) {
       // yield toast.success('投稿に成功しました。', options);
-      localStorage.setItem('jwt', token);
-      yield put(getUsers());
-      yield put(addUser(user));
-      console.log('成功しました。');
-      yield put(push(`/users/${user.id}`));
+      console.log(user);
       return;
     } else {
+      localStorage.setItem('jwt', token);
+      yield put(addUser(user));
+      yield put(getUsers());
+      console.log('成功しました。');
+      yield put(push(`/users/${user.id}`));
       // yield toast.error('投稿に失敗しました。', options);
       return;
     }
@@ -44,17 +45,16 @@ export function* checkLoginUserAsync() {
   const data = yield call(checkLoginUserAxios);
 
   try {
-    if (data !== undefined) {
-      const user = data.user;
-      // yield toast.success('投稿に成功しました。', options);
-      yield put(addUser(user));
-      yield put(getUsers());
-      console.log('jwtを確認できました');
-      return;
-    } else {
-      // yield toast.error('投稿に失敗しました。', options);
+    if (!data) {
       return;
     }
+    console.log(data);
+    const user = data.user;
+    // yield toast.success('投稿に成功しました。', options);
+    yield put(addUser(user));
+    yield put(getUsers());
+    console.log('jwtを確認できました');
+    return;
   } catch (e) {
     return { e };
   }

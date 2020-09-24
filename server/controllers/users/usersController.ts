@@ -1,52 +1,46 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 import { userType } from "../../models/user";
+import passport from "passport";
 const User = db.User;
 
 export default {
-  //loginPage
-  async show(req: Request, res: Response, next: NextFunction) {
-    const { user } = req.body;
-    try {
-      const targetUser: userType = await User.findOne({
-        where: { password: user.password, email: user.email },
-      });
-      res.json({ targetUser });
-    } catch (error) {
-      res.status(404);
-      return next(error);
-    }
-  },
-  //topPage
   async index(req: Request, res: Response, next: NextFunction) {
-    try {
-      // const queryStatus: any = req.query.status ? req.query.status : statusValues;
-      const allUsers: userType = await User.findAll({
-        // where: { show: true },
-      });
+    passport.authenticate(
+      "jwt",
+      { session: false },
+      async (err: any, user: any) => {
+        try {
+          if (err || !user) {
+            const allUsers: userType[] = await User.findAll({
+              where: { show: false },
+            });
 
-      if (!allUsers) {
-        res.status(204).json({ message: "not exist" });
-        return;
+            if (!allUsers) {
+              res.status(204).json({ message: "not exist" });
+              return;
+            }
+            console.log(allUsers.length);
+            res.json({ allUsers });
+            return;
+          }
+          req.login(user, { session: false }, async (err) => {
+            const allUsers: userType[] = await User.findAll({});
+
+            if (!allUsers) {
+              res.status(204).json({ message: "not exist" });
+              return;
+            }
+            console.log(allUsers.length);
+            res.json({ allUsers });
+            return;
+          });
+        } catch (error) {
+          res.status(404);
+          return next(error);
+        }
       }
-
-      res.json({ allUsers });
-      return;
-    } catch (error) {
-      res.status(404);
-      return next(error);
-    }
-  },
-  //signupPage
-  async create(req: Request, res: Response, next: NextFunction) {
-    const { user } = req.body;
-    try {
-      const newUser = await User.add(user);
-      res.status(201).json({ newUser });
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
+    )(req, res);
   },
   // editPage
   async update(req: Request, res: Response, next: NextFunction) {

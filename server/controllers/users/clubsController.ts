@@ -6,6 +6,7 @@ import {
   convertClubDataToClient,
   convertArrayClubDataToClientForUpdate,
 } from "../../utils/convert";
+import passport from "passport";
 const Club = db.Club;
 const UserClubs = db.UserClubs;
 const Shaft = db.Shaft;
@@ -13,37 +14,43 @@ const Maker = db.Maker;
 const ClubTypes = db.ClubType;
 
 export default {
-  async index(req: Request, res: Response, next: NextFunction) {
-    try {
-      const targetClubs = await UserClubs.findAll({
-        where: { userId: req.params.id },
-        include: [
-          {
-            model: Club,
-            required: false,
+  async index(req: Request, res: Response) {
+    passport.authenticate(
+      "jwt",
+      { session: false },
+      async (err: any, user: any) => {
+        try {
+          const targetClubs = await UserClubs.findAll({
+            where: { userId: req.params.id },
             include: [
               {
-                model: Shaft,
+                model: Club,
                 required: false,
-              },
-              {
-                model: ClubTypes,
-                required: false,
-              },
-              {
-                model: Maker,
-                required: false,
+                include: [
+                  {
+                    model: Shaft,
+                    required: false,
+                  },
+                  {
+                    model: ClubTypes,
+                    required: false,
+                  },
+                  {
+                    model: Maker,
+                    required: false,
+                  },
+                ],
               },
             ],
-          },
-        ],
-      });
-      const allClubs = convertArrayClubDataToClient(targetClubs);
-      res.status(200).json({ data: { allClubs } });
-    } catch (error) {
-      res.status(404);
-      return next(error);
-    }
+          });
+          const allClubs = convertArrayClubDataToClient(targetClubs);
+          res.status(200).json({ data: { allClubs } });
+        } catch (error) {
+          res.status(404);
+          return;
+        }
+      }
+    )(req, res);
   },
   async create(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
