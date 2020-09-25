@@ -1,5 +1,5 @@
-import { call, put } from 'redux-saga/effects';
-import { addUser, getUsers, deleteUser } from '../actions/index';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { addUser, getUsers, deleteUser, ACTIONTYPES } from '../actions/index';
 import { push } from 'connected-react-router';
 import { createUserAxios, loginUserAxios, checkLoginUserAxios } from '../services/axios/auth';
 import { options } from '../utils/Toastify';
@@ -41,7 +41,6 @@ export function* loginUserAsync(action: Action<LoginUserType>) {
 
 export function* checkLoginUserAsync() {
   const data = yield call(checkLoginUserAxios);
-
   try {
     if (data.e) {
       return;
@@ -69,3 +68,10 @@ export function* logoutUserAsync() {
     return { e };
   }
 }
+
+const authSagas = [
+  takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
+  takeLatest(ACTIONTYPES.CHECK_LOGIN_USER, checkLoginUserAsync),
+  takeLatest(ACTIONTYPES.LOGOUT_USER, logoutUserAsync),
+];
+export default authSagas;

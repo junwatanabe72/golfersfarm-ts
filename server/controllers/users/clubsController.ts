@@ -4,7 +4,6 @@ import {
   convertArrayClubDataToClient,
   convertClubDataToServer,
   convertClubDataToClient,
-  convertArrayClubDataToClientForUpdate,
 } from "../../utils/convert";
 import passport from "passport";
 const Club = db.Club;
@@ -67,7 +66,7 @@ export default {
   async replace(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
     try {
-      const newData = await Promise.all(
+      const updateClubs = await Promise.all(
         club.map(async (value: any) => {
           // clientのclub型をserver型に変換
           const targetClub = await convertClubDataToServer(value);
@@ -96,13 +95,10 @@ export default {
           return club;
         })
       );
-      if (!newData) {
+      if (!updateClubs) {
         return res.status(400);
-      } else {
-        // client型のclubデータ配列をclientに返すため、object型に変換 {id:{id: id,name: name,...}}
-        const updateClubs = convertArrayClubDataToClientForUpdate(newData);
-        res.status(201).json({ data: { updateClubs } });
       }
+      res.status(201).json({ data: { updateClubs } });
     } catch (error) {
       res.status(400);
       return next(error);
@@ -119,9 +115,8 @@ export default {
       );
       if (!deleteClub) {
         return res.status(400);
-      } else {
-        res.status(201).json({ deleteClub });
       }
+      res.status(201).json({ deleteClub });
     } catch (error) {
       res.status(400);
       return next(error);

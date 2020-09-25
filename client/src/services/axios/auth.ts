@@ -1,39 +1,20 @@
-import { client } from '../../utils/axiosConf';
+import { client, authClient } from '../../utils/axiosConf';
 
 //signup
-export async function createUserAxios(data: SignupUserType) {
-  const queries = { user: { ...data } };
-  try {
-    const data = await client.post('/auth/signup', queries);
-    return data;
-  } catch (e) {
-    return { e };
-  }
+export async function createUserAxios(arg: SignupUserType) {
+  const queries = { user: { ...arg } };
+  const data = await client.post('/auth/signup', queries);
+  return data;
 }
 
 //login
-export async function loginUserAxios(data: LoginUserType) {
-  const queries = { ...data };
-  try {
-    const { data } = await client.post('/auth/login', queries);
-    return data;
-  } catch (e) {
-    return { e };
-  }
+export async function loginUserAxios(arg: LoginUserType) {
+  const queries = { ...arg };
+  const { data } = await client.post('/auth/login', queries);
+  return data;
 }
 
 export async function checkLoginUserAxios() {
-  const jwt = localStorage.getItem('jwt');
-  const config = {
-    headers: {
-      Authorization: `Bearer ${jwt}`,
-    },
-  };
-
-  try {
-    const { data } = await client.get('/auth/login', config);
-    return data;
-  } catch (e) {
-    return { e };
-  }
+  const { data } = await authClient.get('/auth/login');
+  return data;
 }

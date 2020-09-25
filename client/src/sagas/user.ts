@@ -1,8 +1,9 @@
-import { call, put } from 'redux-saga/effects';
-import { addUser, addUsers } from '../actions/index';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { addUser, addUsers, ACTIONTYPES } from '../actions/index';
 import { getUsersAxios, updateUserAxios, updateUserImageAxios } from '../services/axios/user';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
+import { createUserAsync } from './auth';
 
 //users
 export function* getUsersAsync() {
@@ -47,3 +48,11 @@ export function* updateUserImageAsync(action: Action<FormData>) {
     return { e };
   }
 }
+
+const userSagas = [
+  takeLatest(ACTIONTYPES.REQUESTED_USER, getUsersAsync),
+  takeLatest(ACTIONTYPES.CREATE_USER, createUserAsync),
+  takeLatest(ACTIONTYPES.UPDATE_USER, updateUserAsync),
+  takeLatest(ACTIONTYPES.UPDATE_IMAGE_USER, updateUserImageAsync),
+];
+export default userSagas;
