@@ -11,21 +11,10 @@ export default {
       { session: false },
       async (err: any, user: any) => {
         try {
-          if (err || !user) {
-            const allUsers: userType[] = await User.findAll({
-              where: { show: false },
-            });
-
-            if (!allUsers) {
-              res.status(204).json({ message: "not exist" });
-              return;
-            }
-            console.log(allUsers.length);
-            res.json({ allUsers });
-            return;
-          }
           req.login(user, { session: false }, async (err) => {
-            const allUsers: userType[] = await User.findAll({});
+            console.log(user);
+            const where = !user ? { show: true } : {};
+            const allUsers: userType[] = await User.findAll({ where });
 
             if (!allUsers) {
               res.status(204).json({ message: "not exist" });

@@ -36,10 +36,13 @@ export default function ClubsReducer(
     }
     case ACTIONTYPES.REMOVE_CLUBS: {
       const clubIds = Object.keys(clubs);
+      console.log(clubIds);
+
       for (let club in newState) {
         if (clubIds.includes(club)) {
           delete newState[club];
         }
+        console.log(newState);
       }
       return newState;
     }

@@ -1,5 +1,5 @@
-import { call, put } from 'redux-saga/effects';
-import { addUser, getUsers, deleteUser } from '../actions/index';
+import { call, put, takeLatest } from 'redux-saga/effects';
+import { addUser, getUsers, deleteUser, ACTIONTYPES } from '../actions/index';
 import { push } from 'connected-react-router';
 import { createUserAxios, loginUserAxios, checkLoginUserAxios } from '../services/axios/auth';
 import { options } from '../utils/Toastify';
@@ -8,14 +8,13 @@ import { toast } from 'react-toastify';
 export function* createUserAsync(action: Action<SignupUserType>) {
   try {
     const { data } = yield call(createUserAxios, action.payload);
-    if (data !== undefined) {
-      yield toast.success('新規登録に成功しました。', options);
-      yield put(push('/login'));
-      return;
-    } else {
+    if (data.e) {
       yield toast.error('失敗しました。', options);
       return;
     }
+    yield toast.success('新規登録に成功しました。', options);
+    yield put(push('/login'));
+    return;
   } catch (e) {
     return { e };
   }
@@ -42,12 +41,10 @@ export function* loginUserAsync(action: Action<LoginUserType>) {
 
 export function* checkLoginUserAsync() {
   const data = yield call(checkLoginUserAxios);
-
   try {
-    if (!data) {
+    if (data.e) {
       return;
     }
-    console.log(data);
     const user = data.user;
 
     yield put(addUser(user));
@@ -71,3 +68,10 @@ export function* logoutUserAsync() {
     return { e };
   }
 }
+
+const authSagas = [
+  takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
+  takeLatest(ACTIONTYPES.CHECK_LOGIN_USER, checkLoginUserAsync),
+  takeLatest(ACTIONTYPES.LOGOUT_USER, logoutUserAsync),
+];
+export default authSagas;
