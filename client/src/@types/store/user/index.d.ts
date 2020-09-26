@@ -14,7 +14,7 @@ interface UserType {
   hobby: string;
   bestScore: number;
   averageDistance: number;
-  homeCource: string;
+  homeCourse: string;
   email: string;
   password: string;
   clubImage: string;

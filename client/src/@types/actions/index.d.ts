@@ -3,6 +3,7 @@ type ACTIONTYPES =
   | 'DELETE_USER'
   | 'ADD_USERS'
   | 'ADD_CLUBS'
+  | 'ADD_BALL'
   | 'REMOVE_CLUBS'
   | 'ADD_TYPES'
   | 'ADD_SHAFTS'
@@ -14,8 +15,10 @@ type ACTIONTYPES =
   | 'REQUESTED_USER'
   | 'UPDATE_USER'
   | 'UPDATE_IMAGE_USER'
-  | 'REQUESTED_GEARS'
-  | 'UPDATE_CLUBS';
+  | 'REQUESTED_CLUBS'
+  | 'UPDATE_CLUBS'
+  | 'REQUESTED_BALL'
+  | 'UPDATE_BALL';
 
 interface Action<T> extends Action<ACTIONTYPES, T> {
   type: ACTIONTYPES;

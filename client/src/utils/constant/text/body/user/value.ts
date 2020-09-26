@@ -3,12 +3,18 @@ const twitter = 'https://twitter.com/junwata72';
 const instagram = 'https://www.instagram.com/ruby.on/';
 const youtube = 'https://www.youtube.com/channel/UC-hTmh_CtqIUphbwd8Eu6EQ';
 
+const ImageURL =
+  'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';
+
+const URL =
+  'https://avatars1.githubusercontent.com/u/50585862?s=460&u=64c7812edd7b65bdbe3e3fc57e6ac8a383a418af&v=4';
+
 const userName = 'JUNWATANABE72';
 
 export const initialUser = {
   id: 1,
   name: userName,
-  profileImage: '',
+  profileImage: URL,
   facebook: facebook,
   twitter: twitter,
   instagram: instagram,
@@ -20,11 +26,11 @@ export const initialUser = {
   hobby: 'プログラミング',
   bestScore: 69,
   averageDistance: 250,
-  homeCource: '姉ヶ崎CC',
+  homeCourse: '姉ヶ崎CC',
   email: 'junwatanabe72@gmail.com',
   password: 'Password',
   job: 'free',
-  clubImage: '',
+  clubImage: ImageURL,
   show: false,
 };
 
@@ -43,7 +49,7 @@ export const baseUser = {
   hobby: '',
   bestScore: '',
   averageDistance: '',
-  homeCource: '',
+  homeCourse: '',
   email: '',
   password: '',
   job: '',
@@ -66,6 +72,7 @@ export const club = {
   userId: 1,
   makerId: 1,
   typeId: 1,
+  flex: 'R',
 };
 
 export const baseClub = {
@@ -103,8 +110,6 @@ export const allTypes = [
 export const shaft = {
   id: 1,
   name: 'TOUR AD DI-7',
-  flex: 's',
-  manufacturer: 'GRAPHITE DESIGN',
 };
 export const shafts = [
   shaft,

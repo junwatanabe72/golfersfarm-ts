@@ -71,7 +71,7 @@ const snsItems = {
   facebook: 'facebookアカウント',
 };
 const golfItems = {
-  homeCource: 'ホームコース',
+  homeCourse: 'ホームコース',
 };
 const otherItems = {
   residence: '現住所',
@@ -248,7 +248,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
   });
 
   return (
-    <Padding all={CLEAR.MEDIUM}>
+    <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         {editTitleElemensts}
         <FormSubmit>{buttonValue}</FormSubmit>

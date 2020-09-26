@@ -12,6 +12,7 @@ const club = {
   shaftId: 1,
   makerId: 1,
   typeId: 1,
+  flex: "R",
 };
 
 class Club extends Model {
@@ -20,6 +21,7 @@ class Club extends Model {
   public typeId!: number;
   public shaftId!: number;
   public makerId!: number;
+  public flex!: string;
 
   static async add(id: string, club: any, sequelize: Sequelize) {
     if (!club.name) {
@@ -144,6 +146,10 @@ class Club extends Model {
           allowNull: false,
           defaultValue: club.makerId,
         },
+        flex: {
+          type: DataTypes.STRING(250),
+          allowNull: false,
+        },
       },
       {
         tableName: "clubs",
@@ -179,6 +185,7 @@ export interface clubType {
   typeId: number;
   shaftId: number;
   makerId: number;
+  flex: string;
 }
 
 export default Club;

@@ -77,7 +77,7 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
     onSubmit: onSubmit,
   });
   return (
-    <Padding all={CLEAR.MEDIUM}>
+    <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
           <FormTitle>{editTitle}</FormTitle>

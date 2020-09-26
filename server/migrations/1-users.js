@@ -27,6 +27,9 @@ module.exports = {
       bestScore: {
         type: Sequelize.INTEGER,
       },
+      homeCourse: {
+        type: Sequelize.STRING,
+      },
       email: {
         type: Sequelize.STRING,
         allowNull: false,

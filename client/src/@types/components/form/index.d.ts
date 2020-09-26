@@ -49,7 +49,7 @@ interface ProfileEditDataType {
   hobby: string;
   bestScore: number;
   averageDistance: number;
-  homeCource: string;
+  homeCourse: string;
   clubImage: string;
   show: string;
   confirmedPassword: string;

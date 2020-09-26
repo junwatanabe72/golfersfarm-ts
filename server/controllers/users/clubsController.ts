@@ -4,6 +4,7 @@ import {
   convertArrayClubDataToClient,
   convertClubDataToServer,
   convertClubDataToClient,
+  convertCreateClubDataToClient,
 } from "../../utils/convert/club";
 import passport from "passport";
 const Club = db.Club;
@@ -55,7 +56,7 @@ export default {
     const { club } = req.body;
     try {
       const data = await Club.add(req.params.id, club, sequelize);
-      const newClub = await convertClubDataToClient(data.newData);
+      const newClub = await convertCreateClubDataToClient(data.newData);
       res.status(201).json(newClub);
     } catch (error) {
       res.status(400);
@@ -69,6 +70,7 @@ export default {
       const updateClubs = await Promise.all(
         club.map(async (value: any) => {
           // clientのclub型をserver型に変換
+          const { type, maker, shaft } = value;
           const targetClub = await convertClubDataToServer(value);
           if (!targetClub.id) {
             const { newData } = await Club.add(
@@ -77,7 +79,7 @@ export default {
               sequelize
             );
             // serverのclub型をclient型に変換
-            const club = await convertClubDataToClient(newData);
+            const club = convertClubDataToClient(newData, type, maker, shaft);
             return club;
           }
           if (!targetClub.name) {
@@ -91,7 +93,7 @@ export default {
             sequelize
           );
           // serverのclub型をclient型に変換
-          const club = await convertClubDataToClient(newData);
+          const club = convertClubDataToClient(newData, type, maker, shaft);
           return club;
         })
       );

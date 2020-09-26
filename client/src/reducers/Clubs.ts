@@ -9,7 +9,7 @@ const sample = {
     userId: 1,
     maker: 'mizuno',
     shaft: 'pt-7',
-    flex: 's',
+    flex: 'R',
   },
   7: {
     id: 7,
@@ -18,7 +18,7 @@ const sample = {
     userId: 1,
     maker: 'mizuno',
     shaft: 'pt-7',
-    flex: 's',
+    flex: 'R',
   },
 };
 const initialState: ObjectClubType = {};

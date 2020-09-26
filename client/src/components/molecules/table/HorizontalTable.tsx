@@ -6,11 +6,11 @@ import { media } from '../../../utils/styled/styledRdesign';
 interface Props extends PartialWidthSize {
   datas: any;
   tableItems: any;
+  title?: string;
 }
 const StyledTable = styled.table<{ width: Props['width'] }>`
   width: ${(props) => props.width}vw;
   border: solid 1px #ccc;
-  margin: 0vw auto;
   border-radius: 5px;
   ${media.tablet`
       width: 60vw;  
@@ -37,12 +37,12 @@ const StyledTd = styled.td`
   border-right: solid 1px white;
 `;
 
-const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
+const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems, title }) => {
   const order = Object.keys(tableItems);
-
-  const body = datas.map((data: any) => {
+  const data = Array.isArray(datas) ? datas : [datas];
+  const body = data.map((value: any) => {
     return order.map((pKey: string, num) => {
-      return <StyledTd key={num}>{data[pKey]}</StyledTd>;
+      return <StyledTd key={num}>{value[pKey]}</StyledTd>;
     });
   });
   const head = order.map((pKey: string) => {
@@ -51,13 +51,16 @@ const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
   const records = [head, ...body];
 
   return (
-    <StyledTable width={width}>
-      <tbody>
-        {records.map((value, num: number) => {
-          return <StyledTrd key={num}>{value}</StyledTrd>;
-        })}
-      </tbody>
-    </StyledTable>
+    <>
+      {title && <div>{title}</div>}
+      <StyledTable width={width}>
+        <tbody>
+          {records.map((value, num: number) => {
+            return <StyledTrd key={num}>{value}</StyledTrd>;
+          })}
+        </tbody>
+      </StyledTable>
+    </>
   );
 };
 

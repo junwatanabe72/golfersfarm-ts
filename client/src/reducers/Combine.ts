@@ -3,10 +3,11 @@ import { createBrowserHistory } from 'history';
 import { connectRouter } from 'connected-react-router';
 import currentUser from './CurrentUser';
 import shafts from './Shafts';
-import maker from './Maker';
+import makers from './Maker';
 import clubs from './Clubs';
 import types from './Types';
 import users from './Users';
+import balls from './Balls';
 export const router = createBrowserHistory();
 
 const reducers = (history: typeof router) =>
@@ -17,7 +18,8 @@ const reducers = (history: typeof router) =>
     clubs,
     types,
     shafts,
-    maker,
+    makers,
+    balls,
   });
 
 export default reducers;

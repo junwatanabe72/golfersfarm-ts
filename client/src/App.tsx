@@ -13,8 +13,8 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
-import { getUsers, addTypes, addShafts, addMakers, addUser, checkLoginUser } from './actions';
-import { allTypes, shafts } from './utils/constant/text/body/user/value';
+import { getUsers, addTypes, addShafts, addMakers, checkLoginUser } from './actions';
+import { allTypes, shafts, makers } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
@@ -32,8 +32,11 @@ const Container = styled.div`
 const App: React.FC<Props> = ({}) => {
   const currentUser: UserType = useSelector((state: State) => state.currentUser);
   const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users);
-  const makers = useSelector((state: State) => state.maker);
+  // const makers = useSelector((state: State) => state.makers);
+  // const shafts = useSelector((state: State) => state.shafts);
+  // const types = useSelector((state: State) => state.types);
   const storeClubs = useSelector((state: State) => state.clubs);
+  const storeBalls = useSelector((state: State) => state.balls);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
@@ -48,9 +51,19 @@ const App: React.FC<Props> = ({}) => {
           path={`/users/${user.id}`}
           render={() =>
             user.id === currentUser.id ? (
-              <User currentUser={currentUser} targetUser={currentUser} storeClubs={storeClubs} />
+              <User
+                currentUser={currentUser}
+                targetUser={currentUser}
+                storeClubs={storeClubs}
+                storeBalls={storeBalls}
+              />
             ) : (
-              <User currentUser={currentUser} targetUser={user} storeClubs={storeClubs} />
+              <User
+                currentUser={currentUser}
+                targetUser={user}
+                storeClubs={storeClubs}
+                storeBalls={storeBalls}
+              />
             )
           }
         />
@@ -59,7 +72,7 @@ const App: React.FC<Props> = ({}) => {
           path={`/users/${user.id}/edit`}
           render={() =>
             user.id === currentUser.id ? (
-              <UserEdit currentUser={currentUser} storeClubs={storeClubs} />
+              <UserEdit currentUser={currentUser} storeClubs={storeClubs} storeBalls={storeBalls} />
             ) : (
               <Redirect to={ROUTE.TOP} />
             )
