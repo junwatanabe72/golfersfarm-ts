@@ -4,7 +4,7 @@ import {
   convertArrayClubDataToClient,
   convertClubDataToServer,
   convertClubDataToClient,
-} from "../../utils/convert";
+} from "../../utils/convert/club";
 import passport from "passport";
 const Club = db.Club;
 const UserClubs = db.UserClubs;

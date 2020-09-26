@@ -1,4 +1,4 @@
-import db from "../models";
+import db from "../../../models";
 const shafts = db.Shaft;
 const makers = db.Maker;
 const clubTypes = db.ClubType;
@@ -22,36 +22,6 @@ export const convertArrayClubDataToClient = (data: any[]) => {
   return AllClubs;
 };
 //index
-export const convertArrayClubDataToServer = async (data: any) => {
-  const AllClubs = data.map(async (value: any) => {
-    const { type, name, maker, shaft } = value;
-    const targetShaft = await shafts.findOne({
-      where: {
-        name: shaft,
-      },
-    });
-    const targetMaker = await makers.findOne({
-      where: {
-        name: maker,
-      },
-    });
-    const targetClubType = await clubTypes.findOne({
-      where: {
-        name: type,
-      },
-    });
-
-    const club = {
-      name,
-      shaftId: targetShaft.id,
-      makerId: targetMaker.id,
-      typeId: targetClubType.id,
-    };
-
-    return club;
-  });
-  return AllClubs;
-};
 
 // replace
 export const convertClubDataToServer = async (data: any) => {

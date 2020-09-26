@@ -8,6 +8,7 @@ import db from "../models";
 dotenv.config();
 const authRouter = express.Router();
 const User = db.User;
+const Ball = db.Ball;
 
 authRouter.post("/login", async (req: Request, res: Response) => {
   passport.authenticate("local", { session: false }, (err: any, user: any) => {
@@ -73,7 +74,8 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
     delete user["password"];
     user.password = autorizeToken;
     const newUser = await User.add(user);
-    res.status(201).json({ newUser });
+    const newBall = await Ball.add(newUser.id);
+    res.status(201).json({ data: { newUser, newBall } });
   } catch (error) {
     res.status(404);
     return;

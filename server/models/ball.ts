@@ -1,5 +1,4 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-// const woodss = require("../values/modelValues");
 import User from "./user";
 import Maker from "./maker";
 
@@ -14,18 +13,15 @@ class Ball extends Model {
   public userId!: number;
   public makerId!: number;
 
-  static async add(id: string, ball: ballType) {
+  static async add(id: number) {
     const newBall = await this.create({
       ...ball,
-      userId: parseInt(id),
-      // name: ball.name,
-      // userId: parseInt(id),
-      // makerId: ball.makerId,
+      userId: id,
     });
     return { newBall };
   }
 
-  static async updateBall(id: string, ball: ballType) {
+  static async ballUpdate(id: string, ball: ballType) {
     const targetBall: any = await this.findOne({
       where: { userId: parseInt(id) },
     });

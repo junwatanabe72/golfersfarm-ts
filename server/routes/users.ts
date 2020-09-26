@@ -24,6 +24,7 @@ const usersRouter = express.Router();
 const getrouters = [
   { path: "/", route: usersController.index },
   { path: "/:id/clubs", route: clubsController.index },
+  { path: "/:id/ball", route: ballsController.show },
 ];
 getrouters.forEach((route) => {
   usersRouter.get(route.path, route.route);
@@ -43,7 +44,6 @@ usersRouter.post(
 const postroutersWithAuth = [
   { path: "/:id/clubs/replace", route: clubsController.replace },
   { path: "/:id/clubs", route: clubsController.create },
-  { path: "/:id/ball", route: ballsController.create },
   { path: "/:id/videos", route: videosController.create },
 ];
 
