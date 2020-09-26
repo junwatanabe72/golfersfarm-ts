@@ -61,7 +61,7 @@ const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs, onSubmit }) 
       validationSchema={clubValidation}
       onSubmit={onSubmit}
     >
-      <Padding top={CLEAR.MEDIUM} right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
+      <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
         <Form>
           <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
             <FormTitle>{editTitles}</FormTitle>
@@ -80,7 +80,12 @@ const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs, onSubmit }) 
                     name={formikKey}
                     render={({ remove, push }) => {
                       return (
-                        <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                        <Padding
+                          top={CLEAR.TINY}
+                          right={CLEAR.SMALL}
+                          left={CLEAR.SMALL}
+                          bottom={CLEAR.TINY}
+                        >
                           <StyledTable>
                             <tbody>
                               <ClubEditFormLayout remove={remove} />

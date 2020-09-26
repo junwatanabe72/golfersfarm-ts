@@ -24,7 +24,7 @@ const Container = styled.div`
 const profileTableItems = {
   bestScore: 'ベストスコア',
   averageDistance: '平均飛距離',
-  homeCource: 'ホームコース',
+  homeCourse: 'ホームコース',
 };
 
 const UserMain: React.FC<Props> = ({ targetUser }) => {

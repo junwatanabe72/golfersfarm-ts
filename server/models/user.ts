@@ -70,6 +70,9 @@ class User extends Model {
         bestScore: {
           type: DataTypes.INTEGER,
         },
+        homeCourse: {
+          type: DataTypes.STRING(250),
+        },
         email: {
           type: DataTypes.STRING(250),
           allowNull: false,

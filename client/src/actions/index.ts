@@ -5,18 +5,23 @@ export const ACTIONTYPES = {
   ADD_USERS: 'ADD_USERS',
   ADD_CLUBS: 'ADD_CLUBS',
   REMOVE_CLUBS: 'REMOVE_CLUBS',
+  ADD_BALL: 'ADD_BALL',
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
+  // saga
   CREATE_USER: 'CREATE_USER',
   LOGIN_USER: 'LOGIN_USER',
   CHECK_LOGIN_USER: 'CHECK_LOGIN_USER',
   LOGOUT_USER: 'LOGOUT_USER',
+  REQUESTED_BALL: 'REQUESTED_BALL',
   REQUESTED_USER: 'REQUESTED_USER',
   UPDATE_USER: 'UPDATE_USER',
   UPDATE_IMAGE_USER: 'UPDATE_IMAGE_USER',
-  REQUESTED_GEARS: 'REQUESTED_GEARS',
+  REQUESTED_CLUBS: 'REQUESTED_CLUBS',
   UPDATE_CLUBS: 'UPDATE_CLUBS',
+  UPDATE_BALL: 'UPDATE_BALL',
+  //
 } as const;
 
 //REDUX_SAGA
@@ -41,11 +46,17 @@ export function checkLoginUser(): BasicAction {
 export function logoutUser(): BasicAction {
   return { type: ACTIONTYPES.LOGOUT_USER };
 }
-export function getGears(data: PartialUserType): Action<PartialUserType> {
-  return { type: ACTIONTYPES.REQUESTED_GEARS, payload: data };
+export function getClubs(data: PartialUserType): Action<PartialUserType> {
+  return { type: ACTIONTYPES.REQUESTED_CLUBS, payload: data };
 }
 export function updateClubs(data: PartialArrayClubType): Action<PartialArrayClubType> {
   return { type: ACTIONTYPES.UPDATE_CLUBS, payload: data };
+}
+export function getBall(data: PartialUserType): Action<PartialUserType> {
+  return { type: ACTIONTYPES.REQUESTED_BALL, payload: data };
+}
+export function updateBall(data: BallType): Action<BallType> {
+  return { type: ACTIONTYPES.UPDATE_BALL, payload: data };
 }
 //REDUX_SAGA
 
@@ -65,6 +76,10 @@ export function addClubs(data: ObjectClubType): Action<ObjectClubType> {
 }
 export function removeClubs(data: PartialObjectClubType): Action<PartialObjectClubType> {
   return { type: ACTIONTYPES.REMOVE_CLUBS, payload: data };
+}
+//ballsActionCreater
+export function addBall(data: ObjectBallType): Action<ObjectBallType> {
+  return { type: ACTIONTYPES.ADD_BALL, payload: data };
 }
 //typesActionCreater
 export function addTypes(data: TypesData): Action<TypesData> {

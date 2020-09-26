@@ -6,6 +6,7 @@ const club = {
   shaftId: 1,
   makerId: 1,
   typeId: 1,
+  flex: "R",
 };
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -47,6 +48,10 @@ module.exports = {
           model: "makers",
           key: "id",
         },
+      },
+      flex: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

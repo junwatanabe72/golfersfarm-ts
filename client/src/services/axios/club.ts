@@ -1,6 +1,6 @@
 import { authClient } from '../../utils/axiosConf';
 
-export async function getGearsAxios(arg: PartialUserType) {
+export async function getClubsAxios(arg: PartialUserType) {
   const { id } = arg;
   const { data } = await authClient.get(`/users/${id}/clubs`);
   return data;

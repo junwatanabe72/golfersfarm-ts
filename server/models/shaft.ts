@@ -4,8 +4,6 @@ import Club from "./club";
 class Shaft extends Model {
   public id!: number;
   public name!: string;
-  public flex!: string;
-  public manufacturer!: string;
 
   public static initialize(sequelize: Sequelize) {
     this.init(
@@ -17,14 +15,6 @@ class Shaft extends Model {
           primaryKey: true,
         },
         name: {
-          type: DataTypes.STRING(250),
-          allowNull: false,
-        },
-        flex: {
-          type: DataTypes.STRING(250),
-          allowNull: false,
-        },
-        manufacturer: {
           type: DataTypes.STRING(250),
           allowNull: false,
         },

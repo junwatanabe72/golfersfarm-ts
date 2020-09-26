@@ -12,14 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      flex: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      manufacturer: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
+
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

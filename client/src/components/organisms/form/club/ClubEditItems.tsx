@@ -4,8 +4,10 @@ import { useField } from 'formik';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import { allTypes, makers, shafts } from '../../../../utils/constant/text/body/user/value';
+// import { allTypes, makers, shafts } from '../../../../utils/constant/text/body/user/value';
 import Button from '../../../atoms/Button';
+import { useSelector } from 'react-redux';
+import { State } from '../../../../@types/store';
 
 type OptionDatasKey = typeof optionDatasKey;
 type OptionDatasValue = TypeData | MakerData | ShaftData;
@@ -67,17 +69,28 @@ const optionDatasKey = {
   shaft: 'name',
   flex: 'flex',
 } as const;
-
+const flexDatas = [
+  { flex: 'L' },
+  { flex: 'A' },
+  { flex: 'R' },
+  { flex: 'SR' },
+  { flex: 'S' },
+  { flex: 'X' },
+  { flex: 'XX' },
+  { flex: 'SX' },
+];
 const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remove }) => {
   const [, meta] = useField(name);
-
+  const makers = useSelector((state: State) => state.makers);
+  const shafts = useSelector((state: State) => state.shafts);
+  const types = useSelector((state: State) => state.types);
   type OptionDatas = typeof optionDatas;
 
   const optionDatas = {
-    type: allTypes,
+    type: types,
     maker: makers,
     shaft: shafts,
-    flex: shafts,
+    flex: flexDatas,
   };
 
   const selectComponent = (selectName: string, selectKey: string, targetClub: ClubType) => {
@@ -86,7 +99,7 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
       <StyledSelect name={selectName} onChange={onChange}>
         <option value={selectKey}>{targetClub[selectKey]}</option>
         {Object.values(optionDatas[selectKey as keyof OptionDatas]).map(
-          (data: OptionDatasValue, num: number) => {
+          (data: any, num: number) => {
             return targetClub[selectKey] !== data[key as keyof OptionDatasValue] ? (
               <option key={num} value={data[key as keyof OptionDatasValue]}>
                 {data[key as keyof OptionDatasValue]}

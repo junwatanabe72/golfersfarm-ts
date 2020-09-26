@@ -1,6 +1,6 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { addClubs, removeClubs, ACTIONTYPES } from '../actions/index';
-import { getGearsAxios, updateClubsAxios } from '../services/axios/gear';
+import { getClubsAxios, updateClubsAxios } from '../services/axios/club';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
 
@@ -36,9 +36,9 @@ export function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   }
 }
 
-export function* getGearsAsync(action: Action<PartialUserType>) {
+export function* getClubsAsync(action: Action<PartialUserType>) {
   let Clubs: ObjectClubType = {};
-  const { data } = yield call(getGearsAxios, action.payload);
+  const { data } = yield call(getClubsAxios, action.payload);
   try {
     if (!data) {
       return;
@@ -54,8 +54,8 @@ export function* getGearsAsync(action: Action<PartialUserType>) {
   }
 }
 
-const gearSagas = [
-  takeLatest(ACTIONTYPES.REQUESTED_GEARS, getGearsAsync),
+const clubSagas = [
+  takeLatest(ACTIONTYPES.REQUESTED_CLUBS, getClubsAsync),
   takeLatest(ACTIONTYPES.UPDATE_CLUBS, updateClubsAsync),
 ];
-export default gearSagas;
+export default clubSagas;

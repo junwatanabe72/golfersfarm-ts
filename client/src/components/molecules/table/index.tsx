@@ -9,6 +9,7 @@ import HorizontalTable from './HorizontalTable';
 interface Props extends PartialWidthSize {
   datas: object;
   tableItems: object;
+  title?: string;
   type: typeof TABLETYPES.HORIZONTAL | typeof TABLETYPES.VERTICAL;
 }
 
@@ -26,11 +27,11 @@ StyledTable.defaultProps = {
   width: SIZE.MEDIUM,
 };
 
-const Table: React.FC<Props> = ({ datas, width, type, tableItems }) => {
+const Table: React.FC<Props> = ({ datas, width, type, tableItems, title }) => {
   return (
     <>
       {type === TABLETYPES.HORIZONTAL ? (
-        <HorizontalTable datas={datas} width={width} tableItems={tableItems} />
+        <HorizontalTable datas={datas} width={width} tableItems={tableItems} title={title} />
       ) : (
         <VerticalTable datas={datas} width={width} tableItems={tableItems} />
       )}

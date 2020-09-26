@@ -24,3 +24,8 @@ export const gearTableItems = {
   shaft: 'シャフト',
   flex: '硬さ',
 };
+
+export const ballTableItems = {
+  name: '名前',
+  maker: 'メーカー',
+};
