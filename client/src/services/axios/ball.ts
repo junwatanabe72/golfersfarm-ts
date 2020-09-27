@@ -9,6 +9,7 @@ export async function getBallAxios(arg: PartialUserType) {
 export async function updateBallAxios(arg: BallType) {
   const { userId } = arg;
   const queries = { ball: { ...arg } };
-  const { data } = await authClient.post(`/users/${userId}/ball`, queries);
+  const { data } = await authClient.patch(`/users/${userId}/ball`, queries);
+  console.log(data);
   return data;
 }

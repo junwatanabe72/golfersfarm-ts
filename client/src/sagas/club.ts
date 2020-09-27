@@ -1,10 +1,10 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { addClubs, removeClubs, ACTIONTYPES } from '../actions/index';
 import { getClubsAxios, updateClubsAxios } from '../services/axios/club';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
 
-export function* updateClubsAsync(action: Action<PartialArrayClubType>) {
+function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   let Clubs: ObjectClubType = {};
   let deleteClubs: PartialObjectClubType = {};
   try {
@@ -36,7 +36,7 @@ export function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   }
 }
 
-export function* getClubsAsync(action: Action<PartialUserType>) {
+function* getClubsAsync(action: Action<PartialUserType>) {
   let Clubs: ObjectClubType = {};
   const { data } = yield call(getClubsAxios, action.payload);
   try {
@@ -54,8 +54,9 @@ export function* getClubsAsync(action: Action<PartialUserType>) {
   }
 }
 
-const clubSagas = [
-  takeLatest(ACTIONTYPES.REQUESTED_CLUBS, getClubsAsync),
-  takeLatest(ACTIONTYPES.UPDATE_CLUBS, updateClubsAsync),
-];
-export default clubSagas;
+export function* clubSagas() {
+  yield all([
+    yield takeLatest(ACTIONTYPES.REQUESTED_CLUBS, getClubsAsync),
+    yield takeLatest(ACTIONTYPES.UPDATE_CLUBS, updateClubsAsync),
+  ]);
+}

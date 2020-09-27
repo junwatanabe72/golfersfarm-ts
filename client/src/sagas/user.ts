@@ -7,7 +7,7 @@ import { createUserAxios } from '../services/axios/auth';
 import { push } from 'connected-react-router';
 
 //users
-export function* getUsersAsync() {
+function* getUsersAsync() {
   const { allUsers } = yield call(getUsersAxios);
   try {
     const dbUsers = allUsers;
@@ -18,7 +18,7 @@ export function* getUsersAsync() {
   }
 }
 
-export function* createUserAsync(action: Action<SignupUserType>) {
+function* createUserAsync(action: Action<SignupUserType>) {
   try {
     const { data } = yield call(createUserAxios, action.payload);
     if (data.e) {
@@ -33,7 +33,7 @@ export function* createUserAsync(action: Action<SignupUserType>) {
   }
 }
 
-export function* updateUserAsync(action: Action<PartialUserType>) {
+function* updateUserAsync(action: Action<PartialUserType>) {
   try {
     const { updateUser } = yield call(updateUserAxios, action.payload);
     if (!updateUser) {
@@ -49,7 +49,7 @@ export function* updateUserAsync(action: Action<PartialUserType>) {
   }
 }
 
-export function* updateUserImageAsync(action: Action<FormData>) {
+function* updateUserImageAsync(action: Action<FormData>) {
   try {
     const { updateUser } = yield call(updateUserImageAxios, action.payload);
     if (!updateUser) {
@@ -65,10 +65,11 @@ export function* updateUserImageAsync(action: Action<FormData>) {
   }
 }
 
-const userSagas = [
-  takeLatest(ACTIONTYPES.REQUESTED_USER, getUsersAsync),
-  takeLatest(ACTIONTYPES.CREATE_USER, createUserAsync),
-  takeLatest(ACTIONTYPES.UPDATE_USER, updateUserAsync),
-  takeLatest(ACTIONTYPES.UPDATE_IMAGE_USER, updateUserImageAsync),
-];
-export default userSagas;
+export function* userSagas() {
+  yield all([
+    yield takeLatest(ACTIONTYPES.REQUESTED_USER, getUsersAsync),
+    yield takeLatest(ACTIONTYPES.CREATE_USER, createUserAsync),
+    yield takeLatest(ACTIONTYPES.UPDATE_USER, updateUserAsync),
+    yield takeLatest(ACTIONTYPES.UPDATE_IMAGE_USER, updateUserImageAsync),
+  ]);
+}
