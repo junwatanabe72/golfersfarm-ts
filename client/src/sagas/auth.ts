@@ -5,8 +5,7 @@ import { loginUserAxios, checkLoginUserAxios } from '../services/axios/auth';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
 
-export function* loginUserAsync(action: Action<LoginUserType>) {
-  console.log(action);
+function* loginUserAsync(action: Action<LoginUserType>) {
   const { user, token } = yield call(loginUserAxios, action.payload);
   try {
     if (!user) {
@@ -25,7 +24,7 @@ export function* loginUserAsync(action: Action<LoginUserType>) {
   }
 }
 
-export function* checkLoginUserAsync() {
+function* checkLoginUserAsync() {
   const data = yield call(checkLoginUserAxios);
   try {
     if (data.e) {
@@ -42,7 +41,7 @@ export function* checkLoginUserAsync() {
   }
 }
 
-export function* logoutUserAsync() {
+function* logoutUserAsync() {
   try {
     localStorage.clear();
     yield put(deleteUser());
@@ -55,9 +54,10 @@ export function* logoutUserAsync() {
   }
 }
 
-const authSagas = [
-  takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
-  takeLatest(ACTIONTYPES.CHECK_LOGIN_USER, checkLoginUserAsync),
-  takeLatest(ACTIONTYPES.LOGOUT_USER, logoutUserAsync),
-];
-export default authSagas;
+export function* authSagas() {
+  yield all([
+    yield takeLatest(ACTIONTYPES.LOGIN_USER, loginUserAsync),
+    yield takeLatest(ACTIONTYPES.CHECK_LOGIN_USER, checkLoginUserAsync),
+    yield takeLatest(ACTIONTYPES.LOGOUT_USER, logoutUserAsync),
+  ]);
+}

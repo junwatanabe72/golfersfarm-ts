@@ -12,7 +12,6 @@ export default {
       async (err: any, user: any) => {
         try {
           req.login(user, { session: false }, async (err) => {
-            console.log(user);
             const where = !user ? { show: true } : {};
             const allUsers: userType[] = await User.findAll({ where });
 
@@ -20,7 +19,6 @@ export default {
               res.status(204).json({ message: "not exist" });
               return;
             }
-            console.log(allUsers.length);
             res.json({ allUsers });
             return;
           });

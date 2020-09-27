@@ -1,10 +1,10 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { addBall, getBall, ACTIONTYPES } from '../actions/index';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
 import { getBallAxios, updateBallAxios } from '../services/axios/ball';
 
-export function* updateBallAsync(action: Action<BallType>) {
+function* updateBallAsync(action: Action<BallType>) {
   let ball: ObjectBallType = {};
   try {
     const { data } = yield call(updateBallAxios, action.payload);
@@ -24,7 +24,7 @@ export function* updateBallAsync(action: Action<BallType>) {
   }
 }
 
-export function* getBallAsync(action: Action<PartialUserType>) {
+function* getBallAsync(action: Action<PartialUserType>) {
   let ball: ObjectBallType = {};
   const { data } = yield call(getBallAxios, action.payload);
   try {
@@ -41,8 +41,9 @@ export function* getBallAsync(action: Action<PartialUserType>) {
   }
 }
 
-const ballSagas = [
-  takeLatest(ACTIONTYPES.REQUESTED_BALL, getBallAsync),
-  takeLatest(ACTIONTYPES.UPDATE_BALL, updateBallAsync),
-];
-export default ballSagas;
+export function* ballSagas() {
+  yield all([
+    yield takeLatest(ACTIONTYPES.REQUESTED_BALL, getBallAsync),
+    yield takeLatest(ACTIONTYPES.UPDATE_BALL, updateBallAsync),
+  ]);
+}
