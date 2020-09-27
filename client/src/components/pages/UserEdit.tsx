@@ -67,7 +67,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
   useEffect(() => {
     dispatch(getClubs(currentUser));
     dispatch(getBall(currentUser));
-  }, [currentUser, storeClubs, storeBalls]);
+  }, []);
 
   const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
     (club: ClubType) => club.userId === currentUser.id

@@ -44,8 +44,8 @@ const validation = () =>
 const Login: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
   const loginonSubmit = (values: LoginUserType) => {
-    console.log(values);
     const { password, email } = values;
+    console.log(values);
     const loginItems = { password, email };
     dispatch(loginUser(loginItems));
   };
