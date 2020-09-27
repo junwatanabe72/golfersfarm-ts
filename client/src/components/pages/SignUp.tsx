@@ -63,7 +63,6 @@ const signUpValidation = () =>
 const SignUp: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
   const signUponSubmit = (values: SignUpDataType) => {
-    console.log(values);
     const { name, password, email } = values;
     const signItems = { name, password, email };
     dispatch(createUser(signItems));

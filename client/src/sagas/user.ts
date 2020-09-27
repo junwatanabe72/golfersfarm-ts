@@ -1,9 +1,10 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, all } from 'redux-saga/effects';
 import { addUser, addUsers, ACTIONTYPES } from '../actions/index';
 import { getUsersAxios, updateUserAxios, updateUserImageAxios } from '../services/axios/user';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
-import { createUserAsync } from './auth';
+import { createUserAxios } from '../services/axios/auth';
+import { push } from 'connected-react-router';
 
 //users
 export function* getUsersAsync() {
@@ -11,6 +12,21 @@ export function* getUsersAsync() {
   try {
     const dbUsers = allUsers;
     yield put(addUsers(dbUsers));
+    return;
+  } catch (e) {
+    return { e };
+  }
+}
+
+export function* createUserAsync(action: Action<SignupUserType>) {
+  try {
+    const { data } = yield call(createUserAxios, action.payload);
+    if (data.e) {
+      yield toast.error('失敗しました。', options);
+      return;
+    }
+    yield toast.success('新規登録に成功しました。', options);
+    yield put(push('/login'));
     return;
   } catch (e) {
     return { e };
