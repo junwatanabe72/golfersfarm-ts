@@ -1,29 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import * as yup from 'yup';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
-import Form from '../organisms/form/SignLoginForm';
+import Form from '../organisms/form/signupLogin';
 import { Padding } from '../../utils/styled/styledSpace';
 import { ROUTE } from '../../utils/constant/route';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
-import {
-  emailValidation,
-  passwordValidation,
-  nameValidation,
-  confirmedPasswordValidation,
-} from '../../validations';
-import { createUser } from '../../actions';
-
-interface SignUpDataType {
-  email: string;
-  name: string;
-  password: string;
-  confirmedPassword: string;
-}
 
 interface Props {
   currentUser: PartialUserType;
@@ -37,47 +21,14 @@ const SignUpText = {
   SignUpLoginUser,
   SignUpTitle,
 };
-const signUpFormDatas = {
-  initialValuesData: {
-    email: '',
-    name: '',
-    password: '',
-    confirmedPassword: '',
-  },
-  placeHolder: {
-    email: 'メールアドレス',
-    name: 'ユーザ名',
-    password: '英数字８字以上のパスワード',
-    confirmedPassword: '確認用パスワード',
-  },
-};
 
-const signUpValidation = () =>
-  yup.object().shape({
-    email: emailValidation(),
-    name: nameValidation(),
-    password: passwordValidation(),
-    confirmedPassword: confirmedPasswordValidation(),
-  });
-
+const status = 'signUp';
 const SignUp: React.FC<Props> = ({ currentUser }) => {
-  const dispatch = useDispatch();
-  const signUponSubmit = (values: SignUpDataType) => {
-    const { name, password, email } = values;
-    const signItems = { name, password, email };
-    dispatch(createUser(signItems));
-  };
-
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={SignUpText.SignUpTitle}>
-          <Form
-            formDatas={signUpFormDatas}
-            validation={signUpValidation}
-            buttonValue={SignUpText.SignUpTitle}
-            onSubmit={signUponSubmit}
-          />
+          <Form status={status} />
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
             <div>{SignUpText.SignUpCheck}</div>
           </Padding>

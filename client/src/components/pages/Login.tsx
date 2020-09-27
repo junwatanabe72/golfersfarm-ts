@@ -1,17 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import * as yup from 'yup';
 import Layout from '../templates/Layout';
 import Sign from '../molecules/Sign';
 import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
-import Form from '../organisms/form/SignLoginForm';
+import Form from '../organisms/form/signupLogin';
 import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
-import { emailValidation, passwordValidation } from '../../validations';
-import { loginUser } from '../../actions';
 
 interface Props {
   currentUser: PartialUserType;
@@ -23,43 +19,14 @@ const LoginText = {
   LoginNoUser,
   LoginTitle,
 };
-
-const formDatas = {
-  initialValuesData: {
-    email: '',
-    password: '',
-  },
-  placeHolder: {
-    email: 'メールアドレス',
-    password: '英数字８字以上のパスワード',
-  },
-};
-
-const validation = () =>
-  yup.object().shape({
-    email: emailValidation(),
-    password: passwordValidation(),
-  });
-
+const status = 'login';
 const Login: React.FC<Props> = ({ currentUser }) => {
-  const dispatch = useDispatch();
-  const loginonSubmit = (values: LoginUserType) => {
-    const { password, email } = values;
-    console.log(values);
-    const loginItems = { password, email };
-    dispatch(loginUser(loginItems));
-  };
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={LoginText.LoginTitle}>
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <Form
-              formDatas={formDatas}
-              validation={validation}
-              buttonValue={LoginText.LoginTitle}
-              onSubmit={loginonSubmit}
-            />
+            <Form status={status} />
           </Padding>
           <Padding top={CLEAR.XLARGE} bottom={CLEAR.TINY}>
             <LinkButton to={ROUTE.SIGNUP}>
