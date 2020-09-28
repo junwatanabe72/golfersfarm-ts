@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Layout from '../templates/Layout';
-import ThumbNail from '../molecules/ThumbNail';
+import ThumbNail from '../organisms/users/ThumbNail';
 import { media } from '../../utils/styled/styledRdesign';
 import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';

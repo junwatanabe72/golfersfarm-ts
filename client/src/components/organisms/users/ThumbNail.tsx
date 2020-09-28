@@ -1,7 +1,7 @@
 import React from 'react';
-import UserCard from '../organisms/user/Card';
-import { CLEAR } from '../../utils/constant/number';
-import { Padding } from '../../utils/styled/styledSpace';
+import UserCard from '../user/Card';
+import { CLEAR } from '../../../utils/constant/number';
+import { Padding } from '../../../utils/styled/styledSpace';
 interface Props extends PartialClear, PartialWidthSize, PartialWidthTab, PartialFontSize {
   datas: ArrayPartialUserType;
 }

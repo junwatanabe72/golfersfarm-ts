@@ -24,7 +24,7 @@ interface UserType {
 type PartialUserType = Partial<UserType>;
 type ArrayPartialUserType = PartialUserType[];
 
-type SignupUserType = Pick<UserType, 'name' | 'password' | 'email'>;
+type SignupUserType = Pick<UserType, 'name' | 'password' | 'email' | 'sex'>;
 type LoginUserType = Pick<UserType, 'password' | 'email'>;
 type ImageUserType = Pick<UserType, 'profileImage' | 'clubImage'>;
 type PartialImageUserType = Partial<ImageUserType>;

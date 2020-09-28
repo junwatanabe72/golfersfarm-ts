@@ -17,15 +17,15 @@ const Container = styled.div`
 `;
 
 const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize }) => {
-  const { facebook, twitter, instagram, youtube } = data;
+  const { id, name, facebook, twitter, instagram, youtube, profileImage } = data;
   const urls = { facebook, twitter, instagram, youtube };
 
   return (
     <Card clear={clear}>
       <Container>
-        <Image image={data.profileImage} width={width} widthTab={widthTab} />
-        <LinkButton to={`/users/${data.id}`} fontSize={fontSize}>
-          {data.name}
+        <Image image={profileImage} width={width} widthTab={widthTab} />
+        <LinkButton to={`/users/${id}`} fontSize={fontSize}>
+          {name}
         </LinkButton>
         <SNS urls={urls} fontSize={fontSize} />
       </Container>
