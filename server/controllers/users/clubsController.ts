@@ -66,11 +66,13 @@ export default {
 
   async replace(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
+
     try {
-      const updateClubs = await Promise.all(
+      const targetClubs = await Promise.all(
         club.map(async (value: any) => {
           // clientのclub型をserver型に変換
           const { type, maker, shaft } = value;
+
           const targetClub = await convertClubDataToServer(value);
           if (!targetClub.id) {
             const { newData } = await Club.add(
@@ -97,9 +99,8 @@ export default {
           return club;
         })
       );
-      if (!updateClubs) {
-        return res.status(400);
-      }
+      const updateClubs = targetClubs.filter((value) => value);
+
       res.status(201).json({ data: { updateClubs } });
     } catch (error) {
       res.status(400);
