@@ -60,6 +60,7 @@ const Styleddiv = styled.div`
 const optionDatasKey = {
   maker: 'name',
 } as const;
+
 const BallEditItem: React.FC<Props> = ({
   formikBall,
   valueKey,
@@ -86,7 +87,7 @@ const BallEditItem: React.FC<Props> = ({
       <>
         <StyledSelect name={valueKey} onChange={onChange}>
           <option value={valueKey}>{formikBall[valueKey]}</option>
-          {Object.values(optionDatas[valueKey]).map((data: any, num: number) => {
+          {optionDatas.map((data: any, num: number) => {
             return formikBall[valueKey] !== data[selectKey] ? (
               <option key={num} value={data[selectKey]}>
                 {data[selectKey]}
