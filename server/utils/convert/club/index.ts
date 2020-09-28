@@ -65,10 +65,10 @@ export const convertClubDataToClient = (
     id,
     name,
     userId: newUserClubs.userId,
-    shaft: shaftObj.name,
+    shaft: shaftObj,
     flex: flex,
-    maker: makerObj.name,
-    type: typeObj.type,
+    maker: makerObj,
+    type: typeObj,
   };
   return club;
 };
