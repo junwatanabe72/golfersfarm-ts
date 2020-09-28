@@ -7,21 +7,10 @@ import { Padding } from '../../utils/styled/styledSpace';
 import Form from '../organisms/form/user';
 import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
-import {
-  updateUser,
-  updateImageUser,
-  updateClubs,
-  getClubs,
-  getBall,
-  updateBall,
-} from '../../actions';
+import { getClubs, getBall } from '../../actions';
 import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 import BallEditForm from '../organisms/form/ball';
-
-type FormikValueType = {
-  formikClubs: ArrayClubType;
-};
 
 interface Props {
   currentUser: UserType;
@@ -42,7 +31,7 @@ export const editTitleList = {
 
 export const showValues = ['公開', '非公開'];
 
-const checkObject = (obj: { [key: string]: string | number }) => {
+export const checkObject = (obj: { [key: string]: string | number }) => {
   // まずキーのみをソートする
   const keys = Object.keys(obj).sort();
   // 返却する空のオブジェクトを作る
@@ -59,7 +48,6 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
   const moveEditPage = (value: string) => {
     setEditPage(value);
   };
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClubs(currentUser));
@@ -73,78 +61,6 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
     (ball: BallType) => ball.userId === currentUser.id
   );
 
-  const editProfileonSubmit = (values: ProfileEditDataType) => {
-    const showValue = values.show === showValues[0] ? true : false;
-    dispatch(updateUser({ ...values, show: showValue }));
-  };
-  const editImageonSubmit = async (values: PartialImageUserType) => {
-    if (
-      values.profileImage === currentUser.profileImage &&
-      values.clubImage === currentUser.clubImage
-    ) {
-      return;
-    }
-    const formData = new FormData();
-    if (values.profileImage !== currentUser.profileImage && values.profileImage !== undefined) {
-      formData.append('profileImage', values.profileImage);
-    }
-    if (values.clubImage !== currentUser.clubImage && values.clubImage !== undefined) {
-      formData.append('clubImage', values.clubImage);
-    }
-    formData.append('id', String(currentUser.id));
-    dispatch(updateImageUser(formData));
-  };
-
-  const editClubsonSubmit = (values: FormikValueType) => {
-    let editClubs: PartialArrayClubType = [];
-    const submitClubs = values.formikClubs;
-
-    // ojbectに変化がなければ、return
-    const storeClubsJsonData = checkedClubs.map((value) => {
-      return JSON.stringify(checkObject(value));
-    });
-    const unchanged = submitClubs
-      .map((value, num) => {
-        const data = JSON.stringify(checkObject(value));
-        return storeClubsJsonData[num] === data;
-      })
-      .every((value) => value);
-    if (unchanged && submitClubs.length === checkedClubs.length) {
-      return;
-    }
-
-    //deleteするクラブを抽出する。
-    const submitClubsIds = submitClubs.map((value) => {
-      return value.id;
-    });
-    const deleteTargetClubs = checkedClubs
-      .filter((value) => {
-        const data = submitClubsIds.includes(value.id);
-        return !data;
-      })
-      .map((value) => {
-        return { ...value, name: undefined };
-      });
-    //update,create,deleteするクラブを配列にする。
-    editClubs = [...submitClubs, ...deleteTargetClubs];
-    dispatch(updateClubs(editClubs));
-  };
-
-  const editBallonSubmit = (values: BallType) => {
-    // ojbectに変化がなければ、return
-    if (!userBall) {
-      return;
-    }
-    const formikJsonData = JSON.stringify(checkObject(values));
-    const storeJsonData = JSON.stringify(checkObject(userBall));
-
-    if (formikJsonData === storeJsonData) {
-      return;
-    }
-    console.log(values);
-    dispatch(updateBall(values));
-  };
-
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
@@ -154,20 +70,12 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
             onClick={moveEditPage}
             state={currentEditPage}
           />
-          {currentEditPage === editTitleList.profile && (
-            <Form currentUser={currentUser} onSubmit={editProfileonSubmit} />
-          )}
-          {currentEditPage === editTitleList.image && (
-            <ImageEditForm currentUser={currentUser} onSubmit={editImageonSubmit} />
-          )}
+          {currentEditPage === editTitleList.profile && <Form currentUser={currentUser} />}
+          {currentEditPage === editTitleList.image && <ImageEditForm currentUser={currentUser} />}
           {currentEditPage === editTitleList.gear && (
             <>
-              <ClubEditForm
-                currentUser={currentUser}
-                checkedClubs={checkedClubs}
-                onSubmit={editClubsonSubmit}
-              />
-              {userBall && <BallEditForm userBall={userBall} onSubmit={editBallonSubmit} />}
+              <ClubEditForm currentUser={currentUser} checkedClubs={checkedClubs} />
+              {userBall && <BallEditForm userBall={userBall} />}
             </>
           )}
           {currentEditPage === editTitleList.video && <div>VIDEO</div>}

@@ -8,10 +8,11 @@ import { showValues } from '../../../pages/UserEdit';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import { emailValidation, nameValidation } from '../../../../validations';
 import UserEditFormLayout from './UserEditFormLayout';
+import { useDispatch } from 'react-redux';
+import { updateUser } from '../../../../actions';
 
 interface Props {
   currentUser: UserType;
-  onSubmit: (values: ProfileEditDataType) => void;
 }
 
 const StyledForm = styled.form``;
@@ -22,12 +23,17 @@ const profileValidation = () =>
     name: nameValidation(),
   });
 
-const UserEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
+const UserEditForm: React.FC<Props> = ({ currentUser }) => {
   const showValue = currentUser.show ? showValues[0] : showValues[1];
   const initialValuesData = {
     ...currentUser,
     show: showValue,
     confirmedPassword: currentUser.password,
+  };
+  const dispatch = useDispatch();
+  const onSubmit = (values: ProfileEditDataType) => {
+    const showValue = values.show === showValues[0] ? true : false;
+    dispatch(updateUser({ ...values, show: showValue }));
   };
 
   const formik = useFormik({

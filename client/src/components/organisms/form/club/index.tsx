@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik, FieldArray } from 'formik';
+import { updateClubs } from '../../../../actions';
+import { checkObject } from '../../../pages/UserEdit';
 import Button from '../../../atoms/Button';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { media } from '../../../../utils/styled/styledRdesign';
@@ -19,7 +22,6 @@ type FormikValueType = {
 interface Props {
   checkedClubs: ArrayClubType;
   currentUser: UserType;
-  onSubmit: (values: any) => void;
 }
 
 const StyledTable = styled.table`
@@ -51,9 +53,43 @@ const clubValidation = () =>
     ),
   });
 
-const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs, onSubmit }) => {
+const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs }) => {
+  const dispatch = useDispatch();
   const addItem = { name: '', userId: currentUser.id, type: '', maker: '', shaft: '', flex: '' };
   const initialValuesData = { formikClubs: checkedClubs };
+
+  const onSubmit = (values: FormikValueType) => {
+    let editClubs: PartialArrayClubType = [];
+    const submitClubs = values.formikClubs;
+    // ojbectに変化がなければ、return
+    const storeClubsJsonData = checkedClubs.map((value) => {
+      return JSON.stringify(checkObject(value));
+    });
+    const unchanged = submitClubs
+      .map((value, num) => {
+        const data = JSON.stringify(checkObject(value));
+        return storeClubsJsonData[num] === data;
+      })
+      .every((value) => value);
+    if (unchanged && submitClubs.length === checkedClubs.length) {
+      return;
+    }
+    //deleteするクラブを抽出する。
+    const submitClubsIds = submitClubs.map((value) => {
+      return value.id;
+    });
+    const deleteTargetClubs = checkedClubs
+      .filter((value) => {
+        const data = submitClubsIds.includes(value.id);
+        return !data;
+      })
+      .map((value) => {
+        return { ...value, name: undefined };
+      });
+    //update,create,deleteするクラブを配列にする。
+    editClubs = [...submitClubs, ...deleteTargetClubs];
+    dispatch(updateClubs(editClubs));
+  };
 
   return (
     <Formik<FormikValueType>
