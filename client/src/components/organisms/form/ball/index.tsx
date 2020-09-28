@@ -1,7 +1,10 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
+import { checkObject } from '../../../pages/UserEdit';
+import { updateBall } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
@@ -13,7 +16,6 @@ import BallEditFormLayout from './BallEditFormLayout';
 
 interface Props {
   userBall: BallType;
-  onSubmit: (values: any) => void;
 }
 
 const StyledTable = styled.table`
@@ -39,7 +41,21 @@ const ballValidation = () =>
     name: yup.string().required('必須項目です').max(15, '15字以下にしてください。'),
   });
 
-const BallEditForm: React.FC<Props> = ({ userBall, onSubmit }) => {
+const BallEditForm: React.FC<Props> = ({ userBall }) => {
+  const dispatch = useDispatch();
+  const onSubmit = (values: BallType) => {
+    // ojbectに変化がなければ、return
+    if (!userBall) {
+      return;
+    }
+    const formikJsonData = JSON.stringify(checkObject(values));
+    const storeJsonData = JSON.stringify(checkObject(userBall));
+    if (formikJsonData === storeJsonData) {
+      return;
+    }
+    dispatch(updateBall(values));
+  };
+
   return (
     <Formik<BallType>
       initialValues={userBall}

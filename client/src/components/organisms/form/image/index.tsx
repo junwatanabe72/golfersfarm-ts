@@ -1,16 +1,17 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
+import InputItem from './InputItem';
+import { updateImageUser } from '../../../../actions';
 import { Padding } from '../../../../utils/styled/styledSpace';
 import { CLEAR } from '../../../../utils/constant/number';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
-import InputItem from './InputItem';
 
 interface Props {
   currentUser: UserType;
-  onSubmit: (values: PartialImageUserType) => void;
 }
 
 const StyledForm = styled.form``;
@@ -31,7 +32,8 @@ const buttonValue = 'イメージを変更する。';
 const FILE_SIZE = 5000000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
-const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
+const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
+  const dispatch = useDispatch();
   const editFormDatas = {
     initialValuesData: {
       profileImage: currentUser.profileImage,
@@ -71,6 +73,23 @@ const ImageEditForm: React.FC<Props> = ({ currentUser, onSubmit }) => {
         }),
     });
 
+  const onSubmit = async (values: PartialImageUserType) => {
+    if (
+      values.profileImage === currentUser.profileImage &&
+      values.clubImage === currentUser.clubImage
+    ) {
+      return;
+    }
+    const formData = new FormData();
+    if (values.profileImage !== currentUser.profileImage && values.profileImage !== undefined) {
+      formData.append('profileImage', values.profileImage);
+    }
+    if (values.clubImage !== currentUser.clubImage && values.clubImage !== undefined) {
+      formData.append('clubImage', values.clubImage);
+    }
+    formData.append('id', String(currentUser.id));
+    dispatch(updateImageUser(formData));
+  };
   const formik = useFormik({
     initialValues: { ...editFormDatas.initialValuesData },
     validationSchema: imageValidation,
