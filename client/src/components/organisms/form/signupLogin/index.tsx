@@ -6,8 +6,7 @@ import { useFormik } from 'formik';
 import Button from '../../../atoms/Button';
 import { createUser, loginUser } from '../../../../actions';
 import { Padding } from '../../../../utils/styled/styledSpace';
-import { media } from '../../../../utils/styled/styledRdesign';
-import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
+import { CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import {
   emailValidation,
@@ -15,9 +14,11 @@ import {
   passwordValidation,
   confirmedPasswordValidation,
 } from '../../../../validations';
+import SignLoginItem from './SignupLoginItem';
 
 interface SignUpDataType {
   email: string;
+  sex?: string;
   name?: string;
   password: string;
   confirmedPassword?: string;
@@ -33,18 +34,6 @@ const StyledForm = styled.form`
   align-items: center;
 `;
 
-const StyledField = styled.input`
-  width: ${SIZE.SMALL}vw;
-  font-size: ${FONTSIZE.LARGE}px;
-  padding: ${CLEAR.TINY}vw 0px;
-  border-radius: 6px;
-  border-width: 1px;
-  border: 1px solid #ccc;
-  ${media.tablet`
-      width: ${SIZE.MEDIUM}vw;
-      `}
-`;
-
 const StyledButton = styled.button`
   padding: 0;
   margin: 0;
@@ -57,28 +46,15 @@ const Styleddiv = styled.div`
 
 const formDatas = {
   login: {
-    initialValuesData: {
-      email: '',
-      password: '',
-    },
-    placeHolder: {
-      email: 'メールアドレス',
-      password: '英数字８字以上のパスワード',
-    },
+    email: '',
+    password: '',
   },
   signUp: {
-    initialValuesData: {
-      email: '',
-      name: '',
-      password: '',
-      confirmedPassword: '',
-    },
-    placeHolder: {
-      email: 'メールアドレス',
-      name: 'ユーザ名',
-      password: '英数字８字以上のパスワード',
-      confirmedPassword: '確認用パスワード',
-    },
+    email: '',
+    name: '',
+    password: '',
+    confirmedPassword: '',
+    sex: '男性',
   },
 };
 
@@ -107,11 +83,11 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
 
   const onSubmit = {
     signUp: (values: SignUpDataType) => {
-      if (!values.name) {
+      if (!values.name || !values.sex) {
         return;
       }
-      const { name, password, email } = values;
-      const signItems = { name, password, email };
+      const { name, password, email, sex } = values;
+      const signItems = { name, password, email, sex };
       dispatch(createUser(signItems));
     },
     login: (values: LoginUserType) => {
@@ -120,39 +96,28 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
       dispatch(loginUser(loginItems));
     },
   };
-  const data = { ...formDatas[status].initialValuesData };
+  const data = { ...formDatas[status] };
   const formik = useFormik({
     initialValues: data,
     validationSchema: validation[status],
     onSubmit: onSubmit[status],
   });
 
-  const InputItems = Object.entries(formDatas[status].placeHolder).map(
-    ([key, value]: string[], num: number) => {
-      return (
-        <React.Fragment key={num}>
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <StyledField
-              type={key}
-              name={key}
-              placeholder={value}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values[key as keyof SignUpDataType]}
-            />
-          </Padding>
-          {formik.touched[key as keyof SignUpDataType] &&
-          formik.errors[key as keyof SignUpDataType] ? (
-            <Styleddiv>{formik.errors[key as keyof SignUpDataType]}</Styleddiv>
-          ) : null}
-        </React.Fragment>
-      );
-    }
-  );
-
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
-      {InputItems}
+      {Object.keys(formDatas[status]).map((key: string, num: number) => {
+        return (
+          <React.Fragment key={num}>
+            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+              <SignLoginItem formik={formik} valueKey={key} />
+            </Padding>
+            {formik.touched[key as keyof SignUpDataType] &&
+            formik.errors[key as keyof SignUpDataType] ? (
+              <Styleddiv>{formik.errors[key as keyof SignUpDataType]}</Styleddiv>
+            ) : null}
+          </React.Fragment>
+        );
+      })}
       <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
         <StyledButton type="submit">
           <Button pWidth={CLEAR.LARGE}>{buttonValue[status]}</Button>

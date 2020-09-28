@@ -1,37 +1,3 @@
-interface SignUpFormDatasType {
-  initialValuesData: {
-    email: string;
-    name: string;
-    password: string;
-    confirmedPassword: string;
-    [key: string]: string;
-  };
-  placeHolder: {
-    email: string;
-    name: string;
-    password: string;
-    confirmedPassword: string;
-    [key: string]: string;
-  };
-}
-
-interface LoginFormDatasType {
-  initialValuesData: {
-    email: string;
-    password: string;
-    [key: string]: string;
-  };
-  placeHolder: {
-    email: string;
-    password: string;
-    [key: string]: string;
-  };
-}
-
-interface LoginSignUpFormDataTypes {
-  formDatas: LoginFormDatasType | SignUpFormDatasType;
-}
-
 interface ProfileEditDataType {
   email: string;
   name: string;
