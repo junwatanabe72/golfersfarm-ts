@@ -32,7 +32,7 @@ const SignUp: React.FC<Props> = ({ currentUser }) => {
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
             <div>{SignUpText.SignUpCheck}</div>
           </Padding>
-          <Padding top={CLEAR.LARGE} bottom={CLEAR.TINY}>
+          <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
             <LinkButton to={ROUTE.LOGIN}>
               <Button pWidth={CLEAR.XSMALL} color={BASICCOLORS.SECONDARY} fontSize={FONTSIZE.SMALL}>
                 {SignUpText.SignUpLoginUser}

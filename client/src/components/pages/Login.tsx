@@ -28,7 +28,7 @@ const Login: React.FC<Props> = ({ currentUser }) => {
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
             <Form status={status} />
           </Padding>
-          <Padding top={CLEAR.XLARGE} bottom={CLEAR.TINY}>
+          <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
             <LinkButton to={ROUTE.SIGNUP}>
               <Button pWidth={CLEAR.TINY} color={BASICCOLORS.WHITELIGHT} fontSize={FONTSIZE.TINY}>
                 {LoginText.LoginNoUser}
