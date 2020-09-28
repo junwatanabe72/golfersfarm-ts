@@ -15,17 +15,9 @@ interface Props {
 }
 
 const StyledForm = styled.form``;
-
-const baseItems = {
-  profileImage: 'プロフィールイメージ',
-  clubImage: 'クラブセッティングイメージ',
-};
-const imageItemsKeys = Object.keys(baseItems).map((key) => {
-  return key;
-});
-const profileNoteItems = {
-  profileImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
-  clubImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
+const items = {
+  profileImage: 'profileImage',
+  clubImage: 'clubImage',
 };
 const editTitle = 'イメージ';
 const buttonValue = 'イメージを変更する。';
@@ -34,11 +26,9 @@ const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
 const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
-  const editFormDatas = {
-    initialValuesData: {
-      profileImage: currentUser.profileImage,
-      clubImage: currentUser.clubImage,
-    },
+  const initialValuesData = {
+    profileImage: currentUser.profileImage,
+    clubImage: currentUser.clubImage,
   };
 
   const imageValidation = () =>
@@ -91,7 +81,7 @@ const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
     dispatch(updateImageUser(formData));
   };
   const formik = useFormik({
-    initialValues: { ...editFormDatas.initialValuesData },
+    initialValues: { ...initialValuesData },
     validationSchema: imageValidation,
     onSubmit: onSubmit,
   });
@@ -100,17 +90,8 @@ const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
       <StyledForm onSubmit={formik.handleSubmit}>
         <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
           <FormTitle>{editTitle}</FormTitle>
-          {imageItemsKeys.map((key: string, num: number) => {
-            return (
-              <InputItem
-                key={num}
-                formik={formik}
-                pKey={key}
-                label={baseItems[key as keyof ImageUserType]}
-                note={profileNoteItems[key as keyof ImageUserType]}
-                currentUser={currentUser}
-              />
-            );
+          {Object.values(items).map((key: string, num: number) => {
+            return <InputItem key={num} formik={formik} valueKey={key} currentUser={currentUser} />;
           })}
         </Padding>
         <FormSubmit>{buttonValue}</FormSubmit>

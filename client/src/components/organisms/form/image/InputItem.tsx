@@ -6,11 +6,11 @@ import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import FlexLayout from '../../../atoms/FlexLayout';
 
+type BaseItems = typeof baseItems;
+type NoteItems = typeof noteItems;
 interface Props {
   formik: any;
-  label: string;
-  pKey: string;
-  note: string;
+  valueKey: string;
   currentUser: UserType;
 }
 
@@ -45,8 +45,17 @@ const StyledImage = styled.img`
       `}
 `;
 
-const InputItem: React.FC<Props> = ({ formik, label, pKey, currentUser, note }) => {
-  const [targetImage, setImage] = useState<any>(currentUser[pKey as keyof UserType]);
+const baseItems = {
+  profileImage: 'プロフィールイメージ',
+  clubImage: 'クラブセッティングイメージ',
+};
+
+const noteItems = {
+  profileImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
+  clubImage: '画像をアップロードする（縦横200px×200px以上推奨、5MB未満）',
+};
+const InputItem: React.FC<Props> = ({ formik, valueKey, currentUser }) => {
+  const [targetImage, setImage] = useState<any>(currentUser[valueKey as keyof UserType]);
   const editImage = (value: string | ArrayBuffer | null) => {
     setImage(value);
   };
@@ -59,7 +68,7 @@ const InputItem: React.FC<Props> = ({ formik, label, pKey, currentUser, note }) 
           alignItems={ALIGNITEMS.START}
           left={
             <Padding left={CLEAR.TINY}>
-              <StyledLabel htmlFor={pKey}>{label}</StyledLabel>
+              <StyledLabel htmlFor={valueKey}>{baseItems[valueKey as keyof BaseItems]}</StyledLabel>
             </Padding>
           }
           right={
@@ -68,14 +77,14 @@ const InputItem: React.FC<Props> = ({ formik, label, pKey, currentUser, note }) 
                 <StyledField
                   type={'file'}
                   accept={'image/*'}
-                  name={pKey}
+                  name={valueKey}
                   onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                     const file =
                       event.currentTarget.files !== null ? event.currentTarget.files[0] : null;
                     if (file === null) {
                       return;
                     }
-                    formik.setFieldValue(pKey, file);
+                    formik.setFieldValue(valueKey, file);
                     const reader = new FileReader();
                     reader.onload = () => {
                       editImage(reader.result);
@@ -87,11 +96,11 @@ const InputItem: React.FC<Props> = ({ formik, label, pKey, currentUser, note }) 
                   onBlur={formik.handleBlur}
                 />
                 <StyledImage src={targetImage} />
-                {note === undefined ? <></> : <Inline>{note}</Inline>}
-                {formik.touched[pKey as keyof ImageUserType] &&
-                formik.errors[pKey as keyof ImageUserType] ? (
+                {noteItems ? <></> : <Inline>{noteItems[valueKey as keyof NoteItems]}</Inline>}
+                {formik.touched[valueKey as keyof ImageUserType] &&
+                formik.errors[valueKey as keyof ImageUserType] ? (
                   <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-                    <Styleddiv>{formik.errors[pKey as keyof ImageUserType]}</Styleddiv>
+                    <Styleddiv>{formik.errors[valueKey as keyof ImageUserType]}</Styleddiv>
                   </Padding>
                 ) : null}
               </Center>
