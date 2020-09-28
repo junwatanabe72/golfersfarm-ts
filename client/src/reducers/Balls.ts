@@ -26,7 +26,6 @@ export default function ClubsReducer(
   switch (action.type) {
     case ACTIONTYPES.ADD_BALL: {
       newState = { ...state, ...ball };
-      console.log(newState);
       return newState;
     }
     default: {

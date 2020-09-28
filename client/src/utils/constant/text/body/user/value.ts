@@ -132,6 +132,7 @@ export const makers = [
   { ...maker, id: 4, name: 'TOURSTAGE' },
   { ...maker, id: 5, name: 'SRIXON' },
   { ...maker, id: 6, name: 'PING' },
+  { ...maker, id: 7, name: 'original' },
 ];
 
 export const allResults = [
