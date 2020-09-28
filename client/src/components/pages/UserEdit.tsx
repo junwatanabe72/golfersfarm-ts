@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Layout from '../templates/Layout';
 import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
-import Form from '../organisms/form/UserEditForm';
+import Form from '../organisms/form/user';
 import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
 import {
@@ -40,10 +40,7 @@ export const editTitleList = {
   result: 'RESULT',
 } as const;
 
-export const selectProfileItems = {
-  sex: { head: '性別', body: ['男性', '女性'] },
-  show: { head: '公開・非公開', body: ['公開', '非公開'] },
-};
+export const showValues = ['公開', '非公開'];
 
 const checkObject = (obj: { [key: string]: string | number }) => {
   // まずキーのみをソートする
@@ -77,7 +74,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
   );
 
   const editProfileonSubmit = (values: ProfileEditDataType) => {
-    const showValue = values.show === selectProfileItems.show.body[0] ? true : false;
+    const showValue = values.show === showValues[0] ? true : false;
     dispatch(updateUser({ ...values, show: showValue }));
   };
   const editImageonSubmit = async (values: PartialImageUserType) => {
