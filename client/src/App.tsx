@@ -36,6 +36,7 @@ const App: React.FC<Props> = ({}) => {
   // const shafts = useSelector((state: State) => state.shafts);
   // const types = useSelector((state: State) => state.types);
   const storeClubs = useSelector((state: State) => state.clubs);
+  const storeVideos = useSelector((state: State) => state.videos);
   const storeBalls = useSelector((state: State) => state.balls);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
@@ -56,6 +57,7 @@ const App: React.FC<Props> = ({}) => {
                 targetUser={currentUser}
                 storeClubs={storeClubs}
                 storeBalls={storeBalls}
+                storeVideos={storeVideos}
               />
             ) : (
               <User
@@ -63,6 +65,7 @@ const App: React.FC<Props> = ({}) => {
                 targetUser={user}
                 storeClubs={storeClubs}
                 storeBalls={storeBalls}
+                storeVideos={storeVideos}
               />
             )
           }
@@ -72,7 +75,12 @@ const App: React.FC<Props> = ({}) => {
           path={`/users/${user.id}/edit`}
           render={() =>
             user.id === currentUser.id ? (
-              <UserEdit currentUser={currentUser} storeClubs={storeClubs} storeBalls={storeBalls} />
+              <UserEdit
+                currentUser={currentUser}
+                storeClubs={storeClubs}
+                storeBalls={storeBalls}
+                storeVideos={storeVideos}
+              />
             ) : (
               <Redirect to={ROUTE.TOP} />
             )

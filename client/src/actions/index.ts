@@ -5,6 +5,8 @@ export const ACTIONTYPES = {
   ADD_USERS: 'ADD_USERS',
   ADD_CLUBS: 'ADD_CLUBS',
   REMOVE_CLUBS: 'REMOVE_CLUBS',
+  ADD_VIDEOS: 'ADD_VIDEOS',
+  REMOVE_VIDEOS: 'REMOVE_VIDEOS',
   ADD_BALL: 'ADD_BALL',
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
@@ -14,12 +16,14 @@ export const ACTIONTYPES = {
   LOGIN_USER: 'LOGIN_USER',
   CHECK_LOGIN_USER: 'CHECK_LOGIN_USER',
   LOGOUT_USER: 'LOGOUT_USER',
-  REQUESTED_BALL: 'REQUESTED_BALL',
   REQUESTED_USER: 'REQUESTED_USER',
   UPDATE_USER: 'UPDATE_USER',
   UPDATE_IMAGE_USER: 'UPDATE_IMAGE_USER',
   REQUESTED_CLUBS: 'REQUESTED_CLUBS',
   UPDATE_CLUBS: 'UPDATE_CLUBS',
+  REQUESTED_VIDEOS: 'REQUESTED_VIDEOS',
+  UPDATE_VIDEOS: 'UPDATE_VIDEOS',
+  REQUESTED_BALL: 'REQUESTED_BALL',
   UPDATE_BALL: 'UPDATE_BALL',
   //
 } as const;
@@ -52,6 +56,12 @@ export function getClubs(data: PartialUserType): Action<PartialUserType> {
 export function updateClubs(data: PartialArrayClubType): Action<PartialArrayClubType> {
   return { type: ACTIONTYPES.UPDATE_CLUBS, payload: data };
 }
+export function getVideos(data: PartialUserType): Action<PartialUserType> {
+  return { type: ACTIONTYPES.REQUESTED_VIDEOS, payload: data };
+}
+export function updateVideos(data: PartialArrayVideoType): Action<PartialArrayVideoType> {
+  return { type: ACTIONTYPES.UPDATE_VIDEOS, payload: data };
+}
 export function getBall(data: PartialUserType): Action<PartialUserType> {
   return { type: ACTIONTYPES.REQUESTED_BALL, payload: data };
 }
@@ -76,6 +86,13 @@ export function addClubs(data: ObjectClubType): Action<ObjectClubType> {
 }
 export function removeClubs(data: PartialObjectClubType): Action<PartialObjectClubType> {
   return { type: ACTIONTYPES.REMOVE_CLUBS, payload: data };
+}
+//videosActionCreater
+export function addVideos(data: ObjectVideoType): Action<ObjectVideoType> {
+  return { type: ACTIONTYPES.ADD_VIDEOS, payload: data };
+}
+export function removeVideos(data: PartialObjectVideoType): Action<PartialObjectVideoType> {
+  return { type: ACTIONTYPES.REMOVE_VIDEOS, payload: data };
 }
 //ballsActionCreater
 export function addBall(data: ObjectBallType): Action<ObjectBallType> {

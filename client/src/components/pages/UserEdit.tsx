@@ -7,7 +7,7 @@ import { Padding } from '../../utils/styled/styledSpace';
 import Form from '../organisms/form/user';
 import { BASICCOLORS } from '../../utils/constant/color';
 import ItemList from '../molecules/ItemList';
-import { getClubs, getBall } from '../../actions';
+import { getClubs, getBall, getVideos } from '../../actions';
 import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 import BallEditForm from '../organisms/form/ball';
@@ -16,6 +16,7 @@ interface Props {
   currentUser: UserType;
   storeClubs: ObjectClubType;
   storeBalls: ObjectBallType;
+  storeVideos: ObjectVideoType;
 }
 const Color = styled.div`
   background-color: ${BASICCOLORS.WHITELIGHT};
@@ -43,7 +44,7 @@ export const checkObject = (obj: { [key: string]: string | number }) => {
   return map;
 };
 
-const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
+const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeVideos }) => {
   const [currentEditPage, setEditPage] = useState<string>(editTitleList.profile);
   const moveEditPage = (value: string) => {
     setEditPage(value);
@@ -51,11 +52,15 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClubs(currentUser));
+    dispatch(getVideos(currentUser));
     dispatch(getBall(currentUser));
   }, []);
 
   const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
     (club: ClubType) => club.userId === currentUser.id
+  );
+  const checkedVideos: ArrayVideoType = Object.values(storeVideos).filter(
+    (video: VideoType) => video.userId === currentUser.id
   );
   const userBall: BallType | undefined = Object.values(storeBalls).find(
     (ball: BallType) => ball.userId === currentUser.id
