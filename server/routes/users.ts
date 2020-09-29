@@ -25,6 +25,7 @@ const getrouters = [
   { path: "/", route: usersController.index },
   { path: "/:id/clubs", route: clubsController.index },
   { path: "/:id/ball", route: ballsController.show },
+  { path: "/:id/videos", route: videosController.index },
 ];
 getrouters.forEach((route) => {
   usersRouter.get(route.path, route.route);
@@ -43,8 +44,8 @@ usersRouter.post(
 
 const postroutersWithAuth = [
   { path: "/:id/clubs/replace", route: clubsController.replace },
+  { path: "/:id/videos/replace", route: videosController.replace },
   { path: "/:id/clubs", route: clubsController.create },
-  { path: "/:id/videos", route: videosController.create },
 ];
 
 postroutersWithAuth.forEach((route) => {
@@ -59,24 +60,10 @@ postroutersWithAuth.forEach((route) => {
 const patchroutersWithAuth = [
   { path: "/:id", route: usersController.update },
   { path: "/:id/ball", route: ballsController.update },
-  { path: "/:id/videos/:videoid", route: videosController.update },
 ];
 
 patchroutersWithAuth.forEach((route) => {
   usersRouter.patch(
-    route.path,
-    passport.authenticate("jwt", { session: false }),
-    route.route
-  );
-});
-
-// deleteRoute
-const deleteroutersWithAuth = [
-  { path: "/:id/videos/:videoid", route: videosController.delete },
-];
-
-deleteroutersWithAuth.forEach((route) => {
-  usersRouter.delete(
     route.path,
     passport.authenticate("jwt", { session: false }),
     route.route

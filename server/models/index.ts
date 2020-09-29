@@ -9,6 +9,7 @@ import Shaft from "./shaft";
 import Maker from "./maker";
 import ClubType from "./clubType";
 import UserClubs from "./user_clubs";
+import UserVideos from "./user_videos";
 
 dotenv.config();
 
@@ -27,6 +28,7 @@ const db: dbType = {
   Maker: Maker.initialize(sequelize),
   ClubType: ClubType.initialize(sequelize),
   UserClubs: UserClubs.initialize(sequelize),
+  UserVideos: UserVideos.initialize(sequelize),
 };
 
 interface dbType {
