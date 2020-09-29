@@ -22,6 +22,7 @@ import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
 interface Props {
   targetUser: PartialUserType;
   checkedClubs: ArrayClubType;
+  checkedVideos: ObjectVideoType;
   userBall: BallType | undefined;
 }
 
