@@ -1,30 +1,108 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import User from "./user";
+import UserVideos from "./user_videos";
 
+const baseURL = "https://www.youtube.com/embed/";
 class Video extends Model {
   public id!: number;
   public name!: string;
-  public userId!: number;
   public url!: string;
 
-  static async add(id: string, video: Video) {
-    const newVideo = await this.create({
-      userId: id,
-      name: video.name,
-      url: video.url,
+  static async add(id: string, video: any, sequelize: Sequelize) {
+    if (!video.name) {
+      return;
+    }
+    const newData = await sequelize.transaction(async (t) => {
+      const newVideo = await this.create(
+        {
+          ...video,
+          url: baseURL + video.url,
+        },
+        { transaction: t }
+      );
+      const newUserVideos = await UserVideos.create(
+        {
+          userId: parseInt(id),
+          videoId: newVideo.id,
+        },
+        { transaction: t }
+      );
+      console.log({ newVideo, newUserVideos });
+      return { newVideo, newUserVideos };
     });
-    return { newVideo };
+
+    return { newData };
+  }
+  static async videoReplace(userId: string, video: any, sequelize: Sequelize) {
+    const { id } = video;
+    const newVideoData = { ...video, id: undefined };
+    const targetVideo = await this.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (!targetVideo) {
+      return;
+    }
+    const targetuserVideos = await UserVideos.findOne({
+      where: {
+        userId: parseInt(userId),
+        videoId: id,
+      },
+    });
+    if (!targetuserVideos) {
+      return;
+    }
+    const newData = await sequelize.transaction(async (t) => {
+      await targetVideo.destroy({ transaction: t });
+      await targetuserVideos.destroy({ transaction: t });
+      const newVideo = await this.create(
+        {
+          ...newVideoData,
+          url: baseURL + newVideoData.url,
+        },
+        { transaction: t }
+      );
+      const newUserVideos = await UserVideos.create(
+        {
+          userId: parseInt(userId),
+          videoId: newVideo.id,
+        },
+        { transaction: t }
+      );
+      return { newVideo, newUserVideos };
+    });
+    return { newData };
   }
 
-  static async updateDatas(video: Video) {
-    const targetVideo: any = await this.findOne({
-      where: { id: video.id },
+  static async videoDelete(userId: string, video: any, sequelize: Sequelize) {
+    if (!video.id) {
+      return;
+    }
+    const { id } = video;
+    const targetVideo = await this.findOne({
+      where: {
+        id: id,
+      },
     });
-    const updateVideo = await targetVideo.update({
-      name: video.name,
-      url: video.url,
+    if (!targetVideo) {
+      return;
+    }
+    const targetuserVideos = await UserVideos.findOne({
+      where: {
+        userId: parseInt(userId),
+        videoId: id,
+      },
     });
-    return { updateVideo };
+    if (!targetuserVideos) {
+      return;
+    }
+    await sequelize.transaction(async (t) => {
+      await targetVideo.destroy({ transaction: t });
+      await targetuserVideos.destroy({ transaction: t });
+      return;
+    });
+    return;
   }
 
   public static initialize(sequelize: Sequelize) {
@@ -40,10 +118,6 @@ class Video extends Model {
           type: DataTypes.STRING(250),
           allowNull: false,
         },
-        userId: {
-          type: DataTypes.INTEGER,
-          allowNull: false,
-        },
         url: {
           type: DataTypes.STRING(250),
           allowNull: false,
@@ -57,8 +131,8 @@ class Video extends Model {
     return this;
   }
   public static associate() {
-    this.belongsTo(User, {
-      foreignKey: "userId",
+    this.hasMany(UserVideos, {
+      foreignKey: "videoId",
       onDelete: "CASCADE",
       constraints: false,
     });
@@ -67,7 +141,6 @@ class Video extends Model {
 export interface videoType {
   id: number;
   name: string;
-  userId: number;
   url: string;
   add: () => void;
   updateDatas: () => void;
