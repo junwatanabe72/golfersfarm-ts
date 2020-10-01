@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { useFormik } from 'formik';
 import { Padding } from '../../../../utils/styled/styledSpace';
 import { CLEAR } from '../../../../utils/constant/number';
-import { showValues } from '../../../pages/UserEdit';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import { emailValidation, nameValidation } from '../../../../validations';
 import UserEditFormLayout from './UserEditFormLayout';
@@ -22,6 +21,8 @@ const profileValidation = () =>
     email: emailValidation(),
     name: nameValidation(),
   });
+
+const showValues = ['公開', '非公開'];
 
 const UserEditForm: React.FC<Props> = ({ currentUser }) => {
   const showValue = currentUser.show ? showValues[0] : showValues[1];

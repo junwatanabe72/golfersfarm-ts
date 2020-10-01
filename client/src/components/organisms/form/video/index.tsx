@@ -3,98 +3,91 @@ import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik, FieldArray } from 'formik';
-import { updateClubs } from '../../../../actions';
-import Button from '../../../atoms/Button';
-import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
-import { media } from '../../../../utils/styled/styledRdesign';
-import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
-import { BASICCOLORS } from '../../../../utils/constant/color';
-import ClubEditFormLayout from './ClubEditFormLayout';
+import VideoEditFormItem from './VideoEditFormItem';
 import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
+import Button from '../../../atoms/Button';
+import { updateVideos } from '../../../../actions';
+import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
+import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
+import { BASICCOLORS } from '../../../../utils/constant/color';
 import { checkObject } from '../../../../utils/constant/text/form';
 
 type FormikValueType = {
-  formikClubs: ArrayClubType;
+  formikVideos: ArrayVideoType;
 };
 
 interface Props {
-  checkedClubs: ArrayClubType;
+  checkedVideos: ArrayVideoType;
   currentUser: UserType;
 }
 
-const StyledTable = styled.table`
-  width: ${SIZE.MEDIUM}vw;
-  border: solid 1px #ccc;
-  margin: 0vw auto;
-  border-radius: 5px;
-  ${media.tablet`
-      width: 60vw;  
-      `}
-`;
 const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
 `;
 
-const editTitles = 'クラブ';
-const editSubTitles = '使用クラブ';
-const AddButtonText = ['クラブを追加'];
-const buttonValue = 'クラブを登録・編集する。';
-const formikKey = 'formikClubs';
+const editTitles = 'youtube動画';
+const editSubTitles = '登録動画';
+const AddButtonText = ['動画を追加'];
+const buttonValue = '動画を登録・削除する。';
+const formikKey = 'formikVideos';
 
-const clubValidation = () =>
+const videoValidation = () =>
   yup.object({
-    formikClubs: yup.array().of(
+    formikVideos: yup.array().of(
       yup.object().shape({
         name: yup.string().required('必須項目です').max(15, '15字以下にしてください。'),
+        url: yup.string().required('必須項目です'),
       })
     ),
   });
 
-const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs }) => {
+const VideoEditForm: React.FC<Props> = ({ currentUser, checkedVideos }) => {
+  const arrayDatas = Object.values(checkedVideos);
   const dispatch = useDispatch();
-  const addItem = { name: '', userId: currentUser.id, type: '', maker: '', shaft: '', flex: '' };
-  const initialValuesData = { formikClubs: checkedClubs };
+  const addItem = { name: '', userId: currentUser.id, url: '' };
+  const initialValuesData = { formikVideos: arrayDatas };
 
   const onSubmit = (values: FormikValueType) => {
-    let editClubs: PartialArrayClubType = [];
-    const submitClubs = values.formikClubs;
+    let editVideos: PartialArrayVideoType = [];
+    const submitVideos = values.formikVideos;
     // ojbectに変化がなければ、return
-    const storeClubsJsonData = checkedClubs.map((value) => {
+    const storeVideosJsonData = checkedVideos.map((value) => {
       return JSON.stringify(checkObject(value));
     });
-    const unchanged = submitClubs
+
+    const unchanged = submitVideos
       .map((value, num) => {
         const data = JSON.stringify(checkObject(value));
-        return storeClubsJsonData[num] === data;
+        return storeVideosJsonData[num] === data;
       })
       .every((value) => value);
-    if (unchanged && submitClubs.length === checkedClubs.length) {
+    if (unchanged && submitVideos.length === checkedVideos.length) {
       return;
     }
-    //deleteするクラブを抽出する。
-    const submitClubsIds = submitClubs.map((value) => {
+    //deleteするvideoを抽出する。
+    const submitVideosIds = submitVideos.map((value) => {
       return value.id;
     });
-    const deleteTargetClubs = checkedClubs
+    const deleteTargetVideos = checkedVideos
       .filter((value) => {
-        const data = submitClubsIds.includes(value.id);
+        const data = submitVideosIds.includes(value.id);
         return !data;
       })
       .map((value) => {
         return { ...value, name: undefined };
       });
-    //update,create,deleteするクラブを配列にする。
-    editClubs = [...submitClubs, ...deleteTargetClubs];
-    dispatch(updateClubs(editClubs));
+    //update,create,deleteするvideoを配列にする。
+    editVideos = [...submitVideos, ...deleteTargetVideos];
+    dispatch(updateVideos(editVideos));
   };
 
   return (
     <Formik<FormikValueType>
       initialValues={initialValuesData}
-      validationSchema={clubValidation}
+      validationSchema={videoValidation}
       onSubmit={onSubmit}
     >
       <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
@@ -122,11 +115,7 @@ const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs }) => {
                           left={CLEAR.SMALL}
                           bottom={CLEAR.TINY}
                         >
-                          <StyledTable>
-                            <tbody>
-                              <ClubEditFormLayout remove={remove} />
-                            </tbody>
-                          </StyledTable>
+                          <VideoEditFormItem remove={remove} currentVideos={arrayDatas} />
                           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
                             <Button
                               color={BASICCOLORS.WHITE}
@@ -155,4 +144,4 @@ const ClubEditForm: React.FC<Props> = ({ currentUser, checkedClubs }) => {
   );
 };
 
-export default ClubEditForm;
+export default VideoEditForm;

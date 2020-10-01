@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import Layout from '../templates/Layout';
-import { CLEAR } from '../../utils/constant/number';
-import { Padding } from '../../utils/styled/styledSpace';
 import Form from '../organisms/form/user';
-import { BASICCOLORS } from '../../utils/constant/color';
-import ItemList from '../molecules/ItemList';
-import { getClubs, getBall, getVideos } from '../../actions';
 import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 import BallEditForm from '../organisms/form/ball';
+import VideoEditForm from '../organisms/form/video';
+import ItemList from '../molecules/ItemList';
+import { getClubs, getBall, getVideos } from '../../actions';
+import { CLEAR, SIZE } from '../../utils/constant/number';
+import { Padding } from '../../utils/styled/styledSpace';
+import { BASICCOLORS } from '../../utils/constant/color';
+import { editTitleList } from '../../utils/constant/text/common';
 
 interface Props {
   currentUser: UserType;
@@ -21,28 +23,6 @@ interface Props {
 const Color = styled.div`
   background-color: ${BASICCOLORS.WHITELIGHT};
 `;
-
-export const editTitleList = {
-  profile: 'PROFILE',
-  image: 'IMAGE',
-  gear: 'GEAR',
-  video: 'VIEDO',
-  result: 'RESULT',
-} as const;
-
-export const showValues = ['公開', '非公開'];
-
-export const checkObject = (obj: { [key: string]: string | number }) => {
-  // まずキーのみをソートする
-  const keys = Object.keys(obj).sort();
-  // 返却する空のオブジェクトを作る
-  let map: { [key: string]: string | number } = {};
-  // ソート済みのキー順に返却用のオブジェクトに値を格納する
-  keys.forEach((key) => {
-    map[key] = obj[key];
-  });
-  return map;
-};
 
 const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeVideos }) => {
   const [currentEditPage, setEditPage] = useState<string>(editTitleList.profile);
@@ -74,6 +54,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeV
             list={Object.values(editTitleList)}
             onClick={moveEditPage}
             state={currentEditPage}
+            width={SIZE.SMALL}
           />
           {currentEditPage === editTitleList.profile && <Form currentUser={currentUser} />}
           {currentEditPage === editTitleList.image && <ImageEditForm currentUser={currentUser} />}
@@ -83,7 +64,9 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeV
               {userBall && <BallEditForm userBall={userBall} />}
             </>
           )}
-          {currentEditPage === editTitleList.video && <div>VIDEO</div>}
+          {currentEditPage === editTitleList.video && (
+            <VideoEditForm currentUser={currentUser} checkedVideos={checkedVideos} />
+          )}
           {currentEditPage === editTitleList.result && <div>RESULT</div>}
         </Color>
       </Padding>

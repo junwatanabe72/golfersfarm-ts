@@ -1,7 +1,7 @@
-const facebook = 'https://www.facebook.com/junwatanabe72';
-const twitter = 'https://twitter.com/junwata72';
-const instagram = 'https://www.instagram.com/ruby.on/';
-const youtube = 'https://www.youtube.com/channel/UC-hTmh_CtqIUphbwd8Eu6EQ';
+const facebook = 'junwatanabe72';
+const twitter = 'junwata72';
+const instagram = 'ruby.on';
+const youtube = 'UC-hTmh_CtqIUphbwd8Eu6EQ';
 
 const ImageURL =
   'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';

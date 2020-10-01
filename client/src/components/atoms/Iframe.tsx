@@ -16,9 +16,10 @@ const Container = styled.iframe<{ width: Props['width']; height: Props['height']
         height: ${SIZE.MEDIUM}vw;
       `}
 `;
-
-const Iframe: React.FC<Props> = ({ source, width = SIZE.XSMALL, height = SIZE.XSMALL }) => {
-  return <Container width={width} src={source} height={height} frameBorder="0" />;
+const baseURL = 'https://www.youtube.com/embed/';
+const Iframe: React.FC<Props> = ({ source, width = SIZE.MEDIUM, height = SIZE.SMALL }) => {
+  const youtubeURL = baseURL + source;
+  return <Container width={width} src={youtubeURL} height={height} frameBorder="0" />;
 };
 
 export default Iframe;

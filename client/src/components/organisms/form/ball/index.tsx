@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
-import { checkObject } from '../../../pages/UserEdit';
 import { updateBall } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { media } from '../../../../utils/styled/styledRdesign';
@@ -13,6 +12,7 @@ import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import BallEditFormLayout from './BallEditFormLayout';
+import { checkObject } from '../../../../utils/constant/text/form';
 
 interface Props {
   userBall: BallType;

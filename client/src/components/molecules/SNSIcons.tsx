@@ -18,42 +18,32 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
+type URLS = typeof URLs;
+const URLs = {
+  facebook: 'https://www.facebook.com/',
+  twitter: 'https://twitter.com/',
+  instagram: 'https://www.instagram.com/',
+  youtube: 'https://www.youtube.com/channel/',
+} as const;
 
 const SNS: React.FC<Props> = ({ urls, color, fontSize }) => {
+  const SnsURLs = Object.entries(urls);
   return (
     <Container>
-      <Url to={urls.twitter}>
-        <ComponentFontAwesomeIcon
-          fontSize={fontSize}
-          head={FONTAWEICON.twitter.head}
-          tail={FONTAWEICON.twitter.tail}
-          color={color}
-        />
-      </Url>
-      <Url to={urls.facebook}>
-        <ComponentFontAwesomeIcon
-          fontSize={fontSize}
-          head={FONTAWEICON.facebook.head}
-          tail={FONTAWEICON.facebook.tail}
-          color={color}
-        />
-      </Url>
-      <Url to={urls.instagram}>
-        <ComponentFontAwesomeIcon
-          fontSize={fontSize}
-          head={FONTAWEICON.instagram.head}
-          tail={FONTAWEICON.instagram.tail}
-          color={color}
-        />
-      </Url>
-      <Url to={urls.youtube}>
-        <ComponentFontAwesomeIcon
-          fontSize={fontSize}
-          head={FONTAWEICON.youtube.head}
-          tail={FONTAWEICON.youtube.tail}
-          color={color}
-        />
-      </Url>
+      {SnsURLs.map((value, num) => {
+        return value[1] ? (
+          <Url key={num} to={URLs[value[0] as keyof URLS] + value[1]}>
+            <ComponentFontAwesomeIcon
+              fontSize={fontSize}
+              head={FONTAWEICON[value[0] as keyof URLS].head}
+              tail={FONTAWEICON[value[0] as keyof URLS].tail}
+              color={color}
+            />
+          </Url>
+        ) : (
+          <></>
+        );
+      })}
     </Container>
   );
 };
