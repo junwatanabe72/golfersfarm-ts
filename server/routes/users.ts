@@ -6,6 +6,7 @@ import imagesController from "../controllers/users/imagesController";
 import clubsController from "../controllers/users/clubsController";
 import ballsController from "../controllers/users/ballsController";
 import videosController from "../controllers/users/videosController";
+import resultsController from "../controllers/users/resultsController";
 import passport from "passport";
 
 const storage = multer.diskStorage({
@@ -26,6 +27,7 @@ const getrouters = [
   { path: "/:id/clubs", route: clubsController.index },
   { path: "/:id/ball", route: ballsController.show },
   { path: "/:id/videos", route: videosController.index },
+  { path: "/:id/results", route: resultsController.index },
 ];
 getrouters.forEach((route) => {
   usersRouter.get(route.path, route.route);
@@ -45,6 +47,7 @@ usersRouter.post(
 const postroutersWithAuth = [
   { path: "/:id/clubs/replace", route: clubsController.replace },
   { path: "/:id/videos/replace", route: videosController.replace },
+  { path: "/:id/results/replace", route: resultsController.replace },
   { path: "/:id/clubs", route: clubsController.create },
 ];
 

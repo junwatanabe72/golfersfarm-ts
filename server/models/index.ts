@@ -5,11 +5,13 @@ import User from "./user";
 import Ball from "./ball";
 import Club from "./club";
 import Video from "./video";
+import Result from "./result";
 import Shaft from "./shaft";
 import Maker from "./maker";
 import ClubType from "./clubType";
 import UserClubs from "./user_clubs";
 import UserVideos from "./user_videos";
+import UserResults from "./user_results";
 
 dotenv.config();
 
@@ -24,11 +26,13 @@ const db: dbType = {
   Ball: Ball.initialize(sequelize),
   Club: Club.initialize(sequelize),
   Video: Video.initialize(sequelize),
+  Result: Result.initialize(sequelize),
   Shaft: Shaft.initialize(sequelize),
   Maker: Maker.initialize(sequelize),
   ClubType: ClubType.initialize(sequelize),
   UserClubs: UserClubs.initialize(sequelize),
   UserVideos: UserVideos.initialize(sequelize),
+  UserResults: UserResults.initialize(sequelize),
 };
 
 interface dbType {
