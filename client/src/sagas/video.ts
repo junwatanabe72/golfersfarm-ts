@@ -3,12 +3,15 @@ import { addVideos, removeVideos, ACTIONTYPES } from '../actions/index';
 import { getVideosAxios, updateVideosAxios } from '../services/axios/video';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
+import { push } from 'connected-react-router';
 
 function* updateVideosAsync(action: Action<PartialArrayVideoType>) {
   let videos: ObjectVideoType = {};
   let deleteVideos: PartialObjectVideoType = {};
+  const userId = action.payload[0].userId;
   try {
     const { data } = yield call(updateVideosAxios, action.payload);
+
     if (!data.updateVideos) {
       yield toast.error('失敗しました。', options);
       return;
@@ -29,6 +32,7 @@ function* updateVideosAsync(action: Action<PartialArrayVideoType>) {
     yield put(removeVideos(deleteVideos));
     yield put(addVideos(videos));
     yield toast.success('編集に成功しました。', options);
+    yield put(push(`/users/${userId}`));
     return;
   } catch (e) {
     yield toast.error('失敗しました。', options);

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BASICCOLORS } from '../../../utils/constant/color';
 import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
-import VideoPosition from '../../molecules/VideoPosition';
+import VideoContents from './VideoContents';
 import { Padding } from '../../../utils/styled/styledSpace';
 import Table from '../../molecules/table';
 import Image from '../../atoms/Image';
@@ -18,6 +18,7 @@ import {
   ballTableItems,
 } from '../../../utils/constant/text/table';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
+import { editTitleList } from '../../../utils/constant/text/common';
 
 interface Props {
   targetUser: PartialUserType;
@@ -39,7 +40,7 @@ const PaddingExtend = styled(Padding)`
   padding-top: ${CLEAR.TINY}vw;
   padding-right: ${CLEAR.TINY}vw;
 `;
-const StyledFlex = styled.div`
+const Center = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,57 +51,68 @@ const StyledFlexColumn = styled.div`
 `;
 const clubTableTitle = '使用クラブ';
 const ballTableTitle = '使用ボール';
-const URL = 'https://www.youtube.com/embed/wet97FIk2iY';
-const videos = [URL, URL, URL, URL];
 
-const UserSub: React.FC<Props> = ({ targetUser, checkedClubs, userBall }) => {
-  const rightContent = (
-    <StyledFlexColumn>
-      <Table
-        datas={checkedClubs}
-        width={SIZE.SMALL}
-        type={TABLETYPES.HORIZONTAL}
-        tableItems={gearTableItems}
-        title={clubTableTitle}
+const titles = Object.values(editTitleList).filter((value) => {
+  if (value === 'IMAGE') {
+    return;
+  }
+  return value;
+});
+const UserSub: React.FC<Props> = ({ targetUser, checkedClubs, userBall, checkedVideos }) => {
+  type Contents = typeof contents;
+  const contents = {
+    PROFILE: (
+      <Table datas={targetUser} type={TABLETYPES.VERTICAL} tableItems={profileTableSubItems} />
+    ),
+    GEAR: (
+      <FlexLayout
+        left={
+          <Center>
+            <PaddingExtend>
+              <Image image={targetUser.clubImage} width={SIZE.XSMALLMD} />
+            </PaddingExtend>
+          </Center>
+        }
+        right={
+          <StyledFlexColumn>
+            <Table
+              datas={checkedClubs}
+              width={SIZE.SMALL}
+              type={TABLETYPES.HORIZONTAL}
+              tableItems={gearTableItems}
+              title={clubTableTitle}
+            />
+            <Padding top={CLEAR.TINY} />
+            {userBall && (
+              <Table
+                datas={userBall}
+                width={SIZE.XSMALL}
+                type={TABLETYPES.HORIZONTAL}
+                tableItems={ballTableItems}
+                title={ballTableTitle}
+              />
+            )}
+          </StyledFlexColumn>
+        }
+        alignItems={ALIGNITEMS.CENTER}
       />
-      <Padding top={CLEAR.TINY} />
-      {userBall && (
-        <Table
-          datas={userBall}
-          width={SIZE.XSMALL}
-          type={TABLETYPES.HORIZONTAL}
-          tableItems={ballTableItems}
-          title={ballTableTitle}
-        />
-      )}
-    </StyledFlexColumn>
-  );
-
-  const leftContent = (
-    <StyledFlex>
-      <PaddingExtend>
-        <Image image={targetUser.clubImage} width={SIZE.XSMALLMD} />
-      </PaddingExtend>
-    </StyledFlex>
-  );
+    ),
+    VIDEO: <VideoContents videos={checkedVideos} />,
+    RESULT: <Table datas={allResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />,
+  };
 
   return (
     <Container>
-      <Card color={BASICCOLORS.WHITELIGHT} title={'PROFILE'}>
-        <Table datas={targetUser} type={TABLETYPES.VERTICAL} tableItems={profileTableSubItems} />
-      </Card>
-      <Padding all={CLEAR.TINY} />
-      <Card color={BASICCOLORS.WHITELIGHT} title={'GEAR'} textAlign={ALIGNITEMS.START}>
-        <FlexLayout left={leftContent} right={rightContent} alignItems={ALIGNITEMS.CENTER} />
-      </Card>
-      <Padding all={CLEAR.TINY} />
-      <Card color={BASICCOLORS.WHITELIGHT} title={'SWING'}>
-        <VideoPosition videos={videos} />
-      </Card>
-      <Padding all={CLEAR.TINY} />
-      <Card color={BASICCOLORS.WHITELIGHT} title={'RESULT'}>
-        <Table datas={allResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />
-      </Card>
+      {titles.map((value, num) => {
+        return (
+          <React.Fragment key={num}>
+            <Card color={BASICCOLORS.WHITELIGHT} title={value} textAlign={ALIGNITEMS.START}>
+              {contents[value as keyof Contents]}
+            </Card>
+            <Padding all={CLEAR.TINY} />
+          </React.Fragment>
+        );
+      })}
     </Container>
   );
 };

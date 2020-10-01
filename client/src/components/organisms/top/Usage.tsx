@@ -8,6 +8,7 @@ import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { TopUsageText } from '../../../utils/constant/text/body/top/text';
 import { Padding } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
+import { editTitleList } from '../../../utils/constant/text/common';
 
 const Layout = styled.div<{ layout: string }>`
   display: flex;
@@ -26,7 +27,7 @@ const FixedColumn = styled.div`
   border-radius: 4px;
 `;
 
-const mainText = TopUsageText.UsageItem.map((t: string, i: number) => {
+const mainText = Object.values(editTitleList).map((t: string, i: number) => {
   return (
     <Padding left={CLEAR.XSMALL} right={CLEAR.XSMALL} bottom={CLEAR.BASE}>
       <FixedColumn>

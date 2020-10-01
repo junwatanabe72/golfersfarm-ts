@@ -5,13 +5,13 @@ const sample = {
     id: 5,
     name: 'swing真横',
     userId: 1,
-    url: 'wet97FIk2iY',
+    url: 'https://www.youtube.com/embed/wet97FIk2iY',
   },
   7: {
     id: 7,
     name: 'swing真横',
     userId: 1,
-    url: 'wet97FIk2iY',
+    url: 'https://www.youtube.com/embed/wet97FIk2iY',
   },
 };
 const initialState: ObjectVideoType = {};

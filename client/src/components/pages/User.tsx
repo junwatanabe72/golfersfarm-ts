@@ -39,19 +39,21 @@ const User: React.FC<Props> = ({
   const userBall: BallType | undefined = Object.values(storeBalls).find(
     (ball: BallType) => ball.userId === targetUser.id
   );
-  const rightContent = (
-    <UserSub
-      targetUser={targetUser}
-      checkedClubs={checkedClubs}
-      userBall={userBall}
-      checkedVideos={checkedVideos}
-    />
-  );
-  const leftContent = <UserMain targetUser={targetUser} />;
+
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
-        <FlexLayout left={leftContent} right={rightContent} />
+        <FlexLayout
+          left={<UserMain targetUser={targetUser} />}
+          right={
+            <UserSub
+              targetUser={targetUser}
+              checkedClubs={checkedClubs}
+              userBall={userBall}
+              checkedVideos={checkedVideos}
+            />
+          }
+        />
       </Padding>
     </Layout>
   );
