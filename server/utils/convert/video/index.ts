@@ -1,5 +1,3 @@
-const youtube = "https://www.youtube.com/embed/";
-
 // index
 export const convertArrayVideoDataToClient = (data: any[]) => {
   const AllVideos = data.map((value: any) => {

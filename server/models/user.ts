@@ -1,6 +1,7 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import Ball from "./ball";
 import UserClubs from "./user_clubs";
+import UserResults from "./user_results";
 import UserVideos from "./user_videos";
 
 class User extends Model {
@@ -120,6 +121,11 @@ class User extends Model {
     this.hasMany(UserVideos, {
       sourceKey: "id",
       foreignKey: "videoId",
+      constraints: false,
+    });
+    this.hasMany(UserResults, {
+      sourceKey: "id",
+      foreignKey: "resultId",
       constraints: false,
     });
   }
