@@ -2,7 +2,6 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 import Ball from "./ball";
 import UserClubs from "./user_clubs";
 import UserVideos from "./user_videos";
-import { convertSnsUrl } from "../utils/convert/user/convert";
 
 class User extends Model {
   public id!: number;
@@ -26,8 +25,6 @@ class User extends Model {
   public show!: boolean;
 
   static async add(user: User) {
-    // snsURLを加工する関数
-    convertSnsUrl(user);
     const newUser = await this.create({
       ...user,
     });
@@ -35,8 +32,6 @@ class User extends Model {
   }
 
   static async updateProfile(id: string, user: any) {
-    // snsURLを加工する関数
-    convertSnsUrl(user);
     const targetUser: any = await this.findOne({
       where: { id: id },
     });

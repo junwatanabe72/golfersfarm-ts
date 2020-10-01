@@ -36,7 +36,7 @@ export const convertVideoDataToClient = (data: any) => {
     id,
     userId,
     name,
-    url: youtube + url,
+    url,
   };
   return video;
 };
@@ -52,7 +52,7 @@ export const convertCreateVideoDataToClient = async (data: any) => {
     id,
     name,
     userId,
-    url: youtube + url,
+    url,
   };
   return video;
 };

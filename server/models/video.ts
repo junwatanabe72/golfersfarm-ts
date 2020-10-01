@@ -2,7 +2,6 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 import User from "./user";
 import UserVideos from "./user_videos";
 
-const baseURL = "https://www.youtube.com/embed/";
 class Video extends Model {
   public id!: number;
   public name!: string;
@@ -16,7 +15,6 @@ class Video extends Model {
       const newVideo = await this.create(
         {
           ...video,
-          url: baseURL + video.url,
         },
         { transaction: t }
       );
@@ -59,7 +57,6 @@ class Video extends Model {
       const newVideo = await this.create(
         {
           ...newVideoData,
-          url: baseURL + newVideoData.url,
         },
         { transaction: t }
       );
