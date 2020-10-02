@@ -24,7 +24,7 @@ interface Props {
 
 const StyledField = styled.input`
   width: ${SIZE.SXMALL}vw;
-  font-size: ${FONTSIZE.MEDIUM}px;
+  font-size: ${FONTSIZE.BASE}px;
   padding: ${CLEAR.TINY}vw 0px;
   border-radius: 6px;
   border-width: 1px;
@@ -39,7 +39,7 @@ const StyledField = styled.input`
 
 const StyledSelect = styled.select`
   width: ${SIZE.SXMALL}vw;
-  font-size: ${FONTSIZE.MEDIUM}px;
+  font-size: ${FONTSIZE.BASE}px;
   padding: ${CLEAR.TINY}vw 0px;
   border-radius: 6px;
   border-width: 1px;

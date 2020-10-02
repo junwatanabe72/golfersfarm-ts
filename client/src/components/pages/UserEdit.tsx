@@ -7,8 +7,9 @@ import ImageEditForm from '../organisms/form/image';
 import ClubEditForm from '../organisms/form/club';
 import BallEditForm from '../organisms/form/ball';
 import VideoEditForm from '../organisms/form/video';
+import ResultEditForm from '../organisms/form/result';
 import ItemList from '../molecules/ItemList';
-import { getClubs, getBall, getVideos } from '../../actions';
+import { getClubs, getBall, getVideos, getResults } from '../../actions';
 import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
@@ -19,12 +20,19 @@ interface Props {
   storeClubs: ObjectClubType;
   storeBalls: ObjectBallType;
   storeVideos: ObjectVideoType;
+  storeResults: ObjectResultType;
 }
 const Color = styled.div`
   background-color: ${BASICCOLORS.WHITELIGHT};
 `;
 
-const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeVideos }) => {
+const UserEdit: React.FC<Props> = ({
+  currentUser,
+  storeClubs,
+  storeBalls,
+  storeVideos,
+  storeResults,
+}) => {
   const [currentEditPage, setEditPage] = useState<string>(editTitleList.profile);
   const moveEditPage = (value: string) => {
     setEditPage(value);
@@ -34,6 +42,7 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeV
     dispatch(getClubs(currentUser));
     dispatch(getVideos(currentUser));
     dispatch(getBall(currentUser));
+    dispatch(getResults(currentUser));
   }, []);
 
   const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
@@ -41,6 +50,9 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeV
   );
   const checkedVideos: ArrayVideoType = Object.values(storeVideos).filter(
     (video: VideoType) => video.userId === currentUser.id
+  );
+  const checkedResults: ArrayResultType = Object.values(storeResults).filter(
+    (result: ResultType) => result.userId === currentUser.id
   );
   const userBall: BallType | undefined = Object.values(storeBalls).find(
     (ball: BallType) => ball.userId === currentUser.id
@@ -67,7 +79,9 @@ const UserEdit: React.FC<Props> = ({ currentUser, storeClubs, storeBalls, storeV
           {currentEditPage === editTitleList.video && (
             <VideoEditForm currentUser={currentUser} checkedVideos={checkedVideos} />
           )}
-          {currentEditPage === editTitleList.result && <div>RESULT</div>}
+          {currentEditPage === editTitleList.result && (
+            <ResultEditForm currentUser={currentUser} checkedResults={checkedResults} />
+          )}
         </Color>
       </Padding>
     </Layout>

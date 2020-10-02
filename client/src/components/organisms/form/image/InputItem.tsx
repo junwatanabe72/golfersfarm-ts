@@ -15,7 +15,7 @@ interface Props {
 }
 
 const StyledField = styled.input`
-  font-size: ${FONTSIZE.SMALL}px;
+  font-size: ${FONTSIZE.BASE}px;
   ${media.tablet`
       width: ${SIZE.MEDIUMLARGE}vw;
       `}
