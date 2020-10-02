@@ -7,6 +7,8 @@ export const ACTIONTYPES = {
   REMOVE_CLUBS: 'REMOVE_CLUBS',
   ADD_VIDEOS: 'ADD_VIDEOS',
   REMOVE_VIDEOS: 'REMOVE_VIDEOS',
+  ADD_RESULTS: 'ADD_RESULTS',
+  REMOVE_RESULTS: 'REMOVE_RESULTS',
   ADD_BALL: 'ADD_BALL',
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
@@ -25,6 +27,8 @@ export const ACTIONTYPES = {
   UPDATE_VIDEOS: 'UPDATE_VIDEOS',
   REQUESTED_BALL: 'REQUESTED_BALL',
   UPDATE_BALL: 'UPDATE_BALL',
+  REQUESTED_RESULTS: 'REQUESTED_RESULTS',
+  UPDATE_RESULTS: 'UPDATE_RESULTS',
   //
 } as const;
 
@@ -68,6 +72,12 @@ export function getBall(data: PartialUserType): Action<PartialUserType> {
 export function updateBall(data: BallType): Action<BallType> {
   return { type: ACTIONTYPES.UPDATE_BALL, payload: data };
 }
+export function getResults(data: PartialUserType): Action<PartialUserType> {
+  return { type: ACTIONTYPES.REQUESTED_RESULTS, payload: data };
+}
+export function updateResults(data: PartialArrayResultType): Action<PartialArrayResultType> {
+  return { type: ACTIONTYPES.UPDATE_RESULTS, payload: data };
+}
 //REDUX_SAGA
 
 export function addUser(data: PartialUserType): Action<PartialUserType> {
@@ -93,6 +103,12 @@ export function addVideos(data: ObjectVideoType): Action<ObjectVideoType> {
 }
 export function removeVideos(data: PartialObjectVideoType): Action<PartialObjectVideoType> {
   return { type: ACTIONTYPES.REMOVE_VIDEOS, payload: data };
+}
+export function addResults(data: ObjectResultType): Action<ObjectResultType> {
+  return { type: ACTIONTYPES.ADD_RESULTS, payload: data };
+}
+export function removeResults(data: PartialObjectResultType): Action<PartialObjectResultType> {
+  return { type: ACTIONTYPES.REMOVE_RESULTS, payload: data };
 }
 //ballsActionCreater
 export function addBall(data: ObjectBallType): Action<ObjectBallType> {

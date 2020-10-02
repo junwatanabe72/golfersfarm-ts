@@ -12,9 +12,10 @@ export const profileTableSubItems = {
   hobby: '趣味',
 };
 export const resultTableItems = {
-  year: '年',
-  com: '競技',
+  date: '日程',
+  name: '競技名',
   rank: '順位',
+  url: '詳細結果',
 };
 
 export const gearTableItems = {
