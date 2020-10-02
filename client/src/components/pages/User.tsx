@@ -4,7 +4,7 @@ import UserMain from '../organisms/user/Main';
 import UserSub from '../organisms/user/Sub';
 import Layout from '../templates/Layout';
 import { CLEAR } from '../../utils/constant/number';
-import { getClubs, getBall, getVideos } from '../../actions';
+import { getClubs, getBall, getVideos, getResults } from '../../actions';
 import { Padding } from '../../utils/styled/styledSpace';
 import FlexLayout from '../atoms/FlexLayout';
 
@@ -14,6 +14,7 @@ interface Props {
   storeClubs: ObjectClubType;
   storeBalls: ObjectBallType;
   storeVideos: ObjectVideoType;
+  storeResults: ObjectResultType;
 }
 
 const User: React.FC<Props> = ({
@@ -22,12 +23,14 @@ const User: React.FC<Props> = ({
   storeClubs,
   storeBalls,
   storeVideos,
+  storeResults,
 }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getClubs(targetUser));
     dispatch(getVideos(targetUser));
     dispatch(getBall(targetUser));
+    dispatch(getResults(targetUser));
   }, []);
 
   const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
@@ -35,6 +38,9 @@ const User: React.FC<Props> = ({
   );
   const checkedVideos: ArrayVideoType = Object.values(storeVideos).filter(
     (video: VideoType) => video.userId === targetUser.id
+  );
+  const checkedResults: ArrayResultType = Object.values(storeResults).filter(
+    (result: ResultType) => result.userId === targetUser.id
   );
   const userBall: BallType | undefined = Object.values(storeBalls).find(
     (ball: BallType) => ball.userId === targetUser.id
@@ -51,6 +57,7 @@ const User: React.FC<Props> = ({
               checkedClubs={checkedClubs}
               userBall={userBall}
               checkedVideos={checkedVideos}
+              checkedResults={checkedResults}
             />
           }
         />
