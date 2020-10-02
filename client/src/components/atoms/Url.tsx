@@ -10,7 +10,7 @@ const StyledDisplay = styled.div<{ to: Props['to'] }>`
 `;
 
 const checkedDisplay = (props: Props['to']) => {
-  if (props === '') {
+  if (!props) {
     return `
       display: none;
       `;

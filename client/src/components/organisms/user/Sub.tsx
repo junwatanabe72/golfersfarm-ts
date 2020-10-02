@@ -24,6 +24,7 @@ interface Props {
   targetUser: PartialUserType;
   checkedClubs: ArrayClubType;
   checkedVideos: ObjectVideoType;
+  checkedResults: ArrayResultType;
   userBall: BallType | undefined;
 }
 
@@ -58,7 +59,13 @@ const titles = Object.values(editTitleList).filter((value) => {
   }
   return value;
 });
-const UserSub: React.FC<Props> = ({ targetUser, checkedClubs, userBall, checkedVideos }) => {
+const UserSub: React.FC<Props> = ({
+  targetUser,
+  checkedClubs,
+  userBall,
+  checkedVideos,
+  checkedResults,
+}) => {
   type Contents = typeof contents;
   const contents = {
     PROFILE: (
@@ -98,7 +105,9 @@ const UserSub: React.FC<Props> = ({ targetUser, checkedClubs, userBall, checkedV
       />
     ),
     VIDEO: <VideoContents videos={checkedVideos} />,
-    RESULT: <Table datas={allResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />,
+    RESULT: (
+      <Table datas={checkedResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />
+    ),
   };
 
   return (
