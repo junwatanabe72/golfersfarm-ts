@@ -13,10 +13,7 @@ import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/st
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { checkObject } from '../../../../utils/constant/text/form';
-
-type FormikValueType = {
-  formikVideos: ArrayVideoType;
-};
+import { nameValidation, urlValidation } from '../../../../validations';
 
 interface Props {
   checkedVideos: ArrayVideoType;
@@ -32,14 +29,13 @@ const editTitles = 'youtube動画';
 const editSubTitles = '登録動画';
 const AddButtonText = ['動画を追加'];
 const buttonValue = '動画を登録・削除する。';
-const formikKey = 'formikVideos';
 
 const videoValidation = () =>
   yup.object({
     formikVideos: yup.array().of(
       yup.object().shape({
-        name: yup.string().required('必須項目です').max(15, '15字以下にしてください。'),
-        url: yup.string().required('必須項目です'),
+        name: nameValidation(),
+        url: urlValidation(),
       })
     ),
   });
@@ -48,11 +44,12 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, checkedVideos }) => {
   const arrayDatas = Object.values(checkedVideos);
   const dispatch = useDispatch();
   const addItem = { name: '', userId: currentUser.id, url: '' };
-  const initialValuesData = { formikVideos: arrayDatas };
+  const initialValuesData = { formikValues: arrayDatas };
+  const formikKey = Object.keys(initialValuesData)[0];
 
-  const onSubmit = (values: FormikValueType) => {
+  const onSubmit = (values: FormikValueType<ArrayVideoType>) => {
     let editVideos: PartialArrayVideoType = [];
-    const submitVideos = values.formikVideos;
+    const submitVideos = values.formikValues;
     // ojbectに変化がなければ、return
     const storeVideosJsonData = checkedVideos.map((value) => {
       return JSON.stringify(checkObject(value));
@@ -85,7 +82,7 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, checkedVideos }) => {
   };
 
   return (
-    <Formik<FormikValueType>
+    <Formik<FormikValueType<ArrayVideoType>>
       initialValues={initialValuesData}
       validationSchema={videoValidation}
       onSubmit={onSubmit}
@@ -115,7 +112,11 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, checkedVideos }) => {
                           left={CLEAR.SMALL}
                           bottom={CLEAR.TINY}
                         >
-                          <VideoEditFormItem remove={remove} currentVideos={arrayDatas} />
+                          <VideoEditFormItem
+                            remove={remove}
+                            currentVideos={arrayDatas}
+                            formikKey={formikKey}
+                          />
                           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
                             <Button
                               color={BASICCOLORS.WHITE}

@@ -14,3 +14,38 @@ export const checkObject = (obj: { [key: string]: string | number }) => {
   });
   return map;
 };
+
+export const unchangedValues = (
+  current: { [key: string]: string | number }[],
+  submit: { [key: string]: string | number }[]
+): boolean => {
+  const storeClubsJsonData = Object.values(current).map((value) => {
+    return JSON.stringify(checkObject(value));
+  });
+  const unchanged = Object.values(submit).map((value, num: number) => {
+    const data = JSON.stringify(checkObject(value));
+    return storeClubsJsonData[num] === data;
+  });
+  if (unchanged && submit.length === current.length) {
+    return true;
+  }
+  return false;
+};
+
+export const deleteValues = (
+  current: { [key: string]: string | number }[],
+  submit: { [key: string]: string | number }[]
+) => {
+  const submitValuesIds = Object.values(submit).map((value) => {
+    return value.id;
+  });
+  const values = Object.values(current)
+    .filter((value) => {
+      const data = submitValuesIds.includes(value.id);
+      return !data;
+    })
+    .map((value) => {
+      return { ...value, name: undefined };
+    });
+  return values;
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useField } from 'formik';
+import { useField, ErrorMessage } from 'formik';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
@@ -51,14 +51,10 @@ const StyledSelect = styled.select`
       font-size: 1px;
       `}
 `;
-const Styleddiv = styled.div`
+const StyledDiv = styled.div`
   margin: 0 auto;
   font-size: 1px;
   color: ${BASICCOLORS.SECONDARYDARK};
-`;
-
-const Inline = styled.div`
-  font-size: ${FONTSIZE.SMALL}px;
 `;
 
 const thisYear = new Date().getFullYear();
@@ -81,7 +77,6 @@ const selectRank: string[] = [...Array(100)].map((_, i) => {
 
 const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, remove }) => {
   type OptionDatasValue = typeof optionDatas;
-  const [, meta] = useField(name);
 
   const optionDatas = {
     date: selectYears,
@@ -99,7 +94,9 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
           onChange={onChange}
           value={result[arg]}
         />
-        {meta.touched && meta.error ? <Styleddiv>{meta.error}</Styleddiv> : null}
+        <StyledDiv>
+          <ErrorMessage name={name} />
+        </StyledDiv>
       </>
     ),
     url: (
@@ -111,7 +108,9 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
           onChange={onChange}
           value={result[arg]}
         />
-        {meta.touched && meta.error ? <Styleddiv>{meta.error}</Styleddiv> : null}
+        <StyledDiv>
+          <ErrorMessage name={name} />
+        </StyledDiv>
       </>
     ),
     button: (

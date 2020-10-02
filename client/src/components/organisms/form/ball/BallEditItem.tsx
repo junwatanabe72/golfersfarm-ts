@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FormikTouched, FormikErrors } from 'formik';
+import { FormikTouched, FormikErrors, ErrorMessage } from 'formik';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { ballTableItems } from '../../../../utils/constant/text/table';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
@@ -51,24 +51,17 @@ const StyledSelect = styled.select`
       width: ${SIZE.SMALL}vw;
       `}
 `;
-
-const Styleddiv = styled.div`
+const StyledDiv = styled.div`
   margin: 0 auto;
   font-size: 1px;
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
+
 const optionDatasKey = {
   maker: 'name',
 } as const;
 
-const BallEditItem: React.FC<Props> = ({
-  formikBall,
-  valueKey,
-  optionDatas,
-  touched,
-  errors,
-  onChange,
-}) => {
+const BallEditItem: React.FC<Props> = ({ formikBall, valueKey, optionDatas, onChange }) => {
   const selectKey = optionDatasKey[valueKey as keyof OptionDatasKey];
   const item = {
     name: (
@@ -80,7 +73,9 @@ const BallEditItem: React.FC<Props> = ({
           onChange={onChange}
           value={formikBall[valueKey]}
         />
-        {touched[valueKey] && errors[valueKey] ? <Styleddiv>{errors[valueKey]}</Styleddiv> : null}
+        <StyledDiv>
+          <ErrorMessage name={valueKey} />
+        </StyledDiv>
       </>
     ),
     maker: (

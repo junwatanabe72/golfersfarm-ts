@@ -20,3 +20,7 @@ interface ProfileEditDataType {
   show: string;
   confirmedPassword: string;
 }
+
+interface FormikValueType<T> {
+  formikValues: T;
+}
