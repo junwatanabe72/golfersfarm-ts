@@ -1,14 +1,15 @@
-interface resultObjectType {
+interface ResultType {
   id: number;
-  year: string;
-  com: string;
+  userId: number;
+  date: number;
   rank: string;
-  [key: string]: string;
+  name: string;
+  url: string;
+  [key: string]: string | number;
 }
-type PartialResultObjectType = Partial<resultObjectType>;
-type resultTableTypes = resultObjectType[];
-type PartialResultTableTypes = Partial<resultTableTypes>;
+type ArrayResultType = ResultType[];
+type ObjectResultType = { [key: number]: ResultType };
 
-interface TableDataTypes {
-  datas: clubTableTypes | userObjectType | resultTableTypes;
-}
+type PartialResultType = Partial<ResultType>;
+type PartialArrayResultType = PartialResultType[];
+type PartialObjectResultType = { [key: number]: PartialResultType };

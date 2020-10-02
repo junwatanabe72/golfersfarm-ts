@@ -36,6 +36,7 @@ const App: React.FC<Props> = ({}) => {
   // const shafts = useSelector((state: State) => state.shafts);
   // const types = useSelector((state: State) => state.types);
   const storeClubs = useSelector((state: State) => state.clubs);
+  const storeResults = useSelector((state: State) => state.results);
   const storeVideos = useSelector((state: State) => state.videos);
   const storeBalls = useSelector((state: State) => state.balls);
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const App: React.FC<Props> = ({}) => {
                 storeClubs={storeClubs}
                 storeBalls={storeBalls}
                 storeVideos={storeVideos}
+                storeResults={storeResults}
               />
             ) : (
               <User
@@ -66,6 +68,7 @@ const App: React.FC<Props> = ({}) => {
                 storeClubs={storeClubs}
                 storeBalls={storeBalls}
                 storeVideos={storeVideos}
+                storeResults={storeResults}
               />
             )
           }
@@ -80,6 +83,7 @@ const App: React.FC<Props> = ({}) => {
                 storeClubs={storeClubs}
                 storeBalls={storeBalls}
                 storeVideos={storeVideos}
+                storeResults={storeResults}
               />
             ) : (
               <Redirect to={ROUTE.TOP} />
