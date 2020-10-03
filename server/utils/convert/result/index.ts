@@ -2,13 +2,14 @@
 export const convertToClientIndex = (data: any[]) => {
   const allResults = data.map((value: any) => {
     const { Result, userId } = value;
-    const { id, name, url, date, rank } = Result;
+    const { id, name, url, year, month, rank } = Result;
     const result = {
       id,
       name,
       url,
       rank,
-      date,
+      year,
+      month,
       userId,
     };
     return result;
@@ -18,13 +19,14 @@ export const convertToClientIndex = (data: any[]) => {
 
 // replace
 export const convertToServerReplace = (data: any) => {
-  const { id, name, date, rank, url } = data;
+  const { id, name, year, month, rank, url } = data;
 
   const result = {
     id: id || undefined,
     name: name || undefined,
     url,
-    date,
+    year,
+    month,
     rank,
   };
   return result;
@@ -33,13 +35,14 @@ export const convertToServerReplace = (data: any) => {
 export const convertToClientReplace = (data: any) => {
   const { newResult, newUserResults } = data;
   const { userId } = newUserResults;
-  const { id, name, url, date, rank } = newResult;
+  const { id, name, url, year, month, rank } = newResult;
   const result = {
     id,
     name,
     userId,
     url,
-    date,
+    year,
+    month,
     rank,
   };
   return result;
