@@ -3,22 +3,19 @@ export const FORMTYPES = {
   USERPROFILE: 'USERPROFILE',
 } as const;
 
-export const checkObject = (obj: { [key: string]: string | number }) => {
+export function checkObject<T>(obj: T) {
   // まずキーのみをソートする
   const keys = Object.keys(obj).sort();
   // 返却する空のオブジェクトを作る
-  let map: { [key: string]: string | number } = {};
+  let map: Partial<T> = {};
   // ソート済みのキー順に返却用のオブジェクトに値を格納する
   keys.forEach((key) => {
-    map[key] = obj[key];
+    map[key as keyof T] = obj[key as keyof T];
   });
   return map;
-};
+}
 
-export const unchangedValues = (
-  current: { [key: string]: string | number }[],
-  submit: { [key: string]: string | number }[]
-): boolean => {
+export function unchangedValues<T, K>(current: T[], submit: K[]): boolean {
   const storeClubsJsonData = Object.values(current).map((value) => {
     return JSON.stringify(checkObject(value));
   });
@@ -30,12 +27,12 @@ export const unchangedValues = (
     return true;
   }
   return false;
-};
+}
 
-export const deleteValues = (
-  current: { [key: string]: string | number }[],
-  submit: { [key: string]: string | number }[]
-) => {
+export function deleteValues<T extends { id: number }, K extends { id: number }>(
+  current: T[],
+  submit: K[]
+) {
   const submitValuesIds = Object.values(submit).map((value) => {
     return value.id;
   });
@@ -48,4 +45,4 @@ export const deleteValues = (
       return { ...value, name: undefined };
     });
   return values;
-};
+}
