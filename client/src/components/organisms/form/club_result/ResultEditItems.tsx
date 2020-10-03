@@ -21,7 +21,7 @@ interface Props {
 }
 
 const StyledField = styled.input`
-  width: ${SIZE.XXXSMALL}vw;
+  width: ${SIZE.XXSMALL}vw;
   font-size: ${FONTSIZE.BASE}px;
   padding: ${CLEAR.TINY}vw 0px;
   border-radius: 6px;
@@ -37,7 +37,7 @@ const StyledField = styled.input`
 `;
 
 const StyledSelect = styled.select`
-  width: ${SIZE.XXXSMALL}vw;
+  width: ${SIZE.TINY}vw;
   font-size: ${FONTSIZE.BASE}px;
   padding: ${CLEAR.TINY}vw 0px;
   border-radius: 6px;
@@ -47,8 +47,22 @@ const StyledSelect = styled.select`
     background-color: #f5f5f5;
   }
   ${media.tablet`
-      width: ${SIZE.XXSMALL}vw;
+      width: ${SIZE.XXXSMALL}vw;
       font-size: 1px;
+      `}
+`;
+const StyledBox = styled.input`
+  width: ${SIZE.TINY}vw;
+  // padding: ${CLEAR.TINY}vw 0px;
+  // border-radius: 6px;
+  // border-width: 1px;
+  // border: 1px solid #ccc;
+  // &:hover {
+  //   background-color: #f5f5f5;
+  // }
+  ${media.tablet`
+      width: ${SIZE.TINY}vw;
+      // font-size: 1px;
       `}
 `;
 const StyledDiv = styled.div`
@@ -58,6 +72,7 @@ const StyledDiv = styled.div`
 `;
 
 const thisYear = new Date().getFullYear();
+const thisMonth = new Date().getMonth() + 1;
 let initYear = 1980;
 const selectYears: number[] = [...Array(thisYear - initYear + 1)]
   .map((_, i) => {
@@ -67,7 +82,7 @@ const selectYears: number[] = [...Array(thisYear - initYear + 1)]
     return b - a;
   });
 let initMonth = 1;
-const selectMonth: number[] = [...Array(12)].map((_, i) => {
+const selectMonths: number[] = [...Array(12)].map((_, i) => {
   return initMonth + i;
 });
 let initRank = 1;
@@ -79,11 +94,10 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
   type OptionDatasValue = typeof optionDatas;
 
   const optionDatas = {
-    date: selectYears,
-    month: selectMonth,
+    year: selectYears,
+    month: selectMonths,
     rank: selectRank,
   };
-
   const items = {
     name: (
       <>
@@ -126,12 +140,39 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
         ×
       </Button>
     ),
+    tie: (
+      <>
+        {result[arg] ? (
+          <>
+            <StyledBox
+              type={'radio'}
+              name={name}
+              onChange={onChange}
+              value={result[arg]}
+              checked={true}
+            />
+            <StyledBox type={'radio'} name={name} onChange={onChange} value={''} />
+          </>
+        ) : (
+          <>
+            <StyledBox type={'radio'} name={name} onChange={onChange} value={'T'} />
+            <StyledBox
+              type={'radio'}
+              name={name}
+              onChange={onChange}
+              value={result[arg]}
+              checked={true}
+            />
+          </>
+        )}
+      </>
+    ),
     other: (
       <StyledSelect name={name} onChange={onChange}>
-        <option value={arg}>{result[arg]}</option>
+        <option value={result[arg]}>{result[arg]}</option>
         {optionDatas[arg as keyof OptionDatasValue] &&
           Object.values(optionDatas[arg as keyof OptionDatasValue]).map(
-            (data: any, num: number) => {
+            (data: number | string, num: number) => {
               return result[arg] !== data ? (
                 <option key={num} value={data}>
                   {data}

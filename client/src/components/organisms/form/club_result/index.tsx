@@ -36,12 +36,30 @@ const StyledLabel = styled.label`
   color: ${BASICCOLORS.BASICDARK};
 `;
 
+const thisYear = new Date().getFullYear();
+const thisMonth = new Date().getMonth() + 1;
+
 const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) => {
   const dispatch = useDispatch();
 
   const addItem = {
-    club: { name: '', userId: currentUser.id, type: '', maker: '', shaft: '', flex: '' },
-    result: { name: '', userId: currentUser.id, url: '', date: '', rank: '' },
+    club: {
+      name: '',
+      userId: currentUser.id,
+      type: '1WOOD',
+      maker: 'Mizuno',
+      shaft: 'TOUR AD DI-7',
+      flex: 'R',
+    },
+    result: {
+      name: '',
+      userId: currentUser.id,
+      url: '',
+      year: 2020,
+      month: thisMonth,
+      tie: '',
+      rank: '1',
+    },
   };
   const editTitles = { club: 'クラブ', result: '競技実績' };
   const editSubTitles = { club: '使用クラブ', result: '競技結果' };
@@ -87,13 +105,14 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) =
       let editValues: PartialArrayResultType = [];
       const submitValues = values.formikValues;
       // ojbectに変化がなければ、return
+      console.log(submitValues);
+      console.log(currentValues);
       if (unchangedValues(currentValues, submitValues)) {
         return;
       }
       const deleteTargetValues = deleteValues(currentValues, submitValues);
       //update,create,deleteするResultを配列にする。
       editValues = [...submitValues, ...deleteTargetValues];
-      console.log(editValues);
       dispatch(updateResults(editValues));
     },
   };

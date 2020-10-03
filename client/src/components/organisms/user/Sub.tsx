@@ -12,7 +12,7 @@ import FlexLayout from '../../atoms/FlexLayout';
 import { allResults } from '../../../utils/constant/text/body/user/value';
 import {
   TABLETYPES,
-  gearTableItems,
+  clubTableItems,
   profileTableSubItems,
   resultTableItems,
   ballTableItems,
@@ -86,7 +86,7 @@ const UserSub: React.FC<Props> = ({
               datas={checkedClubs}
               width={SIZE.SMALL}
               type={TABLETYPES.HORIZONTAL}
-              tableItems={gearTableItems}
+              tableItems={clubTableItems}
               title={clubTableTitle}
             />
             <Padding top={CLEAR.TINY} />

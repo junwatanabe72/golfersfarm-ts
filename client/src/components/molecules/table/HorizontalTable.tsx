@@ -41,18 +41,26 @@ const Styleddiv = styled.div`
 `;
 const urlValue = '詳細はこちら';
 const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems, title }) => {
-  const order = Object.keys(tableItems);
+  const order = Object.keys(tableItems).filter((key) => {
+    return key !== 'tie';
+  });
   const data = Array.isArray(datas) ? datas : [datas];
   const body = data.map((value: any) => {
     return order.map((key: string, num) => {
-      return key !== 'url' ? (
-        <StyledTd key={num}>{value[key]}</StyledTd>
-      ) : (
+      return key === 'url' ? (
         <StyledTd key={num}>
           <Url to={value[key]}>
             <Styleddiv>{urlValue}</Styleddiv>
           </Url>
         </StyledTd>
+      ) : key === 'rank' ? (
+        <StyledTd key={num}>
+          {value[key]}位{value['tie']}
+        </StyledTd>
+      ) : key === 'tie' ? (
+        <></>
+      ) : (
+        <StyledTd key={num}>{value[key]}</StyledTd>
       );
     });
   });

@@ -5,19 +5,23 @@ const sample = {
     id: 5,
     name: '日本オープン',
     userId: 1,
-    date: 2020,
+    year: 2020,
+    month: 1,
     rank: '1',
+    tie: '',
     url: 'https://www.yahoo.co.jp/',
   },
   7: {
     id: 7,
     name: '日本オープン',
     userId: 1,
-    date: 2020,
+    year: 2019,
+    month: 12,
     rank: '50',
+    tie: 'T',
   },
 };
-const initialState: PartialObjectResultType = {};
+const initialState: PartialObjectResultType = sample;
 
 export default function ResultsReducer(
   state = initialState,

@@ -3,35 +3,40 @@ export const FORMTYPES = {
   USERPROFILE: 'USERPROFILE',
 } as const;
 
-export function checkObject<T>(obj: T) {
+export function checkObject(obj: { [key: string]: string | number }) {
   // まずキーのみをソートする
   const keys = Object.keys(obj).sort();
   // 返却する空のオブジェクトを作る
-  let map: Partial<T> = {};
+  let map: { [key: string]: string | number } = {};
   // ソート済みのキー順に返却用のオブジェクトに値を格納する
   keys.forEach((key) => {
-    map[key as keyof T] = obj[key as keyof T];
+    map[key] = obj[key];
   });
   return map;
 }
 
-export function unchangedValues<T, K>(current: T[], submit: K[]): boolean {
+export function unchangedValues(
+  current: { [key: string]: string | number }[],
+  submit: { [key: string]: string | number }[]
+): boolean {
   const storeClubsJsonData = Object.values(current).map((value) => {
     return JSON.stringify(checkObject(value));
   });
-  const unchanged = Object.values(submit).map((value, num: number) => {
-    const data = JSON.stringify(checkObject(value));
-    return storeClubsJsonData[num] === data;
-  });
+  const unchanged = Object.values(submit)
+    .map((value, num: number) => {
+      const data = JSON.stringify(checkObject(value));
+      return storeClubsJsonData[num] === data;
+    })
+    .every((value) => value);
   if (unchanged && submit.length === current.length) {
     return true;
   }
   return false;
 }
 
-export function deleteValues<T extends { id: number }, K extends { id: number }>(
-  current: T[],
-  submit: K[]
+export function deleteValues(
+  current: { [key: string]: string | number }[],
+  submit: { [key: string]: string | number }[]
 ) {
   const submitValuesIds = Object.values(submit).map((value) => {
     return value.id;
@@ -46,3 +51,11 @@ export function deleteValues<T extends { id: number }, K extends { id: number }>
     });
   return values;
 }
+
+export const convertRankData = (rank: string) => {
+  // "100T" => ["100","T"]
+  // "1" =>["1"]
+  // "CUT" =>["CUT"]
+  const newData = rank.match(/CUT|\d{1,2}|[^\u$]/g);
+  return newData;
+};

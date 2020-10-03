@@ -1,9 +1,11 @@
 interface ResultType {
   id: number;
   userId: number;
-  date: number;
+  year: number;
+  month: number;
   rank: string;
   name: string;
+  tie: string;
   url: string;
   [key: string]: string | number;
 }

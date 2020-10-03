@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useFormikContext } from 'formik';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import { gearTableItems, resultTableItems } from '../../../../utils/constant/text/table';
+import { clubTableItems, resultTableItems } from '../../../../utils/constant/text/table';
 import ClubEditItems from './ClubEditItems';
 import { CLEAR } from '../../../../utils/constant/number';
 import { Padding } from '../../../../utils/styled/styledSpace';
@@ -34,7 +34,7 @@ const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme 
   const { values, handleChange } = useFormikContext<FormikValueType<typeof value>>();
 
   const tableItems = {
-    club: gearTableItems,
+    club: clubTableItems,
     result: resultTableItems,
   } as const;
 

@@ -12,13 +12,15 @@ export const profileTableSubItems = {
   hobby: '趣味',
 };
 export const resultTableItems = {
-  date: '日程',
+  year: '年',
+  month: '月',
   name: '競技名',
   rank: '順位',
+  tie: 'タイ',
   url: '詳細結果',
 };
 
-export const gearTableItems = {
+export const clubTableItems = {
   type: '種類',
   name: '名前',
   maker: 'メーカー',
