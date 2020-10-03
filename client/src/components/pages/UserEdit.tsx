@@ -4,10 +4,9 @@ import { useDispatch } from 'react-redux';
 import Layout from '../templates/Layout';
 import Form from '../organisms/form/user';
 import ImageEditForm from '../organisms/form/image';
-import ClubEditForm from '../organisms/form/club';
+import ArrayEditForm from '../organisms/form/club_result';
 import BallEditForm from '../organisms/form/ball';
 import VideoEditForm from '../organisms/form/video';
-import ResultEditForm from '../organisms/form/result';
 import ItemList from '../molecules/ItemList';
 import { getClubs, getBall, getVideos, getResults } from '../../actions';
 import { CLEAR, SIZE } from '../../utils/constant/number';
@@ -72,7 +71,11 @@ const UserEdit: React.FC<Props> = ({
           {currentEditPage === editTitleList.image && <ImageEditForm currentUser={currentUser} />}
           {currentEditPage === editTitleList.gear && (
             <>
-              <ClubEditForm currentUser={currentUser} checkedClubs={checkedClubs} />
+              <ArrayEditForm
+                currentUser={currentUser}
+                currentValues={checkedClubs}
+                theme={'club'}
+              />
               {userBall && <BallEditForm userBall={userBall} />}
             </>
           )}
@@ -80,7 +83,11 @@ const UserEdit: React.FC<Props> = ({
             <VideoEditForm currentUser={currentUser} checkedVideos={checkedVideos} />
           )}
           {currentEditPage === editTitleList.result && (
-            <ResultEditForm currentUser={currentUser} checkedResults={checkedResults} />
+            <ArrayEditForm
+              currentUser={currentUser}
+              currentValues={checkedResults}
+              theme={'result'}
+            />
           )}
         </Color>
       </Padding>

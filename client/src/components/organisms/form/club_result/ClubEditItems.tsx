@@ -1,16 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useField } from 'formik';
+import { useSelector } from 'react-redux';
+import { useField, ErrorMessage } from 'formik';
+import Button from '../../../atoms/Button';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-// import { allTypes, makers, shafts } from '../../../../utils/constant/text/body/user/value';
-import Button from '../../../atoms/Button';
-import { useSelector } from 'react-redux';
 import { State } from '../../../../@types/store';
-
-type OptionDatasKey = typeof optionDatasKey;
-type OptionDatasValue = TypeData | MakerData | ShaftData;
 
 interface Props {
   arg: string;
@@ -57,7 +53,7 @@ const StyledSelect = styled.select`
       font-size: 1px;
       `}
 `;
-const Styleddiv = styled.div`
+const StyledDiv = styled.div`
   margin: 0 auto;
   font-size: 1px;
   color: ${BASICCOLORS.SECONDARYDARK};
@@ -79,8 +75,9 @@ const flexDatas = [
   { flex: 'XX' },
   { flex: 'SX' },
 ];
+
 const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remove }) => {
-  const [, meta] = useField(name);
+  // const [, meta] = useField(name);
   const makers = useSelector((state: State) => state.makers);
   const shafts = useSelector((state: State) => state.shafts);
   const types = useSelector((state: State) => state.types);
@@ -93,53 +90,52 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
     flex: flexDatas,
   };
 
-  const selectComponent = (selectName: string, selectKey: string, targetClub: ClubType) => {
-    const key = optionDatasKey[selectKey as keyof OptionDatasKey];
-    return (
-      <StyledSelect name={selectName} onChange={onChange}>
-        <option value={selectKey}>{targetClub[selectKey]}</option>
-        {Object.values(optionDatas[selectKey as keyof OptionDatas]).map(
-          (data: any, num: number) => {
-            return targetClub[selectKey] !== data[key as keyof OptionDatasValue] ? (
-              <option key={num} value={data[key as keyof OptionDatasValue]}>
-                {data[key as keyof OptionDatasValue]}
+  const items = {
+    name: (
+      <>
+        <StyledField
+          type={'text'}
+          name={name}
+          placeholder={'入力してください。'}
+          onChange={onChange}
+          value={club[arg]}
+        />
+        <StyledDiv>
+          <ErrorMessage name={name} />
+        </StyledDiv>
+      </>
+    ),
+    button: (
+      <Button
+        pWidth={CLEAR.TINY}
+        pHeight={CLEAR.TINY}
+        color={BASICCOLORS.SECONDARY}
+        fontSize={FONTSIZE.BASE}
+        onClick={() => {
+          remove(index);
+        }}
+      >
+        ×
+      </Button>
+    ),
+    other: (
+      <StyledSelect name={name} onChange={onChange}>
+        <option value={arg}>{club[arg]}</option>
+        {optionDatas[arg as keyof OptionDatas] &&
+          Object.values(optionDatas[arg as keyof OptionDatas]).map((data: any, num: number) => {
+            const key = optionDatasKey[arg as keyof OptionDatas];
+            return club[arg] !== data[key] ? (
+              <option key={num} value={data[key]}>
+                {data[key]}
               </option>
             ) : null;
-          }
-        )}
+          })}
       </StyledSelect>
-    );
+    ),
   };
 
   return (
-    <>
-      {arg === 'name' ? (
-        <>
-          <StyledField
-            type={'text'}
-            name={name}
-            placeholder={'入力してください。'}
-            onChange={onChange}
-            value={club[arg]}
-          />
-          {meta.touched && meta.error ? <Styleddiv>{meta.error}</Styleddiv> : null}
-        </>
-      ) : arg === '' ? (
-        <Button
-          pWidth={CLEAR.TINY}
-          pHeight={CLEAR.TINY}
-          color={BASICCOLORS.SECONDARY}
-          fontSize={FONTSIZE.BASE}
-          onClick={() => {
-            remove(index);
-          }}
-        >
-          ×
-        </Button>
-      ) : (
-        <>{selectComponent(name, arg, club)}</>
-      )}
-    </>
+    <>{items[arg as keyof typeof items] ? items[arg as keyof typeof items] : items['other']}</>
   );
 };
 

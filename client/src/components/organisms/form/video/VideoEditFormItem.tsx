@@ -10,11 +10,8 @@ import { CLEAR, FONTSIZE, SIZE } from '../../../../utils/constant/number';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { media } from '../../../../utils/styled/styledRdesign';
 
-type FormikValueType = {
-  formikVideos: ArrayVideoType;
-};
-
 interface Props {
+  formikKey: string;
   remove: <T>(index: number) => T | undefined;
   currentVideos: ArrayVideoType;
 }
@@ -66,7 +63,7 @@ const item = {
 };
 const buttonValue = '動画を削除する';
 
-const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos }) => {
+const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos, formikKey }) => {
   const [stateVideos, setVideo] = useState<VideoType[]>(currentVideos);
   const moveVideo = (num: number) => {
     const newVideos = stateVideos.filter((_, index: number) => {
@@ -74,14 +71,14 @@ const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos }) => {
     });
     setVideo(newVideos);
   };
-  const { values, handleChange } = useFormikContext<FormikValueType>();
+  const { values, handleChange } = useFormikContext<FormikValueType<typeof currentVideos>>();
 
   return (
     <Width>
-      {Object.values(values.formikVideos).map((video: VideoType, index: number) => {
+      {Object.values(values.formikValues).map((video: VideoType, index: number) => {
         return (
           <ExtendPadding top={CLEAR.XSMALL} key={index}>
-            <div>{`動画${index + 1}`}</div>
+            <div>{`${formikKey}${index + 1}`}</div>
             <FlexLayout
               width={SIZE.XXXSMALL}
               alignItems={ALIGNITEMS.CENTER}
@@ -89,7 +86,8 @@ const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos }) => {
               left={
                 <>
                   {Object.entries(item).map(([key, value]: string[], num: number) => {
-                    const name = `formikVideos.${index}.${key}`;
+                    const name = `${formikKey}.${index}.${key}`;
+
                     return (
                       <Center key={num}>
                         <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
