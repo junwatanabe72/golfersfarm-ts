@@ -12,11 +12,11 @@ import { updateVideos } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import { checkObject } from '../../../../utils/constant/text/form';
+import { checkObject, unchangedValues, deleteValues } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
 
 interface Props {
-  checkedVideos: ArrayVideoType;
+  currentValues: ArrayVideoType;
   currentUser: UserType;
 }
 
@@ -40,8 +40,8 @@ const videoValidation = () =>
     ),
   });
 
-const VideoEditForm: React.FC<Props> = ({ currentUser, checkedVideos }) => {
-  const arrayDatas = Object.values(checkedVideos);
+const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
+  const arrayDatas = Object.values(currentValues);
   const dispatch = useDispatch();
   const addItem = { name: '', userId: currentUser.id, url: '' };
   const initialValuesData = { formikValues: arrayDatas };
@@ -49,35 +49,15 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, checkedVideos }) => {
 
   const onSubmit = (values: FormikValueType<ArrayVideoType>) => {
     let editVideos: PartialArrayVideoType = [];
-    const submitVideos = values.formikValues;
+    const submitValues = values.formikValues;
     // ojbectに変化がなければ、return
-    const storeVideosJsonData = checkedVideos.map((value) => {
-      return JSON.stringify(checkObject(value));
-    });
-
-    const unchanged = submitVideos
-      .map((value, num) => {
-        const data = JSON.stringify(checkObject(value));
-        return storeVideosJsonData[num] === data;
-      })
-      .every((value) => value);
-    if (unchanged && submitVideos.length === checkedVideos.length) {
+    if (unchangedValues(currentValues, submitValues)) {
       return;
     }
-    //deleteするvideoを抽出する。
-    const submitVideosIds = submitVideos.map((value) => {
-      return value.id;
-    });
-    const deleteTargetVideos = checkedVideos
-      .filter((value) => {
-        const data = submitVideosIds.includes(value.id);
-        return !data;
-      })
-      .map((value) => {
-        return { ...value, name: undefined };
-      });
+    const deleteTargetValues = deleteValues(currentValues, submitValues);
+
     //update,create,deleteするvideoを配列にする。
-    editVideos = [...submitVideos, ...deleteTargetVideos];
+    editVideos = [...submitValues, ...deleteTargetValues];
     dispatch(updateVideos(editVideos));
   };
 

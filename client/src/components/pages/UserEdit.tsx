@@ -80,7 +80,7 @@ const UserEdit: React.FC<Props> = ({
             </>
           )}
           {currentEditPage === editTitleList.video && (
-            <VideoEditForm currentUser={currentUser} checkedVideos={checkedVideos} />
+            <VideoEditForm currentUser={currentUser} currentValues={checkedVideos} />
           )}
           {currentEditPage === editTitleList.result && (
             <ArrayEditForm
