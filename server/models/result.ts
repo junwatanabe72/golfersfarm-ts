@@ -4,7 +4,8 @@ import UserResults from "./user_results";
 class Result extends Model {
   public id!: number;
   public name!: string;
-  public date!: number;
+  public year!: number;
+  public month!: number;
   public rank!: string;
   public url?: string;
 
@@ -120,7 +121,11 @@ class Result extends Model {
           type: DataTypes.STRING(250),
           allowNull: false,
         },
-        date: {
+        year: {
+          type: DataTypes.INTEGER,
+          allowNull: false,
+        },
+        month: {
           type: DataTypes.INTEGER,
           allowNull: false,
         },
@@ -151,7 +156,8 @@ class Result extends Model {
 export interface ResultType {
   id: number;
   name: string;
-  date: number;
+  year: number;
+  month: number;
   rank: string;
   url: string;
 }
