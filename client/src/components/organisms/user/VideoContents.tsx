@@ -16,7 +16,6 @@ const Center = styled.div`
 `;
 const movies = ['動画１', '動画2', '動画3', '動画4'];
 const VideoContents: React.FC<Props> = ({ videos }) => {
-  const videoArray = Object.values(videos);
   const [currentVideo, setVideo] = useState<string>(movies[0]);
   const moveVideo = (value: string) => {
     setVideo(value);
@@ -25,7 +24,7 @@ const VideoContents: React.FC<Props> = ({ videos }) => {
   return (
     <>
       <ItemList list={movies} onClick={moveVideo} state={currentVideo} />
-      {videoArray.map((value: VideoType, num: number) => {
+      {Object.values(videos).map((value: VideoType, num: number) => {
         return movies[num] === currentVideo ? (
           <Center key={num}>
             <Padding top={CLEAR.TINY}>

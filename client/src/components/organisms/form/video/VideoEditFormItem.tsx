@@ -78,7 +78,7 @@ const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos, formikKey }
       {Object.values(values.formikValues).map((video: VideoType, index: number) => {
         return (
           <ExtendPadding top={CLEAR.XSMALL} key={index}>
-            <div>{`${formikKey}${index + 1}`}</div>
+            <div>{`動画${index + 1}`}</div>
             <FlexLayout
               width={SIZE.XXXSMALL}
               alignItems={ALIGNITEMS.CENTER}

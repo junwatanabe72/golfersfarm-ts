@@ -13,6 +13,7 @@ import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { editTitleList } from '../../utils/constant/text/common';
+import { clubOrder } from '../../utils/constant/text/body/user/value';
 
 interface Props {
   currentUser: UserType;
@@ -44,15 +45,31 @@ const UserEdit: React.FC<Props> = ({
     dispatch(getResults(currentUser));
   }, []);
 
-  const checkedClubs: ArrayClubType = Object.values(storeClubs).filter(
-    (club: ClubType) => club.userId === currentUser.id
-  );
+  const checkedClubs: ArrayClubType = Object.values(storeClubs)
+    .filter((club: ClubType) => club.userId === currentUser.id)
+    .sort((first: ClubType, second: ClubType) => {
+      const firstNumber = clubOrder.indexOf(first.type);
+      const secondNumber = clubOrder.indexOf(second.type);
+      if (firstNumber < secondNumber) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
   const checkedVideos: ArrayVideoType = Object.values(storeVideos).filter(
     (video: VideoType) => video.userId === currentUser.id
   );
-  const checkedResults: ArrayResultType = Object.values(storeResults).filter(
-    (result: ResultType) => result.userId === currentUser.id
-  );
+  const checkedResults: ArrayResultType = Object.values(storeResults)
+    .filter((result: ResultType) => result.userId === currentUser.id)
+    .sort((first: ResultType, second: ResultType) => {
+      const firstMonths = first.year * 12 + first.month;
+      const secondMonths = second.year * 12 + second.month;
+      if (firstMonths > secondMonths) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
   const userBall: BallType | undefined = Object.values(storeBalls).find(
     (ball: BallType) => ball.userId === currentUser.id
   );

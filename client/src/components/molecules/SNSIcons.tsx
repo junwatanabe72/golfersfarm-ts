@@ -41,7 +41,7 @@ const SNS: React.FC<Props> = ({ urls, color, fontSize }) => {
             />
           </Url>
         ) : (
-          <></>
+          <React.Fragment key={num}></React.Fragment>
         );
       })}
     </Container>

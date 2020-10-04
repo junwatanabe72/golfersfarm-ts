@@ -14,8 +14,6 @@ function* updateResultsAsync(action: Action<PartialArrayResultType>) {
       yield toast.error('失敗しました。', options);
       return;
     }
-    console.log(data.updateResults);
-    console.log(action.payload);
     for (let value of data.updateResults) {
       const { id } = value;
       results[id] = value;
