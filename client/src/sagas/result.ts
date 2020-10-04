@@ -3,12 +3,10 @@ import { addResults, removeResults, ACTIONTYPES } from '../actions/index';
 import { getResultsAxios, updateResultsAxios } from '../services/axios/result';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
-import { push } from 'connected-react-router';
 
 function* updateResultsAsync(action: Action<PartialArrayResultType>) {
   let results: ObjectResultType = {};
   let deleteResults: PartialObjectResultType = {};
-  const userId = action.payload[0].userId;
   try {
     const { data } = yield call(updateResultsAxios, action.payload);
 
@@ -16,15 +14,17 @@ function* updateResultsAsync(action: Action<PartialArrayResultType>) {
       yield toast.error('失敗しました。', options);
       return;
     }
+    console.log(data.updateResults);
+    console.log(action.payload);
     for (let value of data.updateResults) {
-      const id = value.id;
+      const { id } = value;
       results[id] = value;
     }
 
     for (let value of action.payload) {
       if (!value.id) {
       } else {
-        const id = value.id;
+        const { id } = value;
         deleteResults[id] = value;
       }
     }
@@ -32,7 +32,7 @@ function* updateResultsAsync(action: Action<PartialArrayResultType>) {
     yield put(removeResults(deleteResults));
     yield put(addResults(results));
     yield toast.success('編集に成功しました。', options);
-    // yield put(push(`/users/${userId}`));
+
     return;
   } catch (e) {
     yield toast.error('失敗しました。', options);
@@ -48,7 +48,7 @@ function* getResultsAsync(action: Action<PartialUserType>) {
       return;
     }
     for (let value of data.allResults) {
-      const id = value.id;
+      const { id } = value;
       results[id] = value;
     }
     yield put(addResults(results));

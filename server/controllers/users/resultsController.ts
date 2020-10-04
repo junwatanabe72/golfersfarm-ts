@@ -61,8 +61,9 @@ export default {
       const targetResults = await Promise.all(
         result.map(async (value: any) => {
           // clientのResult型をserver型に変換
+          console.log(value);
           const targetResult = convertToServerReplace(value);
-
+          console.log(targetResult);
           if (!targetResult.id) {
             const { newData } = await Result.add(
               req.params.id,
@@ -89,7 +90,7 @@ export default {
         })
       );
       const updateResults = targetResults.filter((value) => value);
-
+      console.log(updateResults);
       res.status(201).json({ data: { updateResults } });
     } catch (error) {
       res.status(400);

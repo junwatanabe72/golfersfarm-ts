@@ -54,9 +54,13 @@ const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems, title }) =
           </Url>
         </StyledTd>
       ) : key === 'rank' ? (
-        <StyledTd key={num}>
-          {value[key]}位{value['tie']}
-        </StyledTd>
+        value['rank'] === 'CUT' ? (
+          <StyledTd key={num}>{value[key]}</StyledTd>
+        ) : (
+          <StyledTd key={num}>
+            {value['tie'] === 'T' ? `${value[key]}位T` : `${value[key]}位`}
+          </StyledTd>
+        )
       ) : key === 'tie' ? (
         <></>
       ) : (

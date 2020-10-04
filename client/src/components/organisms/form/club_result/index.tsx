@@ -13,11 +13,12 @@ import ClubEditFormLayout from './ArrayEditFormLayout';
 import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
-import { deleteValues, unchangedValues } from '../../../../utils/constant/text/form';
+import { deleteValues, unchangedValues, arrayToString } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
 
 interface Props {
-  currentValues: ArrayClubType | ArrayResultType;
+  checkedClubs: ArrayClubType;
+  checkedResults: ArrayResultType;
   currentUser: UserType;
   theme: 'club' | 'result';
 }
@@ -39,7 +40,7 @@ const StyledLabel = styled.label`
 const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth() + 1;
 
-const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) => {
+const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResults, theme }) => {
   const dispatch = useDispatch();
 
   const addItem = {
@@ -55,7 +56,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) =
       name: '',
       userId: currentUser.id,
       url: '',
-      year: 2020,
+      year: thisYear,
       month: thisMonth,
       tie: '',
       rank: '1',
@@ -65,9 +66,12 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) =
   const editSubTitles = { club: '使用クラブ', result: '競技結果' };
   const AddButtonText = { club: ['クラブを追加'], result: ['競技結果を追加'] };
   const buttonValue = { club: 'クラブを登録・編集する。', result: '競技結果を登録・削除する。' };
-  const initialValuesData = { formikValues: currentValues };
-  const formikKey = Object.keys(initialValuesData)[0];
-
+  const initialValuesData = {
+    club: { formikValues: checkedClubs },
+    result: { formikValues: checkedResults },
+  };
+  const formikKey = Object.keys(initialValuesData[theme])[0];
+  const currentValues = initialValuesData[theme];
   const arrayValidation = {
     club: () =>
       yup.object({
@@ -89,37 +93,38 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) =
   };
 
   const onSubmit = {
-    club: (values: FormikValueType<typeof currentValues>) => {
+    club: (values: FormikValueType<typeof currentValues.formikValues>) => {
       let editValues: PartialArrayClubType = [];
       const submitValues = values.formikValues;
       // ojbectに変化がなければ、return
-      if (unchangedValues(currentValues, submitValues)) {
+      if (unchangedValues(currentValues.formikValues, submitValues)) {
         return;
       }
-      const deleteTargetValues = deleteValues(currentValues, submitValues);
+      const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするクラブを配列にする。
       editValues = [...submitValues, ...deleteTargetValues];
       dispatch(updateClubs(editValues));
     },
-    result: (values: FormikValueType<typeof currentValues>) => {
+    result: (values: FormikValueType<typeof currentValues.formikValues>) => {
       let editValues: PartialArrayResultType = [];
-      const submitValues = values.formikValues;
+      const baseSubmitValues = values.formikValues;
+      // checkboxのvalueが["T"],[""]となっているため、stringへ戻す。
+      const submitValues = arrayToString(baseSubmitValues);
       // ojbectに変化がなければ、return
-      console.log(submitValues);
-      console.log(currentValues);
-      if (unchangedValues(currentValues, submitValues)) {
+      if (unchangedValues(currentValues.formikValues, submitValues)) {
         return;
       }
-      const deleteTargetValues = deleteValues(currentValues, submitValues);
+      const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするResultを配列にする。
       editValues = [...submitValues, ...deleteTargetValues];
+      console.log(editValues);
       dispatch(updateResults(editValues));
     },
   };
 
   return (
-    <Formik<FormikValueType<typeof currentValues>>
-      initialValues={initialValuesData}
+    <Formik<FormikValueType<typeof currentValues.formikValues>>
+      initialValues={currentValues}
       validationSchema={arrayValidation[theme]}
       onSubmit={onSubmit[theme]}
     >
@@ -153,7 +158,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, currentValues, theme }) =
                               <ClubEditFormLayout
                                 remove={remove}
                                 formikKey={formikKey}
-                                value={currentValues}
+                                value={currentValues.formikValues}
                                 theme={theme}
                               />
                             </tbody>

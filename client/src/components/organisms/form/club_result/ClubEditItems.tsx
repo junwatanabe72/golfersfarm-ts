@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { useField, ErrorMessage } from 'formik';
+import { ErrorMessage } from 'formik';
 import Button from '../../../atoms/Button';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
@@ -77,7 +77,6 @@ const flexDatas = [
 ];
 
 const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remove }) => {
-  // const [, meta] = useField(name);
   const makers = useSelector((state: State) => state.makers);
   const shafts = useSelector((state: State) => state.shafts);
   const types = useSelector((state: State) => state.types);

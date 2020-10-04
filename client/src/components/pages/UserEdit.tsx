@@ -73,7 +73,8 @@ const UserEdit: React.FC<Props> = ({
             <>
               <ArrayEditForm
                 currentUser={currentUser}
-                currentValues={checkedClubs}
+                checkedClubs={checkedClubs}
+                checkedResults={checkedResults}
                 theme={'club'}
               />
               {userBall && <BallEditForm userBall={userBall} />}
@@ -85,7 +86,8 @@ const UserEdit: React.FC<Props> = ({
           {currentEditPage === editTitleList.result && (
             <ArrayEditForm
               currentUser={currentUser}
-              currentValues={checkedResults}
+              checkedClubs={checkedClubs}
+              checkedResults={checkedResults}
               theme={'result'}
             />
           )}

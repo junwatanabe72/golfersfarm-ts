@@ -73,6 +73,7 @@ const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme 
     result: Object.values(values.formikValues).map((result: ResultType, index: number) => {
       return [...order, 'button'].map((key: string) => {
         const name = `${formikKey}.${index}.${key}`;
+
         return (
           <StyledTd key={key}>
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
