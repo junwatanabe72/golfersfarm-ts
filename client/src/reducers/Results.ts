@@ -20,6 +20,24 @@ const sample = {
     rank: '50',
     tie: 'T',
   },
+  9: {
+    id: 9,
+    name: '日本オープン',
+    userId: 1,
+    year: 2004,
+    month: 1,
+    rank: '50',
+    tie: 'T',
+  },
+  11: {
+    id: 11,
+    name: '日本オープン',
+    userId: 1,
+    year: 2020,
+    month: 9,
+    rank: '50',
+    tie: 'T',
+  },
 };
 const initialState: PartialObjectResultType = {};
 

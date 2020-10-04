@@ -11,6 +11,35 @@ const URL =
 
 const userName = 'JUNWATANABE72';
 
+export const clubOrder = [
+  '1WOOD',
+  '3WOOD',
+  '4WOOD',
+  '5WOOD',
+  '7WOOD',
+  '9WOOD',
+  '11WOOD',
+  '13WOOD',
+  '3UT',
+  '4UT',
+  '5UT',
+  '6UT',
+  'IRON(3~P)',
+  'IRON(4~P)',
+  'IRON(5~P)',
+  'IRON(6~P)',
+  'IRON(3~9)',
+  'IRON(4~9)',
+  'IRON(5~9)',
+  'PW',
+  'AW(50 Degree)',
+  'AW(52 Degree)',
+  'SW(54 Degree)',
+  'SW(56 Degree)',
+  'SW(58 Degree)',
+  'LW(60 Degree)',
+  'PUTTER',
+];
 export const initialUser = {
   id: 1,
   name: userName,
@@ -103,8 +132,8 @@ export const allTypes = [
   { ...clubType, id: 2, type: '3WOOD' },
   { ...clubType, id: 3, type: '5WOOD' },
   { ...clubType, id: 4, type: 'IRON(3~P)' },
-  { ...clubType, id: 5, type: 'AW' },
-  { ...clubType, id: 6, type: 'SW' },
+  { ...clubType, id: 5, type: 'AW(52 Degree)' },
+  { ...clubType, id: 6, type: 'SW(58 Degree)' },
 ];
 
 export const shaft = {

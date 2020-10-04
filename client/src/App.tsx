@@ -45,54 +45,6 @@ const App: React.FC<Props> = ({}) => {
   //develop時に一時的に使用。
   const allUsers = storeUsers.length === 0 ? [currentUser] : [...storeUsers];
   //
-  const route = allUsers.map((user: PartialUserType, num: number) => {
-    return (
-      <React.Fragment key={num}>
-        <Route
-          exact
-          path={`/users/${user.id}`}
-          render={() =>
-            user.id === currentUser.id ? (
-              <User
-                currentUser={currentUser}
-                targetUser={currentUser}
-                storeClubs={storeClubs}
-                storeBalls={storeBalls}
-                storeVideos={storeVideos}
-                storeResults={storeResults}
-              />
-            ) : (
-              <User
-                currentUser={currentUser}
-                targetUser={user}
-                storeClubs={storeClubs}
-                storeBalls={storeBalls}
-                storeVideos={storeVideos}
-                storeResults={storeResults}
-              />
-            )
-          }
-        />
-        <Route
-          exact
-          path={`/users/${user.id}/edit`}
-          render={() =>
-            user.id === currentUser.id ? (
-              <UserEdit
-                currentUser={currentUser}
-                storeClubs={storeClubs}
-                storeBalls={storeBalls}
-                storeVideos={storeVideos}
-                storeResults={storeResults}
-              />
-            ) : (
-              <Redirect to={ROUTE.TOP} />
-            )
-          }
-        />
-      </React.Fragment>
-    );
-  });
 
   useEffect(() => {
     // localStorage.clear();
@@ -110,7 +62,55 @@ const App: React.FC<Props> = ({}) => {
         path={ROUTE.USERS}
         render={() => <Users currentUser={currentUser} allUsers={allUsers} />}
       />
-      {route}
+      {allUsers.map((user: PartialUserType, num: number) => {
+        return (
+          <React.Fragment key={num}>
+            <Route
+              exact
+              path={`/users/${user.id}`}
+              render={() =>
+                user.id === currentUser.id ? (
+                  <User
+                    currentUser={currentUser}
+                    targetUser={currentUser}
+                    storeClubs={storeClubs}
+                    storeBalls={storeBalls}
+                    storeVideos={storeVideos}
+                    storeResults={storeResults}
+                  />
+                ) : (
+                  <User
+                    currentUser={currentUser}
+                    targetUser={user}
+                    storeClubs={storeClubs}
+                    storeBalls={storeBalls}
+                    storeVideos={storeVideos}
+                    storeResults={storeResults}
+                  />
+                )
+              }
+            />
+            <Route
+              exact
+              path={`/users/${user.id}/edit`}
+              render={() =>
+                user.id === currentUser.id ? (
+                  <UserEdit
+                    currentUser={currentUser}
+                    storeClubs={storeClubs}
+                    storeBalls={storeBalls}
+                    storeVideos={storeVideos}
+                    storeResults={storeResults}
+                  />
+                ) : (
+                  <Redirect to={ROUTE.TOP} />
+                )
+              }
+            />
+          </React.Fragment>
+        );
+      })}
+      ;
       <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
       <Route
         exact

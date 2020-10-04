@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ import { updateVideos } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import { checkObject, unchangedValues, deleteValues } from '../../../../utils/constant/text/form';
+import { unchangedValues, deleteValues } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
 
 interface Props {
@@ -41,6 +41,10 @@ const videoValidation = () =>
   });
 
 const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
+  const [count, setCount] = useState<number>(0);
+  const addCount = () => {
+    setCount(count + 1);
+  };
   const arrayDatas = Object.values(currentValues);
   const dispatch = useDispatch();
   const addItem = { name: '', userId: currentUser.id, url: '' };
@@ -85,6 +89,14 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                   <FieldArray
                     name={formikKey}
                     render={({ remove, push }) => {
+                      const checkaddItem = () => {
+                        addCount();
+                        if (count > 3) {
+                          return;
+                        }
+                        push(addItem);
+                      };
+
                       return (
                         <Padding
                           top={CLEAR.TINY}
@@ -103,9 +115,7 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                               pHeight={CLEAR.TINY}
                               pWidth={CLEAR.TINY}
                               fontSize={FONTSIZE.SMALL}
-                              onClick={() => {
-                                push(addItem);
-                              }}
+                              onClick={checkaddItem}
                             >
                               {AddButtonText}
                             </Button>

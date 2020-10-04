@@ -3,7 +3,6 @@ import { client, authClient } from '../../utils/axiosConf';
 //signup
 export async function createUserAxios(arg: SignupUserType) {
   const queries = { user: { ...arg } };
-  console.log(queries);
   const data = await client.post('/auth/signup', queries);
   return data;
 }

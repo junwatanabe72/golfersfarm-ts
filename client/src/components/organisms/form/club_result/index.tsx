@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -41,6 +41,10 @@ const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth() + 1;
 
 const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResults, theme }) => {
+  const [count, setCount] = useState<number>(0);
+  const addCount = () => {
+    setCount(count + 1);
+  };
   const dispatch = useDispatch();
 
   const addItem = {
@@ -146,6 +150,23 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                   <FieldArray
                     name={formikKey}
                     render={({ remove, push }) => {
+                      const checkaddItem = {
+                        club: () => {
+                          addCount();
+                          if (count > 12) {
+                            return;
+                          }
+                          push(addItem);
+                        },
+                        result: () => {
+                          addCount();
+                          if (count > 20) {
+                            return;
+                          }
+                          push(addItem);
+                        },
+                      };
+
                       return (
                         <Padding
                           top={CLEAR.TINY}
@@ -169,9 +190,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                               pHeight={CLEAR.TINY}
                               pWidth={CLEAR.TINY}
                               fontSize={FONTSIZE.SMALL}
-                              onClick={() => {
-                                push(addItem[theme]);
-                              }}
+                              onClick={checkaddItem[theme]}
                             >
                               {AddButtonText[theme]}
                             </Button>
