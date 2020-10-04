@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useField, ErrorMessage } from 'formik';
+import { ErrorMessage } from 'formik';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
@@ -53,17 +53,6 @@ const StyledSelect = styled.select`
 `;
 const StyledBox = styled.input`
   width: ${SIZE.TINY}vw;
-  // padding: ${CLEAR.TINY}vw 0px;
-  // border-radius: 6px;
-  // border-width: 1px;
-  // border: 1px solid #ccc;
-  // &:hover {
-  //   background-color: #f5f5f5;
-  // }
-  ${media.tablet`
-      width: ${SIZE.TINY}vw;
-      // font-size: 1px;
-      `}
 `;
 const StyledDiv = styled.div`
   margin: 0 auto;
@@ -72,18 +61,14 @@ const StyledDiv = styled.div`
 `;
 
 const thisYear = new Date().getFullYear();
-const thisMonth = new Date().getMonth() + 1;
 let initYear = 1980;
-const selectYears: number[] = [...Array(thisYear - initYear + 1)]
-  .map((_, i) => {
-    return initYear + i;
-  })
-  .sort((a, b) => {
-    return b - a;
-  });
+const selectYears: string[] = [...Array(thisYear - initYear + 1)].map((_, i) => {
+  return String(thisYear - i);
+});
+
 let initMonth = 1;
-const selectMonths: number[] = [...Array(12)].map((_, i) => {
-  return initMonth + i;
+const selectMonths: string[] = [...Array(12)].map((_, i) => {
+  return String(initMonth + i);
 });
 let initRank = 1;
 const selectRank: string[] = [...Array(100)].map((_, i) => {
@@ -92,12 +77,12 @@ const selectRank: string[] = [...Array(100)].map((_, i) => {
 
 const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, remove }) => {
   type OptionDatasValue = typeof optionDatas;
-
   const optionDatas = {
     year: selectYears,
     month: selectMonths,
     rank: selectRank,
   };
+  //
   const items = {
     name: (
       <>
@@ -111,6 +96,17 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
         <StyledDiv>
           <ErrorMessage name={name} />
         </StyledDiv>
+      </>
+    ),
+    tie: (
+      <>
+        <StyledBox
+          type={'checkbox'}
+          name={name}
+          onChange={onChange}
+          value={'T'}
+          defaultChecked={result[arg] === 'T'}
+        />
       </>
     ),
     url: (
@@ -140,40 +136,13 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
         ×
       </Button>
     ),
-    tie: (
-      <>
-        {result[arg] ? (
-          <>
-            <StyledBox
-              type={'radio'}
-              name={name}
-              onChange={onChange}
-              value={result[arg]}
-              checked={true}
-            />
-            <StyledBox type={'radio'} name={name} onChange={onChange} value={''} />
-          </>
-        ) : (
-          <>
-            <StyledBox type={'radio'} name={name} onChange={onChange} value={'T'} />
-            <StyledBox
-              type={'radio'}
-              name={name}
-              onChange={onChange}
-              value={result[arg]}
-              checked={true}
-            />
-          </>
-        )}
-      </>
-    ),
     other: (
       <StyledSelect name={name} onChange={onChange}>
         <option value={result[arg]}>{result[arg]}</option>
         {optionDatas[arg as keyof OptionDatasValue] &&
           Object.values(optionDatas[arg as keyof OptionDatasValue]).map(
-            (data: number | string, num: number) => {
-              return result[arg] !== data ? (
+            (data: string, num: number) => {
+              return String(result[arg]) !== data ? (
                 <option key={num} value={data}>
                   {data}
                 </option>

@@ -52,10 +52,14 @@ export function deleteValues(
   return values;
 }
 
-export const convertRankData = (rank: string) => {
-  // "100T" => ["100","T"]
-  // "1" =>["1"]
-  // "CUT" =>["CUT"]
-  const newData = rank.match(/CUT|\d{1,2}|[^\u$]/g);
-  return newData;
-};
+export function arrayToString(result: any) {
+  const returnValues = result.map((value: any) => {
+    if (Array.isArray(value['tie'])) {
+      value['tie'] = value['tie'].join();
+      return value;
+    }
+    return value;
+  });
+
+  return returnValues;
+}
