@@ -41,9 +41,19 @@ const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth() + 1;
 
 const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResults, theme }) => {
-  const [count, setCount] = useState<number>(0);
+  const initialValuesData = {
+    club: { formikValues: checkedClubs },
+    result: { formikValues: checkedResults },
+  };
+  const formikKey = Object.keys(initialValuesData[theme])[0];
+  const currentValues = initialValuesData[theme];
+
+  const [count, setCount] = useState<number>(currentValues.formikValues.length);
   const addCount = () => {
     setCount(count + 1);
+  };
+  const subCount = () => {
+    setCount(count - 1);
   };
   const dispatch = useDispatch();
 
@@ -70,12 +80,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
   const editSubTitles = { club: '使用クラブ', result: '競技結果' };
   const AddButtonText = { club: ['クラブを追加'], result: ['競技結果を追加'] };
   const buttonValue = { club: 'クラブを登録・編集する。', result: '競技結果を登録・削除する。' };
-  const initialValuesData = {
-    club: { formikValues: checkedClubs },
-    result: { formikValues: checkedResults },
-  };
-  const formikKey = Object.keys(initialValuesData[theme])[0];
-  const currentValues = initialValuesData[theme];
+
   const arrayValidation = {
     club: () =>
       yup.object({
@@ -152,17 +157,17 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                     render={({ remove, push }) => {
                       const checkaddItem = {
                         club: () => {
-                          addCount();
                           if (count > 12) {
                             return;
                           }
+                          addCount();
                           push(addItem);
                         },
                         result: () => {
-                          addCount();
-                          if (count > 20) {
+                          if (count > 19) {
                             return;
                           }
+                          addCount();
                           push(addItem);
                         },
                       };
@@ -181,10 +186,12 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                                 formikKey={formikKey}
                                 value={currentValues.formikValues}
                                 theme={theme}
+                                onChange={subCount}
                               />
                             </tbody>
                           </StyledTable>
                           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                            <div>{count}</div>
                             <Button
                               color={BASICCOLORS.WHITE}
                               pHeight={CLEAR.TINY}

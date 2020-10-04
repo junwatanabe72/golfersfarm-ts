@@ -13,6 +13,7 @@ interface Props {
   value: ArrayClubType | ArrayResultType;
   remove: <T>(index: number) => T | undefined;
   theme: 'club' | 'result';
+  onChange: () => void;
 }
 
 const StyledLabel = styled.label`
@@ -30,7 +31,7 @@ const StyledTd = styled.td`
   border-right: solid 1px white;
 `;
 
-const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme }) => {
+const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme, onChange }) => {
   const { values, handleChange } = useFormikContext<FormikValueType<typeof value>>();
 
   const tableItems = {
@@ -63,7 +64,8 @@ const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme 
                 index={index}
                 arg={key}
                 name={name}
-                onChange={handleChange}
+                handleChange={handleChange}
+                onChange={onChange}
               />
             </Padding>
           </StyledTd>
@@ -83,7 +85,8 @@ const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme 
                 index={index}
                 arg={key}
                 name={name}
-                onChange={handleChange}
+                handleChange={handleChange}
+                onChange={onChange}
               />
             </Padding>
           </StyledTd>

@@ -14,6 +14,7 @@ interface Props {
   formikKey: string;
   remove: <T>(index: number) => T | undefined;
   currentVideos: ArrayVideoType;
+  onChange: () => void;
 }
 
 const ExtendPadding = styled(Padding)`
@@ -63,7 +64,7 @@ const item = {
 };
 const buttonValue = '動画を削除する';
 
-const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos, formikKey }) => {
+const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos, formikKey, onChange }) => {
   const [stateVideos, setVideo] = useState<VideoType[]>(currentVideos);
   const moveVideo = (num: number) => {
     const newVideos = stateVideos.filter((_, index: number) => {
@@ -76,6 +77,11 @@ const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos, formikKey }
   return (
     <Width>
       {Object.values(values.formikValues).map((video: VideoType, index: number) => {
+        const checksubItem = () => {
+          onChange();
+          moveVideo(index);
+          remove(index);
+        };
         return (
           <ExtendPadding top={CLEAR.XSMALL} key={index}>
             <div>{`動画${index + 1}`}</div>
@@ -131,10 +137,7 @@ const VideoEditFormItem: React.FC<Props> = ({ remove, currentVideos, formikKey }
                   pHeight={CLEAR.TINY}
                   color={BASICCOLORS.SECONDARY}
                   fontSize={FONTSIZE.BASE}
-                  onClick={() => {
-                    moveVideo(index);
-                    remove(index);
-                  }}
+                  onClick={checksubItem}
                 >
                   {buttonValue}
                 </Button>
