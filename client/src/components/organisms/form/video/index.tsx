@@ -41,13 +41,19 @@ const videoValidation = () =>
   });
 
 const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
-  const [count, setCount] = useState<number>(0);
+  const arrayDatas = Object.values(currentValues);
+
+  const [count, setCount] = useState<number>(arrayDatas.length);
   const addCount = () => {
     setCount(count + 1);
   };
-  const arrayDatas = Object.values(currentValues);
+  const subCount = () => {
+    setCount(count - 1);
+  };
+
   const dispatch = useDispatch();
-  const addItem = { name: '', userId: currentUser.id, url: '' };
+  const addItem = { name: '', userId: currentUser.id, url: '', order: '' };
+
   const initialValuesData = { formikValues: arrayDatas };
   const formikKey = Object.keys(initialValuesData)[0];
 
@@ -55,6 +61,8 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
     let editVideos: PartialArrayVideoType = [];
     const submitValues = values.formikValues;
     // ojbectに変化がなければ、return
+    console.log(currentValues);
+    console.log(submitValues);
     if (unchangedValues(currentValues, submitValues)) {
       return;
     }
@@ -62,6 +70,7 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
 
     //update,create,deleteするvideoを配列にする。
     editVideos = [...submitValues, ...deleteTargetValues];
+    console.log(editVideos);
     dispatch(updateVideos(editVideos));
   };
 
@@ -90,10 +99,10 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                     name={formikKey}
                     render={({ remove, push }) => {
                       const checkaddItem = () => {
-                        addCount();
                         if (count > 3) {
                           return;
                         }
+                        addCount();
                         push(addItem);
                       };
 
@@ -108,8 +117,10 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                             remove={remove}
                             currentVideos={arrayDatas}
                             formikKey={formikKey}
+                            onChange={subCount}
                           />
                           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                            <div>{count}</div>
                             <Button
                               color={BASICCOLORS.WHITE}
                               pHeight={CLEAR.TINY}

@@ -14,12 +14,13 @@ interface Props {
   remove: <T>(index: number) => T | undefined;
   club: ClubType;
   name: string;
-  onChange: {
+  handleChange: {
     (e: React.ChangeEvent<any>): void;
     <T = string | React.ChangeEvent<any>>(field: T): T extends React.ChangeEvent<any>
       ? void
       : (e: string | React.ChangeEvent<any>) => void;
   };
+  onChange: () => void;
 }
 
 const StyledField = styled.input`
@@ -76,7 +77,15 @@ const flexDatas = [
   { flex: 'SX' },
 ];
 
-const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remove }) => {
+const ClubEditItems: React.FC<Props> = ({
+  arg,
+  club,
+  name,
+  index,
+  onChange,
+  handleChange,
+  remove,
+}) => {
   const makers = useSelector((state: State) => state.makers);
   const shafts = useSelector((state: State) => state.shafts);
   const types = useSelector((state: State) => state.types);
@@ -88,7 +97,10 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
     shaft: shafts,
     flex: flexDatas,
   };
-
+  const checksubItem = () => {
+    onChange();
+    remove(index);
+  };
   const items = {
     name: (
       <>
@@ -96,7 +108,7 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
           type={'text'}
           name={name}
           placeholder={'入力してください。'}
-          onChange={onChange}
+          onChange={handleChange}
           value={club[arg]}
         />
         <StyledDiv>
@@ -110,15 +122,13 @@ const ClubEditItems: React.FC<Props> = ({ arg, club, name, index, onChange, remo
         pHeight={CLEAR.TINY}
         color={BASICCOLORS.SECONDARY}
         fontSize={FONTSIZE.BASE}
-        onClick={() => {
-          remove(index);
-        }}
+        onClick={checksubItem}
       >
         ×
       </Button>
     ),
     other: (
-      <StyledSelect name={name} onChange={onChange}>
+      <StyledSelect name={name} onChange={handleChange}>
         <option value={arg}>{club[arg]}</option>
         {optionDatas[arg as keyof OptionDatas] &&
           Object.values(optionDatas[arg as keyof OptionDatas]).map((data: any, num: number) => {

@@ -12,12 +12,13 @@ interface Props {
   remove: <T>(index: number) => T | undefined;
   result: ResultType;
   name: string;
-  onChange: {
+  handleChange: {
     (e: React.ChangeEvent<any>): void;
     <T = string | React.ChangeEvent<any>>(field: T): T extends React.ChangeEvent<any>
       ? void
       : (e: string | React.ChangeEvent<any>) => void;
   };
+  onChange: () => void;
 }
 
 const StyledField = styled.input`
@@ -75,12 +76,24 @@ const selectRank: string[] = [...Array(100)].map((_, i) => {
   return i === 99 ? 'CUT' : String(initRank + i);
 });
 
-const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, remove }) => {
+const ResultEditItems: React.FC<Props> = ({
+  arg,
+  result,
+  name,
+  index,
+  onChange,
+  handleChange,
+  remove,
+}) => {
   type OptionDatasValue = typeof optionDatas;
   const optionDatas = {
     year: selectYears,
     month: selectMonths,
     rank: selectRank,
+  };
+  const checksubItem = () => {
+    onChange();
+    remove(index);
   };
   //
   const items = {
@@ -90,7 +103,7 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
           type={'text'}
           name={name}
           placeholder={'入力してください。'}
-          onChange={onChange}
+          onChange={handleChange}
           value={result[arg]}
         />
         <StyledDiv>
@@ -103,7 +116,7 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
         <StyledBox
           type={'checkbox'}
           name={name}
-          onChange={onChange}
+          onChange={handleChange}
           value={'T'}
           defaultChecked={result[arg] === 'T'}
         />
@@ -115,7 +128,7 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
           type={'text'}
           name={name}
           placeholder={'結果掲載webページのURL'}
-          onChange={onChange}
+          onChange={handleChange}
           value={result[arg]}
         />
         <StyledDiv>
@@ -129,15 +142,13 @@ const ResultEditItems: React.FC<Props> = ({ arg, result, name, index, onChange, 
         pHeight={CLEAR.TINY}
         color={BASICCOLORS.SECONDARY}
         fontSize={FONTSIZE.BASE}
-        onClick={() => {
-          remove(index);
-        }}
+        onClick={checksubItem}
       >
         ×
       </Button>
     ),
     other: (
-      <StyledSelect name={name} onChange={onChange}>
+      <StyledSelect name={name} onChange={handleChange}>
         <option value={result[arg]}>{result[arg]}</option>
         {optionDatas[arg as keyof OptionDatasValue] &&
           Object.values(optionDatas[arg as keyof OptionDatasValue]).map(
