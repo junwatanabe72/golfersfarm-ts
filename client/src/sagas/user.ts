@@ -21,8 +21,8 @@ function* getUsersAsync() {
 function* createUserAsync(action: Action<SignupUserType>) {
   try {
     const { data } = yield call(createUserAxios, action.payload);
-    if (data.e) {
-      yield toast.error('失敗しました。', options);
+    if (data.error || !data.newUser) {
+      yield toast.error(`${data.error}`, options);
       return;
     }
     yield toast.success('新規登録に成功しました。', options);

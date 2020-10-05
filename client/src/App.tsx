@@ -14,7 +14,7 @@ import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
 import { getUsers, addTypes, addShafts, addMakers, checkLoginUser } from './actions';
-import { allTypes, shafts, makers } from './utils/constant/text/body/user/value';
+// import { allTypes, shafts, makers } from './utils/constant/text/body/user/value';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
@@ -32,9 +32,9 @@ const Container = styled.div`
 const App: React.FC<Props> = ({}) => {
   const currentUser: UserType = useSelector((state: State) => state.currentUser);
   const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users);
-  // const makers = useSelector((state: State) => state.makers);
-  // const shafts = useSelector((state: State) => state.shafts);
-  // const types = useSelector((state: State) => state.types);
+  const makers = useSelector((state: State) => state.makers);
+  const shafts = useSelector((state: State) => state.shafts);
+  const types = useSelector((state: State) => state.types);
   const storeClubs = useSelector((state: State) => state.clubs);
   const storeResults = useSelector((state: State) => state.results);
   const storeVideos = useSelector((state: State) => state.videos);
@@ -50,9 +50,10 @@ const App: React.FC<Props> = ({}) => {
     // localStorage.clear();
     dispatch(checkLoginUser());
     dispatch(getUsers());
-    dispatch(addTypes(allTypes));
+    // dispatch(addTypes(allTypes));
     dispatch(addShafts(shafts));
     dispatch(addMakers(makers));
+    dispatch(addMakers(types));
   }, []);
 
   return (
