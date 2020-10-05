@@ -2,6 +2,7 @@ import axios from 'axios';
 import { restfulApiConfig } from './config';
 // export const TOKEN = restfulApiConfig.apiKey;
 
+export const jwt = `Bearer ${localStorage.getItem('jwt')}` || '';
 export const client = axios.create({
   baseURL: restfulApiConfig,
 });
@@ -9,6 +10,6 @@ export const client = axios.create({
 export const authClient = axios.create({
   baseURL: restfulApiConfig,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('jwt')}`,
+    Authorization: jwt,
   },
 });

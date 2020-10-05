@@ -36,8 +36,8 @@ authRouter.get("/login", async (req: Request, res: Response) => {
     try {
       if (err || !user) {
         console.error("hoge", err);
-        return res.status(400).json({
-          message: "somthing is not right",
+        return res.status(200).json({
+          message: "no jwt",
           user,
         });
       }
@@ -58,15 +58,24 @@ authRouter.post("/signup", async (req: Request, res: Response) => {
   const { user } = req.body;
   try {
     const _user = await User.findOne({ where: { email: user.email } });
+    const __user = await User.findOne({ where: { name: user.name } });
     if (!user.password || user.password.length < 8) {
-      return res.status(400).json({
+      return res.status(200).json({
         error: "パスワードは8文字以上を設定してください",
         code: "invalidPassword",
       });
     }
+
+    //
     if (_user) {
-      return res.status(422).json({
+      return res.status(200).json({
         error: "すでに登録されているメールアドレスです",
+        code: "alreadyRegistered",
+      });
+    }
+    if (__user) {
+      return res.status(200).json({
+        error: "すでに登録されているユーザー名です",
         code: "alreadyRegistered",
       });
     }

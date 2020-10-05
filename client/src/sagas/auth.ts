@@ -26,11 +26,12 @@ function* loginUserAsync(action: Action<LoginUserType>) {
 
 function* checkLoginUserAsync() {
   const data = yield call(checkLoginUserAxios);
+  const { user } = data;
   try {
-    if (data.e) {
+    if (data.message || !user) {
+      yield put(getUsers());
       return;
     }
-    const user = data.user;
 
     yield put(addUser(user));
     yield put(getUsers());

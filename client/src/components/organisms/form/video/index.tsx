@@ -52,7 +52,7 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
   };
 
   const dispatch = useDispatch();
-  const addItem = { name: '', userId: currentUser.id, url: '', order: '' };
+  const addItem = { name: '', userId: currentUser.id, url: '' };
 
   const initialValuesData = { formikValues: arrayDatas };
   const formikKey = Object.keys(initialValuesData)[0];
@@ -61,8 +61,6 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
     let editVideos: PartialArrayVideoType = [];
     const submitValues = values.formikValues;
     // ojbectに変化がなければ、return
-    console.log(currentValues);
-    console.log(submitValues);
     if (unchangedValues(currentValues, submitValues)) {
       return;
     }
@@ -70,7 +68,6 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
 
     //update,create,deleteするvideoを配列にする。
     editVideos = [...submitValues, ...deleteTargetValues];
-    console.log(editVideos);
     dispatch(updateVideos(editVideos));
   };
 
