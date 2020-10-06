@@ -3,10 +3,13 @@ import { addResults, removeResults, ACTIONTYPES } from '../actions/index';
 import { getResultsAxios, updateResultsAxios } from '../services/axios/result';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
+import { push } from 'connected-react-router';
 
 function* updateResultsAsync(action: Action<PartialArrayResultType>) {
   let results: ObjectResultType = {};
   let deleteResults: PartialObjectResultType = {};
+  console.log(action.payload);
+  const userId = action.payload[0].userId;
   try {
     const { data } = yield call(updateResultsAxios, action.payload);
 
@@ -29,6 +32,7 @@ function* updateResultsAsync(action: Action<PartialArrayResultType>) {
 
     yield put(removeResults(deleteResults));
     yield put(addResults(results));
+    yield put(push(`/users/${userId}/edit`));
     yield toast.success('編集に成功しました。', options);
 
     return;

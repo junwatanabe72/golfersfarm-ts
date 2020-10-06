@@ -32,7 +32,6 @@ function* checkLoginUserAsync() {
       yield put(getUsers());
       return;
     }
-
     yield put(addUser(user));
     yield put(getUsers());
     yield toast.success('ログインに成功しました。', options);

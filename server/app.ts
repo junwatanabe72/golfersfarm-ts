@@ -67,11 +67,6 @@ allRouters.forEach((route) => {
   app.use(route.path, route.route);
 });
 
-// app.use("/auth", authRouter);
-// app.use("/users", usersRouter);
-// app.use("/makers", makersRouter);
-// app.use("/types", clubTypesRouter);
-// app.use("/shafts", shaftsRouter);
 const server = http.createServer(app);
 const port = process.env.PORT || "3000";
 

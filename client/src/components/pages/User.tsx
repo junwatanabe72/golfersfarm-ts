@@ -63,8 +63,6 @@ const User: React.FC<Props> = ({
   const userBall: BallType | undefined = Object.values(storeBalls).find(
     (ball: BallType) => ball.userId === targetUser.id
   );
-  // console.log(storeResults);
-  // console.log(checkedResults);
   return (
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
