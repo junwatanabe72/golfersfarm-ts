@@ -29,6 +29,9 @@ export const ACTIONTYPES = {
   UPDATE_BALL: 'UPDATE_BALL',
   REQUESTED_RESULTS: 'REQUESTED_RESULTS',
   UPDATE_RESULTS: 'UPDATE_RESULTS',
+  REQUESTED_TYPES: 'REQUESTED_TYPES',
+  REQUESTED_SHAFTS: 'REQUESTED_SHAFTS',
+  REQUESTED_MAKERS: 'REQUESTED_MAKERS',
   //
 } as const;
 
@@ -78,6 +81,15 @@ export function getResults(data: PartialUserType): Action<PartialUserType> {
 export function updateResults(data: PartialArrayResultType): Action<PartialArrayResultType> {
   return { type: ACTIONTYPES.UPDATE_RESULTS, payload: data };
 }
+export function getTypes(): BasicAction {
+  return { type: ACTIONTYPES.REQUESTED_TYPES };
+}
+export function getMakers(): BasicAction {
+  return { type: ACTIONTYPES.REQUESTED_MAKERS };
+}
+export function getShafts(): BasicAction {
+  return { type: ACTIONTYPES.REQUESTED_SHAFTS };
+}
 //REDUX_SAGA
 
 export function addUser(data: PartialUserType): Action<PartialUserType> {
@@ -115,15 +127,15 @@ export function addBall(data: ObjectBallType): Action<ObjectBallType> {
   return { type: ACTIONTYPES.ADD_BALL, payload: data };
 }
 //typesActionCreater
-export function addTypes(data: TypesData): Action<TypesData> {
+export function addTypes(data: ArrayClubTypeType): Action<ArrayClubTypeType> {
   return { type: ACTIONTYPES.ADD_TYPES, payload: data };
 }
 
 //typesActionCreater
-export function addShafts(data: ShaftsData): Action<ShaftsData> {
+export function addShafts(data: ArrayShaftType): Action<ArrayShaftType> {
   return { type: ACTIONTYPES.ADD_SHAFTS, payload: data };
 }
 //typesActionCreater
-export function addMakers(data: MakersData): Action<MakersData> {
+export function addMakers(data: ArrayMakerType): Action<ArrayMakerType> {
   return { type: ACTIONTYPES.ADD_MAKERS, payload: data };
 }

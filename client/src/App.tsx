@@ -13,8 +13,7 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
-import { getUsers, addTypes, addShafts, addMakers, checkLoginUser } from './actions';
-// import { allTypes, shafts, makers } from './utils/constant/text/body/user/value';
+import { getUsers, getMakers, getShafts, getTypes, checkLoginUser } from './actions';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
 import { fab } from '@fortawesome/free-brands-svg-icons'; //fontawesomeのbrandアイコンのインポート
@@ -50,10 +49,9 @@ const App: React.FC<Props> = ({}) => {
     // localStorage.clear();
     dispatch(checkLoginUser());
     dispatch(getUsers());
-    // dispatch(addTypes(allTypes));
-    dispatch(addShafts(shafts));
-    dispatch(addMakers(makers));
-    dispatch(addMakers(types));
+    dispatch(getShafts());
+    dispatch(getMakers());
+    dispatch(getTypes());
   }, []);
 
   return (

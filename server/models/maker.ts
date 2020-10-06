@@ -30,13 +30,6 @@ class Maker extends Model {
     return this;
   }
   public static associate() {
-    // for (const model of models){
-    //   this.hasMany(model, {
-    //     sourceKey: 'id',
-    //     foreignKey: 'makerId',
-    //     constraints: false
-    //   });
-    // }
     this.hasMany(Ball, {
       sourceKey: "id",
       foreignKey: "makerId",
@@ -48,6 +41,11 @@ class Maker extends Model {
       constraints: false,
     });
   }
+}
+export type PartialMakerType = Partial<MakerType>;
+export interface MakerType {
+  id: number;
+  name: string;
 }
 
 export default Maker;

@@ -21,7 +21,7 @@ function* getUsersAsync() {
 function* createUserAsync(action: Action<SignupUserType>) {
   try {
     const { data } = yield call(createUserAxios, action.payload);
-    if (data.error || !data.newUser) {
+    if (data.error) {
       yield toast.error(`${data.error}`, options);
       return;
     }

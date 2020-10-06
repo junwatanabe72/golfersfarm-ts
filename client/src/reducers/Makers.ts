@@ -1,11 +1,11 @@
 import { ACTIONTYPES } from '../actions';
 
-const initialState: MakersData = [];
+const initialState: ArrayMakerType = [];
 
 export default function ShaftsReducer(
   state = initialState,
-  action: Action<MakersData>
-): MakersData {
+  action: Action<ArrayMakerType>
+): ArrayMakerType {
   let newState = state;
   const makers = action.payload || [];
   switch (action.type) {

@@ -1,7 +1,7 @@
-const maker = {
-  id: 1,
-  name: 'MIZUNO',
-};
+interface MakerType {
+  id: number;
+  name: string;
+  [key: string]: string | number;
+}
 
-type MakerData = typeof maker;
-type MakersData = MakerData[];
+type ArrayMakerType = MakerType[];

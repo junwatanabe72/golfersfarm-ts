@@ -37,7 +37,7 @@ class Club extends Model {
       );
       const newUserClubs = await UserClubs.create(
         {
-          userId: parseInt(id),
+          userId: id,
           clubId: newClub.id,
         },
         { transaction: t }

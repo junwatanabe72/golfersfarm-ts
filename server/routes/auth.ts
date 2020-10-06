@@ -14,7 +14,7 @@ authRouter.post("/login", async (req: Request, res: Response) => {
   passport.authenticate("local", { session: false }, (err: any, user: any) => {
     if (err || !user) {
       console.error("hoge", err);
-      return res.status(400).json({
+      return res.status(200).json({
         message: "somthing is not right",
         user,
       });

@@ -34,5 +34,10 @@ class ClubType extends Model {
     });
   }
 }
+export type PartialClubTypeType = Partial<ClubTypeType>;
+export interface ClubTypeType {
+  id: number;
+  type: string;
+}
 
 export default ClubType;

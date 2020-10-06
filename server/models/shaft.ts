@@ -34,5 +34,9 @@ class Shaft extends Model {
     });
   }
 }
-
+export type PartialShaftType = Partial<ShaftType>;
+export interface ShaftType {
+  id: number;
+  name: string;
+}
 export default Shaft;

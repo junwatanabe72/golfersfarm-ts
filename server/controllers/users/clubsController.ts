@@ -72,7 +72,6 @@ export default {
         club.map(async (value: any) => {
           // clientのclub型をserver型に変換
           const { type, maker, shaft } = value;
-
           const targetClub = await convertClubDataToServer(value);
           if (!targetClub.id) {
             const { newData } = await Club.add(
@@ -82,6 +81,7 @@ export default {
             );
             // serverのclub型をclient型に変換
             const club = convertClubDataToClient(newData, type, maker, shaft);
+            console.log(club);
             return club;
           }
           if (!targetClub.name) {
