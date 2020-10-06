@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request, Response, NextFunction, Router } from "express";
 import path from "path";
 import http from "http";
 import debug from "debug";
@@ -8,6 +8,9 @@ import passport from "passport";
 import "./middlewares/passport";
 import { usersRouter } from "./routes/users";
 import { authRouter } from "./routes/auth";
+import { makersRouter } from "./routes/maker";
+import { shaftsRouter } from "./routes/shaft";
+import { clubTypesRouter } from "./routes/type";
 
 const rfs = require("rotating-file-stream");
 const multer = require("multer");
@@ -53,9 +56,22 @@ app.get("/", (req: Request, res: Response) => {
   res.json({ message: "ok" });
 });
 
-app.use("/auth", authRouter);
-app.use("/users", usersRouter);
+const allRouters = [
+  { path: "/auth", route: authRouter },
+  { path: "/users", route: usersRouter },
+  { path: "/makers", route: makersRouter },
+  { path: "/types", route: clubTypesRouter },
+  { path: "/shafts", route: shaftsRouter },
+];
+allRouters.forEach((route) => {
+  app.use(route.path, route.route);
+});
 
+// app.use("/auth", authRouter);
+// app.use("/users", usersRouter);
+// app.use("/makers", makersRouter);
+// app.use("/types", clubTypesRouter);
+// app.use("/shafts", shaftsRouter);
 const server = http.createServer(app);
 const port = process.env.PORT || "3000";
 

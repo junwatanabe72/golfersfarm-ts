@@ -1,7 +1,7 @@
-const shaft = {
-  id: 1,
-  name: 'TOUR-AD PT-7',
-};
+interface ShaftType {
+  id: number;
+  name: string;
+  [key: string]: string | number;
+}
 
-type ShaftData = typeof shaft;
-type ShaftsData = ShaftData[];
+type ArrayShaftType = ShaftType[];

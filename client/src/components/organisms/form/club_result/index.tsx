@@ -130,7 +130,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       dispatch(updateResults(editValues));
     },
   };
-
   return (
     <Formik<FormikValueType<typeof currentValues.formikValues>>
       initialValues={currentValues}
