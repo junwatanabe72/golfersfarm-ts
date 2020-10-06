@@ -102,7 +102,6 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
     validationSchema: validation[status],
     onSubmit: onSubmit[status],
   });
-
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
       {Object.keys(formDatas[status]).map((key: string, num: number) => {

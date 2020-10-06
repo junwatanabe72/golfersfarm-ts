@@ -62,8 +62,8 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       name: '',
       userId: currentUser.id,
       type: '1WOOD',
-      maker: 'Mizuno',
-      shaft: 'TOUR AD DI-7',
+      maker: 'テーラーメイド',
+      shaft: 'original',
       flex: 'R',
     },
     result: {
@@ -103,7 +103,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
 
   const onSubmit = {
     club: (values: FormikValueType<typeof currentValues.formikValues>) => {
-      let editValues: PartialArrayClubType = [];
+      let editClubValues: PartialArrayClubType = [];
       const submitValues = values.formikValues;
       // ojbectに変化がなければ、return
       if (unchangedValues(currentValues.formikValues, submitValues)) {
@@ -111,11 +111,11 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       }
       const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするクラブを配列にする。
-      editValues = [...submitValues, ...deleteTargetValues];
-      dispatch(updateClubs(editValues));
+      editClubValues = [...submitValues, ...deleteTargetValues];
+      dispatch(updateClubs(editClubValues));
     },
     result: (values: FormikValueType<typeof currentValues.formikValues>) => {
-      let editValues: PartialArrayResultType = [];
+      let editResultValues: PartialArrayResultType = [];
       const baseSubmitValues = values.formikValues;
       // checkboxのvalueが["T"],[""]となっているため、stringへ戻す。
       const submitValues = arrayToString(baseSubmitValues);
@@ -125,9 +125,8 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       }
       const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするResultを配列にする。
-      editValues = [...submitValues, ...deleteTargetValues];
-      console.log(editValues);
-      dispatch(updateResults(editValues));
+      editResultValues = [...submitValues, ...deleteTargetValues];
+      dispatch(updateResults(editResultValues));
     },
   };
   return (
@@ -160,14 +159,14 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                             return;
                           }
                           addCount();
-                          push(addItem);
+                          push(addItem[theme]);
                         },
                         result: () => {
                           if (count > 19) {
                             return;
                           }
                           addCount();
-                          push(addItem);
+                          push(addItem[theme]);
                         },
                       };
 
@@ -190,7 +189,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                             </tbody>
                           </StyledTable>
                           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-                            <div>{count}</div>
                             <Button
                               color={BASICCOLORS.WHITE}
                               pHeight={CLEAR.TINY}

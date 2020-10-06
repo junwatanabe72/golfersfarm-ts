@@ -117,7 +117,6 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                             onChange={subCount}
                           />
                           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-                            <div>{count}</div>
                             <Button
                               color={BASICCOLORS.WHITE}
                               pHeight={CLEAR.TINY}
