@@ -22,12 +22,6 @@ export async function updateUserImageAxios(arg: FormData) {
 
 //users
 export async function getUsersAxios() {
-  // const jwt = `Bearer ${localStorage.getItem('jwt')}` || '';
-  // const config = {
-  //   headers: {
-  //     Authorization: jwt,
-  //   },
-  // };
   const { data } = await client.get('/users');
   return data;
 }

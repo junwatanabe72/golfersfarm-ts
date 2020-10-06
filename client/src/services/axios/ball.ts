@@ -10,6 +10,5 @@ export async function updateBallAxios(arg: BallType) {
   const { userId } = arg;
   const queries = { ball: arg };
   const { data } = await client.patch(`/users/${userId}/ball`, queries);
-  console.log(data);
   return data;
 }
