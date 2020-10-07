@@ -4,6 +4,7 @@ import { push } from 'connected-react-router';
 import { loginUserAxios, checkLoginUserAxios } from '../services/axios/auth';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
+import { setAuthToken } from '../utils/axiosConf';
 
 function* loginUserAsync(action: Action<LoginUserType>) {
   const { user, token } = yield call(loginUserAxios, action.payload);
@@ -13,6 +14,8 @@ function* loginUserAsync(action: Action<LoginUserType>) {
       return;
     } else {
       localStorage.setItem('jwt', token);
+      const jwt = `Bearer ${localStorage.getItem('jwt')}`;
+      setAuthToken(jwt);
       yield put(addUser(user));
       yield put(getUsers());
       yield put(push(`/users/${user.id}`));
@@ -25,6 +28,8 @@ function* loginUserAsync(action: Action<LoginUserType>) {
 }
 
 function* checkLoginUserAsync() {
+  const jwt = `Bearer ${localStorage.getItem('jwt')}`;
+  setAuthToken(jwt);
   const data = yield call(checkLoginUserAxios);
   const { user } = data;
   try {
@@ -44,6 +49,7 @@ function* checkLoginUserAsync() {
 function* logoutUserAsync() {
   try {
     localStorage.clear();
+    setAuthToken();
     yield put(deleteUser());
     yield put(getUsers());
     yield toast.info('ログアウトに成功しました。', options);

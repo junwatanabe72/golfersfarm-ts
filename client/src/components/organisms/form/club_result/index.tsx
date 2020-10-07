@@ -13,7 +13,7 @@ import ClubEditFormLayout from './ArrayEditFormLayout';
 import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
-import { deleteValues, unchangedValues, arrayToString } from '../../../../utils/constant/text/form';
+import { deleteValues, arrayToString } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
 
 interface Props {
@@ -105,10 +105,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
     club: (values: FormikValueType<typeof currentValues.formikValues>) => {
       let editClubValues: PartialArrayClubType = [];
       const submitValues = values.formikValues;
-      // ojbectに変化がなければ、return
-      if (unchangedValues(currentValues.formikValues, submitValues)) {
-        return;
-      }
       const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするクラブを配列にする。
       editClubValues = [...submitValues, ...deleteTargetValues];
@@ -120,9 +116,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       // checkboxのvalueが["T"],[""]となっているため、stringへ戻す。
       const submitValues = arrayToString(baseSubmitValues);
       // ojbectに変化がなければ、return
-      if (unchangedValues(currentValues.formikValues, submitValues)) {
-        return;
-      }
       const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするResultを配列にする。
       editResultValues = [...submitValues, ...deleteTargetValues];
@@ -135,81 +128,83 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       validationSchema={arrayValidation[theme]}
       onSubmit={onSubmit[theme]}
     >
-      <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
-        <Form>
-          <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
-            <FormTitle>{editTitles[theme]}</FormTitle>
-            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <FlexLayout
-                justifyContent={JUSTIFYCONTENT.START}
-                width={SIZE.XXXSMALL}
-                alignItems={ALIGNITEMS.START}
-                left={
-                  <Padding left={CLEAR.TINY}>
-                    <StyledLabel>{editSubTitles[theme]}</StyledLabel>
-                  </Padding>
-                }
-                right={
-                  <FieldArray
-                    name={formikKey}
-                    render={({ remove, push }) => {
-                      const checkaddItem = {
-                        club: () => {
-                          if (count > 12) {
-                            return;
-                          }
-                          addCount();
-                          push(addItem[theme]);
-                        },
-                        result: () => {
-                          if (count > 19) {
-                            return;
-                          }
-                          addCount();
-                          push(addItem[theme]);
-                        },
-                      };
+      {({ dirty }) => (
+        <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
+          <Form>
+            <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
+              <FormTitle>{editTitles[theme]}</FormTitle>
+              <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                <FlexLayout
+                  justifyContent={JUSTIFYCONTENT.START}
+                  width={SIZE.XXXSMALL}
+                  alignItems={ALIGNITEMS.START}
+                  left={
+                    <Padding left={CLEAR.TINY}>
+                      <StyledLabel>{editSubTitles[theme]}</StyledLabel>
+                    </Padding>
+                  }
+                  right={
+                    <FieldArray
+                      name={formikKey}
+                      render={({ remove, push }) => {
+                        const checkaddItem = {
+                          club: () => {
+                            if (count > 12) {
+                              return;
+                            }
+                            addCount();
+                            push(addItem[theme]);
+                          },
+                          result: () => {
+                            if (count > 19) {
+                              return;
+                            }
+                            addCount();
+                            push(addItem[theme]);
+                          },
+                        };
 
-                      return (
-                        <Padding
-                          top={CLEAR.TINY}
-                          right={CLEAR.SMALL}
-                          left={CLEAR.SMALL}
-                          bottom={CLEAR.TINY}
-                        >
-                          <StyledTable>
-                            <tbody>
-                              <ClubEditFormLayout
-                                remove={remove}
-                                formikKey={formikKey}
-                                value={currentValues.formikValues}
-                                theme={theme}
-                                onChange={subCount}
-                              />
-                            </tbody>
-                          </StyledTable>
-                          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-                            <Button
-                              color={BASICCOLORS.WHITE}
-                              pHeight={CLEAR.TINY}
-                              pWidth={CLEAR.TINY}
-                              fontSize={FONTSIZE.SMALL}
-                              onClick={checkaddItem[theme]}
-                            >
-                              {AddButtonText[theme]}
-                            </Button>
+                        return (
+                          <Padding
+                            top={CLEAR.TINY}
+                            right={CLEAR.SMALL}
+                            left={CLEAR.SMALL}
+                            bottom={CLEAR.TINY}
+                          >
+                            <StyledTable>
+                              <tbody>
+                                <ClubEditFormLayout
+                                  remove={remove}
+                                  formikKey={formikKey}
+                                  value={currentValues.formikValues}
+                                  theme={theme}
+                                  onChange={subCount}
+                                />
+                              </tbody>
+                            </StyledTable>
+                            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                              <Button
+                                color={BASICCOLORS.WHITE}
+                                pHeight={CLEAR.TINY}
+                                pWidth={CLEAR.TINY}
+                                fontSize={FONTSIZE.SMALL}
+                                onClick={checkaddItem[theme]}
+                              >
+                                {AddButtonText[theme]}
+                              </Button>
+                            </Padding>
                           </Padding>
-                        </Padding>
-                      );
-                    }}
-                  />
-                }
-              />
+                        );
+                      }}
+                    />
+                  }
+                />
+              </Padding>
+              {dirty && <FormSubmit>{buttonValue[theme]}</FormSubmit>}
             </Padding>
-            <FormSubmit>{buttonValue[theme]}</FormSubmit>
-          </Padding>
-        </Form>
-      </Padding>
+          </Form>
+        </Padding>
+      )}
     </Formik>
   );
 };

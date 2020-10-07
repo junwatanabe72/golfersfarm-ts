@@ -12,7 +12,7 @@ import { updateVideos } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import { unchangedValues, deleteValues } from '../../../../utils/constant/text/form';
+import { deleteValues } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
 
 interface Props {
@@ -60,10 +60,6 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
   const onSubmit = (values: FormikValueType<ArrayVideoType>) => {
     let editVideos: PartialArrayVideoType = [];
     const submitValues = values.formikValues;
-    // ojbectに変化がなければ、return
-    if (unchangedValues(currentValues, submitValues)) {
-      return;
-    }
     const deleteTargetValues = deleteValues(currentValues, submitValues);
 
     //update,create,deleteするvideoを配列にする。
@@ -77,67 +73,69 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
       validationSchema={videoValidation}
       onSubmit={onSubmit}
     >
-      <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
-        <Form>
-          <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
-            <FormTitle>{editTitles}</FormTitle>
-            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <FlexLayout
-                justifyContent={JUSTIFYCONTENT.START}
-                width={SIZE.XXXSMALL}
-                alignItems={ALIGNITEMS.START}
-                left={
-                  <Padding left={CLEAR.TINY}>
-                    <StyledLabel>{editSubTitles}</StyledLabel>
-                  </Padding>
-                }
-                right={
-                  <FieldArray
-                    name={formikKey}
-                    render={({ remove, push }) => {
-                      const checkaddItem = () => {
-                        if (count > 3) {
-                          return;
-                        }
-                        addCount();
-                        push(addItem);
-                      };
+      {({ dirty }) => (
+        <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
+          <Form>
+            <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
+              <FormTitle>{editTitles}</FormTitle>
+              <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                <FlexLayout
+                  justifyContent={JUSTIFYCONTENT.START}
+                  width={SIZE.XXXSMALL}
+                  alignItems={ALIGNITEMS.START}
+                  left={
+                    <Padding left={CLEAR.TINY}>
+                      <StyledLabel>{editSubTitles}</StyledLabel>
+                    </Padding>
+                  }
+                  right={
+                    <FieldArray
+                      name={formikKey}
+                      render={({ remove, push }) => {
+                        const checkaddItem = () => {
+                          if (count > 3) {
+                            return;
+                          }
+                          addCount();
+                          push(addItem);
+                        };
 
-                      return (
-                        <Padding
-                          top={CLEAR.TINY}
-                          right={CLEAR.SMALL}
-                          left={CLEAR.SMALL}
-                          bottom={CLEAR.TINY}
-                        >
-                          <VideoEditFormItem
-                            remove={remove}
-                            currentVideos={arrayDatas}
-                            formikKey={formikKey}
-                            onChange={subCount}
-                          />
-                          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-                            <Button
-                              color={BASICCOLORS.WHITE}
-                              pHeight={CLEAR.TINY}
-                              pWidth={CLEAR.TINY}
-                              fontSize={FONTSIZE.SMALL}
-                              onClick={checkaddItem}
-                            >
-                              {AddButtonText}
-                            </Button>
+                        return (
+                          <Padding
+                            top={CLEAR.TINY}
+                            right={CLEAR.SMALL}
+                            left={CLEAR.SMALL}
+                            bottom={CLEAR.TINY}
+                          >
+                            <VideoEditFormItem
+                              remove={remove}
+                              currentVideos={arrayDatas}
+                              formikKey={formikKey}
+                              onChange={subCount}
+                            />
+                            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                              <Button
+                                color={BASICCOLORS.WHITE}
+                                pHeight={CLEAR.TINY}
+                                pWidth={CLEAR.TINY}
+                                fontSize={FONTSIZE.SMALL}
+                                onClick={checkaddItem}
+                              >
+                                {AddButtonText}
+                              </Button>
+                            </Padding>
                           </Padding>
-                        </Padding>
-                      );
-                    }}
-                  />
-                }
-              />
+                        );
+                      }}
+                    />
+                  }
+                />
+              </Padding>
+              {dirty && <FormSubmit>{buttonValue}</FormSubmit>}
             </Padding>
-            <FormSubmit>{buttonValue}</FormSubmit>
-          </Padding>
-        </Form>
-      </Padding>
+          </Form>
+        </Padding>
+      )}
     </Formik>
   );
 };

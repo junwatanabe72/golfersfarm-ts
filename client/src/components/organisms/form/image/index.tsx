@@ -64,12 +64,6 @@ const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
     });
 
   const onSubmit = async (values: PartialImageUserType) => {
-    if (
-      values.profileImage === currentUser.profileImage &&
-      values.clubImage === currentUser.clubImage
-    ) {
-      return;
-    }
     const formData = new FormData();
     if (values.profileImage !== currentUser.profileImage && values.profileImage !== undefined) {
       formData.append('profileImage', values.profileImage);
@@ -94,7 +88,7 @@ const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
             return <InputItem key={num} formik={formik} valueKey={key} currentUser={currentUser} />;
           })}
         </Padding>
-        <FormSubmit>{buttonValue}</FormSubmit>
+        {formik.dirty && <FormSubmit>{buttonValue}</FormSubmit>}
       </StyledForm>
     </Padding>
   );

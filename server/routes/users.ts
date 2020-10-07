@@ -48,7 +48,6 @@ const postroutersWithAuth = [
   { path: "/:id/clubs/replace", route: clubsController.replace },
   { path: "/:id/videos/replace", route: videosController.replace },
   { path: "/:id/results/replace", route: resultsController.replace },
-  { path: "/:id/clubs", route: clubsController.create },
 ];
 
 postroutersWithAuth.forEach((route) => {

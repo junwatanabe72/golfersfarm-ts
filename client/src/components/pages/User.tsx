@@ -46,9 +46,9 @@ const User: React.FC<Props> = ({
         return 1;
       }
     });
-  const checkedVideos: ArrayVideoType = Object.values(storeVideos).filter(
-    (video: VideoType) => video.userId === targetUser.id
-  );
+  const checkedVideos: ArrayVideoType = Object.values(storeVideos)
+    .filter((video: VideoType) => video.userId === targetUser.id)
+    .sort();
   const checkedResults: ArrayResultType = Object.values(storeResults)
     .filter((result: ResultType) => result.userId === targetUser.id)
     .sort((first: ResultType, second: ResultType) => {
