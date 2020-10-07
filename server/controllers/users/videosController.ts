@@ -1,12 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import db, { sequelize } from "../../models";
-import {
-  convertArrayVideoDataToClient,
-  convertCreateVideoDataToClient,
-  convertVideoDataToServer,
-  convertVideoDataToClient,
-} from "../../utils/convert/video";
+import {} from "../../utils/Form/video";
+import { serializeIndex, serializeReplace } from "../../utils/Serialize/video";
+import { formReplace } from "../../utils/Form/video";
 
 const Video = db.Video;
 const UserVideos = db.UserVideos;
@@ -33,7 +30,7 @@ export default {
             return;
           }
           // serverのvideo型をclient型に変換
-          const allVideos = convertArrayVideoDataToClient(targetVideos);
+          const allVideos = serializeIndex(targetVideos);
           res.status(200).json({ data: { allVideos } });
         } catch (error) {
           res.status(404);
@@ -41,18 +38,6 @@ export default {
         }
       }
     )(req, res);
-  },
-  async create(req: Request, res: Response, next: NextFunction) {
-    const { video } = req.body;
-    try {
-      const data = await video.add(req.params.id, video, sequelize);
-      // serverのvideo型をclient型に変換
-      const newVideo = convertCreateVideoDataToClient(data);
-      res.status(201).json({ newVideo });
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
   },
 
   async replace(req: Request, res: Response, next: NextFunction) {
@@ -62,7 +47,7 @@ export default {
       const targetVideos = await Promise.all(
         video.map(async (value: any) => {
           // clientのvideo型をserver型に変換
-          const targetVideo = convertVideoDataToServer(value);
+          const targetVideo = formReplace(value);
 
           if (!targetVideo.id) {
             const { newData } = await Video.add(
@@ -71,21 +56,21 @@ export default {
               sequelize
             );
             // serverのvideo型をclient型に変換
-            const video = convertVideoDataToClient(newData);
+            const video = serializeReplace(newData);
             return video;
           }
           if (!targetVideo.name) {
-            await Video.videoDelete(req.params.id, targetVideo, sequelize);
+            await Video.delete(req.params.id, targetVideo, sequelize);
             return;
           }
 
-          const { newData } = await Video.videoReplace(
+          const { newData } = await Video.replace(
             req.params.id,
             targetVideo,
             sequelize
           );
           // serverのvideo型をclient型に変換
-          const video = convertVideoDataToClient(newData);
+          const video = serializeReplace(newData);
           return video;
         })
       );

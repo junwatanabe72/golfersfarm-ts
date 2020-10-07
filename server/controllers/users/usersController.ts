@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../../models";
-import { userType } from "../../models/user";
+import { UserType } from "../../models/user";
 import passport from "passport";
 const User = db.User;
 
@@ -13,7 +13,7 @@ export default {
         try {
           req.login(user, { session: false }, async (err) => {
             const where = !user ? { show: true } : {};
-            const allUsers: userType[] = await User.findAll({ where });
+            const allUsers: UserType[] = await User.findAll({ where });
 
             if (!allUsers) {
               res.status(204).json({ message: "not exist" });

@@ -1,14 +1,14 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import User from "./user";
-import Club from "./club";
+import Result from "./result";
 
-class User_clubs extends Model {
+class UserResults extends Model {
   public id!: number;
   public userId!: number;
-  public clubId!: number;
+  public resultId!: number;
 
   public static initialize(sequelize: Sequelize) {
-    User_clubs.init(
+    UserResults.init(
       {
         id: {
           allowNull: false,
@@ -17,11 +17,11 @@ class User_clubs extends Model {
           primaryKey: true,
         },
         userId: { type: DataTypes.INTEGER },
-        clubId: { type: DataTypes.INTEGER },
+        resultId: { type: DataTypes.INTEGER },
       },
       {
         sequelize: sequelize,
-        tableName: "user_clubs",
+        tableName: "user_results",
       }
     );
     return this;
@@ -34,17 +34,17 @@ class User_clubs extends Model {
       onDelete: "CASCADE",
       constraints: false,
     });
-    this.belongsTo(Club, {
-      foreignKey: "clubId",
+    this.belongsTo(Result, {
+      foreignKey: "resultId",
       constraints: false,
     });
   }
 }
 
-export interface userClubsType {
+export interface UserResultsType {
   id: number;
   userId: number;
-  clubId: number;
+  resultId: number;
 }
 
-export default User_clubs;
+export default UserResults;

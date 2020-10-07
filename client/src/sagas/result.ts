@@ -8,7 +8,6 @@ import { push } from 'connected-react-router';
 function* updateResultsAsync(action: Action<PartialArrayResultType>) {
   let results: ObjectResultType = {};
   let deleteResults: PartialObjectResultType = {};
-  console.log(action.payload);
   const userId = action.payload[0].userId;
   try {
     const { data } = yield call(updateResultsAxios, action.payload);
