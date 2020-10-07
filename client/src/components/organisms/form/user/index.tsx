@@ -47,7 +47,7 @@ const UserEditForm: React.FC<Props> = ({ currentUser }) => {
     <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         <UserEditFormLayout formik={formik} />
-        <FormSubmit>{buttonValue}</FormSubmit>
+        {formik.dirty && <FormSubmit>{buttonValue}</FormSubmit>}
       </StyledForm>
     </Padding>
   );

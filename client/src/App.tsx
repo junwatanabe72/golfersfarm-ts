@@ -31,9 +31,6 @@ const Container = styled.div`
 const App: React.FC<Props> = ({}) => {
   const currentUser: UserType = useSelector((state: State) => state.currentUser);
   const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users);
-  const makers = useSelector((state: State) => state.makers);
-  const shafts = useSelector((state: State) => state.shafts);
-  const types = useSelector((state: State) => state.types);
   const storeClubs = useSelector((state: State) => state.clubs);
   const storeResults = useSelector((state: State) => state.results);
   const storeVideos = useSelector((state: State) => state.videos);
@@ -109,7 +106,7 @@ const App: React.FC<Props> = ({}) => {
           </React.Fragment>
         );
       })}
-      ;
+
       <Route exact path={ROUTE.TOP} render={() => <Top currentUser={currentUser} />} />
       <Route
         exact

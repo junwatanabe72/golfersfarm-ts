@@ -12,7 +12,6 @@ import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import BallEditFormLayout from './BallEditFormLayout';
-import { checkObject } from '../../../../utils/constant/text/form';
 
 interface Props {
   userBall: BallType;
@@ -44,15 +43,6 @@ const ballValidation = () =>
 const BallEditForm: React.FC<Props> = ({ userBall }) => {
   const dispatch = useDispatch();
   const onSubmit = (values: BallType) => {
-    // ojbectに変化がなければ、return
-    if (!userBall) {
-      return;
-    }
-    const formikJsonData = JSON.stringify(checkObject(values));
-    const storeJsonData = JSON.stringify(checkObject(userBall));
-    if (formikJsonData === storeJsonData) {
-      return;
-    }
     dispatch(updateBall(values));
   };
 
@@ -62,7 +52,7 @@ const BallEditForm: React.FC<Props> = ({ userBall }) => {
       validationSchema={ballValidation}
       onSubmit={onSubmit}
     >
-      {({ values, errors, touched, handleChange }) => (
+      {({ values, errors, touched, handleChange, dirty }) => (
         <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
           <Form>
             <Padding top={CLEAR.XSMALL} bottom={CLEAR.SMALL}>
@@ -98,7 +88,7 @@ const BallEditForm: React.FC<Props> = ({ userBall }) => {
                   }
                 />
               </Padding>
-              <FormSubmit>{buttonValue}</FormSubmit>
+              {dirty && <FormSubmit>{buttonValue}</FormSubmit>}
             </Padding>
           </Form>
         </Padding>
