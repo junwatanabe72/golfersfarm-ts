@@ -38,7 +38,7 @@ const StyledTd = styled.td`
 `;
 
 const order = Object.keys(ballTableItems);
-const head = [...order].map((key: string, num: number) => {
+const head = order.map((key: string, num: number) => {
   return (
     <StyledTd key={num}>
       <StyledLabel htmlFor={key}>{ballTableItems[key as keyof BallTableItems]}</StyledLabel>
@@ -53,7 +53,7 @@ const BallEditFormLayout: React.FC<Props> = ({ formikBall, touched, errors, onCh
     <>
       <StyledTrd>{head}</StyledTrd>
       <StyledTrd>
-        {[...order].map((value: string, num: number) => {
+        {order.map((value: string, num: number) => {
           return (
             <StyledTd key={num}>
               <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>

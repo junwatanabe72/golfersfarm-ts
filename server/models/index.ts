@@ -9,9 +9,9 @@ import Result from "./result";
 import Shaft from "./shaft";
 import Maker from "./maker";
 import ClubType from "./clubType";
-import UserClubs from "./user_clubs";
-import UserVideos from "./user_videos";
-import UserResults from "./user_results";
+import UserClubs from "./userClubs";
+import UserVideos from "./userVideos";
+import UserResults from "./userResults";
 
 dotenv.config();
 

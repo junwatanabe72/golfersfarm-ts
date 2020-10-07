@@ -1,12 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import db, { sequelize } from "../../models";
-import {
-  convertArrayClubDataToClient,
-  convertClubDataToServer,
-  convertClubDataToClient,
-  convertCreateClubDataToClient,
-} from "../../utils/convert/club";
+import { formReplace } from "../../utils/Form/club";
 import passport from "passport";
+import { serializeIndex, serializeReplace } from "../../utils/Serialize/club";
 const Club = db.Club;
 const UserClubs = db.UserClubs;
 const Shaft = db.Shaft;
@@ -43,7 +39,7 @@ export default {
               },
             ],
           });
-          const allClubs = convertArrayClubDataToClient(targetClubs);
+          const allClubs = serializeIndex(targetClubs);
           res.status(200).json({ data: { allClubs } });
         } catch (error) {
           res.status(404);
@@ -52,17 +48,6 @@ export default {
       }
     )(req, res);
   },
-  async create(req: Request, res: Response, next: NextFunction) {
-    const { club } = req.body;
-    try {
-      const data = await Club.add(req.params.id, club, sequelize);
-      const newClub = await convertCreateClubDataToClient(data.newData);
-      res.status(201).json(newClub);
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
-  },
 
   async replace(req: Request, res: Response, next: NextFunction) {
     const { club } = req.body;
@@ -70,56 +55,58 @@ export default {
     try {
       const targetClubs = await Promise.all(
         club.map(async (value: any) => {
-          // clientのclub型をserver型に変換
           const { type, maker, shaft } = value;
-          const targetClub = await convertClubDataToServer(value);
+          const targetShaft = await Shaft.findOne({
+            where: {
+              name: shaft,
+            },
+          });
+          const targetMaker = await Maker.findOne({
+            where: {
+              name: maker,
+            },
+          });
+          const targetClubTypes = await ClubTypes.findOne({
+            where: {
+              type: type,
+            },
+          });
+          // client=>serverに変換
+          const targetClub = await formReplace(
+            value,
+            targetShaft.id,
+            targetMaker.id,
+            targetClubTypes.id
+          );
+
           if (!targetClub.id) {
             const { newData } = await Club.add(
               req.params.id,
               targetClub,
               sequelize
             );
-            // serverのclub型をclient型に変換
-            const club = convertClubDataToClient(newData, type, maker, shaft);
-            console.log(club);
+            // server=>client型に変換
+            const club = serializeReplace(newData, type, maker, shaft);
             return club;
           }
           if (!targetClub.name) {
-            await Club.clubDelete(req.params.id, targetClub, sequelize);
+            await Club.delete(req.params.id, targetClub, sequelize);
             return;
           }
 
-          const { newData } = await Club.clubReplace(
+          const { newData } = await Club.replace(
             req.params.id,
             targetClub,
             sequelize
           );
-          // serverのclub型をclient型に変換
-          const club = convertClubDataToClient(newData, type, maker, shaft);
+          // server=>client型に変換
+          const club = serializeReplace(newData, type, maker, shaft);
           return club;
         })
       );
       const updateClubs = targetClubs.filter((value) => value);
 
       res.status(201).json({ data: { updateClubs } });
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
-  },
-  async delete(req: Request, res: Response, next: NextFunction) {
-    const { club } = req.body;
-    const targetClub = convertClubDataToServer(club);
-    try {
-      const deleteClub = await Club.clubDelete(
-        req.params.id,
-        targetClub,
-        sequelize
-      );
-      if (!deleteClub) {
-        return res.status(400);
-      }
-      res.status(201).json({ deleteClub });
     } catch (error) {
       res.status(400);
       return next(error);

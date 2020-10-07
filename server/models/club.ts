@@ -3,7 +3,7 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 // const woodss = require("../values/modelValues");
 import User from "./user";
 import ClubType from "./clubType";
-import UserClubs from "./user_clubs";
+import UserClubs from "./userClubs";
 import Shaft from "./shaft";
 import Maker from "./maker";
 
@@ -46,7 +46,7 @@ class Club extends Model {
     });
     return { newData };
   }
-  static async clubReplace(userId: string, club: any, sequelize: Sequelize) {
+  static async replace(userId: string, club: any, sequelize: Sequelize) {
     const { id } = club;
     const newClubData = { ...club, id: undefined };
     const targetClub = await this.findOne({
@@ -87,7 +87,7 @@ class Club extends Model {
     return { newData };
   }
 
-  static async clubDelete(userId: string, club: any, sequelize: Sequelize) {
+  static async delete(userId: string, club: any, sequelize: Sequelize) {
     if (!club.id) {
       return;
     }

@@ -2,13 +2,13 @@ import { Model, DataTypes, Sequelize } from "sequelize";
 import User from "./user";
 import Video from "./video";
 
-class User_videos extends Model {
+class UserVideos extends Model {
   public id!: number;
   public userId!: number;
   public videoId!: number;
 
   public static initialize(sequelize: Sequelize) {
-    User_videos.init(
+    UserVideos.init(
       {
         id: {
           allowNull: false,
@@ -41,10 +41,10 @@ class User_videos extends Model {
   }
 }
 
-export interface userVideosType {
+export interface UserVideosType {
   id: number;
   userId: number;
   videoId: number;
 }
 
-export default User_videos;
+export default UserVideos;

@@ -1,5 +1,5 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import UserResults from "./user_results";
+import UserResults from "./userResults";
 
 class Result extends Model {
   public id!: number;
@@ -33,11 +33,7 @@ class Result extends Model {
 
     return { newData };
   }
-  static async resultReplace(
-    userId: string,
-    result: any,
-    sequelize: Sequelize
-  ) {
+  static async replace(userId: string, result: any, sequelize: Sequelize) {
     const { id } = result;
     const newResultData = { ...result, id: undefined };
     const targetResult = await this.findOne({
@@ -78,7 +74,7 @@ class Result extends Model {
     return { newData };
   }
 
-  static async resultDelete(userId: string, result: any, sequelize: Sequelize) {
+  static async delete(userId: string, result: any, sequelize: Sequelize) {
     if (!result.id) {
       return;
     }

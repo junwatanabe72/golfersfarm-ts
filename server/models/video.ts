@@ -1,6 +1,5 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
-import User from "./user";
-import UserVideos from "./user_videos";
+import UserVideos from "./userVideos";
 
 class Video extends Model {
   public id!: number;
@@ -31,7 +30,7 @@ class Video extends Model {
 
     return { newData };
   }
-  static async videoReplace(userId: string, video: any, sequelize: Sequelize) {
+  static async replace(userId: string, video: any, sequelize: Sequelize) {
     const { id } = video;
     const newVideoData = { ...video, id: undefined };
     const targetVideo = await this.findOne({
@@ -72,7 +71,7 @@ class Video extends Model {
     return { newData };
   }
 
-  static async videoDelete(userId: string, video: any, sequelize: Sequelize) {
+  static async delete(userId: string, video: any, sequelize: Sequelize) {
     if (!video.id) {
       return;
     }

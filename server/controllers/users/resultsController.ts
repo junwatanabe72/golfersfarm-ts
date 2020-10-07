@@ -1,12 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import db, { sequelize } from "../../models";
-import {
-  convertToClientIndex,
-  convertToServerReplace,
-  convertToClientReplace,
-  convertToClientCreate,
-} from "../../utils/convert/result";
+import { formReplace } from "../../utils/Form/result";
+import { serializeReplace, serializeIndex } from "../../utils/Serialize/result";
 const Result = db.Result;
 const UserResults = db.UserResults;
 
@@ -32,7 +28,7 @@ export default {
             return;
           }
           // serverのResult型をclient型に変換
-          const allResults = convertToClientIndex(targetResults);
+          const allResults = serializeIndex(targetResults);
           res.status(200).json({ data: { allResults } });
         } catch (error) {
           res.status(404);
@@ -40,18 +36,6 @@ export default {
         }
       }
     )(req, res);
-  },
-  async create(req: Request, res: Response, next: NextFunction) {
-    const { result } = req.body;
-    try {
-      const data = await result.add(req.params.id, result, sequelize);
-      // serverのResult型をclient型に変換
-      const newResult = convertToClientCreate(data);
-      res.status(201).json({ newResult });
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
   },
 
   async replace(req: Request, res: Response, next: NextFunction) {
@@ -61,8 +45,7 @@ export default {
       const targetResults = await Promise.all(
         result.map(async (value: any) => {
           // clientのResult型をserver型に変換
-
-          const targetResult = convertToServerReplace(value);
+          const targetResult = formReplace(value);
 
           if (!targetResult.id) {
             const { newData } = await Result.add(
@@ -71,21 +54,21 @@ export default {
               sequelize
             );
             // serverのResult型をclient型に変換
-            const result = convertToClientReplace(newData);
+            const result = serializeReplace(newData);
             return result;
           }
           if (!targetResult.name) {
-            await Result.resultDelete(req.params.id, targetResult, sequelize);
+            await Result.delete(req.params.id, targetResult, sequelize);
             return;
           }
 
-          const { newData } = await Result.resultReplace(
+          const { newData } = await Result.replace(
             req.params.id,
             targetResult,
             sequelize
           );
           // serverのResult型をclient型に変換
-          const result = convertToClientReplace(newData);
+          const result = serializeReplace(newData);
           return result;
         })
       );

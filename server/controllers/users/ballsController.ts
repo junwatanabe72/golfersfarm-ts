@@ -1,11 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 import db from "../../models";
-import {
-  convertBallDataToClient,
-  convertBallDataToServer,
-  convertBallDataToClientIndex,
-} from "../../utils/convert/ball";
+import { formUpdate } from "../../utils/Form/ball";
 import passport from "passport";
+import { serializeIndex, serializeUpdate } from "../../utils/Serialize/ball";
 
 const Ball = db.Ball;
 const Maker = db.Maker;
@@ -26,7 +23,7 @@ export default {
               },
             ],
           });
-          const targetBall = convertBallDataToClientIndex(ball);
+          const targetBall = serializeIndex(ball);
           res.json({ data: { targetBall } });
         } catch (error) {
           res.status(404);
@@ -38,10 +35,17 @@ export default {
   async update(req: Request, res: Response, next: NextFunction) {
     const { ball } = req.body;
     const makerName = ball.maker;
-    const targetBall = await convertBallDataToServer(ball);
+    const targetMaker = await Maker.findOne({
+      where: {
+        name: makerName,
+      },
+    });
+    // client=>serverにデータ変換。
+    const targetBall = formUpdate(ball, targetMaker.id);
     try {
       const { updateBall } = await Ball.ballUpdate(req.params.id, targetBall);
-      const returnBall = convertBallDataToClient(updateBall, makerName);
+      // server=>clientにデータ変換。
+      const returnBall = serializeUpdate(updateBall, makerName);
       res.status(201).json({ data: { returnBall } });
     } catch (error) {
       res.status(400);

@@ -1,8 +1,8 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import Ball from "./ball";
-import UserClubs from "./user_clubs";
-import UserResults from "./user_results";
-import UserVideos from "./user_videos";
+import UserClubs from "./userClubs";
+import UserResults from "./userResults";
+import UserVideos from "./userVideos";
 
 class User extends Model {
   public id!: number;
@@ -131,7 +131,7 @@ class User extends Model {
   }
 }
 
-export interface userType {
+export interface UserType {
   id: number;
   name: string;
   sex?: string;

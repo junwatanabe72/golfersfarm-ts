@@ -7,7 +7,6 @@ import { toast } from 'react-toastify';
 function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   let Clubs: ObjectClubType = {};
   let deleteClubs: PartialObjectClubType = {};
-  console.log(action.payload);
   try {
     const { data } = yield call(updateClubsAxios, action.payload);
     if (!data.updateClubs) {
