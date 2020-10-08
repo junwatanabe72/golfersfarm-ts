@@ -96,9 +96,9 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
       dispatch(loginUser(loginItems));
     },
   };
-  const data = { ...formDatas[status] };
+
   const formik = useFormik({
-    initialValues: data,
+    initialValues: formDatas[status],
     validationSchema: validation[status],
     onSubmit: onSubmit[status],
   });

@@ -13,6 +13,7 @@ import Tos from './components/pages/Tos';
 import Login from './components/pages/Login';
 import LogOut from './components/pages/LogOut';
 import SignUp from './components/pages/SignUp';
+import Modal from './components/templates/Modal';
 import { getUsers, getMakers, getShafts, getTypes, checkLoginUser } from './actions';
 import { ROUTE, INFOROUTE } from './utils/constant/route';
 import { library } from '@fortawesome/fontawesome-svg-core'; //fontawesomeのコアファイル
@@ -35,6 +36,7 @@ const App: React.FC<Props> = ({}) => {
   const storeResults = useSelector((state: State) => state.results);
   const storeVideos = useSelector((state: State) => state.videos);
   const storeBalls = useSelector((state: State) => state.balls);
+  const storeModal = useSelector((state: State) => state.modal);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
@@ -136,6 +138,7 @@ const App: React.FC<Props> = ({}) => {
       <Route exact path={INFOROUTE.PRIVACY} render={() => <Privacy currentUser={currentUser} />} />
       <Route exact path={INFOROUTE.TOS} render={() => <Tos currentUser={currentUser} />} />
       <Route exact path={'*'} render={() => <Redirect to={ROUTE.TOP} />} />
+      <Modal show={storeModal.show} component={storeModal.component} />
     </Container>
   );
 };

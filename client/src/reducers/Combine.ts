@@ -10,6 +10,7 @@ import users from './Users';
 import balls from './Balls';
 import videos from './Videos';
 import results from './Results';
+import modal from './Modal';
 export const router = createBrowserHistory();
 
 const reducers = (history: typeof router) =>
@@ -24,6 +25,7 @@ const reducers = (history: typeof router) =>
     balls,
     videos,
     results,
+    modal,
   });
 
 export default reducers;
