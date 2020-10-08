@@ -13,6 +13,9 @@ export const ACTIONTYPES = {
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
+  // modal
+  MODAL_PUSH: 'MODAL_PUSH',
+  MODAL_POP: 'MODAL_POP',
   // saga
   CREATE_USER: 'CREATE_USER',
   LOGIN_USER: 'LOGIN_USER',
@@ -138,4 +141,11 @@ export function addShafts(data: ArrayShaftType): Action<ArrayShaftType> {
 //typesActionCreater
 export function addMakers(data: ArrayMakerType): Action<ArrayMakerType> {
   return { type: ACTIONTYPES.ADD_MAKERS, payload: data };
+}
+
+export function modalPush(data: JSX.Element): Action<JSX.Element> {
+  return { type: ACTIONTYPES.MODAL_PUSH, payload: data };
+}
+export function modalPop(data: JSX.Element): Action<JSX.Element> {
+  return { type: ACTIONTYPES.MODAL_POP, payload: data };
 }

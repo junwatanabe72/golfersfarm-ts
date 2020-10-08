@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { ErrorMessage } from 'formik';
 import Button from '../../../atoms/Button';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { State } from '../../../../@types/store';
+import { modalPop, modalPush } from '../../../../actions';
+import ModalSelectForm from '../../modal/ModalSelectForm';
 
 interface Props {
   arg: string;
@@ -60,12 +62,12 @@ const StyledDiv = styled.div`
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
 
-const optionDatasKey = {
-  type: 'type',
-  maker: 'name',
-  shaft: 'name',
-  flex: 'flex',
-} as const;
+// const optionDatasKey = {
+//   type: 'type',
+//   maker: 'name',
+//   shaft: 'name',
+//   flex: 'flex',
+// } as const;
 const flexDatas = [
   { flex: 'L' },
   { flex: 'A' },
@@ -89,6 +91,8 @@ const ClubEditItems: React.FC<Props> = ({
   const makers = useSelector((state: State) => state.makers);
   const shafts = useSelector((state: State) => state.shafts);
   const types = useSelector((state: State) => state.types);
+  const dispatch = useDispatch();
+
   type OptionDatas = typeof optionDatas;
 
   const optionDatas = {
@@ -100,6 +104,26 @@ const ClubEditItems: React.FC<Props> = ({
   const checksubItem = () => {
     onChange();
     remove(index);
+  };
+
+  const dispatchModalPop = () => {
+    dispatch(modalPop(<></>));
+  };
+
+  const modalComponent = (
+    <ModalSelectForm
+      key={1}
+      valueKey={arg}
+      name={name}
+      value={club[arg]}
+      datas={optionDatas[arg as keyof OptionDatas]}
+      onChange={handleChange}
+      modalPop={dispatchModalPop}
+    />
+  );
+
+  const onClick = () => {
+    dispatch(modalPush(modalComponent));
   };
   const items = {
     name: (
@@ -127,15 +151,24 @@ const ClubEditItems: React.FC<Props> = ({
         ×
       </Button>
     ),
+    maker: (
+      <StyledSelect onClick={onClick}>
+        <option value={club[arg]}>{club[arg]}</option>
+      </StyledSelect>
+    ),
+    shaft: (
+      <StyledSelect name={name} onClick={onClick}>
+        <option value={arg}>{club[arg]}</option>
+      </StyledSelect>
+    ),
     other: (
       <StyledSelect name={name} onChange={handleChange}>
         <option value={arg}>{club[arg]}</option>
         {optionDatas[arg as keyof OptionDatas] &&
           Object.values(optionDatas[arg as keyof OptionDatas]).map((data: any, num: number) => {
-            const key = optionDatasKey[arg as keyof OptionDatas];
-            return club[arg] !== data[key] ? (
-              <option key={num} value={data[key]}>
-                {data[key]}
+            return club[arg] !== data[arg] ? (
+              <option key={num} value={data[arg]}>
+                {data[arg]}
               </option>
             ) : null;
           })}

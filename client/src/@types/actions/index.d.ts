@@ -29,7 +29,9 @@ type ACTIONTYPES =
   | 'UPDATE_RESULTS'
   | 'REQUESTED_TYPES'
   | 'REQUESTED_SHAFTS'
-  | 'REQUESTED_MAKERS';
+  | 'REQUESTED_MAKERS'
+  | 'MODAL_PUSH'
+  | 'MODAL_POP';
 
 interface Action<T> extends Action<ACTIONTYPES, T> {
   type: ACTIONTYPES;

@@ -9,7 +9,7 @@ import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/st
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import ClubEditFormLayout from './ArrayEditFormLayout';
+import EditFormLayout from './ArrayEditFormLayout';
 import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
@@ -62,8 +62,8 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       name: '',
       userId: currentUser.id,
       type: '1WOOD',
-      maker: 'テーラーメイド',
-      shaft: 'original',
+      maker: 'Mizuno',
+      shaft: 'TOUR AD DI-7',
       flex: 'R',
     },
     result: {
@@ -105,6 +105,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
     club: (values: FormikValueType<typeof currentValues.formikValues>) => {
       let editClubValues: PartialArrayClubType = [];
       const submitValues = values.formikValues;
+      console.log(submitValues);
       const deleteTargetValues = deleteValues(currentValues.formikValues, submitValues);
       //update,create,deleteするクラブを配列にする。
       editClubValues = [...submitValues, ...deleteTargetValues];
@@ -173,7 +174,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                           >
                             <StyledTable>
                               <tbody>
-                                <ClubEditFormLayout
+                                <EditFormLayout
                                   remove={remove}
                                   formikKey={formikKey}
                                   value={currentValues.formikValues}

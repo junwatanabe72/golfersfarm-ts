@@ -5,13 +5,15 @@ import { BASICCOLORS } from '../../../../utils/constant/color';
 import { ballTableItems } from '../../../../utils/constant/text/table';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { media } from '../../../../utils/styled/styledRdesign';
+import { useDispatch } from 'react-redux';
+import { modalPush, modalPop } from '../../../../actions';
+import ModalSelectForm from '../../modal/ModalSelectForm';
 
 type BallTableItems = typeof ballTableItems;
-type OptionDatasKey = typeof optionDatasKey;
 interface Props {
   formikBall: BallType;
   valueKey: string;
-  optionDatas: any;
+  optionDatas: ArrayMakerType;
   errors: FormikErrors<BallType>;
   touched: FormikTouched<BallType>;
   onChange: {
@@ -24,6 +26,7 @@ interface Props {
 
 const StyledField = styled.input`
   width: ${SIZE.SXMALL}vw;
+  cursor: pointer;
   font-size: ${FONTSIZE.BASE}px;
   padding: ${CLEAR.TINY}vw 0px;
   border-radius: 6px;
@@ -39,6 +42,7 @@ const StyledField = styled.input`
 
 const StyledSelect = styled.select`
   width: ${SIZE.SXMALL}vw;
+  cursor: pointer;
   font-size: ${FONTSIZE.BASE}px;
   padding: ${CLEAR.TINY}vw 0px;
   border-radius: 6px;
@@ -57,12 +61,26 @@ const StyledDiv = styled.div`
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
 
-const optionDatasKey = {
-  maker: 'name',
-} as const;
-
 const BallEditItem: React.FC<Props> = ({ formikBall, valueKey, optionDatas, onChange }) => {
-  const selectKey = optionDatasKey[valueKey as keyof OptionDatasKey];
+  const dispatch = useDispatch();
+  const dispatchModalPop = () => {
+    dispatch(modalPop(<></>));
+  };
+  const modalComponent = (
+    <ModalSelectForm
+      key={2}
+      name={valueKey}
+      valueKey={valueKey}
+      value={formikBall[valueKey]}
+      datas={optionDatas}
+      onChange={onChange}
+      modalPop={dispatchModalPop}
+    />
+  );
+  const onClick = () => {
+    dispatch(modalPush(modalComponent));
+  };
+
   const item = {
     name: (
       <>
@@ -79,18 +97,9 @@ const BallEditItem: React.FC<Props> = ({ formikBall, valueKey, optionDatas, onCh
       </>
     ),
     maker: (
-      <>
-        <StyledSelect name={valueKey} onChange={onChange}>
-          <option value={valueKey}>{formikBall[valueKey]}</option>
-          {optionDatas.map((data: any, num: number) => {
-            return formikBall[valueKey] !== data[selectKey] ? (
-              <option key={num} value={data[selectKey]}>
-                {data[selectKey]}
-              </option>
-            ) : null;
-          })}
-        </StyledSelect>
-      </>
+      <StyledSelect name={valueKey} onClick={onClick}>
+        <option value={formikBall[valueKey]}>{formikBall[valueKey]}</option>
+      </StyledSelect>
     ),
   };
 
