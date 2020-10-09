@@ -46,8 +46,8 @@ export function createUser(data: {
   password: string;
   email: string;
   name: string;
-  sex: string;
-}): Action<{ password: string; email: string; name: string; sex: string }> {
+  sex: number;
+}): Action<{ password: string; email: string; name: string; sex: number }> {
   return { type: ACTIONTYPES.CREATE_USER, payload: data };
 }
 export function updateUser(data: PartialUserType): Action<PartialUserType> {

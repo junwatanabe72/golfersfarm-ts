@@ -15,10 +15,11 @@ import {
   confirmedPasswordValidation,
 } from '../../../../validations';
 import SignLoginItem from './SignupLoginItem';
+import { sexValues } from '../../../../utils/constant/text/body/user/value';
 
 interface AuthDataType {
   email: string;
-  sex?: string;
+  sex?: number;
   name?: string;
   password: string;
   confirmedPassword?: string;
@@ -54,7 +55,7 @@ const formDatas = {
     name: '',
     password: '',
     confirmedPassword: '',
-    sex: '男性',
+    sex: sexValues['male'],
   },
 };
 

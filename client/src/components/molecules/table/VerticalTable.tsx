@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SIZE } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
+import { sexValues, sexLabels } from '../../../utils/constant/text/body/user/value';
 
 interface Props extends PartialWidthSize {
   datas: any;
@@ -36,15 +37,34 @@ const StyledTd = styled.td`
   border-bottom: solid 1px #ccc;
   border-right: solid 1px white;
 `;
+
 const VerticalTable: React.FC<Props> = ({ datas, width, tableItems }) => {
   const order = Object.keys(tableItems);
 
-  const Data = order.map((value: string, num: number) => {
-    return (
-      <StyledTrd key={num}>
-        <StyledTd>{tableItems[value]}</StyledTd>
-        <StyledTd>{datas[value]}</StyledTd>
-      </StyledTrd>
+  const Data = order.map((key: string, num: number) => {
+    const items = {
+      sex: (
+        <>
+          <StyledTd>{tableItems[key]}</StyledTd>
+          {datas[key] === sexValues['male'] ? (
+            <StyledTd>{sexLabels['male']}</StyledTd>
+          ) : (
+            <StyledTd>{sexLabels['female']}</StyledTd>
+          )}
+        </>
+      ),
+      other: (
+        <>
+          <StyledTd>{tableItems[key]}</StyledTd>
+          <StyledTd>{datas[key]}</StyledTd>
+        </>
+      ),
+    };
+
+    return items[key as keyof typeof items] ? (
+      <StyledTrd key={num}>{items[key as keyof typeof items]}</StyledTrd>
+    ) : (
+      <StyledTrd key={num}>{items['other']}</StyledTrd>
     );
   });
 

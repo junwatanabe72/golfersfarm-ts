@@ -9,6 +9,12 @@ import { emailValidation, nameValidation } from '../../../../validations';
 import UserEditFormLayout from './UserEditFormLayout';
 import { useDispatch } from 'react-redux';
 import { updateUser } from '../../../../actions';
+import {
+  sexLabels,
+  sexValues,
+  showLabels,
+  showValues,
+} from '../../../../utils/constant/text/body/user/value';
 
 interface Props {
   currentUser: UserType;
@@ -22,19 +28,20 @@ const profileValidation = () =>
     name: nameValidation(),
   });
 
-const showValues = ['公開', '非公開'];
-
 const UserEditForm: React.FC<Props> = ({ currentUser }) => {
-  const showValue = currentUser.show ? showValues[0] : showValues[1];
+  const showValue = currentUser.show === 0 ? showLabels['open'] : showLabels['close'];
+  const sexValue = currentUser.sex === 0 ? sexLabels['male'] : sexLabels['female'];
   const initialValuesData = {
     ...currentUser,
     show: showValue,
+    sex: sexValue,
     confirmedPassword: currentUser.password,
   };
   const dispatch = useDispatch();
   const onSubmit = (values: ProfileEditDataType) => {
-    const showValue = values.show === showValues[0] ? true : false;
-    dispatch(updateUser({ ...values, show: showValue }));
+    const showValue = values.show === showLabels['open'] ? showValues['open'] : showValues['close'];
+    const sexValue = values.sex === sexLabels['male'] ? sexValues['male'] : sexValues['female'];
+    dispatch(updateUser({ ...values, show: showValue, sex: sexValue }));
   };
 
   const formik = useFormik({
