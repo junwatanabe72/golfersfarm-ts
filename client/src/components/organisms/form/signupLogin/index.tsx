@@ -15,10 +15,11 @@ import {
   confirmedPasswordValidation,
 } from '../../../../validations';
 import SignLoginItem from './SignupLoginItem';
+import { sexValues } from '../../../../utils/constant/text/body/user/value';
 
-interface SignUpDataType {
+interface AuthDataType {
   email: string;
-  sex?: string;
+  sex?: number;
   name?: string;
   password: string;
   confirmedPassword?: string;
@@ -54,7 +55,7 @@ const formDatas = {
     name: '',
     password: '',
     confirmedPassword: '',
-    sex: '男性',
+    sex: sexValues['male'],
   },
 };
 
@@ -82,18 +83,16 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
   const dispatch = useDispatch();
 
   const onSubmit = {
-    signUp: (values: SignUpDataType) => {
-      if (!values.name || !values.sex) {
+    signUp: (values: AuthDataType) => {
+      const { name, password, email, sex } = values;
+      if (!name || !sex) {
         return;
       }
-      const { name, password, email, sex } = values;
       const signItems = { name, password, email, sex };
       dispatch(createUser(signItems));
     },
-    login: (values: LoginUserType) => {
-      const { password, email } = values;
-      const loginItems = { password, email };
-      dispatch(loginUser(loginItems));
+    login: (values: AuthDataType) => {
+      dispatch(loginUser(values));
     },
   };
 
@@ -110,9 +109,9 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
               <SignLoginItem formik={formik} valueKey={key} />
             </Padding>
-            {formik.touched[key as keyof SignUpDataType] &&
-            formik.errors[key as keyof SignUpDataType] ? (
-              <Styleddiv>{formik.errors[key as keyof SignUpDataType]}</Styleddiv>
+            {formik.touched[key as keyof AuthDataType] &&
+            formik.errors[key as keyof AuthDataType] ? (
+              <Styleddiv>{formik.errors[key as keyof AuthDataType]}</Styleddiv>
             ) : null}
           </React.Fragment>
         );

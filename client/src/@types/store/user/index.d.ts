@@ -6,7 +6,7 @@ interface UserType {
   twitter: string;
   instagram: string;
   youtube: string;
-  sex: string;
+  sex: number;
   residence: string;
   birthPlace: string;
   school: string;
@@ -18,7 +18,7 @@ interface UserType {
   email: string;
   password: string;
   clubImage: string;
-  show: boolean;
+  show: number;
 }
 
 type PartialUserType = Partial<UserType>;

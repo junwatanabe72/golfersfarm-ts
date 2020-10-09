@@ -12,7 +12,7 @@ export default {
       async (err: any, user: any) => {
         try {
           req.login(user, { session: false }, async (err) => {
-            const where = !user ? { show: true } : {};
+            const where = !user ? { show: 0 } : {};
             const allUsers: UserType[] = await User.findAll({ where });
 
             if (!allUsers) {

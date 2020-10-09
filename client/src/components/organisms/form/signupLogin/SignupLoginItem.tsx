@@ -2,14 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
-
+import { sexValues, sexLabels } from '../../../../utils/constant/text/body/user/value';
+type Label = typeof sexLabels;
 type PlaceHolder = typeof placeHolder;
-interface SignUpDataType {
+interface AuthDataType {
   email: string;
-  sex?: string;
-  name?: string;
+  sex: string;
+  name: string;
   password: string;
-  confirmedPassword?: string;
+  confirmedPassword: string;
 }
 
 interface Props {
@@ -47,19 +48,18 @@ const placeHolder = {
   confirmedPassword: '確認用パスワード',
   sex: '性別',
 };
-const sexData = ['男性', '女性'];
+
 const SignLoginItem: React.FC<Props> = ({ formik, valueKey }) => {
   const item = {
     sex: (
       <>
         <StyledSelect name={valueKey} onChange={formik.handleChange}>
-          <option value={valueKey}>{formik.values[valueKey]}</option>
-          {sexData.map((data: string, num: number) => {
-            return formik.values[valueKey] !== data ? (
-              <option key={num} value={data}>
-                {data}
+          {Object.keys(sexValues).map((key: string, num: number) => {
+            return (
+              <option key={num} value={sexValues[key as keyof Label]}>
+                {sexLabels[key as keyof Label]}
               </option>
-            ) : null;
+            );
           })}
         </StyledSelect>
       </>
@@ -71,7 +71,7 @@ const SignLoginItem: React.FC<Props> = ({ formik, valueKey }) => {
         placeholder={placeHolder[valueKey as keyof PlaceHolder]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values[valueKey as keyof SignUpDataType]}
+        value={formik.values[valueKey as keyof AuthDataType]}
       />
     ),
   };

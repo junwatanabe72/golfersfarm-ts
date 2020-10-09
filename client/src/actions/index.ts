@@ -42,7 +42,12 @@ export const ACTIONTYPES = {
 export function getUsers(): BasicAction {
   return { type: ACTIONTYPES.REQUESTED_USER };
 }
-export function createUser(data: SignupUserType): Action<SignupUserType> {
+export function createUser(data: {
+  password: string;
+  email: string;
+  name: string;
+  sex: number;
+}): Action<{ password: string; email: string; name: string; sex: number }> {
   return { type: ACTIONTYPES.CREATE_USER, payload: data };
 }
 export function updateUser(data: PartialUserType): Action<PartialUserType> {
@@ -51,7 +56,10 @@ export function updateUser(data: PartialUserType): Action<PartialUserType> {
 export function updateImageUser(data: FormData): Action<FormData> {
   return { type: ACTIONTYPES.UPDATE_IMAGE_USER, payload: data };
 }
-export function loginUser(data: LoginUserType): Action<LoginUserType> {
+export function loginUser(data: {
+  password: string;
+  email: string;
+}): Action<{ password: string; email: string }> {
   return { type: ACTIONTYPES.LOGIN_USER, payload: data };
 }
 export function checkLoginUser(): BasicAction {

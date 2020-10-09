@@ -3,6 +3,26 @@ const twitter = 'junwata72';
 const instagram = 'ruby.on';
 const youtube = 'UC-hTmh_CtqIUphbwd8Eu6EQ';
 
+export const sexValues = Object.freeze({
+  male: 0,
+  female: 100,
+});
+
+export const sexLabels = {
+  male: '男性',
+  female: '女性',
+};
+
+export const showValues = Object.freeze({
+  open: 0,
+  close: 100,
+});
+
+export const showLabels = {
+  open: '公開',
+  close: '非公開',
+};
+
 const ImageURL =
   'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';
 
@@ -48,7 +68,7 @@ export const initialUser = {
   twitter: twitter,
   instagram: instagram,
   youtube: youtube,
-  sex: '男性',
+  sex: 0,
   residence: '兵庫県',
   birthPlace: '栃木県',
   school: '学習院大学',
@@ -60,7 +80,7 @@ export const initialUser = {
   password: 'Password',
   job: 'free',
   clubImage: ImageURL,
-  show: false,
+  show: 100,
 };
 
 export const baseUser = {
