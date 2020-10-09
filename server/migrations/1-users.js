@@ -13,7 +13,7 @@ module.exports = {
         allowNull: false,
       },
       sex: {
-        type: Sequelize.STRING,
+        type: Sequelize.INTEGER,
       },
       residence: {
         type: Sequelize.STRING,
@@ -61,7 +61,7 @@ module.exports = {
       twitter: { type: Sequelize.STRING },
       instagram: { type: Sequelize.STRING },
       youtube: { type: Sequelize.STRING },
-      show: { type: Sequelize.BOOLEAN, defaultValue: false },
+      show: { type: Sequelize.INTEGER, defaultValue: 100 },
     });
   },
   down: (queryInterface, Sequelize) => {

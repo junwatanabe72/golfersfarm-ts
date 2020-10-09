@@ -7,7 +7,7 @@ import UserVideos from "./userVideos";
 class User extends Model {
   public id!: number;
   public name!: string;
-  public sex?: string;
+  public sex!: number;
   public residence?: string;
   public birthPlace?: string;
   public averageDistance?: number;
@@ -23,7 +23,7 @@ class User extends Model {
   public twitter?: string;
   public instagram?: string;
   public youtube?: string;
-  public show!: boolean;
+  public show!: number;
 
   static async add(user: User) {
     const newUser = await this.create({
@@ -57,7 +57,7 @@ class User extends Model {
           allowNull: false,
         },
         sex: {
-          type: DataTypes.STRING(250),
+          type: DataTypes.INTEGER,
         },
         residence: {
           type: DataTypes.STRING(250),
@@ -97,7 +97,7 @@ class User extends Model {
         twitter: { type: DataTypes.STRING(250) },
         instagram: { type: DataTypes.STRING(250) },
         youtube: { type: DataTypes.STRING(250) },
-        show: { type: DataTypes.BOOLEAN, defaultValue: false },
+        show: { type: DataTypes.INTEGER, defaultValue: 100 },
       },
       {
         tableName: "users",
