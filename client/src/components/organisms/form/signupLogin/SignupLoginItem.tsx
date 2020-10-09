@@ -4,12 +4,12 @@ import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 
 type PlaceHolder = typeof placeHolder;
-interface SignUpDataType {
+interface AuthDataType {
   email: string;
-  sex?: string;
-  name?: string;
+  sex: string;
+  name: string;
   password: string;
-  confirmedPassword?: string;
+  confirmedPassword: string;
 }
 
 interface Props {
@@ -71,7 +71,7 @@ const SignLoginItem: React.FC<Props> = ({ formik, valueKey }) => {
         placeholder={placeHolder[valueKey as keyof PlaceHolder]}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
-        value={formik.values[valueKey as keyof SignUpDataType]}
+        value={formik.values[valueKey as keyof AuthDataType]}
       />
     ),
   };
