@@ -26,7 +26,7 @@ const sample = {
     url: 'mB-QXgtoItA',
   },
 };
-const initialState: ObjectVideoType = {};
+const initialState: ObjectVideoType = sample;
 
 export default function VideosReducer(
   state = initialState,

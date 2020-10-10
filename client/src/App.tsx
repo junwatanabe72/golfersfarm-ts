@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 import { Route, Redirect } from 'react-router-dom';
 import Top from './components/pages/Top';
@@ -29,14 +29,14 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const App: React.FC<Props> = ({}) => {
-  const currentUser: UserType = useSelector((state: State) => state.currentUser);
-  const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users);
-  const storeClubs = useSelector((state: State) => state.clubs);
-  const storeResults = useSelector((state: State) => state.results);
-  const storeVideos = useSelector((state: State) => state.videos);
-  const storeBalls = useSelector((state: State) => state.balls);
-  const storeModal = useSelector((state: State) => state.modal);
+const App: React.FC<Props> = () => {
+  const currentUser: UserType = useSelector((state: State) => state.currentUser, shallowEqual);
+  const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users, shallowEqual);
+  const storeClubs = useSelector((state: State) => state.clubs, shallowEqual);
+  const storeResults = useSelector((state: State) => state.results, shallowEqual);
+  const storeVideos = useSelector((state: State) => state.videos, shallowEqual);
+  const storeBalls = useSelector((state: State) => state.balls, shallowEqual);
+  const storeModal = useSelector((state: State) => state.modal, shallowEqual);
   const dispatch = useDispatch();
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
@@ -51,7 +51,7 @@ const App: React.FC<Props> = ({}) => {
     dispatch(getShafts());
     dispatch(getMakers());
     dispatch(getTypes());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

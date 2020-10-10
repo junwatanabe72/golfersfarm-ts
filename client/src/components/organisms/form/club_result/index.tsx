@@ -40,6 +40,11 @@ const StyledLabel = styled.label`
 const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth() + 1;
 
+const editTitles = { club: 'クラブ', result: '競技実績' };
+const editSubTitles = { club: '使用クラブ', result: '競技結果' };
+const AddButtonText = { club: ['クラブを追加'], result: ['競技結果を追加'] };
+const buttonValue = { club: 'クラブを登録・編集する。', result: '競技結果を登録・削除する。' };
+
 const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResults, theme }) => {
   const initialValuesData = {
     club: { formikValues: checkedClubs },
@@ -76,10 +81,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       rank: '1',
     },
   };
-  const editTitles = { club: 'クラブ', result: '競技実績' };
-  const editSubTitles = { club: '使用クラブ', result: '競技結果' };
-  const AddButtonText = { club: ['クラブを追加'], result: ['競技結果を追加'] };
-  const buttonValue = { club: 'クラブを登録・編集する。', result: '競技結果を登録・削除する。' };
 
   const arrayValidation = {
     club: () =>

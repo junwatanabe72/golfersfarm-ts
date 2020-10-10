@@ -9,7 +9,6 @@ import Table from '../../molecules/table';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import FlexLayout from '../../atoms/FlexLayout';
-import { allResults } from '../../../utils/constant/text/body/user/value';
 import {
   TABLETYPES,
   clubTableItems,
@@ -55,10 +54,11 @@ const ballTableTitle = '使用ボール';
 
 const titles = Object.values(editTitleList).filter((value) => {
   if (value === 'IMAGE') {
-    return;
+    return null;
   }
   return value;
 });
+
 const UserSub: React.FC<Props> = ({
   targetUser,
   checkedClubs,
@@ -66,7 +66,6 @@ const UserSub: React.FC<Props> = ({
   checkedVideos,
   checkedResults,
 }) => {
-  type Contents = typeof contents;
   const contents = {
     PROFILE: (
       <Table datas={targetUser} type={TABLETYPES.VERTICAL} tableItems={profileTableSubItems} />
@@ -109,7 +108,7 @@ const UserSub: React.FC<Props> = ({
       <Table datas={checkedResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />
     ),
   };
-
+  type Contents = typeof contents;
   return (
     <Container>
       {titles.map((value, num) => {

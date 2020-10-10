@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { useFormikContext } from 'formik';
 import { BASICCOLORS } from '../../../../utils/constant/color';
@@ -43,13 +43,16 @@ const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme,
   type HeadItems = typeof headItems;
   const order = Object.keys(tableItems[theme]);
 
-  const head = [...order, ''].map((arg: string, num: number) => {
-    return (
-      <StyledTd key={num}>
-        <StyledLabel htmlFor={arg}>{headItems[arg as keyof HeadItems]}</StyledLabel>
-      </StyledTd>
-    );
-  });
+  const head = useMemo(() => {
+    const memo = [...order, ''].map((arg: string, num: number) => {
+      return (
+        <StyledTd key={num}>
+          <StyledLabel htmlFor={arg}>{headItems[arg as keyof HeadItems]}</StyledLabel>
+        </StyledTd>
+      );
+    });
+    return memo;
+  }, [order, headItems]);
 
   const selectItems = {
     club: Object.values(values.formikValues).map((club: ClubType, index: number) => {
@@ -75,7 +78,6 @@ const ArrayEditFormLayout: React.FC<Props> = ({ remove, formikKey, value, theme,
     result: Object.values(values.formikValues).map((result: ResultType, index: number) => {
       return [...order, 'button'].map((key: string) => {
         const name = `${formikKey}.${index}.${key}`;
-
         return (
           <StyledTd key={key}>
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>

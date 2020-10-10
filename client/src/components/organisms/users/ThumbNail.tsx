@@ -14,6 +14,7 @@ const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize })
       </Padding>
     );
   });
+
   return <>{player}</>;
 };
 export default ThumbNail;

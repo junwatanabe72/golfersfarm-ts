@@ -43,7 +43,7 @@ const UserEdit: React.FC<Props> = ({
     dispatch(getVideos(currentUser));
     dispatch(getBall(currentUser));
     dispatch(getResults(currentUser));
-  }, []);
+  }, [currentUser, dispatch]);
 
   const checkedClubs: ArrayClubType = Object.values(storeClubs)
     .filter((club: ClubType) => club.userId === currentUser.id)

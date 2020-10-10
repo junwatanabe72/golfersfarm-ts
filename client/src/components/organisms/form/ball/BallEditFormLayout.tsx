@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import styled from 'styled-components';
 import { FormikTouched, FormikErrors } from 'formik';
 import BallEditItem from './BallEditItem';
@@ -47,7 +47,7 @@ const head = order.map((key: string, num: number) => {
 });
 
 const BallEditFormLayout: React.FC<Props> = ({ formikBall, touched, errors, onChange }) => {
-  const makers = useSelector((state: State) => state.makers);
+  const makers = useSelector((state: State) => state.makers, shallowEqual);
 
   return (
     <>

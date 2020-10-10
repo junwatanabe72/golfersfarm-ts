@@ -15,7 +15,7 @@ const sample = {
     maker: 'mizuno',
   },
 };
-const initialState: ObjectBallType = {};
+const initialState: ObjectBallType = sample;
 
 export default function ClubsReducer(
   state = initialState,

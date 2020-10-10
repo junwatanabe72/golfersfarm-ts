@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { ErrorMessage } from 'formik';
 import Button from '../../../atoms/Button';
 import { media } from '../../../../utils/styled/styledRdesign';
@@ -61,13 +61,6 @@ const StyledDiv = styled.div`
   font-size: 1px;
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
-
-// const optionDatasKey = {
-//   type: 'type',
-//   maker: 'name',
-//   shaft: 'name',
-//   flex: 'flex',
-// } as const;
 const flexDatas = [
   { flex: 'L' },
   { flex: 'A' },
@@ -88,12 +81,10 @@ const ClubEditItems: React.FC<Props> = ({
   handleChange,
   remove,
 }) => {
-  const makers = useSelector((state: State) => state.makers);
-  const shafts = useSelector((state: State) => state.shafts);
-  const types = useSelector((state: State) => state.types);
+  const makers = useSelector((state: State) => state.makers, shallowEqual);
+  const shafts = useSelector((state: State) => state.shafts, shallowEqual);
+  const types = useSelector((state: State) => state.types, shallowEqual);
   const dispatch = useDispatch();
-
-  type OptionDatas = typeof optionDatas;
 
   const optionDatas = {
     type: types,
@@ -101,6 +92,7 @@ const ClubEditItems: React.FC<Props> = ({
     shaft: shafts,
     flex: flexDatas,
   };
+  type OptionDatas = typeof optionDatas;
   const checksubItem = () => {
     onChange();
     remove(index);

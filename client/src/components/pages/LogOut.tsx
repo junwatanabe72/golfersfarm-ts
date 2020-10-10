@@ -25,7 +25,7 @@ const LogOut: React.FC<Props> = ({ currentUser }) => {
 
   useEffect(() => {
     dispatch(logoutUser());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>

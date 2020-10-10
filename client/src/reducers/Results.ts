@@ -39,7 +39,7 @@ const sample = {
     tie: 'T',
   },
 };
-const initialState: PartialObjectResultType = {};
+const initialState: PartialObjectResultType = sample;
 
 export default function ResultsReducer(
   state = initialState,

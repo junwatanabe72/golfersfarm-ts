@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all } from 'redux-saga/effects';
-import { addBall, getBall, ACTIONTYPES } from '../actions/index';
+import { addBall, ACTIONTYPES } from '../actions/index';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
 import { getBallAxios, updateBallAxios } from '../services/axios/ball';
