@@ -22,10 +22,10 @@ const ComponentFontAwesomeIcon: React.FC<Props> = ({
   tail,
 }) => {
   const Lookup: IconLookup = { prefix: head, iconName: tail };
-  const IconDefinition: IconDefinition = findIconDefinition(Lookup);
+  const iconDefinition: IconDefinition = findIconDefinition(Lookup);
   return (
     <Container fontSize={fontSize} color={color}>
-      <FontAwesomeIcon icon={IconDefinition} />
+      <FontAwesomeIcon icon={iconDefinition} />
     </Container>
   );
 };

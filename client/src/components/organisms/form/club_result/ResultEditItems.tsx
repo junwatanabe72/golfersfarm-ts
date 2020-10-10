@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import styled from 'styled-components';
 import { ErrorMessage } from 'formik';
 import { media } from '../../../../utils/styled/styledRdesign';
@@ -60,22 +60,9 @@ const StyledDiv = styled.div`
   font-size: 1px;
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
-
-const thisYear = new Date().getFullYear();
 let initYear = 1980;
-const selectYears: string[] = [...Array(thisYear - initYear + 1)].map((_, i) => {
-  return String(thisYear - i);
-});
-
 let initMonth = 1;
-const selectMonths: string[] = [...Array(12)].map((_, i) => {
-  return String(initMonth + i);
-});
 let initRank = 1;
-const selectRank: string[] = [...Array(100)].map((_, i) => {
-  return i === 99 ? 'CUT' : String(initRank + i);
-});
-
 const ResultEditItems: React.FC<Props> = ({
   arg,
   result,
@@ -85,12 +72,37 @@ const ResultEditItems: React.FC<Props> = ({
   handleChange,
   remove,
 }) => {
-  type OptionDatasValue = typeof optionDatas;
+  const thisYear = useMemo(() => new Date().getFullYear(), []);
+  const selectYears: string[] = useMemo(
+    () =>
+      [...Array(thisYear - initYear + 1)].map((_, i) => {
+        return String(thisYear - i);
+      }),
+    [thisYear]
+  );
+
+  const selectMonths: string[] = useMemo(
+    () =>
+      [...Array(12)].map((_, i) => {
+        return String(initMonth + i);
+      }),
+    []
+  );
+
+  const selectRank: string[] = useMemo(
+    () =>
+      [...Array(100)].map((_, i) => {
+        return i === 99 ? 'CUT' : String(initRank + i);
+      }),
+    []
+  );
+
   const optionDatas = {
     year: selectYears,
     month: selectMonths,
     rank: selectRank,
   };
+  type OptionDatasValue = typeof optionDatas;
   const checksubItem = () => {
     onChange();
     remove(index);

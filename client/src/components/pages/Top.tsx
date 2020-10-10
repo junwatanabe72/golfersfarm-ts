@@ -25,19 +25,18 @@ const Container = styled.div`
 
 const components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />];
 
-const contents = components.map((d: JSX.Element, i: number) => {
-  const color = i % 2 === 0 ? BASICCOLORS.WHITE : BASICCOLORS.WHITELIGHT;
-
-  return (
-    <BackColor key={i} color={color}>
-      <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
-        <Container>{d}</Container>
-      </Padding>
-    </BackColor>
-  );
-});
-
 const Top: React.FC<Props> = ({ currentUser }) => {
+  const contents = components.map((d: JSX.Element, i: number) => {
+    const color = i % 2 === 0 ? BASICCOLORS.WHITE : BASICCOLORS.WHITELIGHT;
+    return (
+      <BackColor key={i} color={color}>
+        <Padding top={CLEAR.XSMALL} bottom={CLEAR.XSMALL}>
+          <Container>{d}</Container>
+        </Padding>
+      </BackColor>
+    );
+  });
+
   return (
     <Layout currentUser={currentUser} width={SIZE.MAX}>
       {contents}

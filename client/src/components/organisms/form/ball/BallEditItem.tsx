@@ -77,6 +77,7 @@ const BallEditItem: React.FC<Props> = ({ formikBall, valueKey, optionDatas, onCh
       modalPop={dispatchModalPop}
     />
   );
+
   const onClick = () => {
     dispatch(modalPush(modalComponent));
   };

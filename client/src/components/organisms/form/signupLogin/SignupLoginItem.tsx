@@ -64,6 +64,16 @@ const SignLoginItem: React.FC<Props> = ({ formik, valueKey }) => {
         </StyledSelect>
       </>
     ),
+    confirmedPassword: (
+      <StyledField
+        type={'password'}
+        name={valueKey}
+        placeholder={placeHolder[valueKey as keyof PlaceHolder]}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        value={formik.values[valueKey as keyof AuthDataType]}
+      />
+    ),
     other: (
       <StyledField
         type={valueKey}
@@ -75,8 +85,8 @@ const SignLoginItem: React.FC<Props> = ({ formik, valueKey }) => {
       />
     ),
   };
-
-  const component = valueKey === 'sex' ? item[valueKey] : item['other'];
+  type Item = typeof item;
+  const component = item[valueKey as keyof Item] ? item[valueKey as keyof Item] : item['other'];
 
   return <>{component}</>;
 };
