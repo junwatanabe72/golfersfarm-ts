@@ -50,6 +50,7 @@ export const CLEAR = {
 export const FONTWEIGHT = {
   NORMAL: 400,
   BOLD: 600,
+  TINY: 200,
 } as const;
 
 export const BORDERRADIUS = 4 as 4;

@@ -28,11 +28,11 @@ const Center = styled.div`
 `;
 const CR = '©️ 2020 Copyright: junwatanabe72';
 
-const Footer: React.FC<Props> = ({ color = BASICCOLORS.WHITELIGHT, route, infoRoute }) => {
-  const fontColor = color === BASICCOLORS.WHITE ? BASICCOLORS.PRIMARY : BASICCOLORS.SECONDARY;
+const Footer: React.FC<Props> = ({ color, route, infoRoute }) => {
+  const fontColor = color === BASICCOLORS.WHITE ? BASICCOLORS.SECONDARY : BASICCOLORS.PRIMARY;
   return (
     <BackgroundColor color={color}>
-      <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
+      <Padding top={CLEAR.SMALL} bottom={CLEAR.BASE}>
         <Container>
           <div>
             <LinkList color={fontColor} route={route} />

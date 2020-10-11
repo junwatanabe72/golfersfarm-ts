@@ -4,6 +4,12 @@ const TitleText: string[] = [
   'さあ、今すぐ登録をしよう！',
   'Enjoy your Golf life!!',
 ];
+export const loginTitleText: string[] = [
+  'Golfersfarmをご利用いただきありがとうございます！',
+  '使い心地はいかがでしょうか？',
+  'スコア管理機能等々今後もバージョンアップを考えています',
+  'comming soon!',
+];
 const TitleTitle = 'あなたのゴルフライフを公開しよう！';
 const TitleLink = '今すぐ無料登録する';
 
@@ -27,11 +33,26 @@ export const TopTitleText = {
   TitleText,
   TitleLink,
 };
-export const UsageItem: string[] = ['PROFILE', 'GEARS', 'RESULTS', 'SWING', 'SCORES'];
+export const usageItem: string[] = ['PROFILE', 'GEARS', 'RESULTS', 'SWING', 'SCORES'];
 
 export const UsageTitle = 'Golfersfarmに登録すると、何が出来るの？';
 
 export const TopUsageText = {
-  UsageItem,
+  usageItem,
   UsageTitle,
 };
+
+export const profileText: string[] = [
+  'ベストスコアや趣味などのプロフィールを登録できます。',
+  '登録されたSNSアカウントを通して、気になるゴルファーと繋がることも？',
+];
+
+export const swingText: string[] = [
+  'Golfersfarmでは、youtubeにアップした動画を登録できます。',
+  'あなたの素晴らしい？スウィングやプレーを見てもらいましょう！',
+];
+
+export const clubResultText: string[] = [
+  'あなたのクラブセッティングや競技実績も登録可能です。',
+  'きっと、ツアープロみたいなプロフィールページが出来上がりますよ！',
+];

@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../../atoms/Button';
-import LinkButton from '../../atoms/LinkButton';
 import Logo from '../../atoms/Logo';
 import Text from '../../atoms/Text';
-import { ROUTE } from '../../../utils/constant/route';
 import { BASICCOLORS } from '../../../utils/constant/color';
-import { TopTitleText } from '../../../utils/constant/text/body/top/text';
+import { TopTitleText, loginTitleText } from '../../../utils/constant/text/body/top/text';
 import { FONTSIZE, CLEAR } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
 
@@ -19,7 +16,7 @@ const StyledDiv = styled.div`
   font-size: ${FONTSIZE.ICONLARGE}px;
 `;
 
-const TopTitle: React.FC = () => {
+const LoginTopTitle: React.FC = () => {
   return (
     <Container>
       <Padding top={CLEAR.LARGE} bottom={CLEAR.TINY}>
@@ -30,14 +27,9 @@ const TopTitle: React.FC = () => {
       <Padding bottom={CLEAR.SMALL}>
         <StyledDiv>Golfersfarm</StyledDiv>
       </Padding>
-      <Text fontSize={FONTSIZE.XLARGE} text={TopTitleText.TitleText} />
-      <Padding top={CLEAR.XSMALL} bottom={CLEAR.MEDIUMLARGE}>
-        <LinkButton to={ROUTE.LOGIN}>
-          <Button color={BASICCOLORS.WHITELIGHT}>{TopTitleText.TitleLink}</Button>
-        </LinkButton>
-      </Padding>
+      <Text fontSize={FONTSIZE.XLARGE} text={loginTitleText} />
     </Container>
   );
 };
 
-export default TopTitle;
+export default LoginTopTitle;

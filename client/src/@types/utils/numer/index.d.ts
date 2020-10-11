@@ -24,7 +24,10 @@ interface Clear {
 }
 // types
 
-type FONTSIZEWEIGHTTYPE = typeof FONTWEIGHT.NORMAL | typeof FONTWEIGHT.BOLD;
+type FONTSIZEWEIGHTTYPE =
+  | typeof FONTWEIGHT.NORMAL
+  | typeof FONTWEIGHT.BOLD
+  | typeof FONTWEIGHT.TINY;
 
 type FONTSIZETYPE =
   | typeof FONTSIZE.ICONXLARGE
@@ -133,6 +136,7 @@ const CLEAR = {
 const FONTWEIGHT = {
   NORMAL: 400,
   BOLD: 600,
+  TINY: 200,
 } as const;
 
 const BORDERRADIUS = 4 as 4;

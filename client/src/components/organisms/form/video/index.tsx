@@ -14,6 +14,7 @@ import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { deleteValues } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
+import Url from '../../../atoms/Url';
 
 interface Props {
   currentValues: ArrayVideoType;
@@ -23,6 +24,16 @@ interface Props {
 const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
+`;
+
+const StyledLi = styled.li`
+  list-style: inside;
+  font-size: ${FONTSIZE.BASE}px;
+`;
+
+const StyledSpan = styled.span`
+  color: ${BASICCOLORS.BASICDARK};
+  font-weight: 600;
 `;
 
 const editTitles = 'youtube動画';
@@ -40,6 +51,23 @@ const videoValidation = () =>
     ),
   });
 
+const caution = (
+  <ul>
+    <StyledLi>編集ボタンを押さずページを切替えれば、削除データは元に戻ります。</StyledLi>
+    <StyledLi>
+      「https://www.youtube.com/embed/<StyledSpan>VIDEO_ID</StyledSpan>」の
+      <StyledSpan>「VIDEO_ID」のみ</StyledSpan>を動画URLの項目に入力してください。
+    </StyledLi>
+
+    <Url
+      display={'block'}
+      color={BASICCOLORS.SECONDARYLIGHT}
+      to={'https://www.howtonote.jp/youtube/usage/index5.html'}
+    >
+      <StyledLi>VIDEO_IDの確認方法等は、こちらをご参照ください。</StyledLi>
+    </Url>
+  </ul>
+);
 const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
   const arrayDatas = Object.values(currentValues);
 
@@ -132,6 +160,7 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                 />
               </Padding>
               {dirty && <FormSubmit>{buttonValue}</FormSubmit>}
+              {caution}
             </Padding>
           </Form>
         </Padding>

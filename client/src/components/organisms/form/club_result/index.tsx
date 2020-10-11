@@ -36,6 +36,10 @@ const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
 `;
+const StyledLi = styled.li`
+  list-style: inside;
+  font-size: ${FONTSIZE.BASE}px;
+`;
 
 const thisYear = new Date().getFullYear();
 const thisMonth = new Date().getMonth() + 1;
@@ -45,6 +49,19 @@ const editSubTitles = { club: '使用クラブ', result: '競技結果' };
 const AddButtonText = { club: ['クラブを追加'], result: ['競技結果を追加'] };
 const buttonValue = { club: 'クラブを登録・編集する。', result: '競技結果を登録・削除する。' };
 
+const caution = {
+  club: (
+    <ul>
+      <StyledLi>編集ボタンを押さずページを切替えれば、削除データは元に戻ります。</StyledLi>
+    </ul>
+  ),
+  result: (
+    <ul>
+      <StyledLi>編集ボタンを押さずページを切替えれば、削除データは元に戻ります。</StyledLi>
+      <StyledLi>詳細結果には、webページのURLすべてを貼り付けてください。</StyledLi>
+    </ul>
+  ),
+};
 const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResults, theme }) => {
   const initialValuesData = {
     club: { formikValues: checkedClubs },
@@ -165,7 +182,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                             push(addItem[theme]);
                           },
                         };
-
                         return (
                           <Padding
                             top={CLEAR.TINY}
@@ -203,6 +219,7 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                 />
               </Padding>
               {dirty && <FormSubmit>{buttonValue[theme]}</FormSubmit>}
+              {caution[theme]}
             </Padding>
           </Form>
         </Padding>

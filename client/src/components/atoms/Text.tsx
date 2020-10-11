@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CLEAR, FONTSIZE } from '../../utils/constant/number';
-import { Padding } from '../../utils/styled/styledSpace';
+import { Padding, ALIGNITEMS } from '../../utils/styled/styledSpace';
 
 interface Props extends PartialFontSize {
   text: string[];
@@ -9,7 +9,7 @@ interface Props extends PartialFontSize {
 
 const Container = styled.div<PartialFontSize>`
   font-size: ${(props) => props.fontSize}px;
-  text-align: center;
+  text-align: ${ALIGNITEMS.CENTER};
 `;
 
 const Text: React.FC<Props> = ({ text, fontSize = FONTSIZE.LARGE }) => {

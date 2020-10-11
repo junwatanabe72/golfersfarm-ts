@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Image from './Image';
 import { SIZE } from '../../utils/constant/number';
+import { BASICCOLORS } from '../../utils/constant/color';
 
 interface Props extends PartialWidthSize {
   image: string;
@@ -14,6 +15,9 @@ const FixedColumn = styled.div`
 
 const StyledA = styled.a`
   text-align: center;
+  &:hover {
+    color: ${BASICCOLORS.WHITEDARK};
+  }
 `;
 
 const FreePick: React.FC<Props> = ({ image, width = SIZE.SMALL }) => {
