@@ -7,12 +7,12 @@ import { Padding } from '../../utils/styled/styledSpace';
 import { ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props extends PartialColor, PartialClear, PartialTextAlignType {
+interface Props extends PartialColor, PartialClear, PartialTextAlignType, PartialFontSize {
   title?: string;
 }
 
-const Color = styled.div<PartialColor>`
-  background-color: ${(props) => props.color};
+const Color = styled.div`
+  background-color: ${BASICCOLORS.WHITELIGHT};
 `;
 
 const PaddingExtend = styled(Padding)<PartialClear>`
@@ -24,15 +24,18 @@ const PaddingExtend = styled(Padding)<PartialClear>`
 
 const Card: React.FC<Props> = ({
   textAlign = ALIGNITEMS.START,
-  color = BASICCOLORS.WHITELIGHT,
+  color,
+  fontSize,
   title,
   children,
   clear = CLEAR.XSMALL,
 }) => {
   return (
-    <Color color={color}>
+    <Color>
       <PaddingExtend clear={clear}>
-        <Logo textAlign={textAlign}>{title}</Logo>
+        <Logo color={color} textAlign={textAlign} fontSize={fontSize}>
+          {title}
+        </Logo>
         {children}
       </PaddingExtend>
     </Color>

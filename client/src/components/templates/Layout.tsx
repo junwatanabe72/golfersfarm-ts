@@ -18,9 +18,9 @@ const BackColor = styled.div`
 const Container = styled.div<PartialWidthSize>`
   width: ${(props) => props.width}vw;
   margin: 0vw auto;
-  ${media.tablet`
-    width: 90vw;
-      `}
+  // ${media.tablet`
+  //   width: 90vw;
+  //     `}
 `;
 
 //仮の数値
@@ -34,9 +34,9 @@ const Layout: React.FC<Props> = ({ currentUser, children, width = SIZE.XXXLARGE 
 
   return (
     <BackColor>
-      <Header route={route} />
+      <Header route={route} color={BASICCOLORS.WHITELIGHT} />
       <Container width={width}>{children}</Container>
-      <Footer route={route} infoRoute={INFOROUTE} />
+      <Footer route={route} infoRoute={INFOROUTE} color={BASICCOLORS.WHITELIGHT} />
     </BackColor>
   );
 };

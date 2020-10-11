@@ -30,12 +30,12 @@ const Container = styled.div`
 const HeaderTitleText = {
   appTitle: 'Golfersfarm',
 };
-const Header: React.FC<Props> = ({ color = BASICCOLORS.WHITELIGHT, route }) => {
+const Header: React.FC<Props> = ({ color, route }) => {
   const [modalIsOpen, setModal] = useState<boolean>(false);
   const workModal = () => {
     setModal(!modalIsOpen);
   };
-  const fontColor = color === BASICCOLORS.WHITE ? BASICCOLORS.PRIMARY : BASICCOLORS.SECONDARY;
+  const fontColor = color === BASICCOLORS.WHITE ? BASICCOLORS.SECONDARY : BASICCOLORS.PRIMARY;
   const linkList = <LinkList color={fontColor} route={route} />;
   const modalInLinks = (
     <SimpleModal

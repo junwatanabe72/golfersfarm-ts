@@ -6,15 +6,26 @@ import { useFormik } from 'formik';
 import InputItem from './InputItem';
 import { updateImageUser } from '../../../../actions';
 import { Padding } from '../../../../utils/styled/styledSpace';
-import { CLEAR } from '../../../../utils/constant/number';
+import { CLEAR, FONTSIZE } from '../../../../utils/constant/number';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
+import { BASICCOLORS } from '../../../../utils/constant/color';
 
 interface Props {
   currentUser: UserType;
 }
 
 const StyledForm = styled.form``;
+
+const StyledLi = styled.li`
+  list-style: inside;
+  font-size: ${FONTSIZE.BASE}px;
+`;
+
+const StyledSpan = styled.span`
+  color: ${BASICCOLORS.BASICDARK};
+  font-weight: 600;
+`;
 const items = {
   profileImage: 'profileImage',
   clubImage: 'clubImage',
@@ -24,6 +35,16 @@ const buttonValue = 'イメージを変更する。';
 const FILE_SIZE = 5000000;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/gif', 'image/png'];
 
+const caution = (
+  <ul>
+    <StyledLi>
+      <StyledSpan>「image/jpg, image/jpeg, image/gif, image/png」</StyledSpan>のみ。
+    </StyledLi>
+    <StyledLi>
+      ファイル容量は<StyledSpan>5MG</StyledSpan>まで。
+    </StyledLi>
+  </ul>
+);
 const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
   const dispatch = useDispatch();
   const initialValuesData = {
@@ -89,6 +110,7 @@ const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
           })}
         </Padding>
         {formik.dirty && <FormSubmit>{buttonValue}</FormSubmit>}
+        {caution}
       </StyledForm>
     </Padding>
   );
