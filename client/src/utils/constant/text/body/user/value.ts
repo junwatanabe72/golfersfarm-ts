@@ -4,7 +4,7 @@ const instagram = 'ruby.on';
 const youtube = 'UC-hTmh_CtqIUphbwd8Eu6EQ';
 
 export const sexValues = Object.freeze({
-  male: 0,
+  male: 1,
   female: 100,
 });
 
@@ -14,7 +14,7 @@ export const sexLabels = {
 };
 
 export const showValues = Object.freeze({
-  open: 0,
+  open: 1,
   close: 100,
 });
 
@@ -44,6 +44,11 @@ export const clubOrder = [
   '4UT',
   '5UT',
   '6UT',
+  '2IRON',
+  '3IRON',
+  '4IRON',
+  'IRON(2~9)',
+  'IRON(2~P)',
   'IRON(3~P)',
   'IRON(4~P)',
   'IRON(5~P)',

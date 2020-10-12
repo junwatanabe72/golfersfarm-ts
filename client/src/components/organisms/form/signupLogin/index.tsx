@@ -85,10 +85,13 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
   const onSubmit = {
     signUp: (values: AuthDataType) => {
       const { name, password, email, sex } = values;
+
       if (!name || !sex) {
+        console.log(values);
         return;
       }
       const signItems = { name, password, email, sex };
+
       dispatch(createUser(signItems));
     },
     login: (values: AuthDataType) => {
@@ -101,6 +104,7 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
     validationSchema: validation[status],
     onSubmit: onSubmit[status],
   });
+
   return (
     <StyledForm onSubmit={formik.handleSubmit}>
       {Object.keys(formDatas[status]).map((key: string, num: number) => {

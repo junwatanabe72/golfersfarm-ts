@@ -4,13 +4,8 @@ import Url from '../atoms/Url';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
 
-interface Props extends PartialColor, PartialFontSize {
-  urls: {
-    facebook?: string;
-    twitter?: string;
-    instagram?: string;
-    youtube?: string;
-  };
+interface Props extends PartialFontSize {
+  urls: SNSUserType;
 }
 
 const Container = styled.div`
@@ -18,7 +13,33 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 `;
-type URLS = typeof URLs;
+
+const StyledSpan = styled.span`
+  position: relative; /*相対配置*/
+  display: inline-block;
+  vertical-align: middle; /*垂直中央に*/
+  background: -webkit-linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat;
+  background: linear-gradient(135deg, #427eff 0%, #f13f79 70%) no-repeat; /*グラデーション①*/
+  overflow: hidden; /*はみ出た部分を隠す*/
+  border-radius: 8px; /*角丸に*/
+  &:before {
+    content: '';
+    position: absolute; /*絶対配置*/
+    top: 24px; /*ずらす*/
+    left: 18px; /*ずらす*/
+    background: -webkit-radial-gradient(
+      #ffdb2c 10%,
+      rgba(255, 105, 34, 0.65) 55%,
+      rgba(255, 88, 96, 0) 70%
+    );
+    background: radial-gradient(
+      #ffdb2c 10%,
+      rgba(255, 105, 34, 0.65) 55%,
+      rgba(255, 88, 96, 0) 70%
+    ); /*グラデーション②*/
+  }
+`;
+
 const URLs = {
   facebook: 'https://www.facebook.com/',
   twitter: 'https://twitter.com/',
@@ -26,22 +47,45 @@ const URLs = {
   youtube: 'https://www.youtube.com/channel/',
 } as const;
 
-const SNS: React.FC<Props> = ({ urls, color, fontSize }) => {
+type URLTypes = keyof typeof URLs;
+
+const colors = {
+  facebook: '#4267b2',
+  twitter: '#1da1f2',
+  instagram: '#FFF',
+  youtube: '#Ff0000',
+} as const;
+
+const SNS: React.FC<Props> = ({ urls, fontSize }) => {
   const SnsURLs = Object.entries(urls);
   return (
     <Container>
-      {SnsURLs.map((value, num) => {
-        return value[1] ? (
-          <Url key={num} to={URLs[value[0] as keyof URLS] + value[1]}>
+      {SnsURLs.map(([key, value]: [string, string | undefined], num: number) => {
+        const valueKey = key === 'instagram' ? key : 'other';
+        const components = {
+          instagram: (
+            <StyledSpan>
+              <ComponentFontAwesomeIcon
+                fontSize={fontSize}
+                head={FONTAWEICON[key as URLTypes].head}
+                tail={FONTAWEICON[key as URLTypes].tail}
+                color={colors[key as URLTypes]}
+              />
+            </StyledSpan>
+          ),
+          other: (
             <ComponentFontAwesomeIcon
               fontSize={fontSize}
-              head={FONTAWEICON[value[0] as keyof URLS].head}
-              tail={FONTAWEICON[value[0] as keyof URLS].tail}
-              color={color}
+              head={FONTAWEICON[key as URLTypes].head}
+              tail={FONTAWEICON[key as URLTypes].tail}
+              color={colors[key as URLTypes]}
             />
-          </Url>
-        ) : (
-          <React.Fragment key={num}></React.Fragment>
+          ),
+        };
+        return (
+          <React.Fragment key={num}>
+            <Url to={URLs[key as URLTypes] + value}>{components[valueKey]}</Url>
+          </React.Fragment>
         );
       })}
     </Container>

@@ -26,13 +26,13 @@ const profileTableItems = {
   averageDistance: '平均飛距離',
   homeCourse: 'ホームコース',
 };
-
+const title = 'SKILL';
 const UserMain: React.FC<Props> = ({ targetUser }) => {
   return (
     <Container>
       <UserCard data={targetUser} width={SIZE.XXSMALL} />
-      <Padding all={CLEAR.XSMALL} />
-      <Card color={BASICCOLORS.WHITELIGHT}>
+      <Padding all={CLEAR.TINY} />
+      <Card title={title}>
         <Table
           datas={targetUser}
           width={SIZE.XXSMALL}

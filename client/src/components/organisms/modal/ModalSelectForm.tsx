@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from '../../atoms/Logo';
-import { FONTSIZE, CLEAR } from '../../../utils/constant/number';
+import { FONTSIZE, CLEAR, SIZE } from '../../../utils/constant/number';
 import { BASICCOLORS } from '../../../utils/constant/color';
-import { Padding } from '../../../utils/styled/styledSpace';
+import { Padding, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
+import { media } from '../../../utils/styled/styledRdesign';
 
 interface Props extends PartialWidthSize, PartialWidthTab {
   modalPop: () => void;
@@ -20,22 +21,30 @@ interface Props extends PartialWidthSize, PartialWidthTab {
 }
 
 const Center = styled.div`
-  margin: auto;
+  text-align: center;
 `;
 
 const Flex = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: ${JUSTIFYCONTENT.BETWEEN};
 `;
 
 const StyledField = styled.input`
-  font-size: ${FONTSIZE.TINY}px;
-  padding: ${CLEAR.TINY}vw ${CLEAR.XSMALL}vw;
+  font-size: ${FONTSIZE.MEDIUM}px;
   border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  width: ${SIZE.XSMALL}vw;
+  padding: ${CLEAR.TINY}vw;
   &:hover {
+    color: ${BASICCOLORS.SECONDARY};
     background-color: #f5f5f5;
   }
+  ${media.tablet`
+      font-size: ${FONTSIZE.BASE}px;
+      width: ${SIZE.SMALL}vw;
+      `}
 `;
 const CurrentField = styled(StyledField)`
   color: ${BASICCOLORS.SECONDARY};
@@ -47,6 +56,7 @@ const optionDatasKey = {
 } as const;
 
 const selectText = '選択してください。';
+const selectSub = '名前順（a->z,あ->ん）';
 const ModalSelectForm: React.FC<Props> = ({ modalPop, datas, onChange, value, valueKey, name }) => {
   const selectItems = Object.values(datas).sort((x, y) => {
     const xName = x.name;
@@ -60,8 +70,11 @@ const ModalSelectForm: React.FC<Props> = ({ modalPop, datas, onChange, value, va
 
   return (
     <Center>
-      <Logo>{selectText}</Logo>
-      <Padding all={CLEAR.XSMALL} />
+      <Logo fontSize={FONTSIZE.LARGE} color={BASICCOLORS.SECONDARY}>
+        {selectText}
+      </Logo>
+      <div>{selectSub}</div>
+      <Padding all={CLEAR.TINY} />
       <Flex>
         {selectItems.map((data: any, num: number) => {
           const key = optionDatasKey[valueKey as keyof typeof optionDatasKey];

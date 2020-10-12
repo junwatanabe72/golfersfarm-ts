@@ -28,7 +28,6 @@ const components: JSX.Element[] = [<TopTitle />, <TopUsage />, <TopConcept />];
 
 const Top: React.FC<Props> = ({ currentUser }) => {
   const isLogin: boolean = 0 !== Object.keys(currentUser).length;
-
   const visiterContents = components.map((d: JSX.Element, i: number) => {
     const color = i % 2 !== 0 ? BASICCOLORS.WHITE : BASICCOLORS.WHITELIGHT;
     const clear = i === components.length - 1 ? CLEAR.ZERO : CLEAR.SMALL;
