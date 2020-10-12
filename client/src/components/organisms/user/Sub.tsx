@@ -114,7 +114,7 @@ const UserSub: React.FC<Props> = ({
       {titles.map((value, num) => {
         return (
           <React.Fragment key={num}>
-            <Card color={BASICCOLORS.WHITELIGHT} title={value} textAlign={ALIGNITEMS.START}>
+            <Card title={value} textAlign={ALIGNITEMS.START}>
               {contents[value as keyof Contents]}
             </Card>
             <Padding all={CLEAR.TINY} />

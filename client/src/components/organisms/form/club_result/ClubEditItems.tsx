@@ -61,7 +61,8 @@ const StyledDiv = styled.div`
   font-size: 1px;
   color: ${BASICCOLORS.SECONDARYDARK};
 `;
-const flexDatas = [
+export const flexDatas = [
+  { flex: '-' },
   { flex: 'L' },
   { flex: 'A' },
   { flex: 'R' },

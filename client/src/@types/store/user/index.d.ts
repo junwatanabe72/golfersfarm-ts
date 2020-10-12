@@ -25,6 +25,7 @@ type PartialUserType = Partial<UserType>;
 type ArrayPartialUserType = PartialUserType[];
 
 type SignupUserType = Pick<UserType, 'name' | 'password' | 'email' | 'sex'>;
+type SNSUserType = Pick<PartialUserType, 'facebook' | 'twitter' | 'instagram' | 'youtube'>;
 type LoginUserType = Pick<UserType, 'password' | 'email'>;
 type ImageUserType = Pick<UserType, 'profileImage' | 'clubImage'>;
 type PartialImageUserType = Partial<ImageUserType>;

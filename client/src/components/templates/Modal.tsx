@@ -14,8 +14,7 @@ const ModalWindow: React.FC<Props> = ({ show, component }) => {
       isOpen={show}
       style={{
         content: {
-          maxWidth: '800px',
-          minWidth: '50px',
+          maxWidth: '1000px',
           margin: '0 auto',
         },
       }}

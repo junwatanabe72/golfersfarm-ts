@@ -16,6 +16,7 @@ const Color = styled.div`
 `;
 
 const PaddingExtend = styled(Padding)<PartialClear>`
+  border-radius: 5px;
   padding: ${(props) => props.clear}vw;
   ${media.tablet`
       padding: ${CLEAR.XSMALL}vw;

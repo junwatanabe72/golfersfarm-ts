@@ -4,6 +4,8 @@ import LinkButton from '../../atoms/LinkButton';
 import Image from '../../atoms/Image';
 import Card from '../../molecules/Card';
 import SNS from '../../molecules/SNSIcons';
+import { CLEAR } from '../../../utils/constant/number';
+import { Padding } from '../../../utils/styled/styledSpace';
 
 interface Props extends PartialClear, PartialWidthSize, PartialWidthTab, PartialFontSize {
   data: PartialUserType;
@@ -18,15 +20,17 @@ const Container = styled.div`
 
 const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize }) => {
   const { id, name, facebook, twitter, instagram, youtube, profileImage } = data;
-  const urls = { facebook, twitter, instagram, youtube };
+  const urls = { facebook, twitter, youtube, instagram };
 
   return (
     <Card clear={clear}>
       <Container>
         <Image image={profileImage} width={width} widthTab={widthTab} />
-        <LinkButton to={`/users/${id}`} fontSize={fontSize}>
-          {name}
-        </LinkButton>
+        <Padding top={CLEAR.TINY}>
+          <LinkButton to={`/users/${id}`} fontSize={fontSize}>
+            {name}
+          </LinkButton>
+        </Padding>
         <SNS urls={urls} fontSize={fontSize} />
       </Container>
     </Card>

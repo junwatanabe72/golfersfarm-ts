@@ -45,7 +45,6 @@ const App: React.FC<Props> = () => {
   //
 
   useEffect(() => {
-    // localStorage.clear();
     dispatch(checkLoginUser());
     dispatch(getUsers());
     dispatch(getShafts());

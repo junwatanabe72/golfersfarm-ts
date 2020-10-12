@@ -32,6 +32,28 @@ export default {
   // editPage
   async update(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
+    const _user = await User.findOne({ where: { email: user.email } });
+    const __user = await User.findOne({ where: { name: user.name } });
+    if (!user.password || user.password.length < 8) {
+      return res.status(200).json({
+        error: "パスワードは8文字以上を設定してください",
+        code: "invalidPassword",
+      });
+    }
+
+    //
+    if (_user) {
+      return res.status(200).json({
+        error: "すでに登録されているメールアドレスです",
+        code: "alreadyRegistered",
+      });
+    }
+    if (__user) {
+      return res.status(200).json({
+        error: "すでに登録されているユーザー名です",
+        code: "alreadyRegistered",
+      });
+    }
     try {
       const updateUser = await User.updateProfile(req.params.id, user);
       if (!updateUser) {

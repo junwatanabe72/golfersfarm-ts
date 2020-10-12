@@ -5,18 +5,20 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE } from '../../utils/constant/number';
 import { IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 
-interface Props extends PartialColor, PartialFontSize, MENUZTYPE {}
+interface Props extends PartialFontSize, MENUZTYPE {
+  color: any;
+}
 
 const Container = styled.div<{ color: Props['color']; fontSize: Props['fontSize'] }>`
   font-size: ${(props) => props.fontSize}px;
   color: ${(props) => props.color};
   display: inline-block;
-  margin: 0 16px 0 auto;
+  margin: 0 5px;
   cursor: pointer;
 `;
 
 const ComponentFontAwesomeIcon: React.FC<Props> = ({
-  color = BASICCOLORS.SECONDARY,
+  color,
   fontSize = FONTSIZE.LARGE,
   head,
   tail,

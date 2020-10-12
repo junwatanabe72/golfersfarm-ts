@@ -84,8 +84,8 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
       name: '',
       userId: currentUser.id,
       type: '1WOOD',
-      maker: 'Mizuno',
-      shaft: 'TOUR AD DI-7',
+      maker: 'タイトリスト',
+      shaft: '純正シャフト',
       flex: 'R',
     },
     result: {
