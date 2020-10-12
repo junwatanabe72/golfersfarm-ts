@@ -4,6 +4,7 @@ module.exports = {
     return queryInterface.bulkInsert(
       "makers",
       [
+        { name: "その他", createdAt: new Date(), updatedAt: new Date() },
         { name: "A DESIGN GOLF", createdAt: new Date(), updatedAt: new Date() },
         { name: "A.F.D.", createdAt: new Date(), updatedAt: new Date() },
         { name: "A.japa", createdAt: new Date(), updatedAt: new Date() },
