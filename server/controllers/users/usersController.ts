@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 import { UserType } from "../../models/user";
 import passport from "passport";
+
 const User = db.User;
 
 export default {
@@ -32,28 +33,31 @@ export default {
   // editPage
   async update(req: Request, res: Response, next: NextFunction) {
     const { user } = req.body;
-    const _user = await User.findOne({ where: { email: user.email } });
-    const __user = await User.findOne({ where: { name: user.name } });
-    if (!user.password || user.password.length < 8) {
-      return res.status(200).json({
-        error: "パスワードは8文字以上を設定してください",
-        code: "invalidPassword",
-      });
-    }
+    const id = parseInt(req.params.id);
+    const email = user.email ? user.email : null;
+    const name = user.name ? user.name : null;
+    const _user = await User.findOne({
+      where: {
+        email: email,
+      },
+    });
+    const __user = await User.findOne({
+      where: { name: name },
+    });
 
-    //
-    if (_user) {
+    if (_user && _user.id !== id) {
       return res.status(200).json({
         error: "すでに登録されているメールアドレスです",
         code: "alreadyRegistered",
       });
     }
-    if (__user) {
+    if (__user && __user.id !== id) {
       return res.status(200).json({
         error: "すでに登録されているユーザー名です",
         code: "alreadyRegistered",
       });
     }
+
     try {
       const updateUser = await User.updateProfile(req.params.id, user);
       if (!updateUser) {

@@ -3,6 +3,7 @@ import Ball from "./ball";
 import UserClubs from "./userClubs";
 import UserResults from "./userResults";
 import UserVideos from "./userVideos";
+const fs = require("fs");
 
 class User extends Model {
   public id!: number;
@@ -33,13 +34,33 @@ class User extends Model {
   }
 
   static async updateProfile(id: string, user: any) {
+    let profilePath: any = undefined;
     const targetUser: any = await this.findOne({
       where: { id: id },
     });
+    if (user.profileImage && targetUser.profileImage) {
+      const start = "./public/";
+      const end = targetUser.profileImage.slice(22);
+      profilePath["profile"] = start + end;
+    }
+    if (user.clubImage && targetUser.clubImage) {
+      const start = "./public/";
+      const end = targetUser.clubImage.slice(22);
+      profilePath["club"] = start + end;
+    }
 
     const updateUser = await targetUser.update({
       ...user,
     });
+
+    if (profilePath) {
+      Object.values(profilePath).map(async (value: any) => {
+        await fs.unlink(value, (err: any) => {
+          if (err) throw err;
+          console.log("削除しました");
+        });
+      });
+    }
     return { updateUser };
   }
 
