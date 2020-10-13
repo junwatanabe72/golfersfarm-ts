@@ -3,6 +3,7 @@ import LinkButton from '../atoms/LinkButton';
 import { CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 import { routeLabel } from '../../utils/constant/route';
+
 interface Props extends Color, PartialClear {
   route: any;
 }

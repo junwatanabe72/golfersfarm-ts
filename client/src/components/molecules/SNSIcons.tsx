@@ -84,7 +84,7 @@ const SNS: React.FC<Props> = ({ urls, fontSize }) => {
         };
         return (
           <React.Fragment key={num}>
-            <Url to={URLs[key as URLTypes] + value}>{components[valueKey]}</Url>
+            {value && <Url to={URLs[key as URLTypes] + value}>{components[valueKey]}</Url>}
           </React.Fragment>
         );
       })}

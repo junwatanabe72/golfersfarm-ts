@@ -3,9 +3,11 @@ import { addBall, ACTIONTYPES } from '../actions/index';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
 import { getBallAxios, updateBallAxios } from '../services/axios/ball';
+import { push } from 'connected-react-router';
 
 function* updateBallAsync(action: Action<BallType>) {
   let ball: ObjectBallType = {};
+  const userId = action.payload.userId;
   try {
     const { data } = yield call(updateBallAxios, action.payload);
 
@@ -17,6 +19,7 @@ function* updateBallAsync(action: Action<BallType>) {
     ball[getBall.id] = getBall;
     yield put(addBall(ball));
     yield toast.success('編集に成功しました。', options);
+    yield put(push(`/users/${userId}`));
     return;
   } catch (e) {
     yield toast.error('失敗しました。', options);

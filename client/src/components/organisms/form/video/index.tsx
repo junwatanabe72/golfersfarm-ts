@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
@@ -8,13 +8,14 @@ import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import Button from '../../../atoms/Button';
+import Url from '../../../atoms/Url';
 import { updateVideos } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { deleteValues } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
-import Url from '../../../atoms/Url';
+import useDialog from '../../../../utils/dialog';
 
 interface Props {
   currentValues: ArrayVideoType;
@@ -69,6 +70,12 @@ const caution = (
   </ul>
 );
 const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
+  const { ref, showDialog, closeDialog } = useDialog();
+  useEffect(() => {
+    if (ref.current && !ref.current.showModal) {
+      dialogPolyfill.registerDialog(ref.current);
+    }
+  }, [ref]);
   const arrayDatas = Object.values(currentValues);
 
   const [count, setCount] = useState<number>(arrayDatas.length);
@@ -159,7 +166,11 @@ const VideoEditForm: React.FC<Props> = ({ currentUser, currentValues }) => {
                   }
                 />
               </Padding>
-              {dirty && <FormSubmit>{buttonValue}</FormSubmit>}
+              {dirty && (
+                <FormSubmit closeDialog={closeDialog} showDialog={showDialog} propsRef={ref}>
+                  {buttonValue}
+                </FormSubmit>
+              )}
               {caution}
             </Padding>
           </Form>

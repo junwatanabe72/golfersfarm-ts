@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import dialogPolyfill from 'dialog-polyfill';
 import * as yup from 'yup';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
@@ -16,6 +17,8 @@ import {
 } from '../../../../validations';
 import SignLoginItem from './SignupLoginItem';
 import { sexValues } from '../../../../utils/constant/text/body/user/value';
+import { useDialog } from '../../../../utils/dialog';
+import Dialog from '../../../atoms/form/Dialog';
 
 interface AuthDataType {
   email: string;
@@ -80,18 +83,22 @@ const validation = {
 };
 
 const SignLoginForm: React.FC<Props> = ({ status }) => {
+  const { ref, showDialog, closeDialog } = useDialog();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (ref.current && !ref.current.showModal) {
+      dialogPolyfill.registerDialog(ref.current);
+    }
+  }, [ref]);
 
   const onSubmit = {
     signUp: (values: AuthDataType) => {
       const { name, password, email, sex } = values;
-
       if (!name || !sex) {
-        console.log(values);
         return;
       }
       const signItems = { name, password, email, sex };
-
       dispatch(createUser(signItems));
     },
     login: (values: AuthDataType) => {
@@ -106,26 +113,28 @@ const SignLoginForm: React.FC<Props> = ({ status }) => {
   });
 
   return (
-    <StyledForm onSubmit={formik.handleSubmit}>
-      {Object.keys(formDatas[status]).map((key: string, num: number) => {
-        return (
-          <React.Fragment key={num}>
-            <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-              <SignLoginItem formik={formik} valueKey={key} />
-            </Padding>
-            {formik.touched[key as keyof AuthDataType] &&
-            formik.errors[key as keyof AuthDataType] ? (
-              <Styleddiv>{formik.errors[key as keyof AuthDataType]}</Styleddiv>
-            ) : null}
-          </React.Fragment>
-        );
-      })}
-      <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-        <StyledButton type="submit">
+    <>
+      <StyledForm onSubmit={formik.handleSubmit}>
+        {Object.keys(formDatas[status]).map((key: string, num: number) => {
+          return (
+            <React.Fragment key={num}>
+              <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+                <SignLoginItem formik={formik} valueKey={key} />
+              </Padding>
+              {formik.touched[key as keyof AuthDataType] &&
+              formik.errors[key as keyof AuthDataType] ? (
+                <Styleddiv>{formik.errors[key as keyof AuthDataType]}</Styleddiv>
+              ) : null}
+            </React.Fragment>
+          );
+        })}
+        <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}></Padding>
+        <StyledButton type="button" onClick={showDialog}>
           <Button pWidth={CLEAR.LARGE}>{buttonValue[status]}</Button>
         </StyledButton>
-      </Padding>
-    </StyledForm>
+        <Dialog onClick={closeDialog} propsRef={ref} />
+      </StyledForm>
+    </>
   );
 };
 

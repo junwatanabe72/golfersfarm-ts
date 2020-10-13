@@ -73,7 +73,7 @@ export const initialUser = {
   twitter: twitter,
   instagram: instagram,
   youtube: youtube,
-  sex: 0,
+  sex: 1,
   residence: '兵庫県',
   birthPlace: '栃木県',
   school: '学習院大学',

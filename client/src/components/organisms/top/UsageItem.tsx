@@ -1,22 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import Image from '../../atoms/Image';
-import Logo from '../../atoms/Logo';
-import { BASICCOLORS } from '../../../utils/constant/color';
+import Card from '../../molecules/Card';
+import FreePick from '../../atoms/FreePick';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
-import {
-  TopUsageText,
-  profileText,
-  swingText,
-  clubResultText,
-} from '../../../utils/constant/text/body/top/text';
+import { profileText, swingText, clubResultText } from '../../../utils/constant/text/body/top/text';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
 import swingCollection from '../../../utils/image/swingCollection.jpg';
 import clubContest from '../../../utils/image/clubContest.jpg';
 import people from '../../../utils/image/people.jpg';
-import Card from '../../molecules/Card';
-import FreePick from '../../atoms/FreePick';
 
 const Container = styled.div`
   display: flex;

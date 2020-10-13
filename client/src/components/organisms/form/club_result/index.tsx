@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik, FieldArray } from 'formik';
-import { updateClubs, updateResults } from '../../../../actions';
-import Button from '../../../atoms/Button';
-import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
-import { media } from '../../../../utils/styled/styledRdesign';
-import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
-import { BASICCOLORS } from '../../../../utils/constant/color';
 import EditFormLayout from './ArrayEditFormLayout';
 import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
-import { deleteValues, arrayToString } from '../../../../utils/constant/text/form';
+import Button from '../../../atoms/Button';
+import { updateClubs, updateResults } from '../../../../actions';
 import { nameValidation, urlValidation } from '../../../../validations';
+import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
+import { media } from '../../../../utils/styled/styledRdesign';
+import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
+import { BASICCOLORS } from '../../../../utils/constant/color';
+import { deleteValues, arrayToString } from '../../../../utils/constant/text/form';
+import useDialog from '../../../../utils/dialog';
 
 interface Props {
   checkedClubs: ArrayClubType;
@@ -63,6 +64,14 @@ const caution = {
   ),
 };
 const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResults, theme }) => {
+  const { ref, showDialog, closeDialog } = useDialog();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (ref.current && !ref.current.showModal) {
+      dialogPolyfill.registerDialog(ref.current);
+    }
+  }, [ref]);
   const initialValuesData = {
     club: { formikValues: checkedClubs },
     result: { formikValues: checkedResults },
@@ -77,7 +86,6 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
   const subCount = () => {
     setCount(count - 1);
   };
-  const dispatch = useDispatch();
 
   const addItem = {
     club: {
@@ -218,7 +226,11 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                   }
                 />
               </Padding>
-              {dirty && <FormSubmit>{buttonValue[theme]}</FormSubmit>}
+              {dirty && (
+                <FormSubmit closeDialog={closeDialog} showDialog={showDialog} propsRef={ref}>
+                  {buttonValue[theme]}
+                </FormSubmit>
+              )}
               {caution[theme]}
             </Padding>
           </Form>
