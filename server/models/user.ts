@@ -55,6 +55,9 @@ class User extends Model {
 
     if (profilePath) {
       Object.values(profilePath).map(async (value: any) => {
+        if (!fs.existsSync(value)) {
+          return;
+        }
         await fs.unlink(value, (err: any) => {
           if (err) throw err;
           console.log("削除しました");

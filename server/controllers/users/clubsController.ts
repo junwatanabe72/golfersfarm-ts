@@ -99,6 +99,7 @@ export default {
             targetClub,
             sequelize
           );
+
           // server=>client型に変換
           const club = serializeReplace(newData, type, maker, shaft);
           return club;
