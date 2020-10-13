@@ -31,7 +31,7 @@ const Container = styled.div`
 
 const App: React.FC<Props> = () => {
   const currentUser: UserType = useSelector((state: State) => state.currentUser, shallowEqual);
-  const storeUsers: ArrayPartialUserType = useSelector((state: State) => state.users, shallowEqual);
+  const storeUsers: ObjectUserType = useSelector((state: State) => state.users, shallowEqual);
   const storeClubs = useSelector((state: State) => state.clubs, shallowEqual);
   const storeResults = useSelector((state: State) => state.results, shallowEqual);
   const storeVideos = useSelector((state: State) => state.videos, shallowEqual);
@@ -41,7 +41,8 @@ const App: React.FC<Props> = () => {
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
   //develop時に一時的に使用。
-  const allUsers = storeUsers.length === 0 ? [currentUser] : [...storeUsers];
+  const allUsers =
+    Object.values(storeUsers).length === 0 ? [currentUser] : [...Object.values(storeUsers)];
   //
 
   useEffect(() => {

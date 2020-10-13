@@ -8,10 +8,14 @@ import { push } from 'connected-react-router';
 
 //users
 function* getUsersAsync() {
+  let users: ObjectUserType = {};
   const { allUsers } = yield call(getUsersAxios);
   try {
-    const dbUsers = allUsers;
-    yield put(addUsers(dbUsers));
+    for (let value of allUsers) {
+      const id = value.id;
+      users[id] = value;
+    }
+    yield put(addUsers(users));
     return;
   } catch (e) {
     return { e };
@@ -20,7 +24,7 @@ function* getUsersAsync() {
 
 function* createUserAsync(action: Action<SignupUserType>) {
   try {
-    const { data } = yield call(createUserAxios, action.payload);
+    const data = yield call(createUserAxios, action.payload);
     if (data.error) {
       yield toast.error(`${data.error}`, options);
       return;
@@ -35,13 +39,14 @@ function* createUserAsync(action: Action<SignupUserType>) {
 
 function* updateUserAsync(action: Action<PartialUserType>) {
   try {
-    const { updateUser } = yield call(updateUserAxios, action.payload);
-    if (!updateUser) {
-      yield toast.error('編集に失敗しました。', options);
+    const data = yield call(updateUserAxios, action.payload);
+
+    if (data.error) {
+      yield toast.error(`${data.error}`, options);
       return;
     }
     yield toast.success('編集に成功しました。', options);
-    const user = updateUser.updateUser;
+    const user = data.updateUser.updateUser;
     yield put(addUser(user));
     yield put(push(`/users/${user.id}`));
     return;
@@ -52,13 +57,14 @@ function* updateUserAsync(action: Action<PartialUserType>) {
 
 function* updateUserImageAsync(action: Action<FormData>) {
   try {
-    const { updateUser } = yield call(updateUserImageAxios, action.payload);
-    if (!updateUser) {
-      yield toast.error('失敗しました。', options);
+    const data = yield call(updateUserImageAxios, action.payload);
+
+    if (data.error) {
+      yield toast.error(`${data.error}`, options);
       return;
     }
     yield toast.success('編集に成功しました。', options);
-    const user = updateUser.updateUser;
+    const user = data.updateUser.updateUser;
     yield put(addUser(user));
     yield put(push(`/users/${user.id}`));
     return;
