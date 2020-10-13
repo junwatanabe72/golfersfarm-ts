@@ -110,7 +110,7 @@ export function deleteUser(): BasicAction {
   return { type: ACTIONTYPES.DELETE_USER };
 }
 //usersActionCreater
-export function addUsers(data: ArrayPartialUserType): Action<ArrayPartialUserType> {
+export function addUsers(data: ObjectUserType): Action<ObjectUserType> {
   return { type: ACTIONTYPES.ADD_USERS, payload: data };
 }
 //clubsActionCreater

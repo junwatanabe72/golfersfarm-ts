@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { push } from 'connected-react-router';
 
 function* updateClubsAsync(action: Action<PartialArrayClubType>) {
-  let Clubs: ObjectClubType = {};
+  let clubs: ObjectClubType = {};
   let deleteClubs: PartialObjectClubType = {};
   const userId = action.payload[0].userId;
   try {
@@ -17,7 +17,7 @@ function* updateClubsAsync(action: Action<PartialArrayClubType>) {
     }
     for (let value of data.updateClubs) {
       const id = value.id;
-      Clubs[id] = value;
+      clubs[id] = value;
     }
 
     for (let value of action.payload) {
@@ -29,7 +29,7 @@ function* updateClubsAsync(action: Action<PartialArrayClubType>) {
     }
 
     yield put(removeClubs(deleteClubs));
-    yield put(addClubs(Clubs));
+    yield put(addClubs(clubs));
     yield put(push(`/users/${userId}`));
     yield toast.success('編集に成功しました。', options);
     return;
@@ -40,7 +40,7 @@ function* updateClubsAsync(action: Action<PartialArrayClubType>) {
 }
 
 function* getClubsAsync(action: Action<PartialUserType>) {
-  let Clubs: ObjectClubType = {};
+  let clubs: ObjectClubType = {};
   const { data } = yield call(getClubsAxios, action.payload);
   try {
     if (!data) {
@@ -48,9 +48,9 @@ function* getClubsAsync(action: Action<PartialUserType>) {
     }
     for (let value of data.allClubs) {
       const id = value.id;
-      Clubs[id] = value;
+      clubs[id] = value;
     }
-    yield put(addClubs(Clubs));
+    yield put(addClubs(clubs));
     return;
   } catch (e) {
     return { e };

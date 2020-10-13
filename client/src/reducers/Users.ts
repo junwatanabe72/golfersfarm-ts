@@ -1,16 +1,16 @@
 import { ACTIONTYPES } from '../actions';
 
-const initialState: ArrayPartialUserType = [];
+const initialState: ObjectUserType = {};
 
 export default function UsersReducer(
   state = initialState,
-  action: Action<ArrayPartialUserType>
-): ArrayPartialUserType {
+  action: Action<ObjectUserType>
+): ObjectUserType {
   let newState = state;
   const users = action.payload || [];
   switch (action.type) {
     case ACTIONTYPES.ADD_USERS: {
-      newState = [...users];
+      newState = { ...state, ...users };
       return newState;
     }
     default: {
