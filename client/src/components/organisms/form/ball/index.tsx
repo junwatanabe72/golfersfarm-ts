@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
+import BallEditFormLayout from './BallEditFormLayout';
+import FlexLayout from '../../../atoms/FlexLayout';
+import FormTitle from '../../../atoms/form/FormTitle';
+import FormSubmit from '../../../atoms/form/FormSubmit';
 import { updateBall } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import FlexLayout from '../../../atoms/FlexLayout';
-import FormTitle from '../../../atoms/form/FormTitle';
-import FormSubmit from '../../../atoms/form/FormSubmit';
-import BallEditFormLayout from './BallEditFormLayout';
+import useDialog from '../../../../utils/dialog';
 
 interface Props {
   userBall: BallType;
@@ -41,11 +42,16 @@ const ballValidation = () =>
   });
 
 const BallEditForm: React.FC<Props> = ({ userBall }) => {
+  const { ref, showDialog, closeDialog } = useDialog();
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (ref.current && !ref.current.showModal) {
+      dialogPolyfill.registerDialog(ref.current);
+    }
+  }, [ref]);
   const onSubmit = (values: BallType) => {
     dispatch(updateBall(values));
   };
-
   return (
     <Formik<BallType>
       initialValues={userBall}
@@ -88,7 +94,11 @@ const BallEditForm: React.FC<Props> = ({ userBall }) => {
                   }
                 />
               </Padding>
-              {dirty && <FormSubmit>{buttonValue}</FormSubmit>}
+              {dirty && (
+                <FormSubmit closeDialog={closeDialog} showDialog={showDialog} propsRef={ref}>
+                  {buttonValue}
+                </FormSubmit>
+              )}
             </Padding>
           </Form>
         </Padding>

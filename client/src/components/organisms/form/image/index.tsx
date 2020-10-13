@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
 import InputItem from './InputItem';
+import FormTitle from '../../../atoms/form/FormTitle';
+import FormSubmit from '../../../atoms/form/FormSubmit';
 import { updateImageUser } from '../../../../actions';
 import { Padding } from '../../../../utils/styled/styledSpace';
 import { CLEAR, FONTSIZE } from '../../../../utils/constant/number';
-import FormTitle from '../../../atoms/form/FormTitle';
-import FormSubmit from '../../../atoms/form/FormSubmit';
 import { BASICCOLORS } from '../../../../utils/constant/color';
+import useDialog from '../../../../utils/dialog';
 
 interface Props {
   currentUser: UserType;
@@ -46,7 +47,13 @@ const caution = (
   </ul>
 );
 const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
+  const { ref, showDialog, closeDialog } = useDialog();
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (ref.current && !ref.current.showModal) {
+      dialogPolyfill.registerDialog(ref.current);
+    }
+  }, [ref]);
   const initialValuesData = {
     profileImage: currentUser.profileImage,
     clubImage: currentUser.clubImage,
@@ -109,7 +116,11 @@ const ImageEditForm: React.FC<Props> = ({ currentUser }) => {
             return <InputItem key={num} formik={formik} valueKey={key} currentUser={currentUser} />;
           })}
         </Padding>
-        {formik.dirty && <FormSubmit>{buttonValue}</FormSubmit>}
+        {formik.dirty && (
+          <FormSubmit closeDialog={closeDialog} showDialog={showDialog} propsRef={ref}>
+            {buttonValue}
+          </FormSubmit>
+        )}
         {caution}
       </StyledForm>
     </Padding>

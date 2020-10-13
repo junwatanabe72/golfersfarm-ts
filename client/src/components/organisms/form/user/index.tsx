@@ -1,20 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import * as yup from 'yup';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
+import UserEditFormLayout from './UserEditFormLayout';
+import FormSubmit from '../../../atoms/form/FormSubmit';
 import { Padding } from '../../../../utils/styled/styledSpace';
 import { CLEAR } from '../../../../utils/constant/number';
-import FormSubmit from '../../../atoms/form/FormSubmit';
-import { emailValidation, nameValidation } from '../../../../validations';
-import UserEditFormLayout from './UserEditFormLayout';
-import { useDispatch } from 'react-redux';
-import { updateUser } from '../../../../actions';
 import {
   sexLabels,
   sexValues,
   showLabels,
   showValues,
 } from '../../../../utils/constant/text/body/user/value';
+import useDialog from '../../../../utils/dialog';
+import { emailValidation, nameValidation } from '../../../../validations';
+import { updateUser } from '../../../../actions';
 
 interface Props {
   currentUser: UserType;
@@ -29,15 +30,23 @@ const profileValidation = () =>
   });
 
 const UserEditForm: React.FC<Props> = ({ currentUser }) => {
+  const dispatch = useDispatch();
+  const { ref, showDialog, closeDialog } = useDialog();
+  useEffect(() => {
+    if (ref.current && !ref.current.showModal) {
+      dialogPolyfill.registerDialog(ref.current);
+    }
+  }, [ref]);
+
   const showValue = currentUser.show === 0 ? showLabels['open'] : showLabels['close'];
-  const sexValue = currentUser.sex === 0 ? sexLabels['male'] : sexLabels['female'];
+  const sexValue = currentUser.sex === 1 ? sexLabels['male'] : sexLabels['female'];
   const initialValuesData = {
     ...currentUser,
     show: showValue,
     sex: sexValue,
     confirmedPassword: currentUser.password,
   };
-  const dispatch = useDispatch();
+
   const onSubmit = (values: ProfileEditDataType) => {
     const showValue = values.show === showLabels['open'] ? showValues['open'] : showValues['close'];
     const sexValue = values.sex === sexLabels['male'] ? sexValues['male'] : sexValues['female'];
@@ -54,7 +63,11 @@ const UserEditForm: React.FC<Props> = ({ currentUser }) => {
     <Padding right={CLEAR.MEDIUM} left={CLEAR.MEDIUM}>
       <StyledForm onSubmit={formik.handleSubmit}>
         <UserEditFormLayout formik={formik} />
-        {formik.dirty && <FormSubmit>{buttonValue}</FormSubmit>}
+        {formik.dirty && (
+          <FormSubmit closeDialog={closeDialog} showDialog={showDialog} propsRef={ref}>
+            {buttonValue}
+          </FormSubmit>
+        )}
       </StyledForm>
     </Padding>
   );

@@ -3,8 +3,13 @@ import styled from 'styled-components';
 import { Padding } from '../../../utils/styled/styledSpace';
 import { CLEAR } from '../../../utils/constant/number';
 import Button from '../Button';
+import Dialog from './Dialog';
 
-interface Props {}
+interface Props {
+  showDialog: () => void;
+  closeDialog: () => void;
+  propsRef: React.MutableRefObject<HTMLDialogElement | null>;
+}
 
 const Center = styled.div`
   display: flex;
@@ -18,15 +23,18 @@ const StyledButton = styled.button`
   border-style: none;
 `;
 
-const FormSubmit: React.FC<Props> = ({ children }) => {
+const FormSubmit: React.FC<Props> = ({ showDialog, closeDialog, propsRef, children }) => {
   return (
-    <Center>
-      <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-        <StyledButton type="submit">
-          <Button pWidth={CLEAR.LARGE}>{children}</Button>
-        </StyledButton>
-      </Padding>
-    </Center>
+    <>
+      <Center>
+        <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+          <StyledButton type="button" onClick={showDialog}>
+            <Button pWidth={CLEAR.LARGE}>{children}</Button>
+          </StyledButton>
+        </Padding>
+      </Center>
+      <Dialog onClick={closeDialog} propsRef={propsRef} />
+    </>
   );
 };
 

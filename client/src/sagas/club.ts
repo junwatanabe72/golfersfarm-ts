@@ -3,10 +3,12 @@ import { addClubs, removeClubs, ACTIONTYPES } from '../actions/index';
 import { getClubsAxios, updateClubsAxios } from '../services/axios/club';
 import { options } from '../utils/Toastify';
 import { toast } from 'react-toastify';
+import { push } from 'connected-react-router';
 
 function* updateClubsAsync(action: Action<PartialArrayClubType>) {
   let Clubs: ObjectClubType = {};
   let deleteClubs: PartialObjectClubType = {};
+  const userId = action.payload[0].userId;
   try {
     const { data } = yield call(updateClubsAxios, action.payload);
     if (!data.updateClubs) {
@@ -28,6 +30,7 @@ function* updateClubsAsync(action: Action<PartialArrayClubType>) {
 
     yield put(removeClubs(deleteClubs));
     yield put(addClubs(Clubs));
+    yield put(push(`/users/${userId}`));
     yield toast.success('編集に成功しました。', options);
     return;
   } catch (e) {

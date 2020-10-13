@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE } from '../../utils/constant/number';
 import { IconLookup, IconDefinition, findIconDefinition } from '@fortawesome/fontawesome-svg-core';
 

@@ -31,7 +31,7 @@ function* updateResultsAsync(action: Action<PartialArrayResultType>) {
 
     yield put(removeResults(deleteResults));
     yield put(addResults(results));
-    yield put(push(`/users/${userId}/edit`));
+    yield put(push(`/users/${userId}`));
     yield toast.success('編集に成功しました。', options);
 
     return;

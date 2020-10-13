@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS } from '../../../utils/constant/color';
-import { SIZE, CLEAR } from '../../../utils/constant/number';
-import { Padding } from '../../../utils/styled/styledSpace';
+import UserCard from './Card';
 import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
-import UserCard from './Card';
+import { SIZE, CLEAR } from '../../../utils/constant/number';
+import { Padding } from '../../../utils/styled/styledSpace';
 import { TABLETYPES } from '../../../utils/constant/text/table';
 
 interface Props {

@@ -11,7 +11,7 @@ import { ROUTE } from '../../../utils/constant/route';
 import { BASICCOLORS } from '../../../utils/constant/color';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { TopConceptText } from '../../../utils/constant/text/body/top/text';
-import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
+import { Padding, ALIGNITEMS } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
 
 const Container = styled.div`

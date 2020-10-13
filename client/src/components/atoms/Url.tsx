@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS } from '../../utils/constant/color';
 
 interface Props extends PartialColor {
   to?: string;

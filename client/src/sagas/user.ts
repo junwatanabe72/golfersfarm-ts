@@ -43,6 +43,7 @@ function* updateUserAsync(action: Action<PartialUserType>) {
     yield toast.success('編集に成功しました。', options);
     const user = updateUser.updateUser;
     yield put(addUser(user));
+    yield put(push(`/users/${user.id}`));
     return;
   } catch (e) {
     return { e };
@@ -59,6 +60,7 @@ function* updateUserImageAsync(action: Action<FormData>) {
     yield toast.success('編集に成功しました。', options);
     const user = updateUser.updateUser;
     yield put(addUser(user));
+    yield put(push(`/users/${user.id}`));
     return;
   } catch (e) {
     return { e };

@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASICCOLORS } from '../../../utils/constant/color';
+import VideoContents from './VideoContents';
+import Table from '../../molecules/table';
+import Card from '../../molecules/Card';
+import Image from '../../atoms/Image';
+import FlexLayout from '../../atoms/FlexLayout';
 import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
-import VideoContents from './VideoContents';
 import { Padding } from '../../../utils/styled/styledSpace';
-import Table from '../../molecules/table';
-import Image from '../../atoms/Image';
-import Card from '../../molecules/Card';
-import FlexLayout from '../../atoms/FlexLayout';
 import {
   TABLETYPES,
   clubTableItems,
