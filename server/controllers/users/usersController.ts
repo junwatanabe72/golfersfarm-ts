@@ -2,8 +2,12 @@ import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 import { UserType } from "../../models/user";
 import passport from "passport";
+import { serializeIndex, serializeUpdate } from "../../utils/Serialize/user";
+import { formUpdate } from "../../utils/Form/user";
+import { Op } from "sequelize";
 
 const User = db.User;
+const ClubType = db.ClubType;
 
 export default {
   async index(req: Request, res: Response, next: NextFunction) {
@@ -13,13 +17,28 @@ export default {
       async (err: any, user: any) => {
         try {
           req.login(user, { session: false }, async (err) => {
-            const where = !user ? { show: 0 } : {};
-            const allUsers: UserType[] = await User.findAll({ where });
-
-            if (!allUsers) {
+            const where = !user
+              ? { show: 1 }
+              : {
+                  show: {
+                    [Op.or]: [100, 1],
+                  },
+                };
+            const users: UserType[] = await User.findAll({
+              where: where,
+              include: [
+                {
+                  model: ClubType,
+                  required: false,
+                },
+              ],
+            });
+            if (!users) {
               res.status(204).json({ message: "not exist" });
               return;
             }
+            // typeId number=>string
+            const allUsers = serializeIndex(users);
             res.json({ allUsers });
             return;
           });
@@ -36,6 +55,8 @@ export default {
     const id = parseInt(req.params.id);
     const email = user.email ? user.email : null;
     const name = user.name ? user.name : null;
+    const typeType = user.typeId;
+
     const _user = await User.findOne({
       where: {
         email: email,
@@ -58,11 +79,18 @@ export default {
       });
     }
 
+    const targetType = await ClubType.findOne({
+      where: {
+        type: typeType,
+      },
+    });
+    const targetUser = formUpdate(user, targetType.id);
     try {
-      const updateUser = await User.updateProfile(req.params.id, user);
-      if (!updateUser) {
+      const returnUser = await User.updateProfile(req.params.id, targetUser);
+      if (!returnUser) {
         return res.status(400);
       } else {
+        const updateUser = serializeUpdate(returnUser, typeType);
         res.status(201).json({ updateUser });
       }
     } catch (error) {
