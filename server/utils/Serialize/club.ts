@@ -1,15 +1,15 @@
+// server=>client型に変換
+
 // index
-export const serializeIndex = (data: any[]) => {
-  const AllClubs = data.map((value: any) => {
-    const { Club, userId } = value;
-    const { Maker, Shaft, ClubType, id, name, flex } = Club;
+export const serializeIndex = (datas: any[]) => {
+  const AllClubs = datas.map((data: any) => {
+    const { Club, userId } = data;
+    const { Maker, Shaft, ClubType, dataValues } = Club;
     const club = {
-      id,
-      name,
-      userId: userId,
+      ...dataValues,
+      userId,
       maker: Maker.name,
       shaft: Shaft.name,
-      flex: flex,
       type: ClubType.type,
     };
     return club;
@@ -21,21 +21,19 @@ export const serializeIndex = (data: any[]) => {
 // replace
 export const serializeReplace = (
   data: any,
-  typeObj: any,
-  makerObj: any,
-  shaftObj: any
+  type: any,
+  maker: any,
+  shaft: any
 ) => {
   const { newClub, newUserClubs } = data;
-  const { id, name, flex } = newClub;
+  const { dataValues } = newClub;
 
   const club = {
-    id,
-    name,
+    ...dataValues,
     userId: newUserClubs.userId,
-    shaft: shaftObj,
-    flex: flex,
-    maker: makerObj,
-    type: typeObj,
+    shaft: shaft,
+    maker: maker,
+    type: type,
   };
   return club;
 };
