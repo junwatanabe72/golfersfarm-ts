@@ -1,9 +1,10 @@
+// server=>client型に変換
+
 export const serializeUpdate = (data: any, makerName: string) => {
-  const { id, userId, name } = data;
+  const { dataValues } = data;
+  delete dataValues.makerId;
   const ball = {
-    id,
-    name,
-    userId,
+    ...dataValues,
     maker: makerName,
   };
   return ball;
@@ -11,10 +12,11 @@ export const serializeUpdate = (data: any, makerName: string) => {
 
 //ball index
 export const serializeIndex = (data: any) => {
-  const { id, userId, name, Maker } = data;
+  const { dataValues, userId, Maker } = data;
+  delete dataValues.Maker;
+  delete dataValues.makerId;
   const ball = {
-    id,
-    name,
+    ...dataValues,
     userId,
     maker: Maker.name,
   };

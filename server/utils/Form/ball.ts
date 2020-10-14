@@ -1,3 +1,5 @@
+// client=>serverに変換
+
 // ball update
 export const formUpdate = (data: any, makerId: number) => {
   const { id, userId, name } = data;

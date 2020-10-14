@@ -1,3 +1,5 @@
+// client=>serverに変換
+
 // replace
 export const formReplace = (data: any) => {
   const { id, name, year, month, rank, tie, url } = data;

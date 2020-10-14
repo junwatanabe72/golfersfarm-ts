@@ -1,17 +1,13 @@
+// server=>client型に変換
+
 // index
-export const serializeIndex = (data: any[]) => {
-  const allResults = data.map((value: any) => {
-    const { Result, userId } = value;
-    const { id, name, url, year, month, rank } = Result;
-    const newData = convertRankData(rank);
-    const rankValue = newData ? newData[0] : "";
-    const tieValue = newData ? newData[1] : "";
+export const serializeIndex = (datas: any[]) => {
+  const allResults = datas.map((data: any) => {
+    const { Result, userId } = data;
+    const { dataValues, rank } = Result;
+    const { rankValue, tieValue } = convertRank(rank);
     const result = {
-      id,
-      name,
-      url,
-      year,
-      month,
+      ...dataValues,
       userId,
       rank: rankValue,
       tie: tieValue,
@@ -25,27 +21,20 @@ export const serializeIndex = (data: any[]) => {
 export const serializeReplace = (data: any) => {
   const { newResult, newUserResults } = data;
   const { userId } = newUserResults;
-  const { id, name, url, year, month, rank } = newResult;
-  const newData = convertRankData(rank);
-  const rankValue = newData ? newData[0] : "";
-  const tieValue = newData ? newData[1] : "";
+  const { dataValues, rank } = newResult;
+  const { rankValue, tieValue } = convertRank(rank);
   const result = {
-    id,
-    name,
+    ...dataValues,
     userId,
-    url,
-    year,
-    month,
     rank: rankValue,
     tie: tieValue,
   };
   return result;
 };
 
-export const convertRankData = (rank: string) => {
-  // "100T" => ["100","T"]
-  // "1" =>["1"]
-  // "CUT" =>["CUT"]
+const convertRank = (rank: string) => {
   const newData = rank.match(/CUT|\d{1,2}|[^\u$]/g);
-  return newData;
+  const rankValue = newData ? newData[0] : "";
+  const tieValue = newData ? newData[1] : "";
+  return { rankValue, tieValue };
 };
