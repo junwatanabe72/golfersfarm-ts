@@ -43,6 +43,9 @@ const Center = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  ${media.tablet`
+      flex-direction: column;
+      `}
 `;
 const StyledFlexColumn = styled.div`
   display: flex;
@@ -67,7 +70,20 @@ const UserSub: React.FC<Props> = ({
 }) => {
   const contents = {
     PROFILE: (
-      <Table datas={targetUser} type={TABLETYPES.VERTICAL} tableItems={profileTableSubItems} />
+      <Center>
+        <Table
+          width={SIZE.SXMALL}
+          datas={targetUser}
+          type={TABLETYPES.VERTICAL}
+          tableItems={profileTableSubItems}
+        />
+        <Table
+          width={SIZE.SXMALL}
+          datas={targetUser}
+          type={TABLETYPES.VERTICAL}
+          tableItems={profileTableSubItems}
+        />
+      </Center>
     ),
     GEAR: (
       <FlexLayout

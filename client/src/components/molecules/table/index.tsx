@@ -15,11 +15,9 @@ interface Props extends PartialWidthSize {
 
 const StyledTable = styled.table<{ width: Props['width'] }>`
   width: ${(props) => props.width}vw;
-  border: solid 1px #ccc;
   margin: 0vw auto;
-  border-radius: 5px;
   ${media.tablet`
-      width: 60vw;  
+      width: ${SIZE.LARGE}vw;  
       `}
 `;
 

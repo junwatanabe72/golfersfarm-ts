@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import UserCard from './Card';
 import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
-import { SIZE, CLEAR } from '../../../utils/constant/number';
+import { SIZE, CLEAR, FONTSIZE } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
 import { TABLETYPES } from '../../../utils/constant/text/table';
+import SNS from '../../molecules/SNSIcons';
+import { media } from '../../../utils/styled/styledRdesign';
 
 interface Props {
   targetUser: PartialUserType;
@@ -20,6 +22,13 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const Styleddiv = styled.div`
+  width: ${SIZE.XXSMALL}vw;
+  ${media.tablet`
+      width: ${SIZE.LARGE}vw;  
+      `}
+`;
+
 const profileTableItems = {
   bestScore: 'ベストスコア',
   averageDistance: '平均飛距離',
@@ -27,9 +36,17 @@ const profileTableItems = {
 };
 const title = 'SKILL';
 const UserMain: React.FC<Props> = ({ targetUser }) => {
+  const { facebook, twitter, instagram, youtube } = targetUser;
+  const urls = { facebook, twitter, youtube, instagram };
   return (
     <Container>
       <UserCard data={targetUser} width={SIZE.XXSMALL} />
+      <Padding all={CLEAR.TINY} />
+      <Card title={'SNS'}>
+        <Styleddiv>
+          <SNS urls={urls} fontSize={FONTSIZE.XLARGE} />
+        </Styleddiv>
+      </Card>
       <Padding all={CLEAR.TINY} />
       <Card title={title}>
         <Table

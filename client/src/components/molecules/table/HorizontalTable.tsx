@@ -11,10 +11,8 @@ interface Props extends PartialWidthSize {
 }
 const StyledTable = styled.table<{ width: Props['width'] }>`
   width: ${(props) => props.width}vw;
-  border: solid 1px #ccc;
-  border-radius: 5px;
   ${media.tablet`
-      width: 60vw;  
+      width: ${SIZE.LARGE}vw;  
       `}
 `;
 
@@ -24,10 +22,18 @@ StyledTable.defaultProps = {
 
 const StyledTrd = styled.tr`
   border-top: solid 1px #ccc;
-  text-align: left;
+  text-align: center;
   &:hover {
     background-color: #f5f5f5;
   }
+`;
+
+const StyledTh = styled.th`
+  min-width: 20px;
+  font-size: 14px;
+  font-weight: 600px;
+  border-bottom: solid 1px #ccc;
+  border-right: solid 1px white;
 `;
 
 const StyledTd = styled.td`
@@ -69,7 +75,7 @@ const HorizontalTable: React.FC<Props> = ({ datas, width, tableItems, title }) =
     });
   });
   const head = order.map((key: string) => {
-    return <StyledTd key={key}>{tableItems[key]}</StyledTd>;
+    return <StyledTh key={key}>{tableItems[key]}</StyledTh>;
   });
   const records = [head, ...body];
 

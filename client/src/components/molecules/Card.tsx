@@ -12,11 +12,11 @@ interface Props extends PartialColor, PartialClear, PartialTextAlignType, Partia
 }
 
 const Color = styled.div`
+  border-radius: 5px;
   background-color: ${BASICCOLORS.WHITELIGHT};
 `;
 
 const PaddingExtend = styled(Padding)<PartialClear>`
-  border-radius: 5px;
   padding: ${(props) => props.clear}vw;
   ${media.tablet`
       padding: ${CLEAR.XSMALL}vw;
