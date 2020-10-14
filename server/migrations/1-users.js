@@ -12,8 +12,35 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
       sex: {
         type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      show: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 100,
+      },
+      typeId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
       residence: {
         type: Sequelize.STRING,
@@ -30,14 +57,6 @@ module.exports = {
       homeCourse: {
         type: Sequelize.STRING,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
       job: {
         type: Sequelize.STRING,
       },
@@ -47,21 +66,42 @@ module.exports = {
       clubImage: {
         type: Sequelize.STRING,
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+      school: {
+        type: Sequelize.STRING,
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+      hobby: {
+        type: Sequelize.STRING,
       },
-      school: { type: Sequelize.STRING },
-      hobby: { type: Sequelize.STRING },
-      facebook: { type: Sequelize.STRING },
-      twitter: { type: Sequelize.STRING },
-      instagram: { type: Sequelize.STRING },
-      youtube: { type: Sequelize.STRING },
-      show: { type: Sequelize.INTEGER, defaultValue: 100 },
+      facebook: {
+        type: Sequelize.STRING,
+      },
+      twitter: {
+        type: Sequelize.STRING,
+      },
+      instagram: {
+        type: Sequelize.STRING,
+      },
+      youtube: {
+        type: Sequelize.STRING,
+      },
+      favourite: {
+        type: Sequelize.STRING,
+      },
+      blood: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+      },
+      history: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1,
+      },
+      hcap: {
+        type: Sequelize.INTEGER,
+      },
+      classification: {
+        type: Sequelize.INTEGER,
+        defaultValue: 100,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

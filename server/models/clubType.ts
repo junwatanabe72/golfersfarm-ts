@@ -1,5 +1,6 @@
 import { Model, DataTypes, Sequelize } from "sequelize";
 import Club from "./club";
+import User from "./user";
 
 class ClubType extends Model {
   public id!: number;
@@ -28,6 +29,11 @@ class ClubType extends Model {
   }
   public static associate() {
     this.hasMany(Club, {
+      sourceKey: "id",
+      foreignKey: "typeId",
+      constraints: false,
+    });
+    this.hasMany(User, {
       sourceKey: "id",
       foreignKey: "typeId",
       constraints: false,
