@@ -23,7 +23,10 @@ const UserEditFormLayout: React.FC<Props> = ({ formik }) => {
       <UserSelectItem category={category['golf' as keyof Category]} formik={formik} />
     </>,
     <UserInputItem category={category['sns' as keyof Category]} formik={formik} />,
-    <UserInputItem category={category['other' as keyof Category]} formik={formik} />,
+    <>
+      <UserSelectItem category={category['other' as keyof Category]} formik={formik} />
+      <UserInputItem category={category['other' as keyof Category]} formik={formik} />
+    </>,
   ];
 
   return (

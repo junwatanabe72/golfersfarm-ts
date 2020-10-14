@@ -52,8 +52,6 @@ const items = {
     homeCourse: 'ホームコース',
   },
   other: {
-    residence: '現住所',
-    birthPlace: '出生地',
     job: '職業',
     school: '出身校',
     hobby: '趣味',

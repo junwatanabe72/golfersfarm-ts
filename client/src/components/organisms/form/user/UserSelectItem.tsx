@@ -5,7 +5,7 @@ import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import FlexLayout from '../../../atoms/FlexLayout';
-import { sexLabels, showLabels } from '../../../../utils/constant/text/body/user/value';
+import { sexLabels, showLabels, prefacture } from '../../../../utils/constant/text/body/user/value';
 
 type Options = typeof options['base'] | typeof options['golf'];
 type Notes = typeof notes['base'];
@@ -59,7 +59,10 @@ const items = {
     bestScore: 'ベストスコア',
     averageDistance: '平均飛距離',
   },
-  other: {},
+  other: {
+    residence: '現住所',
+    birthPlace: '出生地',
+  },
 };
 const options = {
   base: {
@@ -71,7 +74,10 @@ const options = {
     bestScore: bScore,
     averageDistance: aDistance,
   },
-  other: {},
+  other: {
+    residence: prefacture,
+    birthPlace: prefacture,
+  },
 };
 const notes = {
   base: {

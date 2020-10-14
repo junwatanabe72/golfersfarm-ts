@@ -9,6 +9,7 @@ import { Padding } from '../../../utils/styled/styledSpace';
 
 interface Props extends PartialClear, PartialWidthSize, PartialWidthTab, PartialFontSize {
   data: PartialUserType;
+  showSNS?: boolean;
 }
 
 const Container = styled.div`
@@ -18,7 +19,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize }) => {
+const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize, showSNS = false }) => {
   const { id, name, facebook, twitter, instagram, youtube, profileImage } = data;
   const urls = { facebook, twitter, youtube, instagram };
 
@@ -31,7 +32,7 @@ const UserCard: React.FC<Props> = ({ data, clear, width, widthTab, fontSize }) =
             {name}
           </LinkButton>
         </Padding>
-        <SNS urls={urls} fontSize={fontSize} />
+        {showSNS && <SNS urls={urls} fontSize={fontSize} />}
       </Container>
     </Card>
   );

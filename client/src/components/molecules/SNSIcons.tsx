@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Url from '../atoms/Url';
 import { FONTAWEICON } from '../../utils/constant/text/fontAweicon';
 import ComponentFontAwesomeIcon from '../atoms/FontAwesomeIcon';
+import { Padding } from '../../utils/styled/styledSpace';
+import { CLEAR } from '../../utils/constant/number';
 
 interface Props extends PartialFontSize {
   urls: SNSUserType;
@@ -74,12 +76,14 @@ const SNS: React.FC<Props> = ({ urls, fontSize }) => {
             </StyledSpan>
           ),
           other: (
-            <ComponentFontAwesomeIcon
-              fontSize={fontSize}
-              head={FONTAWEICON[key as URLTypes].head}
-              tail={FONTAWEICON[key as URLTypes].tail}
-              color={colors[key as URLTypes]}
-            />
+            <Padding right={CLEAR.TINY}>
+              <ComponentFontAwesomeIcon
+                fontSize={fontSize}
+                head={FONTAWEICON[key as URLTypes].head}
+                tail={FONTAWEICON[key as URLTypes].tail}
+                color={colors[key as URLTypes]}
+              />
+            </Padding>
           ),
         };
         return (

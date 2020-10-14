@@ -10,7 +10,14 @@ const ThumbNail: React.FC<Props> = ({ datas, clear, width, widthTab, fontSize })
   const player = datas.map((data: PartialUserType, num: number) => {
     return (
       <Padding all={CLEAR.TINY} key={num}>
-        <UserCard data={data} clear={clear} width={width} widthTab={widthTab} fontSize={fontSize} />
+        <UserCard
+          data={data}
+          clear={clear}
+          width={width}
+          widthTab={widthTab}
+          fontSize={fontSize}
+          showSNS={true}
+        />
       </Padding>
     );
   });
