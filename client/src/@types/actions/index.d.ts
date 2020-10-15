@@ -2,6 +2,7 @@ type ACTIONTYPES =
   | 'ADD_USER'
   | 'DELETE_USER'
   | 'ADD_USERS'
+  | 'DELETE_USERS'
   | 'ADD_CLUBS'
   | 'REMOVE_CLUBS'
   | 'ADD_VIDEOS'

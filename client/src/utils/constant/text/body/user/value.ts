@@ -28,7 +28,7 @@ export const classValues = Object.freeze({
 });
 
 export const classLabels = {
-  pro: 'プロ',
+  pro: 'プロフェッショナル',
   ama: 'アマチュア',
 };
 

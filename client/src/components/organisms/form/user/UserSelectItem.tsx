@@ -5,9 +5,17 @@ import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import FlexLayout from '../../../atoms/FlexLayout';
-import { sexLabels, showLabels, prefacture } from '../../../../utils/constant/text/body/user/value';
+import {
+  sexLabels,
+  showLabels,
+  prefacture,
+  bloodLabels,
+  historyLabels,
+  classLabels,
+} from '../../../../utils/constant/text/body/user/value';
+import { useSelector, shallowEqual } from 'react-redux';
+import { State } from '../../../../@types/store';
 
-type Options = typeof options['base'] | typeof options['golf'];
 type Notes = typeof notes['base'];
 
 interface Props {
@@ -41,7 +49,7 @@ const StyledLabel = styled.label`
 `;
 
 let iniHDCP = -5;
-const hdcp: number[] = [...Array(83)].map((_, i) => {
+const hdcpNumbers: number[] = [...Array(83)].map((_, i) => {
   return iniHDCP + i * 0.5;
 });
 
@@ -58,41 +66,64 @@ const items = {
   base: {
     sex: '性別',
     show: '公開・非公開',
+    blood: '血液型',
   },
   sns: {},
   golf: {
     bestScore: 'ベストスコア',
     averageDistance: '平均飛距離',
+    typeId: '得意なクラブ',
+    history: 'ゴルフ歴',
+    hcap: 'ハンディキャップ ',
+    classification: '資格',
   },
   other: {
     residence: '現住所',
     birthPlace: '出生地',
   },
 };
-const options = {
-  base: {
-    sex: [sexLabels['male'], sexLabels['female']],
-    show: [showLabels['open'], showLabels['close']],
-  },
-  sns: {},
-  golf: {
-    bestScore: bScore,
-    averageDistance: aDistance,
-  },
-  other: {
-    residence: prefacture,
-    birthPlace: prefacture,
-  },
-};
+
 const notes = {
   base: {
     show: 'ログインユーザーのみに情報が公開されます。',
   },
 };
-
+const inital = {
+  bestScore: 100,
+  averageDistance: 200,
+  hcap: 28,
+  birthPlace: '東京都',
+  residence: '東京都',
+};
 const UserSelectItem: React.FC<Props> = ({ category, formik }) => {
+  const types = useSelector((state: State) => state.types, shallowEqual);
+
+  const options = {
+    base: {
+      sex: [sexLabels['male'], sexLabels['female']],
+      show: [showLabels['open'], showLabels['close']],
+      blood: Object.values(bloodLabels),
+    },
+    sns: {},
+    golf: {
+      bestScore: bScore,
+      averageDistance: aDistance,
+      history: Object.values(historyLabels),
+      hcap: hdcpNumbers,
+      classification: [classLabels['pro'], classLabels['ama']],
+      typeId: types.map((v: ClubType) => {
+        return v.type;
+      }),
+    },
+    other: {
+      residence: prefacture,
+      birthPlace: prefacture,
+    },
+  };
+  type Options = typeof options['base'] | typeof options['golf'] | typeof options['other'];
   const notesItem = category === 'base' ? notes[category] : undefined;
   const optionsItem = options[category];
+
   return (
     <>
       {Object.entries(items[category]).map(([key, value], num: number) => {
@@ -112,7 +143,9 @@ const UserSelectItem: React.FC<Props> = ({ category, formik }) => {
                   <Padding left={CLEAR.MEDIUM}>
                     <StyledSelect name={key} onChange={formik.handleChange}>
                       <option value={formik.values[key as keyof UserType]}>
-                        {formik.values[key as keyof UserType]}
+                        {formik.values[key]
+                          ? formik.values[key]
+                          : inital[key as keyof typeof inital]}
                       </option>
                       {Object.values(optionsItem[key as keyof Options]).map(
                         (data: any, num: number) => {

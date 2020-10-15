@@ -50,6 +50,7 @@ const items = {
   },
   golf: {
     homeCourse: 'ホームコース',
+    favourite: '好きなゴルファー',
   },
   other: {
     job: '職業',
@@ -72,6 +73,7 @@ const UserInputItem: React.FC<Props> = ({ category, formik }) => {
   return (
     <>
       {Object.entries(items[category]).map(([key, value]: string[], num: number) => {
+        const inputValue = formik.values[key] ? formik.values[key] : '';
         return (
           <React.Fragment key={num}>
             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
@@ -92,7 +94,7 @@ const UserInputItem: React.FC<Props> = ({ category, formik }) => {
                       placeholder={value}
                       onChange={formik.handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values[key as keyof UserType]}
+                      value={inputValue}
                     />
                     {notesItem && <Inline>{notesItem[key as keyof Notes]}</Inline>}
                   </Padding>

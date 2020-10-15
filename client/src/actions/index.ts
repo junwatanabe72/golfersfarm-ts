@@ -3,6 +3,7 @@ export const ACTIONTYPES = {
   ADD_USER: 'ADD_USER',
   DELETE_USER: 'DELETE_USER',
   ADD_USERS: 'ADD_USERS',
+  DELETE_USERS: 'DELETE_USERS',
   ADD_CLUBS: 'ADD_CLUBS',
   REMOVE_CLUBS: 'REMOVE_CLUBS',
   ADD_VIDEOS: 'ADD_VIDEOS',
@@ -112,6 +113,9 @@ export function deleteUser(): BasicAction {
 //usersActionCreater
 export function addUsers(data: ObjectUserType): Action<ObjectUserType> {
   return { type: ACTIONTYPES.ADD_USERS, payload: data };
+}
+export function deleteUsers(): BasicAction {
+  return { type: ACTIONTYPES.DELETE_USERS };
 }
 //clubsActionCreater
 export function addClubs(data: ObjectClubType): Action<ObjectClubType> {
