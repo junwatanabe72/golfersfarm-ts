@@ -13,6 +13,10 @@ export default function UsersReducer(
       newState = { ...state, ...users };
       return newState;
     }
+    case ACTIONTYPES.DELETE_USERS: {
+      newState = {};
+      return newState;
+    }
     default: {
       return state;
     }

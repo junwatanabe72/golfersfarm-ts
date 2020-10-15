@@ -38,6 +38,7 @@ function* createUserAsync(action: Action<SignupUserType>) {
 }
 
 function* updateUserAsync(action: Action<PartialUserType>) {
+  let users: ObjectUserType = {};
   try {
     const data = yield call(updateUserAxios, action.payload);
 
@@ -46,8 +47,10 @@ function* updateUserAsync(action: Action<PartialUserType>) {
       return;
     }
     yield toast.success('編集に成功しました。', options);
-    const user = data.updateUser.updateUser;
+    const user = data.updateUser;
+    users[user.id] = user;
     yield put(addUser(user));
+    yield put(addUsers(users));
     yield put(push(`/users/${user.id}`));
     return;
   } catch (e) {
@@ -56,6 +59,7 @@ function* updateUserAsync(action: Action<PartialUserType>) {
 }
 
 function* updateUserImageAsync(action: Action<FormData>) {
+  let users: ObjectUserType = {};
   try {
     const data = yield call(updateUserImageAxios, action.payload);
 
@@ -65,7 +69,9 @@ function* updateUserImageAsync(action: Action<FormData>) {
     }
     yield toast.success('編集に成功しました。', options);
     const user = data.updateUser.updateUser;
+    users[user.id] = user;
     yield put(addUser(user));
+    yield put(addUsers(users));
     yield put(push(`/users/${user.id}`));
     return;
   } catch (e) {

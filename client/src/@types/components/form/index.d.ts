@@ -19,6 +19,12 @@ interface ProfileEditDataType {
   clubImage: string;
   show: string;
   confirmedPassword: string;
+  typeId: string;
+  favourite: string;
+  blood: string;
+  history: string;
+  hcap: number;
+  classification: string;
 }
 
 interface FormikValueType<T> {
