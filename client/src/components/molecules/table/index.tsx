@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { SIZE } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
 import { TABLETYPES } from '../../../utils/constant/text/table';
-import VerticalTable from './VerticalTable';
-import HorizontalTable from './HorizontalTable';
+import VerticalTable from './vertical';
+import HorizontalTable from './horizontal';
 
 interface Props extends PartialWidthSize {
   datas: object;
@@ -31,7 +31,7 @@ const Table: React.FC<Props> = ({ datas, width, type, tableItems, title }) => {
       {type === TABLETYPES.HORIZONTAL ? (
         <HorizontalTable datas={datas} width={width} tableItems={tableItems} title={title} />
       ) : (
-        <VerticalTable datas={datas} width={width} tableItems={tableItems} />
+        <VerticalTable data={datas} width={width} tableItems={tableItems} />
       )}
     </>
   );

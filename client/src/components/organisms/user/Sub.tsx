@@ -11,7 +11,8 @@ import { Padding } from '../../../utils/styled/styledSpace';
 import {
   TABLETYPES,
   clubTableItems,
-  profileTableSubItems,
+  profileTableSubItemsA,
+  profileTableSubItemsB,
   resultTableItems,
   ballTableItems,
 } from '../../../utils/constant/text/table';
@@ -75,13 +76,13 @@ const UserSub: React.FC<Props> = ({
           width={SIZE.SXMALL}
           datas={targetUser}
           type={TABLETYPES.VERTICAL}
-          tableItems={profileTableSubItems}
+          tableItems={profileTableSubItemsA}
         />
         <Table
           width={SIZE.SXMALL}
           datas={targetUser}
           type={TABLETYPES.VERTICAL}
-          tableItems={profileTableSubItems}
+          tableItems={profileTableSubItemsB}
         />
       </Center>
     ),

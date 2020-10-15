@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Url from '../../atoms/Url';
-import { SIZE } from '../../../utils/constant/number';
-import { media } from '../../../utils/styled/styledRdesign';
-import { BASICCOLORS } from '../../../utils/constant/color';
+import Url from '../../../atoms/Url';
+import { SIZE } from '../../../../utils/constant/number';
+import { media } from '../../../../utils/styled/styledRdesign';
+import { BASICCOLORS } from '../../../../utils/constant/color';
 interface Props extends PartialWidthSize {
   datas: any;
   tableItems: any;

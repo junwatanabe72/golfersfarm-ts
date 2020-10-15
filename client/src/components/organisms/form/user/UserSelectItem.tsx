@@ -40,6 +40,11 @@ const StyledLabel = styled.label`
   color: ${BASICCOLORS.BASICDARK};
 `;
 
+let iniHDCP = -5;
+const hdcp: number[] = [...Array(83)].map((_, i) => {
+  return iniHDCP + i * 0.5;
+});
+
 let iniScore = 54;
 const bScore: number[] = [...Array(82)].map((_, i) => {
   return iniScore + i;
