@@ -4,6 +4,7 @@ import passport from "passport";
 import jwt from "jsonwebtoken";
 import { hash } from "bcrypt";
 import db from "../models";
+import { serializeLogin } from "../utils/Serialize/user";
 
 dotenv.config();
 const authRouter = express.Router();
@@ -26,7 +27,8 @@ authRouter.post("/login", async (req: Request, res: Response) => {
       const payload = { id: user.id, email: user.email };
       const secret: any = process.env.SECRET;
       const token = jwt.sign(payload, secret);
-      return res.json({ user, token });
+      const loginUser = serializeLogin(user);
+      return res.json({ loginUser, token });
     });
   })(req, res);
 });
@@ -45,7 +47,8 @@ authRouter.get("/login", async (req: Request, res: Response) => {
         if (err) {
           res.send(err);
         }
-        return res.json({ user });
+        const loginUser = serializeLogin(user);
+        return res.json({ loginUser });
       });
     } catch (error) {
       res.status(404);

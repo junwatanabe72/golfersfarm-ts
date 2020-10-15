@@ -3,8 +3,10 @@ import { Strategy as LocalStrategy } from "passport-local";
 import passportJWT from "passport-jwt";
 import { compare } from "bcrypt";
 import dotenv from "dotenv";
-import User from "../models/user";
+import db from "../models";
 
+const User = db.User;
+const ClubType = db.ClubType;
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 dotenv.config();
@@ -18,7 +20,15 @@ passport.use(
     async function (email: string, password: string, done: Function) {
       let user;
       try {
-        user = await User.findOne({ where: { email } });
+        user = await User.findOne({
+          where: { email },
+          include: [
+            {
+              model: ClubType,
+              required: false,
+            },
+          ],
+        });
 
         if (!user) {
           return done(null, false, { message: "No user by that email" });
@@ -44,7 +54,15 @@ passport.use(
     async function (jwtPayload: any, done: Function) {
       let user;
       try {
-        user = await User.findByPk(jwtPayload.id);
+        user = await User.findOne({
+          where: { id: jwtPayload.id },
+          include: [
+            {
+              model: ClubType,
+              required: false,
+            },
+          ],
+        });
         if (!user) {
           return done(null, false, { message: "No user" });
         }
