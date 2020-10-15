@@ -22,3 +22,13 @@ export const serializeIndex = (datas: any[]) => {
   });
   return users;
 };
+
+export const serializeLogin = (data: any) => {
+  const { ClubType, dataValues } = data;
+  delete dataValues.ClubType;
+  const user = {
+    ...dataValues,
+    typeId: ClubType.type,
+  };
+  return user;
+};

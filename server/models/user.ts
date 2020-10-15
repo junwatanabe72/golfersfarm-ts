@@ -43,10 +43,11 @@ class User extends Model {
   }
 
   static async updateProfile(id: string, user: any) {
-    let profilePath: any = undefined;
+    let profilePath: any = {};
     const targetUser: any = await this.findOne({
       where: { id: id },
     });
+
     if (user.profileImage && targetUser.profileImage) {
       const start = "./public/";
       const end = targetUser.profileImage.slice(22);
@@ -62,8 +63,9 @@ class User extends Model {
       ...user,
     });
 
-    if (profilePath) {
-      Object.values(profilePath).map(async (value: any) => {
+    const values = Object.values(profilePath);
+    if (values.length !== 0) {
+      values.map(async (value: any) => {
         if (!fs.existsSync(value)) {
           return;
         }
