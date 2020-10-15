@@ -3,14 +3,23 @@ export const TABLETYPES = {
   VERTICAL: 'VERTICAL',
 } as const;
 
-export const profileTableSubItems = {
+//UserSub
+export const profileTableSubItemsA = {
   sex: '性別',
+  blood: '血液型',
   residence: '現住所',
   birthPlace: '出生地',
-  job: '職業',
   school: '出身校',
+};
+
+export const profileTableSubItemsB = {
+  typeId: '得意クラブ',
+  favourite: '好きなゴルファー',
+  history: 'ゴルフ歴',
+  job: '職業',
   hobby: '趣味',
 };
+
 export const resultTableItems = {
   year: '年',
   month: '月',

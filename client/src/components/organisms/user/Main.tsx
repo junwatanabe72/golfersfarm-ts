@@ -30,6 +30,8 @@ const Styleddiv = styled.div`
 `;
 
 const profileTableItems = {
+  classification: 'クラス',
+  hcap: 'HDCP',
   bestScore: 'ベストスコア',
   averageDistance: '平均飛距離',
   homeCourse: 'ホームコース',

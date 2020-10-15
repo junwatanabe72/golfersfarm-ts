@@ -22,6 +22,48 @@ export const showLabels = {
   open: '公開',
   close: '非公開',
 };
+export const classValues = Object.freeze({
+  pro: 1,
+  ama: 100,
+});
+
+export const classLabels = {
+  pro: 'プロ',
+  ama: 'アマチュア',
+};
+
+export const bloodValues = Object.freeze({
+  A: 1,
+  B: 2,
+  O: 3,
+  AB: 4,
+});
+
+export const bloodLabels = {
+  A: 'A',
+  B: 'B',
+  O: 'O',
+  AB: 'AB',
+};
+export const historyValues = Object.freeze({
+  A: 1,
+  B: 2,
+  C: 3,
+  D: 4,
+  E: 5,
+  F: 6,
+  G: 7,
+});
+
+export const historyLabels = {
+  A: '-',
+  B: '〜1年',
+  C: '2年〜5年',
+  D: '6年〜10年',
+  E: '10年〜15年',
+  F: '15年〜20年',
+  G: '20年〜',
+};
 
 const ImageURL =
   'https://res.cloudinary.com/hqejvhqad/image/upload/v1566349931/edh9uyqxlz8xx6zyz60z.jpg';
@@ -86,6 +128,12 @@ export const initialUser = {
   job: 'free',
   clubImage: ImageURL,
   show: 100,
+  typeId: '1WOOD',
+  favourite: 'タイガーウッズ',
+  blood: 1,
+  history: 1,
+  hcap: 5,
+  classification: 100,
 };
 export const prefacture = [
   '北海道',

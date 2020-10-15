@@ -19,6 +19,12 @@ interface UserType {
   password: string;
   clubImage: string;
   show: number;
+  typeId: string;
+  favourite: string;
+  blood: number;
+  history: number;
+  hcap: number;
+  classification: number;
 }
 
 type PartialUserType = Partial<UserType>;
