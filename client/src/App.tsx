@@ -41,8 +41,8 @@ const App: React.FC<Props> = () => {
   const existedCurrentUser = 0 !== Object.keys(currentUser).length;
 
   //develop時に一時的に使用。
-  const allUsers =
-    Object.values(storeUsers).length === 0 ? [currentUser] : [...Object.values(storeUsers)];
+  const allUsers = Object.values(storeUsers);
+  // Object.values(storeUsers).length === 0 ? [currentUser] : [...Object.values(storeUsers)];
   //
 
   useEffect(() => {
