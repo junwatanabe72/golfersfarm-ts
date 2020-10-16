@@ -1,32 +1,32 @@
 import { ACTIONTYPES } from '../actions';
 
-const sample = {
-  5: {
-    id: 5,
-    name: 'swing真横',
-    userId: 1,
-    url: 'wet97FIk2iY',
-  },
-  7: {
-    id: 7,
-    name: 'フォークソング',
-    userId: 1,
-    url: 'Slxo9dfA9EQ',
-  },
-  9: {
-    id: 9,
-    name: '軽井沢',
-    userId: 1,
-    url: '7Kb8V7G66Bk',
-  },
-  11: {
-    id: 11,
-    name: 'モーツァルト',
-    userId: 1,
-    url: 'mB-QXgtoItA',
-  },
-};
-const initialState: ObjectVideoType = sample;
+// const sample = {
+//   5: {
+//     id: 5,
+//     name: 'swing真横',
+//     userId: 1,
+//     url: 'wet97FIk2iY',
+//   },
+//   7: {
+//     id: 7,
+//     name: 'フォークソング',
+//     userId: 1,
+//     url: 'Slxo9dfA9EQ',
+//   },
+//   9: {
+//     id: 9,
+//     name: '軽井沢',
+//     userId: 1,
+//     url: '7Kb8V7G66Bk',
+//   },
+//   11: {
+//     id: 11,
+//     name: 'モーツァルト',
+//     userId: 1,
+//     url: 'mB-QXgtoItA',
+//   },
+// };
+const initialState: ObjectVideoType = {};
 
 export default function VideosReducer(
   state = initialState,

@@ -15,7 +15,7 @@ import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { deleteValues, arrayToString } from '../../../../utils/constant/text/form';
-import useDialog from '../../../../utils/dialog';
+import useDialog from '../../../../hooks/dialog';
 
 interface Props {
   checkedClubs: ArrayClubType;

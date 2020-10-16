@@ -10,7 +10,7 @@ import { updateImageUser } from '../../../../actions';
 import { Padding } from '../../../../utils/styled/styledSpace';
 import { CLEAR, FONTSIZE } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import useDialog from '../../../../utils/dialog';
+import useDialog from '../../../../hooks/dialog';
 
 interface Props {
   currentUser: UserType;

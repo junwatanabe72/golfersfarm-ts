@@ -15,7 +15,7 @@ import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { deleteValues } from '../../../../utils/constant/text/form';
 import { nameValidation, urlValidation } from '../../../../validations';
-import useDialog from '../../../../utils/dialog';
+import useDialog from '../../../../hooks/dialog';
 
 interface Props {
   currentValues: ArrayVideoType;
