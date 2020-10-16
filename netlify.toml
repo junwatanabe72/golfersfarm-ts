@@ -1,10 +1,6 @@
 [build]
   publish = "/client"
 
-# 本番環境のビルドコマンド
-[context.production]
-  command = "npm install & npm run build"
-
 [[redirects]]
   from = "/*"
   to = "/index.html"
