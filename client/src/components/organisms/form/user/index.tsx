@@ -19,7 +19,7 @@ import {
   bloodValues,
   historyValues,
 } from '../../../../utils/constant/text/body/user/value';
-import useDialog from '../../../../utils/dialog';
+import useDialog from '../../../../hooks/dialog';
 import { emailValidation, nameValidation } from '../../../../validations';
 import { updateUser } from '../../../../actions';
 

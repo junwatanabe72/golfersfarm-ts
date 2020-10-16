@@ -12,7 +12,7 @@ import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/st
 import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
-import useDialog from '../../../../utils/dialog';
+import useDialog from '../../../../hooks/dialog';
 
 interface Props {
   userBall: BallType;

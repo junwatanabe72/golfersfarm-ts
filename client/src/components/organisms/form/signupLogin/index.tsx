@@ -17,7 +17,7 @@ import {
 } from '../../../../validations';
 import SignLoginItem from './SignupLoginItem';
 import { sexValues } from '../../../../utils/constant/text/body/user/value';
-import { useDialog } from '../../../../utils/dialog';
+import { useDialog } from '../../../../hooks/dialog';
 import Dialog from '../../../atoms/form/Dialog';
 
 interface AuthDataType {
