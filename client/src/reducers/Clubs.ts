@@ -1,54 +1,54 @@
 import { ACTIONTYPES } from '../actions';
 
 // objectに変更する。
-// const sample = {
-//   5: {
-//     id: 5,
-//     type: '1WOOD',
-//     name: 'x-drive',
-//     userId: 1,
-//     maker: 'mizuno',
-//     shaft: 'pt-7',
-//     flex: 'R',
-//   },
-//   7: {
-//     id: 7,
-//     type: '5WOOD',
-//     name: 'x-drive',
-//     userId: 1,
-//     maker: 'mizuno',
-//     shaft: 'pt-7',
-//     flex: 'R',
-//   },
-//   9: {
-//     id: 9,
-//     type: 'IRON(4~P)',
-//     name: 'x-drive',
-//     userId: 1,
-//     maker: 'mizuno',
-//     shaft: 'pt-7',
-//     flex: 'R',
-//   },
-//   11: {
-//     id: 11,
-//     type: 'SW(56 Degree)',
-//     name: 'x-drive',
-//     userId: 1,
-//     maker: 'mizuno',
-//     shaft: 'pt-7',
-//     flex: 'R',
-//   },
-//   15: {
-//     id: 15,
-//     type: 'PUTTER',
-//     name: 'x-drive',
-//     userId: 1,
-//     maker: 'mizuno',
-//     shaft: 'pt-7',
-//     flex: 'R',
-//   },
-// };
-const initialState: ObjectClubType = {};
+const sample = {
+  5: {
+    id: 5,
+    type: '1WOOD',
+    name: 'J-BEAM',
+    userId: 1,
+    maker: 'CRAZY',
+    shaft: 'ツアーAD HD',
+    flex: 'S',
+  },
+  7: {
+    id: 7,
+    type: '5WOOD',
+    name: 'x-drive',
+    userId: 1,
+    maker: 'タイトリスト',
+    shaft: 'pt-7',
+    flex: 'R',
+  },
+  9: {
+    id: 9,
+    type: 'IRON(4~P)',
+    name: 'I-Brade',
+    userId: 1,
+    maker: 'タイトリスト',
+    shaft: 'pt-7',
+    flex: 'R',
+  },
+  11: {
+    id: 11,
+    type: 'SW(56 Degree)',
+    name: 'Ezone',
+    userId: 1,
+    maker: 'タイトリスト',
+    shaft: 'ダイナミックゴールド',
+    flex: 'R',
+  },
+  15: {
+    id: 15,
+    type: 'PUTTER',
+    name: 'future=X',
+    userId: 1,
+    maker: 'タイトリスト',
+    shaft: '純正シャフト',
+    flex: 'S',
+  },
+};
+const initialState: ObjectClubType = sample;
 
 export default function ClubsReducer(
   state = initialState,
