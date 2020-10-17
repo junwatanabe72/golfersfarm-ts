@@ -1,12 +1,12 @@
-const dotenv = require('dotenv');
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 
-const config={
+const config = {
   host: process.env.DATABASE_HOST,
   database: process.env.DATABASE_NAME,
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
-}
+};
 
 module.exports = {
   development: {
@@ -15,23 +15,22 @@ module.exports = {
     database: config.database,
     host: config.host,
     dialect: "mysql",
-    operatorsAliases: false
+    operatorsAliases: false,
   },
   test: {
     username: config.username,
     password: config.password,
-    database: config.database + '_test',
+    database: config.database + "_test",
     host: config.host,
     dialect: "mysql",
-    operatorsAliases: false
-    
+    operatorsAliases: false,
   },
   production: {
     username: config.username,
     password: config.password,
-    database: config.database + '_production',
+    database: config.database,
     host: config.host,
     dialect: "mysql",
-    operatorsAliases: false
-  }
-}
+    operatorsAliases: false,
+  },
+};

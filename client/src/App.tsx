@@ -42,7 +42,8 @@ const App: React.FC<Props> = () => {
 
   //develop時に一時的に使用。
   const allUsers = Object.values(storeUsers);
-  // Object.values(storeUsers).length === 0 ? [currentUser] : [...Object.values(storeUsers)];
+  // const allUsers =
+  //   Object.values(storeUsers).length === 0 ? [currentUser] : [...Object.values(storeUsers)];
   //
 
   useEffect(() => {
