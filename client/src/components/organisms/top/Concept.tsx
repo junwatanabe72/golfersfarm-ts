@@ -6,7 +6,7 @@ import LinkButton from '../../atoms/LinkButton';
 import Logo from '../../atoms/Logo';
 import Text from '../../atoms/Text';
 import FlexLayout from '../../atoms/FlexLayout';
-import LastImage from '../../../utils/image/topConcept.jpg';
+import LastImage from '../../../utils/image/topConcept-min.jpg';
 import { ROUTE } from '../../../utils/constant/route';
 import { BASICCOLORS } from '../../../utils/constant/color';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';

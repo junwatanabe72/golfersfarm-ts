@@ -6,9 +6,9 @@ import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { profileText, swingText, clubResultText } from '../../../utils/constant/text/body/top/text';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
-import swingCollection from '../../../utils/image/swingCollection.jpg';
-import clubContest from '../../../utils/image/clubContest.jpg';
-import people from '../../../utils/image/people.jpg';
+import swingCollection from '../../../utils/image/swingCollection-min.jpg';
+import clubContest from '../../../utils/image/clubContest-min.jpg';
+import people from '../../../utils/image/people-min.jpg';
 
 const Container = styled.div`
   display: flex;
