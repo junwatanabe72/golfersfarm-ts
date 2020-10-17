@@ -7,7 +7,6 @@
 
   # Default build command.
   command = "echo 'default context'"
-  command = "echo 'default context'"
 
   [[redirects]]
   from = "/*"
