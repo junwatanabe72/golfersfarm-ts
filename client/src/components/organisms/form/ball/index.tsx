@@ -4,12 +4,12 @@ import * as yup from 'yup';
 import styled from 'styled-components';
 import { Form, Formik } from 'formik';
 import BallEditFormLayout from './BallEditFormLayout';
+import Table from '../../../molecules/table';
 import FlexLayout from '../../../atoms/FlexLayout';
 import FormTitle from '../../../atoms/form/FormTitle';
 import FormSubmit from '../../../atoms/form/FormSubmit';
 import { updateBall } from '../../../../actions';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
-import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import useDialog from '../../../../hooks/dialog';
@@ -17,16 +17,6 @@ import useDialog from '../../../../hooks/dialog';
 interface Props {
   userBall: BallType;
 }
-
-const StyledTable = styled.table`
-  width: ${SIZE.MEDIUM}vw;
-  border: solid 1px #ccc;
-  margin: 0vw auto;
-  border-radius: 5px;
-  ${media.tablet`
-      width: 60vw;  
-      `}
-`;
 const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
@@ -80,16 +70,16 @@ const BallEditForm: React.FC<Props> = ({ userBall }) => {
                       left={CLEAR.MEDIUM}
                       bottom={CLEAR.TINY}
                     >
-                      <StyledTable>
-                        <tbody>
+                      <Table
+                        component={
                           <BallEditFormLayout
                             formikBall={values}
                             onChange={handleChange}
                             errors={errors}
                             touched={touched}
                           />
-                        </tbody>
-                      </StyledTable>
+                        }
+                      />
                     </Padding>
                   }
                 />

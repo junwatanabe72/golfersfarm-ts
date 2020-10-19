@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import UserCard from './Card';
+import ProfileTable from './table/profile';
 import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
 import { SIZE, CLEAR, FONTSIZE } from '../../../utils/constant/number';
 import { Padding } from '../../../utils/styled/styledSpace';
-import { TABLETYPES } from '../../../utils/constant/text/table';
 import SNS from '../../molecules/SNSIcons';
 import { media } from '../../../utils/styled/styledRdesign';
+import { profileTableItems } from '../../../utils/constant/text/table';
 
 interface Props {
   targetUser: PartialUserType;
@@ -29,13 +30,6 @@ const Styleddiv = styled.div`
       `}
 `;
 
-const profileTableItems = {
-  classification: 'クラス',
-  hcap: 'HDCP',
-  bestScore: 'ベストスコア',
-  averageDistance: '平均飛距離',
-  homeCourse: 'ホームコース',
-};
 const title = 'SKILL';
 const UserMain: React.FC<Props> = ({ targetUser }) => {
   const { facebook, twitter, instagram, youtube } = targetUser;
@@ -52,10 +46,8 @@ const UserMain: React.FC<Props> = ({ targetUser }) => {
       <Padding all={CLEAR.TINY} />
       <Card title={title}>
         <Table
-          datas={targetUser}
+          component={<ProfileTable data={targetUser} tableItems={profileTableItems} />}
           width={SIZE.XXSMALL}
-          type={TABLETYPES.VERTICAL}
-          tableItems={profileTableItems}
         />
       </Card>
     </Container>
