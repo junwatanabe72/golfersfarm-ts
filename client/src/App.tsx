@@ -44,7 +44,6 @@ const App: React.FC<Props> = () => {
   const allUsers = Object.values(storeUsers);
   // const allUsers =
   //   Object.values(storeUsers).length === 0 ? [currentUser] : [...Object.values(storeUsers)];
-  //
 
   useEffect(() => {
     dispatch(checkLoginUser());

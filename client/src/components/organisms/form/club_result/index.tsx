@@ -11,11 +11,11 @@ import Button from '../../../atoms/Button';
 import { updateClubs, updateResults } from '../../../../actions';
 import { nameValidation, urlValidation } from '../../../../validations';
 import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../../utils/styled/styledSpace';
-import { media } from '../../../../utils/styled/styledRdesign';
 import { FONTSIZE, SIZE, CLEAR } from '../../../../utils/constant/number';
 import { BASICCOLORS } from '../../../../utils/constant/color';
 import { deleteValues, arrayToString } from '../../../../utils/constant/text/form';
 import useDialog from '../../../../hooks/dialog';
+import Table from '../../../molecules/table';
 
 interface Props {
   checkedClubs: ArrayClubType;
@@ -24,15 +24,6 @@ interface Props {
   theme: 'club' | 'result';
 }
 
-const StyledTable = styled.table`
-  width: ${SIZE.MEDIUM}vw;
-  border: solid 1px #ccc;
-  margin: 0vw auto;
-  border-radius: 5px;
-  ${media.tablet`
-      width: 60vw;  
-      `}
-`;
 const StyledLabel = styled.label`
   font-size: ${FONTSIZE.BASE}px;
   color: ${BASICCOLORS.BASICDARK};
@@ -197,8 +188,8 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                             left={CLEAR.SMALL}
                             bottom={CLEAR.TINY}
                           >
-                            <StyledTable>
-                              <tbody>
+                            <Table
+                              component={
                                 <EditFormLayout
                                   remove={remove}
                                   formikKey={formikKey}
@@ -206,8 +197,8 @@ const ArrayEditForm: React.FC<Props> = ({ currentUser, checkedClubs, checkedResu
                                   theme={theme}
                                   onChange={subCount}
                                 />
-                              </tbody>
-                            </StyledTable>
+                              }
+                            />
                             <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
                               <Button
                                 color={BASICCOLORS.WHITE}

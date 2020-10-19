@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ProfileTable from './table/profile';
 import VideoContents from './VideoContents';
 import Table from '../../molecules/table';
 import Card from '../../molecules/Card';
@@ -9,7 +10,6 @@ import { SIZE, CLEAR } from '../../../utils/constant/number';
 import { media } from '../../../utils/styled/styledRdesign';
 import { Padding } from '../../../utils/styled/styledSpace';
 import {
-  TABLETYPES,
   clubTableItems,
   profileTableSubItemsA,
   profileTableSubItemsB,
@@ -18,6 +18,8 @@ import {
 } from '../../../utils/constant/text/table';
 import { ALIGNITEMS } from '../../../utils/styled/styledSpace';
 import { editTitleList } from '../../../utils/constant/text/common';
+import BallTable from './table/ball';
+import ClubResultTable from './table/clubResult';
 
 interface Props {
   targetUser: PartialUserType;
@@ -73,16 +75,12 @@ const UserSub: React.FC<Props> = ({
     PROFILE: (
       <Center>
         <Table
+          component={<ProfileTable data={targetUser} tableItems={profileTableSubItemsA} />}
           width={SIZE.SXMALL}
-          datas={targetUser}
-          type={TABLETYPES.VERTICAL}
-          tableItems={profileTableSubItemsA}
         />
         <Table
+          component={<ProfileTable data={targetUser} tableItems={profileTableSubItemsB} />}
           width={SIZE.SXMALL}
-          datas={targetUser}
-          type={TABLETYPES.VERTICAL}
-          tableItems={profileTableSubItemsB}
         />
       </Center>
     ),
@@ -98,19 +96,17 @@ const UserSub: React.FC<Props> = ({
         right={
           <StyledFlexColumn>
             <Table
-              datas={checkedClubs}
+              component={
+                <ClubResultTable datas={checkedClubs} tableItems={clubTableItems} theme={'club'} />
+              }
               width={SIZE.SMALL}
-              type={TABLETYPES.HORIZONTAL}
-              tableItems={clubTableItems}
               title={clubTableTitle}
             />
             <Padding top={CLEAR.TINY} />
             {userBall && (
               <Table
-                datas={userBall}
+                component={<BallTable data={userBall} tableItems={ballTableItems} />}
                 width={SIZE.XSMALL}
-                type={TABLETYPES.HORIZONTAL}
-                tableItems={ballTableItems}
                 title={ballTableTitle}
               />
             )}
@@ -121,7 +117,11 @@ const UserSub: React.FC<Props> = ({
     ),
     VIDEO: <VideoContents videos={checkedVideos} />,
     RESULT: (
-      <Table datas={checkedResults} type={TABLETYPES.HORIZONTAL} tableItems={resultTableItems} />
+      <Table
+        component={
+          <ClubResultTable datas={checkedResults} tableItems={resultTableItems} theme={'result'} />
+        }
+      />
     ),
   };
   type Contents = typeof contents;

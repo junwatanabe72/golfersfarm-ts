@@ -1,7 +1,10 @@
-export const TABLETYPES = {
-  HORIZONTAL: 'HORIZONTAL',
-  VERTICAL: 'VERTICAL',
-} as const;
+export const profileTableItems = {
+  classification: 'クラス',
+  hcap: 'HDCP',
+  bestScore: 'ベストスコア',
+  averageDistance: '平均飛距離',
+  homeCourse: 'ホームコース',
+};
 
 //UserSub
 export const profileTableSubItemsA = {
