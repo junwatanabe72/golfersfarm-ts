@@ -5,7 +5,7 @@ import Button from '../atoms/Button';
 import LinkButton from '../atoms/LinkButton';
 import Form from '../organisms/form/signupLogin';
 import { Padding } from '../../utils/styled/styledSpace';
-import { ROUTE } from '../../utils/constant/route';
+import { ROUTE, INFOROUTE } from '../../utils/constant/route';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 
@@ -13,24 +13,35 @@ interface Props {
   currentUser: PartialUserType;
 }
 
-const SignUpCheck = '利用規約とプライバシーポリシーを御覧ください。';
 const SignUpLoginUser = 'アカウントをお持ちの方はこちら';
 const SignUpTitle = 'SIGN UP';
 const SignUpText = {
-  SignUpCheck,
   SignUpLoginUser,
   SignUpTitle,
 };
 
 const status = 'signUp';
 const SignUp: React.FC<Props> = ({ currentUser }) => {
+  const TosLink = (
+    <LinkButton color={BASICCOLORS.SECONDARY} to={INFOROUTE.TOS}>
+      利用規約
+    </LinkButton>
+  );
+  const PrivacyLink = (
+    <LinkButton color={BASICCOLORS.SECONDARY} to={INFOROUTE.PRIVACY}>
+      プライバシーポリシー
+    </LinkButton>
+  );
+
   return (
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={SignUpText.SignUpTitle}>
           <Form status={status} />
           <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
-            <div>{SignUpText.SignUpCheck}</div>
+            <div>
+              ご利用前に、{TosLink}及び{PrivacyLink}を御覧ください。
+            </div>
           </Padding>
           <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>
             <LinkButton to={ROUTE.LOGIN}>

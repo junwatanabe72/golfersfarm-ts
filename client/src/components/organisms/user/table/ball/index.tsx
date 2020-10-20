@@ -31,11 +31,11 @@ const StyledTd = styled.td`
 
 const BallTable: React.FC<Props> = ({ data, tableItems }) => {
   const order = Object.keys(tableItems);
-  const body = Object.values(data).map((value, num) => {
-    return <StyledTd key={num}>{value}</StyledTd>;
+  const body = order.map((key, num) => {
+    return <StyledTd key={num}>{data[key]}</StyledTd>;
   });
-  const head = order.map((key: string) => {
-    return <StyledTh key={key}>{tableItems[key as keyof TableItems]}</StyledTh>;
+  const head = order.map((key: string, num: number) => {
+    return <StyledTh key={num}>{tableItems[key as keyof TableItems]}</StyledTh>;
   });
   const records = [head, body];
 
