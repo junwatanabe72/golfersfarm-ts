@@ -4,7 +4,7 @@ import ClubType from "./clubType";
 import UserClubs from "./userClubs";
 import UserResults from "./userResults";
 import UserVideos from "./userVideos";
-const fs = require("fs");
+import * as fs from "fs";
 
 class User extends Model {
   public id!: number;
@@ -32,8 +32,6 @@ class User extends Model {
   public history?: number;
   public hcap?: number;
   public classification?: number;
-  // public ?: string;
-  // 得意クラブ:goodClub,血液型:blood,好きなゴルファー:favourite,ゴルフ歴:history,hcap:ハンデ
 
   static async add(user: User) {
     const newUser = await this.create({
@@ -58,7 +56,6 @@ class User extends Model {
       const end = targetUser.clubImage.slice(22);
       profilePath["club"] = start + end;
     }
-
     const updateUser = await targetUser.update({
       ...user,
     });
