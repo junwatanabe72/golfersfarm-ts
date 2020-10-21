@@ -11,7 +11,7 @@ import { authRouter } from "./routes/auth";
 import { makersRouter } from "./routes/maker";
 import { shaftsRouter } from "./routes/shaft";
 import { clubTypesRouter } from "./routes/type";
-
+import { contactRouter } from "./routes/contact";
 const rfs = require("rotating-file-stream");
 const app = express();
 const accessLogStream = rfs.createStream("access.log", {
@@ -51,6 +51,7 @@ const allRouters = [
   { path: "/makers", route: makersRouter },
   { path: "/types", route: clubTypesRouter },
   { path: "/shafts", route: shaftsRouter },
+  { path: "/contact", route: contactRouter },
 ];
 allRouters.forEach((route) => {
   app.use(route.path, route.route);
