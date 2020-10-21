@@ -1,5 +1,5 @@
 import express from "express";
-const multer = require("multer");
+import multer from "multer";
 import path from "path";
 import usersController from "../controllers/users/usersController";
 import imagesController from "../controllers/users/imagesController";

@@ -13,17 +13,6 @@ import { shaftsRouter } from "./routes/shaft";
 import { clubTypesRouter } from "./routes/type";
 
 const rfs = require("rotating-file-stream");
-const multer = require("multer");
-const storage = multer.diskStorage({
-  destination: "./public/uploads/",
-  filename: function (req: any, file: any, cb: any) {
-    cb(null, "IMAGE-" + Date.now() + path.extname(file.originalname));
-  },
-});
-export const upload = multer({
-  storage: storage,
-  limits: { fileSize: 5000000 },
-});
 const app = express();
 const accessLogStream = rfs.createStream("access.log", {
   interval: "1d", // rotate daily
