@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '../templates/Layout';
-import TopConcept from '../organisms/top/Concept';
+import Concept from '../organisms/about';
 
 interface Props {
   currentUser: PartialUserType;
@@ -9,7 +9,7 @@ interface Props {
 const About: React.FC<Props> = ({ currentUser }) => {
   return (
     <Layout currentUser={currentUser}>
-      <TopConcept />
+      <Concept />
     </Layout>
   );
 };

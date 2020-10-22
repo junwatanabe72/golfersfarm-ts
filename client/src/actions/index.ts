@@ -14,6 +14,7 @@ export const ACTIONTYPES = {
   ADD_TYPES: 'ADD_TYPES',
   ADD_SHAFTS: 'ADD_SHAFTS',
   ADD_MAKERS: 'ADD_MAKERS',
+  SEND_MESSAGE: 'SEND_MESSAGE',
   // modal
   MODAL_PUSH: 'MODAL_PUSH',
   MODAL_POP: 'MODAL_POP',
@@ -160,4 +161,7 @@ export function modalPush(data: JSX.Element): Action<JSX.Element> {
 }
 export function modalPop(data: JSX.Element): Action<JSX.Element> {
   return { type: ACTIONTYPES.MODAL_POP, payload: data };
+}
+export function sendMessage(data: ContactType): Action<ContactType> {
+  return { type: ACTIONTYPES.SEND_MESSAGE, payload: data };
 }

@@ -6,7 +6,7 @@ export const emailValidation = (message = 'メールアドレスの形式で入�
 export const nameValidation = (message = '必須項目です') =>
   yup.string().required(message).max(15, '15字以下にしてください。');
 
-export const urlValidation = (message = '必須項目です') => yup.string();
+export const urlValidation = (message = '必須項目です') => yup.string().required(message);
 
 export const passwordValidation = (message = '必須項目です', minCount = 8, maxCount = 30) =>
   yup

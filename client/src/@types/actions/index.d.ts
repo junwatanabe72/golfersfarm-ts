@@ -32,7 +32,8 @@ type ACTIONTYPES =
   | 'REQUESTED_SHAFTS'
   | 'REQUESTED_MAKERS'
   | 'MODAL_PUSH'
-  | 'MODAL_POP';
+  | 'MODAL_POP'
+  | 'SEND_MESSAGE';
 
 interface Action<T> extends Action<ACTIONTYPES, T> {
   type: ACTIONTYPES;

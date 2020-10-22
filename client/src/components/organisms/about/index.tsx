@@ -1,13 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import FreePick from '../../atoms/FreePick';
-import Button from '../../atoms/Button';
-import LinkButton from '../../atoms/LinkButton';
 import Logo from '../../atoms/Logo';
 import Text from '../../atoms/Text';
 import FlexLayout from '../../atoms/FlexLayout';
 import LastImage from '../../../utils/image/topConcept-min.jpg';
-import { ROUTE } from '../../../utils/constant/route';
 import { BASICCOLORS } from '../../../utils/constant/color';
 import { FONTSIZE, SIZE, CLEAR } from '../../../utils/constant/number';
 import { TopConceptText } from '../../../utils/constant/text/body/top/text';
@@ -23,13 +20,9 @@ const Container = styled.div`
       `}
 `;
 
-const StyledDiv = styled.div`
-  background-color: ${BASICCOLORS.WHITE};
-  border-radius: 5px;
-`;
 const headContent = (
   <>
-    <Padding top={CLEAR.BASE} bottom={CLEAR.SMALL}>
+    <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
       <Logo color={BASICCOLORS.SECONDARY} fontSize={FONTSIZE.XXLARGE}>
         {TopConceptText.ConceptTitle}
       </Logo>
@@ -37,34 +30,29 @@ const headContent = (
   </>
 );
 
-const rightContent = (
+const leftContent = (
   <Container>
-    <Text text={TopConceptText.ConceptText} />
-    <Padding top={CLEAR.XSMALL} bottom={CLEAR.BASE}>
-      <LinkButton to={ROUTE.LOGIN}>
-        <Button color={BASICCOLORS.WHITELIGHT}>{TopConceptText.ConceptLink}</Button>
-      </LinkButton>
-    </Padding>
+    <Text text={TopConceptText.ConceptText} fontSize={FONTSIZE.XLARGE} />
   </Container>
 );
 
-const leftContent = (
-  <Padding bottom={CLEAR.BASE}>
+const rightContent = (
+  <Padding>
     <FreePick image={LastImage} />
   </Padding>
 );
 
 const TopConcept: React.FC = () => {
   return (
-    <StyledDiv>
+    <Padding bottom={CLEAR.SMALL}>
       {headContent}
       <FlexLayout
-        right={leftContent}
-        left={rightContent}
+        right={rightContent}
+        left={leftContent}
         width={SIZE.BASESMALL}
         alignItems={ALIGNITEMS.CENTER}
       />
-    </StyledDiv>
+    </Padding>
   );
 };
 
