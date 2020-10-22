@@ -25,7 +25,7 @@ const Login: React.FC<Props> = ({ currentUser }) => {
     <Layout currentUser={currentUser} width={SIZE.LARGE}>
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={LoginText.LoginTitle}>
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+          <Padding top={CLEAR.SMALL} bottom={CLEAR.SMALL}>
             <Form status={status} />
           </Padding>
           <Padding top={CLEAR.SMALL} bottom={CLEAR.TINY}>

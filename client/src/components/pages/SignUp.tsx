@@ -38,7 +38,7 @@ const SignUp: React.FC<Props> = ({ currentUser }) => {
       <Padding top={CLEAR.MEDIUM} bottom={CLEAR.MEDIUM}>
         <Sign title={SignUpText.SignUpTitle}>
           <Form status={status} />
-          <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
+          <Padding top={CLEAR.SMALL} bottom={CLEAR.SMALL}>
             <div>
               ご利用前に、{TosLink}及び{PrivacyLink}を御覧ください。
             </div>

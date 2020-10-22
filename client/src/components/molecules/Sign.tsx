@@ -3,17 +3,17 @@ import styled from 'styled-components';
 import Logo from '../atoms/Logo';
 import { BASICCOLORS } from '../../utils/constant/color';
 import { CLEAR, FONTSIZE } from '../../utils/constant/number';
-import { Padding } from '../../utils/styled/styledSpace';
+import { Padding, ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { media } from '../../utils/styled/styledRdesign';
 
-interface Props extends PartialColor, PartialClear {
+interface Props extends PartialColor, PartialClear, PartialAlignItemsType {
   title?: string;
 }
 
-const Container = styled.div`
+const Container = styled.div<{ alignItems: Props['alignItems'] }>`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${(props) => props.alignItems};
 `;
 
 const Color = styled.div<PartialColor>`
@@ -32,11 +32,12 @@ const Sign: React.FC<Props> = ({
   title,
   children,
   clear = CLEAR.SMALL,
+  alignItems = ALIGNITEMS.CENTER,
 }) => {
   return (
     <Color color={color}>
       <PaddingExtend clear={clear}>
-        <Container>
+        <Container alignItems={alignItems}>
           <Logo fontSize={FONTSIZE.XXXLARGE}>{title}</Logo>
           {children}
         </Container>

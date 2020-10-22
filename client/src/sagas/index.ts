@@ -8,6 +8,7 @@ import { resultSagas } from './result';
 import { makerSagas } from './maker';
 import { shaftSagas } from './shaft';
 import { typeSagas } from './type';
+import { contactSagas } from './contact';
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     fork(makerSagas),
     fork(shaftSagas),
     fork(typeSagas),
+    fork(contactSagas),
   ]);
 }
