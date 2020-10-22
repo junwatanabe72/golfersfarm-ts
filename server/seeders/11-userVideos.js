@@ -1,34 +1,35 @@
-"use strict";
+("use strict");
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert(
-      "clubs",
+      "user_videos",
       [
         {
-          name: "JBEAM 435",
-          typeId: 2,
-          shaftId: 3,
-          makerId: 2,
-          flex: "S",
+          id: 1,
+          userId: 1,
+          videoId: 1,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "Ibrade",
-          typeId: 2,
-          shaftId: 2,
-          makerId: 1,
-          flex: "S",
+          id: 1,
+          userId: 1,
+          videoId: 2,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          name: "X-Drive",
-          typeId: 1,
-          shaftId: 2,
-          makerId: 1,
-          flex: "S",
+          id: 1,
+          userId: 1,
+          videoId: 3,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: 1,
+          userId: 1,
+          videoId: 4,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -38,6 +39,6 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("clubs", null, {});
+    return queryInterface.bulkDelete("user_videos", null, {});
   },
 };
