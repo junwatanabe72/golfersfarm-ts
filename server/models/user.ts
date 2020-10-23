@@ -5,6 +5,7 @@ import UserClubs from "./userClubs";
 import UserResults from "./userResults";
 import UserVideos from "./userVideos";
 import * as fs from "fs";
+import { processImages } from "../middlewares/sharp";
 
 class User extends Model {
   public id!: number;
@@ -40,36 +41,43 @@ class User extends Model {
     return newUser;
   }
 
-  static async updateProfile(id: string, user: any) {
-    let profilePath: any = {};
-    const targetUser: any = await this.findOne({
-      where: { id: id },
-    });
-
-    if (user.profileImage && targetUser.profileImage) {
-      const start = "./public/";
-      const end = targetUser.profileImage.slice(22);
-      profilePath["profile"] = start + end;
-    }
-    if (user.clubImage && targetUser.clubImage) {
-      const start = "./public/";
-      const end = targetUser.clubImage.slice(22);
-      profilePath["club"] = start + end;
-    }
-    const updateUser = await targetUser.update({
+  async updateProfile(user: any) {
+    const updateUser = await this.update({
       ...user,
     });
+    return { updateUser };
+  }
 
-    const values = Object.values(profilePath);
-    if (values.length !== 0) {
-      values.map(async (value: any) => {
-        if (!fs.existsSync(value)) {
-          return;
-        }
-        await fs.unlink(value, (err: any) => {
-          if (err) throw err;
-          console.log("削除しました");
-        });
+  async updateImages(files: any) {
+    // 元の画像のパスを保持
+    const { profileImage, clubImage } = this;
+
+    // 新しく変更するためのパス
+    const newProfileImage = await processImages(
+      files.profileImage || undefined
+    );
+    const newClubImage = await processImages(files.clubImage || undefined);
+
+    // 更新
+    const updateUser = await this.update({
+      profileImage: newProfileImage,
+      clubImage: newClubImage,
+    });
+
+    // 前の画像がある場合は削除
+    if (profileImage && newProfileImage) {
+      const imagePath = profileImage.slice(22);
+      fs.unlink(imagePath, (err: any) => {
+        if (err) throw err;
+        console.log("削除しました");
+      });
+    }
+
+    if (clubImage && newClubImage) {
+      const imagePath = clubImage.slice(22);
+      fs.unlink(imagePath, (err: any) => {
+        if (err) throw err;
+        console.log("削除しました");
       });
     }
     return { updateUser };

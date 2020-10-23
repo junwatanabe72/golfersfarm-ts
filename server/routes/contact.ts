@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
+const nodemailer = require("nodemailer");
 
 dotenv.config();
 const contactRouter = express.Router();
@@ -27,7 +27,10 @@ contactRouter.post("/", async (req: Request, res: Response) => {
 
   // メール送信
   try {
-    smtp.sendMail(returnMessage, function (error, info) {
+    smtp.sendMail(returnMessage, function (
+      error: { message: any },
+      info: { messageId: any }
+    ) {
       // エラー発生時
       if (error) {
         console.log("send failed");
