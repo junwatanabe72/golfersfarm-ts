@@ -47,37 +47,6 @@ class User extends Model {
     });
     return { updateUser };
   }
-  // static async updateProfile(id: string, user: any) {
-  //   let profilePath: any = {};
-  //   const targetUser: any = await this.findOne({
-  //     where: { id: id },
-  //   });
-
-  //   if (user.profileImage && targetUser.profileImage) {
-  //     profilePath["profile"] = targetUser.profileImage.slice(22);
-  //   }
-  //   if (user.clubImage && targetUser.clubImage) {
-  //     profilePath["club"] = targetUser.clubImage.slice(22);
-  //   }
-  //   const updateUser = await targetUser.update({
-  //     ...user,
-  //   });
-
-  //   const values = Object.values(profilePath);
-
-  //   if (values.length !== 0) {
-  //     values.map(async (value: any) => {
-  //       if (!fs.existsSync(value)) {
-  //         return;
-  //       }
-  //       await fs.unlink(value, (err: any) => {
-  //         if (err) throw err;
-  //         console.log("削除しました");
-  //       });
-  //     });
-  //   }
-  //   return { updateUser };
-  // }
 
   async updateImages(files: any) {
     // 元の画像のパスを保持
