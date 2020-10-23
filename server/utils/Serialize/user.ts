@@ -1,6 +1,6 @@
 // server=>client型に変換
 
-export const serializeUpdate = (data: any, typeType: string) => {
+export const serializeUpdate = (data: any, typeType?: string) => {
   const { dataValues } = data.updateUser;
   const user = {
     ...dataValues,

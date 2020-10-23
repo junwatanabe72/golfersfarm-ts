@@ -50,13 +50,12 @@ export default {
     )(req, res);
   },
   // editPage
-  async update(req: Request, res: Response, next: NextFunction) {
-    const { user } = req.body;
-    const id = parseInt(req.params.id);
+  async update(req: any, res: Response, next: NextFunction) {
+    const { profileImage, clubImage, ...user } = req.body;
+    const id = parseInt(user.id);
     const email = user.email ? user.email : null;
     const name = user.name ? user.name : null;
     const typeType = user.typeId;
-
     const _user = await User.findOne({
       where: {
         email: email,
@@ -79,36 +78,22 @@ export default {
       });
     }
 
-    const targetType = await ClubType.findOne({
-      where: {
-        type: typeType,
-      },
-    });
-    const targetUser = formUpdate(user, targetType.id);
+    const targetType = typeType
+      ? await ClubType.findOne({
+          where: {
+            type: typeType,
+          },
+        })
+      : undefined;
+    const targetUser = formUpdate(user, targetType);
     try {
-      const returnUser = await User.updateProfile(req.params.id, targetUser);
+      const returnUser = await req.user.updateProfile(targetUser);
       if (!returnUser) {
         return res.status(400);
       } else {
         const updateUser = serializeUpdate(returnUser, typeType);
         res.status(201).json({ updateUser });
       }
-    } catch (error) {
-      res.status(400);
-      return next(error);
-    }
-  },
-
-  async delete(req: Request, res: Response, next: NextFunction) {
-    try {
-      const targetUser: any = await User.findOne({
-        where: { id: req.params.id },
-      });
-      if (!targetUser) {
-        res.json({ message: "check this userId" });
-      }
-      await targetUser.destroy();
-      res.status(204).json({});
     } catch (error) {
       res.status(400);
       return next(error);
