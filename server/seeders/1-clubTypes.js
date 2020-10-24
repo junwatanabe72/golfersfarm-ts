@@ -81,6 +81,31 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
+          type: "5IRON",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          type: "6IRON",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          type: "7IRON",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          type: "8IRON",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          type: "9IRON",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
           type: "IRON(2~P)",
           createdAt: new Date(),
           updatedAt: new Date(),

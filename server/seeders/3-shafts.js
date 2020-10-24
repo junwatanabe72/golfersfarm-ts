@@ -6,6 +6,8 @@ module.exports = {
       [
         { name: "純正シャフト", createdAt: new Date(), updatedAt: new Date() },
         { name: "その他", createdAt: new Date(), updatedAt: new Date() },
+        { name: "PUTTER", createdAt: new Date(), updatedAt: new Date() },
+        { name: "Original", createdAt: new Date(), updatedAt: new Date() },
         {
           name: "マミヤ ATTAS DAAAS",
           createdAt: new Date(),
