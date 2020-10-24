@@ -16,7 +16,7 @@ import { editTitleList } from '../../utils/constant/text/common';
 import { clubOrder } from '../../utils/constant/text/body/user/value';
 
 interface Props {
-  currentUser: UserType;
+  currentUser: CurrentUserType;
   storeClubs: ObjectClubType;
   storeBalls: ObjectBallType;
   storeVideos: ObjectVideoType;

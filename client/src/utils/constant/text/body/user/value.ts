@@ -135,6 +135,33 @@ export const initialUser = {
   hcap: 5,
   classification: 100,
 };
+export const ohterUser = {
+  id: 1,
+  name: userName,
+  profileImage: URL,
+  facebook: facebook,
+  twitter: twitter,
+  instagram: instagram,
+  youtube: youtube,
+  sex: 1,
+  residence: '兵庫県',
+  birthPlace: '栃木県',
+  school: '学習院大学',
+  hobby: 'プログラミング',
+  bestScore: 69,
+  averageDistance: 250,
+  homeCourse: '姉ヶ崎CC',
+  job: 'free',
+  clubImage: ImageURL,
+  show: 100,
+  typeId: '1WOOD',
+  favourite: 'タイガーウッズ',
+  blood: 1,
+  history: 1,
+  hcap: 5,
+  classification: 100,
+};
+
 export const prefacture = [
   '北海道',
   '青森県',

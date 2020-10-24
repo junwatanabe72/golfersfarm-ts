@@ -30,7 +30,10 @@ const Container = styled.div`
 `;
 
 const App: React.FC<Props> = () => {
-  const currentUser: UserType = useSelector((state: State) => state.currentUser, shallowEqual);
+  const currentUser: CurrentUserType = useSelector(
+    (state: State) => state.currentUser,
+    shallowEqual
+  );
   const storeUsers: ObjectUserType = useSelector((state: State) => state.users, shallowEqual);
   const storeClubs = useSelector((state: State) => state.clubs, shallowEqual);
   const storeResults = useSelector((state: State) => state.results, shallowEqual);
@@ -66,27 +69,16 @@ const App: React.FC<Props> = () => {
             <Route
               exact
               path={`/users/${user.id}`}
-              render={() =>
-                user.id === currentUser.id ? (
-                  <User
-                    currentUser={currentUser}
-                    targetUser={currentUser}
-                    storeClubs={storeClubs}
-                    storeBalls={storeBalls}
-                    storeVideos={storeVideos}
-                    storeResults={storeResults}
-                  />
-                ) : (
-                  <User
-                    currentUser={currentUser}
-                    targetUser={user}
-                    storeClubs={storeClubs}
-                    storeBalls={storeBalls}
-                    storeVideos={storeVideos}
-                    storeResults={storeResults}
-                  />
-                )
-              }
+              render={() => (
+                <User
+                  currentUser={currentUser}
+                  targetUser={user}
+                  storeClubs={storeClubs}
+                  storeBalls={storeBalls}
+                  storeVideos={storeVideos}
+                  storeResults={storeResults}
+                />
+              )}
             />
             <Route
               exact

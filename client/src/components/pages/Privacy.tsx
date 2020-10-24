@@ -5,7 +5,7 @@ import { SIZE, CLEAR } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
 }
 
 const Privacy: React.FC<Props> = ({ currentUser }) => {

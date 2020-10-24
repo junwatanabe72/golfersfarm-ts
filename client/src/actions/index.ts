@@ -52,7 +52,7 @@ export function createUser(data: {
 }): Action<{ password: string; email: string; name: string; sex: number }> {
   return { type: ACTIONTYPES.CREATE_USER, payload: data };
 }
-export function updateUser(data: PartialUserType): Action<PartialUserType> {
+export function updateUser(data: PartialCurrentUserType): Action<PartialCurrentUserType> {
   return { type: ACTIONTYPES.UPDATE_USER, payload: data };
 }
 export function updateImageUser(data: FormData): Action<FormData> {
@@ -105,7 +105,7 @@ export function getShafts(): BasicAction {
 }
 //REDUX_SAGA
 
-export function addUser(data: PartialUserType): Action<PartialUserType> {
+export function addUser(data: CurrentUserType): Action<CurrentUserType> {
   return { type: ACTIONTYPES.ADD_USER, payload: data };
 }
 export function deleteUser(): BasicAction {

@@ -1,4 +1,9 @@
 import { ACTIONTYPES } from '../actions';
+// import { ohterUser } from '../utils/constant/text/body/user/value';
+// let a: ObjectUserType = {};
+// for (let i = 1; i <= 100; i++) {
+//   a[i] = { ...ohterUser, id: i };
+// }
 
 const initialState: ObjectUserType = {};
 

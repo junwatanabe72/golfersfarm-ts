@@ -10,7 +10,7 @@ import { BASICCOLORS } from '../../utils/constant/color';
 import { FONTSIZE, CLEAR, SIZE } from '../../utils/constant/number';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
 }
 
 const SignUpLoginUser = 'アカウントをお持ちの方はこちら';

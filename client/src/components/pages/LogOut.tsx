@@ -11,7 +11,7 @@ import { CLEAR, SIZE } from '../../utils/constant/number';
 import { ROUTE } from '../../utils/constant/route';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
 }
 const LogoutMessage = 'ログアウトしました';
 const LogoutLoginUser = 'ログインはこちら';

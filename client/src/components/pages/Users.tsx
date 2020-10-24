@@ -7,7 +7,7 @@ import { CLEAR, SIZE } from '../../utils/constant/number';
 import { Padding } from '../../utils/styled/styledSpace';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
   allUsers: ArrayPartialUserType;
 }
 
@@ -25,7 +25,12 @@ const Users: React.FC<Props> = ({ currentUser, allUsers }) => {
     <Layout currentUser={currentUser}>
       <Padding top={CLEAR.BASE} bottom={CLEAR.BASE}>
         <Container>
-          <ThumbNail datas={allUsers} clear={CLEAR.TINY} width={SIZE.XXXSMALL} />
+          <ThumbNail
+            datas={allUsers}
+            clear={CLEAR.TINY}
+            width={SIZE.XXXSMALL}
+            // widthTab={SIZE.XXSMALL}
+          />
         </Container>
       </Padding>
     </Layout>
