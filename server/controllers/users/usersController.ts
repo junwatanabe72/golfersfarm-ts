@@ -51,7 +51,7 @@ export default {
   },
   // editPage
   async update(req: any, res: Response, next: NextFunction) {
-    const { profileImage, clubImage, ...user } = req.body;
+    const { profileImage, clubImage, ...user } = req.body.user;
     const id = parseInt(user.id);
     const email = user.email ? user.email : null;
     const name = user.name ? user.name : null;
@@ -78,13 +78,11 @@ export default {
       });
     }
 
-    const targetType = typeType
-      ? await ClubType.findOne({
-          where: {
-            type: typeType,
-          },
-        })
-      : undefined;
+    const targetType = await ClubType.findOne({
+      where: {
+        type: user.typeId,
+      },
+    });
     const targetUser = formUpdate(user, targetType);
     try {
       const returnUser = await req.user.updateProfile(targetUser);
