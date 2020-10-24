@@ -1,11 +1,11 @@
 // client=>serverに変換
 
 // user update
-export const formUpdate = (data: any, type?: any) => {
-  const id = type ? type.id : undefined;
+export const formUpdate = (data: any, targetType: any) => {
+  delete data.ClubType;
   const user = {
     ...data,
-    typeId: id,
+    typeId: targetType.id,
   };
   return user;
 };

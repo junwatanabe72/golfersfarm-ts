@@ -13,9 +13,10 @@ export const serializeUpdate = (data: any, typeType?: string) => {
 export const serializeIndex = (datas: any[]) => {
   const users = datas.map((data) => {
     const { ClubType, dataValues } = data;
-    delete dataValues.ClubType;
+    const { password, email, ...params } = dataValues;
+    delete params.ClubType;
     const user = {
-      ...dataValues,
+      ...params,
       typeId: ClubType.type,
     };
     return user;
