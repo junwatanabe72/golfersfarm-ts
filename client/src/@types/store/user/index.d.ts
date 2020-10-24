@@ -1,4 +1,4 @@
-interface UserType {
+interface CurrentUserType {
   id: number;
   name: string;
   profileImage: string;
@@ -26,12 +26,9 @@ interface UserType {
   hcap: number;
   classification: number;
 }
-
-type PartialUserType = Partial<UserType>;
-type ArrayPartialUserType = PartialUserType[];
-type ObjectUserType = { [key: number]: UserType };
-type SignupUserType = Pick<UserType, 'name' | 'password' | 'email' | 'sex'>;
-type SNSUserType = Pick<PartialUserType, 'facebook' | 'twitter' | 'instagram' | 'youtube'>;
-type LoginUserType = Pick<UserType, 'password' | 'email'>;
-type ImageUserType = Pick<UserType, 'profileImage' | 'clubImage'>;
+type PartialCurrentUserType = Partial<CurrentUserType>;
+type SignupUserType = Pick<PartialCurrentUserType, 'name' | 'password' | 'email' | 'sex'>;
+type SNSUserType = Pick<PartialCurrentUserType, 'facebook' | 'twitter' | 'instagram' | 'youtube'>;
+type LoginUserType = Pick<PartialCurrentUserType, 'password' | 'email'>;
+type ImageUserType = Pick<PartialCurrentUserType, 'profileImage' | 'clubImage'>;
 type PartialImageUserType = Partial<ImageUserType>;

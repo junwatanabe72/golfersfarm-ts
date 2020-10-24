@@ -3,7 +3,7 @@ import Layout from '../templates/Layout';
 import Concept from '../organisms/about';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
 }
 
 const About: React.FC<Props> = ({ currentUser }) => {

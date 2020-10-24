@@ -10,7 +10,7 @@ import FlexLayout from '../atoms/FlexLayout';
 import { clubOrder } from '../../utils/constant/text/body/user/value';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
   targetUser: PartialUserType;
   storeClubs: ObjectClubType;
   storeBalls: ObjectBallType;

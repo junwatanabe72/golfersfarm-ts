@@ -6,7 +6,7 @@ import Sign from '../molecules/Sign';
 import { CLEAR, SIZE } from '../../utils/constant/number';
 
 interface Props {
-  currentUser: PartialUserType;
+  currentUser: CurrentUserType;
 }
 const text = 'ご要望、ご意見等々ございましたら、下記フォームよりお問い合わせください。';
 

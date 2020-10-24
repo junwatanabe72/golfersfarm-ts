@@ -24,7 +24,7 @@ import { emailValidation, nameValidation } from '../../../../validations';
 import { updateUser } from '../../../../actions';
 
 interface Props {
-  currentUser: UserType;
+  currentUser: CurrentUserType;
 }
 
 const StyledForm = styled.form``;
@@ -66,10 +66,10 @@ const labels = {
   history: historyLabels,
 };
 
-const formUserValues = (user: UserType) => {
+const formUserValues = (user: CurrentUserType) => {
   const a = Object.entries(values).map(([key, value]) => {
     const b = Object.entries(value).find(
-      ([valueKey, data]) => data === user[key as keyof UserType]
+      ([valueKey, data]) => data === user[key as keyof CurrentUserType]
     );
     // "male"
     const v = b ? b[0] : clientInitalValue[key as keyof ClientInitalValue];
