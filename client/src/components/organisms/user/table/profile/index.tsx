@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Items from './ProfileItems';
 import {
   profileTableItems,
+  profileUsersItems,
   profileTableSubItemsA,
   profileTableSubItemsB,
 } from '../../../../../utils/constant/text/table';
@@ -16,9 +17,11 @@ import {
   bloodLabels,
   historyLabels,
 } from '../../../../../utils/constant/text/body/user/value';
+import { BASICCOLORS } from '../../../../../utils/constant/color';
 
 type TableItems =
   | typeof profileTableItems
+  | typeof profileUsersItems
   | typeof profileTableSubItemsA
   | typeof profileTableSubItemsB;
 
@@ -30,13 +33,16 @@ type ShowLabel = SexLabels | ClassLabels | BloodLabels | HistoryLabels;
 interface Props extends PartialWidthSize {
   data: PartialUserType;
   tableItems: TableItems;
+  hover?: string;
 }
 
-const StyledTrd = styled.tr`
+const StyledTrd = styled.tr<{
+  hover: Props['hover'];
+}>`
   border-top: solid 1px #ccc;
   text-align: center;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${(props) => props.hover};
   }
 `;
 const values = {
@@ -54,7 +60,7 @@ const labels = {
 type Values = typeof values;
 type Labels = typeof labels;
 
-const UserProfile: React.FC<Props> = ({ data, tableItems }) => {
+const UserProfile: React.FC<Props> = ({ data, tableItems, hover = BASICCOLORS.WHITE }) => {
   const order = Object.keys(tableItems);
   return (
     <>
@@ -70,7 +76,7 @@ const UserProfile: React.FC<Props> = ({ data, tableItems }) => {
           : initialValue;
 
         return (
-          <StyledTrd key={num}>
+          <StyledTrd key={num} hover={hover}>
             <Items valueKey={key} value={showValue} label={tableItems[key as keyof TableItems]} />
           </StyledTrd>
         );
