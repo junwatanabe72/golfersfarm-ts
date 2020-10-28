@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import {BASICCOLORS} from "../constant/color";
+import { BASICCOLORS } from '../constant/color';
 export const GlobalStyle = createGlobalStyle`
   html {
     font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
@@ -27,6 +27,9 @@ export const GlobalStyle = createGlobalStyle`
   li {
     list-style-type: none;
   }
+  img{
+	vertical-align:top;
+}
   a {
     text-decoration: none;
     color: ${BASICCOLORS.WHITELIGHT};

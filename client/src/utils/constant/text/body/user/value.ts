@@ -122,7 +122,7 @@ export const initialUser = {
   hobby: 'プログラミング',
   bestScore: 69,
   averageDistance: 250,
-  homeCourse: '姉ヶ崎CC',
+  homeCourse: '兵庫CC',
   email: 'junwatanabe72@gmail.com',
   password: 'Password',
   job: 'free',

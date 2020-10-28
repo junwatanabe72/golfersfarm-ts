@@ -23,4 +23,12 @@ export const FONTAWEICON = {
     head: 'fas',
     tail: 'bars',
   },
+  search: {
+    head: 'fas',
+    tail: 'search',
+  },
+  sort: {
+    head: 'fas',
+    tail: 'sort',
+  },
 } as const;

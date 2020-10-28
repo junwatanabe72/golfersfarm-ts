@@ -1,3 +1,11 @@
+export const profileUsersItems = {
+  classification: 'クラス',
+  hcap: 'HDCP',
+  bestScore: 'ベストスコア',
+  averageDistance: '平均飛距離',
+  homeCourse: 'ホームコース',
+};
+
 export const profileTableItems = {
   classification: 'クラス',
   hcap: 'HDCP',
