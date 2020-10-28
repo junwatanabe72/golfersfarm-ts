@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { resultTableItems, clubTableItems } from '../../../../../utils/constant/text/table';
 import ResultItems from './ResultItems';
+import { BASICCOLORS } from '../../../../../utils/constant/color';
 type ResultTableItems = typeof resultTableItems;
 type ClubTableItems = typeof clubTableItems;
 type TableItems = ResultTableItems | ClubTableItems;
@@ -16,7 +17,7 @@ const StyledTrd = styled.tr`
   border-top: solid 1px #ccc;
   text-align: center;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${BASICCOLORS.WHITE};
   }
 `;
 

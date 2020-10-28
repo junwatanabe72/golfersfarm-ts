@@ -12,6 +12,7 @@ const Container = styled.img<{
   widthTab: Props['widthTab'];
 }>`
   width: ${(props) => props.width}vw;
+  border-radius: 5px;
   ${media.tablet`
         width: ${(props: { widthTab: PartialWidthTab }) => props.widthTab}vw
       `}

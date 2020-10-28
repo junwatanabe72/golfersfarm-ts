@@ -9,11 +9,12 @@ import { media } from '../../utils/styled/styledRdesign';
 
 interface Props extends PartialColor, PartialClear, PartialTextAlignType, PartialFontSize {
   title?: string;
+  bColor?: COLORTYPES;
 }
 
-const Color = styled.div`
+const Color = styled.div<{ bColor: Props['bColor'] }>`
   border-radius: 5px;
-  background-color: ${BASICCOLORS.WHITELIGHT};
+  background-color: ${(props) => props.bColor};
 `;
 
 const PaddingExtend = styled(Padding)<PartialClear>`
@@ -26,13 +27,14 @@ const PaddingExtend = styled(Padding)<PartialClear>`
 const Card: React.FC<Props> = ({
   textAlign = ALIGNITEMS.START,
   color,
+  bColor = BASICCOLORS.WHITELIGHT,
   fontSize,
   title,
   children,
   clear = CLEAR.XSMALL,
 }) => {
   return (
-    <Color>
+    <Color bColor={bColor}>
       <PaddingExtend clear={clear}>
         <Logo color={color} textAlign={textAlign} fontSize={fontSize}>
           {title}

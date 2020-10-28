@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SIZE, CLEAR, FONTSIZE } from '../../utils/constant/number';
+import { SIZE, FONTSIZE } from '../../utils/constant/number';
 import { media } from '../../utils/styled/styledRdesign';
 
 interface InputProps {
   placeHolder?: string;
   value?: string;
-  onChange?: (e: any) => void;
+  onChange: (e: any) => void;
+  type: string;
 }
 
 const Container = styled.div`
-  width: ${SIZE.SMALL}vw;
   ${media.tablet`
       width: ${SIZE.MEDIUM}vw;
       `}
@@ -22,20 +22,19 @@ const Frame = styled.div`
 `;
 const InputBar = styled.input`
   display: table-cell;
-  font-size: ${FONTSIZE.LARGE}px;
+  font-size: ${FONTSIZE.MEDIUM}px;
   width: 98%;
-  padding: ${CLEAR.TINY}vw 0px;
   border-width: inital;
   border-style: none;
   outline: none;
   background: none;
 `;
 
-const Input: React.FC<InputProps> = ({ placeHolder = '', value, onChange }) => {
+const Input: React.FC<InputProps> = ({ placeHolder = '', value, onChange, type }) => {
   return (
     <Container>
       <Frame>
-        <InputBar placeholder={placeHolder} value={value} onChange={onChange} />
+        <InputBar type={type} placeholder={placeHolder} value={value} onChange={onChange} />
       </Frame>
     </Container>
   );

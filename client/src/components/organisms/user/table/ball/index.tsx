@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BASICCOLORS } from '../../../../../utils/constant/color';
 type TableItems = Pick<BallType, 'name' | 'maker'>;
 interface Props extends PartialWidthSize {
   data: BallType;
@@ -10,7 +11,7 @@ const StyledTrd = styled.tr`
   border-top: solid 1px #ccc;
   text-align: center;
   &:hover {
-    background-color: #f5f5f5;
+    background-color: ${BASICCOLORS.WHITE};
   }
 `;
 

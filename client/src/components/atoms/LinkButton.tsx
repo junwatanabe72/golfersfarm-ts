@@ -6,10 +6,15 @@ import styled from 'styled-components';
 
 interface Props extends PartialColor, PartialFontSize {
   to: string;
+  display?: string;
 }
 
-const StyledLink = styled(Link)<{ color: Props['color']; fontSize: Props['fontSize'] }>`
-  display: inline-block;
+const StyledLink = styled(Link)<{
+  color: Props['color'];
+  fontSize: Props['fontSize'];
+  display: Props['display'];
+}>`
+  display:  ${(props) => props.display};
   font-size: ${(props) => props.fontSize}px;
   // ${(props) => getButtonBcolor(props.color)};
 `;
@@ -50,10 +55,11 @@ const LinkButton: React.FC<Props> = ({
   to,
   fontSize = FONTSIZE.MEDIUM,
   color = BASICCOLORS.PRIMARY,
+  display = 'inline-block',
   children,
 }) => {
   return (
-    <StyledLink to={to} fontSize={fontSize} color={color}>
+    <StyledLink to={to} fontSize={fontSize} color={color} display={display}>
       {children}
     </StyledLink>
   );

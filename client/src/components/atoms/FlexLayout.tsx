@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import { media } from '../../utils/styled/styledRdesign';
-import { JUSTIFYCONTENT } from '../../utils/styled/styledSpace';
+import { JUSTIFYCONTENT, ALIGNITEMS } from '../../utils/styled/styledSpace';
 import { SIZE } from '../../utils/constant/number';
 interface Props extends PartialWidthSize, PartialAlignItemsType, PartialJustifyContentType {
   right: ReactElement;
@@ -17,7 +17,7 @@ const Container = styled.div<{
   align-items: ${(props) => props.alignItems};
   ${media.tablet`
         flex-direction: column;
-        align-items: center;
+        align-items: ${ALIGNITEMS.CENTER};
       `}
 `;
 

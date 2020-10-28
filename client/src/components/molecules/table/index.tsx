@@ -6,26 +6,28 @@ import { media } from '../../../utils/styled/styledRdesign';
 interface Props extends PartialWidthSize {
   component: JSX.Element;
   title?: string;
+  widthTab?: SIZETYPE;
 }
 
-const StyledTable = styled.table<{ width: Props['width'] }>`
+const StyledTable = styled.table<{ width: Props['width']; widthTab: Props['widthTab'] }>`
   width: ${(props) => props.width}vw;
   margin: 0vw auto;
   border-radius: 5px;
   ${media.tablet`
-      width: ${SIZE.LARGE}vw;  
+    width: ${(props: { widthTab: SIZETYPE }) => props.widthTab}vw;
       `}
 `;
 
-StyledTable.defaultProps = {
-  width: SIZE.MEDIUM,
-};
-
-const Table: React.FC<Props> = ({ title, component, width }) => {
+const Table: React.FC<Props> = ({
+  title,
+  component,
+  width = SIZE.MEDIUM,
+  widthTab = SIZE.LARGE,
+}) => {
   return (
     <>
       {title && <div>{title}</div>}
-      <StyledTable width={width}>
+      <StyledTable width={width} widthTab={widthTab}>
         <tbody>{component}</tbody>
       </StyledTable>
     </>
