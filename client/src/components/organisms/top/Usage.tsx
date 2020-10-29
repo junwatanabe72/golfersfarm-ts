@@ -10,7 +10,11 @@ const TopUsage: React.FC = () => {
   return (
     <>
       <Padding bottom={CLEAR.XSMALL}>
-        <Logo fontSize={FONTSIZE.XXLARGE} color={BASICCOLORS.SECONDARY}>
+        <Logo
+          fontSize={FONTSIZE.XXLARGE}
+          color={BASICCOLORS.SECONDARY}
+          fontSizeTab={FONTSIZE.XLARGE}
+        >
           {TopUsageText.UsageTitle}
         </Logo>
       </Padding>

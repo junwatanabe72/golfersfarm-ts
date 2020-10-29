@@ -1,12 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
 import { BASICCOLORS } from '../constant/color';
+import { media } from '../../utils/styled/styledRdesign';
+import { FONTSIZE } from '../constant/number';
 export const GlobalStyle = createGlobalStyle`
   html {
     font-family: 'Lato', 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Sans-Serif;
     line-height: 1.5;
-    font-size: 15px;
+    font-size: ${FONTSIZE.MEDIUM}px;
     color: ${BASICCOLORS.BASIC};
     font-weight: 400; 
+    ${media.tablet`
+        font-size: ${FONTSIZE.BASE}px;
+      `}
   }
   body {
     padding: 0;

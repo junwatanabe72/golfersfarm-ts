@@ -8,7 +8,7 @@ import { Padding, ALIGNITEMS, JUSTIFYCONTENT } from '../../../utils/styled/style
 import { media } from '../../../utils/styled/styledRdesign';
 import swingCollection from '../../../utils/image/swingCollection-min.jpg';
 import clubContest from '../../../utils/image/clubContest-min.jpg';
-import people from '../../../utils/image/people-min.jpg';
+import people from '../../../utils/image/2159.jpg';
 
 const Container = styled.div`
   display: flex;

@@ -66,7 +66,9 @@ class User extends Model {
 
     // 前の画像がある場合は削除
     if (profileImage && newProfileImage) {
-      const imagePath = profileImage.slice(22);
+      const slicePoint = process.env.URL ? process.env.URL.length + 1 : 22;
+      console.log(slicePoint);
+      const imagePath = profileImage.slice(slicePoint);
       fs.unlink(imagePath, (err: any) => {
         if (err) throw err;
         console.log("削除しました");
