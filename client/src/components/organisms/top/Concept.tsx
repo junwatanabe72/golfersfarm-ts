@@ -15,11 +15,11 @@ import { Padding, ALIGNITEMS } from '../../../utils/styled/styledSpace';
 import { media } from '../../../utils/styled/styledRdesign';
 
 const Container = styled.div`
-  text-align: center;
+  text-align: ${ALIGNITEMS.START};
   width: ${SIZE.SMALL}vw;
   ${media.tablet`
   width: ${SIZE.LARGE}vw;
-      
+      text-align: ${ALIGNITEMS.CENTER};
       `}
 `;
 
@@ -30,7 +30,7 @@ const StyledDiv = styled.div`
 const headContent = (
   <>
     <Padding top={CLEAR.BASE} bottom={CLEAR.SMALL}>
-      <Logo color={BASICCOLORS.SECONDARY} fontSize={FONTSIZE.XXLARGE}>
+      <Logo color={BASICCOLORS.SECONDARY} fontSize={FONTSIZE.XXLARGE} fontSizeTab={FONTSIZE.XLARGE}>
         {TopConceptText.ConceptTitle}
       </Logo>
     </Padding>
@@ -39,7 +39,7 @@ const headContent = (
 
 const rightContent = (
   <Container>
-    <Text text={TopConceptText.ConceptText} />
+    <Text text={TopConceptText.ConceptText} alignItems={ALIGNITEMS.START} />
     <Padding top={CLEAR.XSMALL} bottom={CLEAR.BASE}>
       <LinkButton to={ROUTE.LOGIN}>
         <Button color={BASICCOLORS.WHITELIGHT}>{TopConceptText.ConceptLink}</Button>
@@ -59,8 +59,8 @@ const TopConcept: React.FC = () => {
     <StyledDiv>
       {headContent}
       <FlexLayout
-        right={leftContent}
-        left={rightContent}
+        right={rightContent}
+        left={leftContent}
         width={SIZE.BASESMALL}
         alignItems={ALIGNITEMS.CENTER}
       />

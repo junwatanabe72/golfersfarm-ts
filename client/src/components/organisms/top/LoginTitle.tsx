@@ -13,7 +13,7 @@ const Container = styled.div`
 
 const StyledDiv = styled.div`
   color: ${BASICCOLORS.SECONDARY};
-  font-size: ${FONTSIZE.ICONLARGE}px;
+  font-size: ${FONTSIZE.XXXLARGE}px;
 `;
 
 const LoginTopTitle: React.FC = () => {

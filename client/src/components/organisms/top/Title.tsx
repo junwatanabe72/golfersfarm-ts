@@ -16,21 +16,25 @@ const Container = styled.div`
 
 const StyledDiv = styled.div`
   color: ${BASICCOLORS.SECONDARY};
-  font-size: ${FONTSIZE.ICONLARGE}px;
+  font-size: 40px;
 `;
 
 const TopTitle: React.FC = () => {
   return (
     <Container>
-      <Padding top={CLEAR.LARGE} bottom={CLEAR.TINY}>
-        <Logo color={BASICCOLORS.BASICDARK} fontSize={FONTSIZE.XXXLARGE}>
+      <Padding top={CLEAR.LARGE}>
+        <Logo
+          color={BASICCOLORS.BASICDARK}
+          fontSize={FONTSIZE.XXXLARGE}
+          fontSizeTab={FONTSIZE.XXLARGE}
+        >
           {TopTitleText.TitleTitle}
         </Logo>
       </Padding>
-      <Padding bottom={CLEAR.SMALL}>
+      <Padding top={CLEAR.TINY} bottom={CLEAR.TINY}>
         <StyledDiv>Golfersfarm</StyledDiv>
       </Padding>
-      <Text fontSize={FONTSIZE.XLARGE} text={TopTitleText.TitleText} />
+      <Text fontSize={FONTSIZE.LARGE} text={TopTitleText.TitleText} />
       <Padding top={CLEAR.XSMALL} bottom={CLEAR.MEDIUMLARGE}>
         <LinkButton to={ROUTE.LOGIN}>
           <Button color={BASICCOLORS.WHITELIGHT}>{TopTitleText.TitleLink}</Button>
