@@ -8,6 +8,10 @@ RUN apt-get update && \
 ENV LC_ALL ja_JP.UTF-8
 
 RUN { \
+  echo '[mysql]'; \
+  echo 'default-character-set=utf8mb4'; \
+  echo '[mysqldump]'; \
+  echo 'default-character-set=utf8mb4'; \
   echo '[mysqld]'; \
   echo 'character-set-server=utf8mb4'; \
   echo 'collation-server=utf8mb4_general_ci'; \

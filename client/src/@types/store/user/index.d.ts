@@ -1,0 +1,34 @@
+interface CurrentUserType {
+  id: number;
+  name: string;
+  profileImage: string;
+  facebook: string;
+  twitter: string;
+  instagram: string;
+  youtube: string;
+  sex: number;
+  residence: string;
+  birthPlace: string;
+  school: string;
+  job: string;
+  hobby: string;
+  bestScore: number;
+  averageDistance: number;
+  homeCourse: string;
+  email: string;
+  password: string;
+  clubImage: string;
+  show: number;
+  typeId: string;
+  favourite: string;
+  blood: number;
+  history: number;
+  hcap: number;
+  classification: number;
+}
+type PartialCurrentUserType = Partial<CurrentUserType>;
+type SignupUserType = Pick<PartialCurrentUserType, 'name' | 'password' | 'email' | 'sex'>;
+type SNSUserType = Pick<PartialCurrentUserType, 'facebook' | 'twitter' | 'instagram' | 'youtube'>;
+type LoginUserType = Pick<PartialCurrentUserType, 'password' | 'email'>;
+type ImageUserType = Pick<PartialCurrentUserType, 'profileImage' | 'clubImage'>;
+type PartialImageUserType = Partial<ImageUserType>;
