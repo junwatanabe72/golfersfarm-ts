@@ -23,6 +23,17 @@ export const serializeIndex = (datas: any[]) => {
   });
   return users;
 };
+//user index
+export const serializeUser = (data: any) => {
+  const { ClubType, dataValues } = data;
+  const { password, email, ...params } = dataValues;
+  delete params.ClubType;
+  const user = {
+    ...params,
+    typeId: ClubType.type,
+  };
+  return user;
+};
 
 export const serializeLogin = (data: any) => {
   const { ClubType, dataValues } = data;

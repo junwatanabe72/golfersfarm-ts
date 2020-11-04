@@ -24,6 +24,7 @@ const usersRouter = express.Router();
 // getRoute
 const getrouters = [
   { path: "/", route: usersController.index },
+  { path: "/:id", route: usersController.show },
   { path: "/:id/clubs", route: clubsController.index },
   { path: "/:id/ball", route: ballsController.show },
   { path: "/:id/videos", route: videosController.index },
