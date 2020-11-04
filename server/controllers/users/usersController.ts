@@ -2,7 +2,11 @@ import { Request, Response, NextFunction } from "express";
 import db from "../../models";
 import { UserType } from "../../models/user";
 import passport from "passport";
-import { serializeIndex, serializeUpdate } from "../../utils/Serialize/user";
+import {
+  serializeIndex,
+  serializeUpdate,
+  serializeUser,
+} from "../../utils/Serialize/user";
 import { formUpdate } from "../../utils/Form/user";
 import { Op } from "sequelize";
 
@@ -40,6 +44,46 @@ export default {
             // typeId number=>string
             const allUsers = serializeIndex(users);
             res.json({ allUsers });
+            return;
+          });
+        } catch (error) {
+          res.status(404);
+          return next(error);
+        }
+      }
+    )(req, res);
+  },
+  async show(req: Request, res: Response, next: NextFunction) {
+    passport.authenticate(
+      "jwt",
+      { session: false },
+      async (err: any, user: any) => {
+        try {
+          req.login(user, { session: false }, async (err) => {
+            const where = !user
+              ? // 公開
+                { show: 1 }
+              : {
+                  show: {
+                    [Op.or]: [100, 1],
+                  },
+                };
+            const targetUser: any = await User.findOne({
+              where: { id: req.params.id, ...where },
+              include: [
+                {
+                  model: ClubType,
+                  required: false,
+                },
+              ],
+            });
+            if (!targetUser) {
+              res.status(204).json({ message: "not exist" });
+              return;
+            }
+            // typeId number=>string
+            const returnUser = serializeUser(targetUser);
+            res.json({ returnUser });
             return;
           });
         } catch (error) {

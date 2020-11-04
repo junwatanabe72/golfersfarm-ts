@@ -4,9 +4,11 @@
 export const serializeIndex = (datas: any[]) => {
   const AllClubs = datas.map((data: any) => {
     const { Club, userId } = data;
-    const { Maker, Shaft, ClubType, dataValues } = Club;
+    const { id, name, flex, Maker, Shaft, ClubType } = Club;
     const club = {
-      ...dataValues,
+      id,
+      name,
+      flex,
       userId,
       maker: Maker.name,
       shaft: Shaft.name,
@@ -27,9 +29,11 @@ export const serializeReplace = (
 ) => {
   const { newClub, newUserClubs } = data;
   const { dataValues } = newClub;
-
+  const { id, name, flex } = dataValues;
   const club = {
-    ...dataValues,
+    id,
+    name,
+    flex,
     userId: newUserClubs.userId,
     shaft: shaft,
     maker: maker,
