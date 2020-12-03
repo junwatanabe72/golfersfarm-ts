@@ -17,9 +17,8 @@
 - 経緯: typescript にてアプリケーションを開発した実績を作る。フロントエンドとバックエンドが分離したモダンな開発を体験する。
 - 設計:
   - フロント側：redux にて状態を管理。バックエンドとの通信には、redux-saga,axios を使用。
-  - バックエンド側: express にて API を作成。jwt などを活用し、secure な開発を心がけた。docker-compose を使用し、client,server,db コンテナを稼働させ開発を行った。
-- 目的: ゴルファーのプロフィールを登録するアプリケーション。
-- 動機: 元々、rubyonRails で作成したものを再作成したもの。
+  - バックエンド側: express にて API を作成。jwt を活用し、secure な開発を心がけた。
+  - 全体: docker-compose を使用し、client,server,db コンテナを稼働させ開発を行った。
 
 ## 使用した技術
 
@@ -53,23 +52,24 @@
 - sharp
 - mysql2
 - typescript
-- mysql5.7
 - heroku
 - ansible
 
 ## 設計
 
-- 全体構成
+- 全体構成  
   ![image](https://user-images.githubusercontent.com/50585862/101005400-2f55e880-35a4-11eb-88e5-0bc9b158e29d.png)
-- 認証
-  jwtToken によりユーザーを認証。  
-   ユーザーのログインリクエストにより、jwtToken が server より返却。  
-   返された jwtToken をブラウザの localStorage に保存。  
-   以降、API リクエストごとに認証を実行。  
+- 認証  
+  ![image](https://user-images.githubusercontent.com/50585862/101005647-41378b80-35a4-11eb-845b-3ecc1bf57f43.png)  
+  jwtToken にて認証。ブラウザの localStorage にて Token を管理。  
+   クライアントのログインページにて、サーバー側にログインリクエスト。  
+   リクエストが、認証されれば、server から jwtToken が送られる。  
+   送られてきた jwtToken をブラウザの localStorage に保存。  
+   以降、API リクエストごとに認証。  
    リダイレクトした場合、localStorage に jwtToken があれば、自動的にログインされる。
-  ![image](https://user-images.githubusercontent.com/50585862/101005647-41378b80-35a4-11eb-845b-3ecc1bf57f43.png)
 - フロントエンド(ページ構成)  
-  / => トップページ  
+  / => トップページ
+  <img width="1433" alt="スクリーンショット 2020-12-03 16 46 28" src="https://user-images.githubusercontent.com/50585862/100980654-eba1b580-3588-11eb-956e-f387b9ff458b.png">
   /users => ユーザー一覧ページ
   <img width="1429" alt="スクリーンショット 2020-12-03 16 50 17" src="https://user-images.githubusercontent.com/50585862/100980871-42a78a80-3589-11eb-96c2-72d53a10f9db.png">
   /users/:id => ユーザー詳細ページ
@@ -86,8 +86,8 @@
   /contact => メールでの問合せフォーム
 
 - バックエンド(エンドポイント)
-  ![image](https://user-images.githubusercontent.com/50585862/101005689-44cb1280-35a4-11eb-9d7d-305d2e68c381.png)
-  以下、全てのエンドポイントです。
+  ![image](https://user-images.githubusercontent.com/50585862/101005689-44cb1280-35a4-11eb-9d7d-305d2e68c381.png)  
+  以下、全てのエンドポイントです。  
   get: /users  
   patch: /users/:id/edit  
   post,get: /auth/login  
