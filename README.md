@@ -3,7 +3,7 @@
 ---
 
 ゴルファーのプロフィール登録ツールです。  
-このアプリはゴルファーの名刺として使えます。  
+このアプリはゴルファーの名刺として使えます。
 レスポンシブル対応なので、スマホ画面でも問題ありません。  
 現在、production 版として、本アプリの next.js 化を行っています。  
 2020 年内にリリース予定です。
@@ -14,11 +14,12 @@
 
 - 名称： golfersfarm
 - site: https://golfersfarm.netlify.app/
-- 経緯: typescript にてアプリケーションを開発した実績を作る。フロントエンドとバックエンドが分離したモダンな開発を体験する。
+- 経緯: typescript にてアプリケーションを開発した実績を作る。フロントエンドとバックエンドが分離したモダンな開発を経験する。
 - 設計:
   - フロント側：redux にて状態を管理。バックエンドとの通信には、redux-saga,axios を使用。
   - バックエンド側: express にて API を作成。jwt を活用し、secure な開発を心がけた。
   - 全体: docker-compose を使用し、client,server,db コンテナを稼働させ開発を行った。
+- 背景:コロナ禍において、ゴルフは三密を回避するスポーツとして、今、見直されてきています。 また、リモートワークの推進により、余暇時間が増え、そして、地方居住でも仕事ができるようになった場合、ゴルフを始めるというニーズは今後、増えていくと予想されます。従来、ゴルフには、事前にメンバーを集めることが当たり前でしたが、今後は、ちょっと空いた時間を利用した一人ゴルフが増えていくのではないかと思料されます。その際に、名刺代わりに使用するツールとして作成しました。
 
 ## 使用した技術
 
@@ -58,9 +59,9 @@
 ## 設計
 
 - 全体構成  
-  ![image](https://user-images.githubusercontent.com/50585862/101005400-2f55e880-35a4-11eb-88e5-0bc9b158e29d.png)
+  ![image](https://user-images.githubusercontent.com/50585862/101127024-fd925f80-363f-11eb-89cb-bfc76ee8b008.png)
 - 認証  
-  ![image](https://user-images.githubusercontent.com/50585862/101005647-41378b80-35a4-11eb-845b-3ecc1bf57f43.png)  
+  ![image](https://user-images.githubusercontent.com/50585862/101127020-f8cdab80-363f-11eb-9d99-c8e36132729b.png)  
   jwtToken にて認証。ブラウザの localStorage にて Token を管理。
 
   1.  クライアントのログインページにて、サーバー側にログインリクエスト。
@@ -90,17 +91,18 @@
   /auth/logout  
    => ユーザーログアウトページ  
   /privacy  
-   => 個人情報の取り扱い  
+   => 個人情報の取り扱いのページ  
   /tos  
-   => 利用規約  
+   => 利用規約のページ
   /about  
-  => アプリについての説明  
+  => アプリについての説明ページ  
   /contact  
-   => メールでの問合せフォーム
+   => メールでの問合せフォームのページ
 
-- バックエンド(エンドポイント)
-  ![image](https://user-images.githubusercontent.com/50585862/101005689-44cb1280-35a4-11eb-9d7d-305d2e68c381.png)  
-   以下、全てのエンドポイントです。  
+- バックエンド(エンドポイント)  
+  ![image](https://user-images.githubusercontent.com/50585862/101126959-e0f62780-363f-11eb-87fa-631325cfc5a1.png)
+
+  以下、全てのエンドポイントです。  
    get: /users  
    =>ユーザー一覧取得。  
   patch: /users/:id/edit  
